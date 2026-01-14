@@ -1,0 +1,14 @@
+.\objects\test_img.o: SCGUI\bmp\test_img.c
+.\objects\test_img.o: .\SCGUI\sc_gui.h
+.\objects\test_img.o: .\SCGUI\sc_common.h
+.\objects\test_img.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\objects\test_img.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\test_img.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\test_img.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
+.\objects\test_img.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\objects\test_img.o: .\SCGUI\lvgl.h
+.\objects\test_img.o: .\SCGUI\sc_lvgl_font.h
+.\objects\test_img.o: .\SCGUI\sc_event_task.h
+.\objects\test_img.o: .\SCGUI\sc_arc.h
+.\objects\test_img.o: .\SCGUI\sc_transform.h
+.\objects\test_img.o: .\SCGUI\sc_compose.h

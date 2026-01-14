@@ -1,0 +1,592 @@
+
+========================================================================
+
+** ELF Header Information
+
+    File Name: ./Objects/bsr1901_demo.axf
+
+    Machine class: ELFCLASS32 (32-bit)
+    Data encoding: ELFDATA2LSB (Little endian)
+    Header version: EV_CURRENT (Current version)
+    Operating System ABI: none
+    ABI Version: 0
+    File Type: ET_EXEC (Executable) (2)
+    Machine: EM_ARM (ARM)
+
+    Image Entry point: 0x000000c1
+    Flags: EF_ARM_HASENTRY + EF_ARM_ABI_FLOAT_SOFT (0x05000202)
+
+    ARM ELF revision: 5 (ABI version 2)
+
+    Conforms to Soft float procedure-call standard
+
+    Built with
+    Component: ARM Compiler 5.06 update 6 (build 750) Tool: armasm [4d35ec]
+    Component: ARM Compiler 5.06 update 6 (build 750) Tool: armlink [4d35ed]
+
+    Header size: 52 bytes (0x34)
+    Program header entry size: 32 bytes (0x20)
+    Section header entry size: 40 bytes (0x28)
+
+    Program header entries: 1
+    Section header entries: 16
+
+    Program header offset: 264848 (0x00040a90)
+    Section header offset: 264880 (0x00040ab0)
+
+    Section header string table index: 15
+
+========================================================================
+
+** Program header #0 (PT_LOAD) [PF_X + PF_W + PF_R + PF_ARM_ENTRY]
+    Size : 124388 bytes
+    Virtual address: 0x00000000 (Alignment 4)
+
+
+========================================================================
+
+** Section #1 'ER_IROM1' (SHT_PROGBITS) [SHF_ALLOC + SHF_EXECINSTR]
+    Size   : 123588 bytes (alignment 4)
+    Address: 0x00000000
+
+
+** Section #2 'RW_IRAM1' (SHT_PROGBITS) [SHF_ALLOC + SHF_WRITE]
+    Size   : 80 bytes (alignment 4)
+    Address: 0x20000000
+
+    0x20000000:   85 78 8e 80 00 00 00 00 00 00 00 00 00 00 00 00    .x..............
+    0x20000010:   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    ................
+    0x20000020:   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    ................
+    0x20000030:   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    ................
+    0x20000040:   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    ................
+
+
+** Section #3 '__RAM_CODE__' (SHT_PROGBITS) [SHF_ALLOC + SHF_EXECINSTR]
+    Size   : 720 bytes (alignment 4)
+    Address: 0x20000050
+
+
+** Section #4 '.debug_abbrev' (SHT_PROGBITS)
+    Size   : 1476 bytes
+
+
+** Section #5 '.debug_frame' (SHT_PROGBITS)
+    Size   : 2908 bytes
+
+
+** Section #6 '.debug_info' (SHT_PROGBITS)
+    Size   : 39172 bytes
+
+
+** Section #7 '.debug_line' (SHT_PROGBITS)
+    Size   : 13320 bytes
+
+
+** Section #8 '.debug_loc' (SHT_PROGBITS)
+    Size   : 4284 bytes
+
+
+** Section #9 '.debug_macinfo' (SHT_PROGBITS)
+    Size   : 29204 bytes
+
+
+** Section #10 '.debug_pubnames' (SHT_PROGBITS)
+    Size   : 7698 bytes
+
+
+** Section #11 '.symtab' (SHT_SYMTAB)
+    Size   : 8720 bytes (alignment 4)
+    String table #12 '.strtab'
+    Last local symbol no. 319
+
+
+** Section #12 '.strtab' (SHT_STRTAB)
+    Size   : 7168 bytes
+
+
+** Section #13 '.note' (SHT_NOTE)
+    Size   : 28 bytes (alignment 4)
+
+
+** Section #14 '.comment' (SHT_PROGBITS)
+    Size   : 26260 bytes
+
+
+** Section #15 '.shstrtab' (SHT_STRTAB)
+    Size   : 168 bytes
+
+
+address     size       variable name                            type
+0x000162a4  0x8000     gImage_128x128_battery_32b               array[8192] of const unsigned int
+
+address     size       variable name                            type
+0x00011484  0x4e20     gImage_circle_100x100                    array[20000] of const unsigned char
+
+address     size       variable name                            type
+0x00009484  0x8000     gImage_128x128_charging_32bit            array[8192] of const unsigned int
+
+address     size       variable name                            type
+0x00001484  0x8000     gImage_128x128_star_32bit                array[8192] of const unsigned int
+
+address     size       variable name                            type
+0x00000000  0x4        ack_status                               volatile unsigned int
+
+address     size       variable name                            type
+0x00000000  0x4        ad_current_vout                          volatile unsigned int
+
+address     size       variable name                            type
+0x00000000  0x4        ad_ntc                                   volatile unsigned int
+
+address     size       variable name                            type
+0x00000000  0x4        ad_offset_by_power                       volatile unsigned int
+
+address     size       variable name                            type
+0x00000000  0x1        add_voltage_offset                       volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        bFlag_Bat_CC                             volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        bFlag_Calc_Coulomb_Counter               volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        bFlag_Timeslice_16ms                     volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        bFlag_Timeslice_1ms                      volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        bFlag_Timeslice_1sec                     volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        bFlag_Timeslice_display                  volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        bFlag_ad_ntc_update                      volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        bFlag_adjust_scp_ocp_4A5                 volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        bFlag_adjust_scp_ocp_5A                  volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        bFlag_all_led_is_off                     volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        bFlag_bat_under_voltage                  volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        bFlag_bat_vol_alarm                      volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        bFlag_battery_is_low                     volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        bFlag_blink                              volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        bFlag_bt_standby                         volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        bFlag_cc_src_sink_ok                     volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        bFlag_change_total_i_limit               volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        bFlag_charge_complete                    volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        bFlag_charge_ext                         volatile unsigned char
+
+address     size       variable name                            type
+0x20000020  0x1        bFlag_charge_on                          volatile unsigned char
+
+address     size       variable name                            type
+0x20000021  0x1        bFlag_charge_qc                          volatile unsigned char
+
+address     size       variable name                            type
+0x20000029  0x1        bFlag_charge_quick                       volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        bFlag_charging_from_empty                volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        bFlag_chg_or_dischg                      volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        bFlag_derating_power_non_pd_9v           volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        bFlag_derating_power_temp_ex             volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        bFlag_disable_discharge_on               volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        bFlag_disable_quick_charge               volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        bFlag_disable_quick_discharge            volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        bFlag_disable_send_cmd                   volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        bFlag_discharge_pd                       volatile unsigned char
+
+address     size       variable name                            type
+0x20000022  0x1        bFlag_discharge_qc                       volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        bFlag_enable_charge                      volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        bFlag_enable_discharge                   volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        bFlag_gSysTick_change                    volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        bFlag_in_scp_A3                          volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        bFlag_in_small_current_mode              volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        bFlag_init_battery_volume                volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        bFlag_init_ip53xs                        volatile unsigned char
+
+address     size       variable name                            type
+0x2000001f  0x1        bFlag_init_ipxs                          volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        bFlag_input_ovp                          volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        bFlag_input_voltage_5v                   volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        bFlag_is_breathing_mode                  volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        bFlag_is_trickle_charge                  volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        bFlag_isys_over_1A5                      volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        bFlag_led_blue_always_on                 volatile unsigned char
+
+address     size       variable name                            type
+0x20000024  0x1        bFlag_light_load                         volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        bFlag_light_load_right                   volatile unsigned char
+
+address     size       variable name                            type
+0x20000028  0x1        bFlag_multi_port                         volatile unsigned char
+
+address     size       variable name                            type
+0x20000026  0x1        bFlag_ocp                                volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        bFlag_ovp_in_pd_9v                       volatile unsigned char
+
+address     size       variable name                            type
+0x20000023  0x1        bFlag_p_i2c_int_is_high                  volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        bFlag_power_on                           volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        bFlag_reg0xFD_bitx                       volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        bFlag_reverse                            volatile unsigned char
+
+address     size       variable name                            type
+0x20000027  0x1        bFlag_short_circuit                      volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        bFlag_shutdown_eta                       volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        bFlag_sink_pd                            volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        bFlag_temp_alarm                         volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        bFlag_temp_exception_chg                 volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        bFlag_temp_exception_dischg              volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        bFlag_temp_exception_over_chg            volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        bFlag_trel_over_7v                       volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        bFlag_typec_in                           volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        bFlag_under_3v3                          volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        bFlag_under_3v5_derating_power           volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        bFlag_under_voltage                      volatile unsigned char
+
+address     size       variable name                            type
+0x20000025  0x1        bFlag_usb_a1_in                          volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        bFlag_usb_a2_in                          volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        bFlag_v_chg_12v                          volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        bFlag_v_chg_5v                           volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        bFlag_v_chg_7v                           volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        bFlag_v_chg_9v                           volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        bFlag_vol_bat_over_4v                    volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        bFlag_vol_bat_under_3v5                  volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        bFlag_vsys_over_12v8                     volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        bFlag_vsys_over_6v3                      volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        bFlag_vsys_under_4v5                     volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        bFlag_vsys_under_4v75                    volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        battery_volume_voltage                   volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        cc_dcp_mode                              volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        compareTimer                             volatile unsigned char
+
+address     size       variable name                            type
+0x2000002a  0x1        counter_dl                               volatile unsigned char
+
+address     size       variable name                            type
+0x2000002b  0x1        counter_gl                               volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        counter_isys_big                         volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        counter_isys_small                       volatile unsigned char
+
+address     size       variable name                            type
+0x20000038  0x4        current_battery                          volatile unsigned int
+
+address     size       variable name                            type
+0x2000002e  0x1        current_ntc                              volatile unsigned char
+
+address     size       variable name                            type
+0x2000003c  0x4        current_vsys                             volatile unsigned int
+
+address     size       variable name                            type
+0x00000000  0x1        default_power                            volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x4        delaySleepTimer                          volatile unsigned int
+
+address     size       variable name                            type
+0x00000000  0x1        derating_power_mode                      volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        displayData                              volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        displayDataLast                          volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x4        display_cycle                            volatile unsigned int
+
+address     size       variable name                            type
+0x00000000  0x4        display_timer_10minutes                  volatile unsigned int
+
+address     size       variable name                            type
+0x00000000  0x1        display_timer_mask                       volatile unsigned char
+
+address     size       variable name                            type
+0x2000002d  0x1        dl_timer_out                             volatile unsigned char
+
+address     size       variable name                            type
+0x2000002f  0x1        forceDispTimer                           volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x4        gSysTick                                 volatile unsigned int
+
+address     size       variable name                            type
+0x00000000  0x4        gSysTickCurrent                          volatile unsigned int
+
+address     size       variable name                            type
+0x00000000  0x1        g_counter_cc                             volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        gcounter                                 volatile unsigned char
+
+address     size       variable name                            type
+0x2000002c  0x1        gl_timer_out                             volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        idexSum                                  volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        indicator_light_mode                     volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        isys_grade                               volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        last_cc_dcp_mode                         volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        last_isys_grade                          volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        ledDispTimer                             volatile unsigned char
+
+address     size       variable name                            type
+0x20000040  0x4        power_vsys                               volatile unsigned int
+
+address     size       variable name                            type
+0x00000000  0x1        restore_chg_iset_vbus12v                 volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        restore_chg_iset_vbus5v                  volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        restore_chg_iset_vbus9v                  volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        restore_power                            volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        restore_reg0x29                          volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        restore_reg0x86                          volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        restore_reg0xA6                          volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        restore_reg0xAC                          volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        restore_reg0xBB                          volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        restore_reg0xb1                          volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        restore_reg0xb5                          volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        restore_reg0xb9                          volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        sendTimer                                volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x4        system_current                           volatile unsigned int
+
+address     size       variable name                            type
+0x20000048  0x5        timenode                                 array[5] of volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        timer_30_seconds                         volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x4        timer_derating_power                     volatile unsigned int
+
+address     size       variable name                            type
+0x00000000  0x1        timer_dischg_minimum                     volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        timer_display_full                       volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        timer_display_slice_16ms                 volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        timer_dly_chk_ovp                        volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        timer_dly_chk_vsys                       volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        timer_get_ip53xs_status                  volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        timer_led4_display                       volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        timer_test                               volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        underVoltageDispTimer                    volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        under_voltage_timer_out                  volatile unsigned char
+
+address     size       variable name                            type
+0x20000030  0x4        voltage_battery                          volatile unsigned int
+
+address     size       variable name                            type
+0x20000044  0x4        voltage_ntc                              volatile unsigned int
+
+address     size       variable name                            type
+0x20000034  0x4        voltage_vsys                             volatile unsigned int
+
+address     size       variable name                            type
+0x20000018  0x2        location                                 uint16
+
+address     size       variable name                            type
+0x20000014  0x4        timer1_tmp_cnt1                          int
+
+address     size       variable name                            type
+0x20000010  0x4        TimeTick                                 volatile uint32_t
+
+address     size       variable name                            type
+0x2000000c  0x1        dma_int_flag                             volatile unsigned char
+
+address     size       variable name                            type
+0x00000000  0x1        flag_250us                               volatile uint8_t
+
+address     size       variable name                            type
+0x20000000  0x4        AON_CFG_ANA_CTRL_1_0x20_Default          uint32
+
+address     size       variable name                            type
+0x20000004  0x4        AON_CFG_ANA_CTRL_2_0x24_Default          uint32
+
+address     size       variable name                            type
+0x20000008  0x4        AON_CFG_GPIO_WAKEUP_CTRL_0x10_Default    uint32
+

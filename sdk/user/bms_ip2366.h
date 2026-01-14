@@ -1,0 +1,712 @@
+#ifndef _BMS_IPXS_H_
+#define _BMS_IPXS_H_
+
+
+#define BIT0 0x01
+#define BIT1 0x02
+#define BIT2 0x04
+#define BIT3 0x08
+#define BIT4 0x10
+#define BIT5 0x20
+#define BIT6 0x40
+#define BIT7 0x80
+
+
+//version IP2369_AC（with reg）V1.00
+
+#define DEVICE_ADDR_IP  (0xEA)  //
+
+#define REG_SYS_CTL0    (0x00)  //charge使能寄存器
+        #define  b_En_LOADOTP (BIT7)//开机唤醒重新复位寄存器值使能
+        // 0: 不重新复位寄存器值
+        //! 1：重新复位寄存器值 defualt
+        // 该 bit 不建议修改为 0，如果需要修改，软件需要定期复位寄存器默认值，如 VINOk VBUOk 信号触发后
+        #define  b_En_RESETMCU (BIT6)//MCU 重新复位寄存器
+        //! 0: default 
+        // 写 1：重新复位寄存器为默认值，复位后该 bit 自动恢复为 0,复位后应等待2S再进行读写寄存器
+        #define b_En_INT_low (BIT5)
+        //! 0：disable  defualt
+        // 1：Enable
+        // 有异常的时候 INT 拉低 2MS ，提示 MCU 有异常发生
+        #define b_En_Vbus_SinkDPDM (BIT4)
+        // 0：disable
+        //! 1：Enable
+        // C 口输入 DM DP 快充使能
+        #define En _Vbus_SinkPd (BIT3)
+        // 0：disable
+        //! 1：Enable
+        //C 口输入 Pd 快充使能
+        #define b_En_Vbus_SinkSCP (BIT2)
+        //! 1：Enable
+        // 0：disable
+        //C 口输入 SCP 快充使能
+        #define b_En_ppath (BIT1) //!注意这里和ip2368 不一样
+        // 0：disable (优先充电)
+        //! 1：Enable
+        // 5V边充边放使能
+        #define b_En_Charger    (BIT0)// Charger 充电使能（关闭后不可充电）
+        // 0：disable
+        //! 1：Enable
+        // Charger 充电使能（关闭后不可充电）    
+
+#define REG_SYS_CTL1    (0x01)  // （VBUS/VOUT1口路径MOS使能）
+        #define  b_En_Vbus_Src_Mos (BIT7)
+        // 0：disable	R/W	1
+        //! 1：Enable
+        // VBUS口MOS输出使能
+        #define  b_En_Vin_Src_Mos (BIT4)
+        // 0：disable	R/W	1
+        //! 1：Enable
+        // VOUT1口MOS输出使能
+        #define  b_En_Vbus_Sink_Mos (BIT2)
+        // 0：disable	R/W	1
+        //! 1：Enable
+        // VBUS口MOS输入使能
+        //! [6:5] and bit3 and [1:0] Reserved
+
+
+#define REG_SYS_CTL2    (0x02)//（Vset充满电压设定）
+        // [7:0]	Vset	单节电池充满电压
+        // Vset=N*10mV+2500mV（最高4.4V）
+        //! 10101010  defualt 170 *10mV + 2500mV = 4200mV
+        // #define CONST_FULL_VOLTAGE (4250)  //mv
+        // #define CONST_VSET_4V25         ((CONST_FULL_VOLTAGE/10)-250)
+        #define CONST_VSET_4V4         (190)
+        #define CONST_VSET_4V35        (185)
+        #define CONST_VSET_4V25        (175)
+        #define CONST_VSET_4V20        (170)
+
+#define REG_SYS_CTL3    (0x03)//（Iset充电功率或电流设置）
+        // 电池端电流最大限制（不可配置小于停充电流）Iset=N*100mA（最大为9.7A）
+        #define CONST_ISET_9A7         (97)
+        #define CONST_VSET_8A5         (85)
+
+
+#define REG_SYS_CTL6  (0x06)     //SYS_CTL6（涓流充电电流设置）
+        // Itk=N*50mA //涓流充电电流设置
+        #define CONST_ITK_250MA (5)
+        #define CONST_ITK_200MA (4)
+        #define CONST_ITK_150MA (3)
+
+#define REG_SYS_CTL8   (0x08)//SYS_CTL8（停充电流和再充电阈值设置）
+        //[7;4]  Istop Istop=N*50mA
+        #define CONST_ISTOP_100MA (2)
+        #define CONST_ISTOP_50MA (1)
+        //00：充饱后没有再充电功能
+        // [3:2]
+        #define CONST_VTRGT_100mV (2)  //defult VTRGT
+        #define CONST_VTRGT_200mV (1)
+        // 01：VTRGT–N*0.05
+        // 10：VTRGT–N*0.1
+        // 11：VTRGT–N*0.2
+        // VTRGT–---充饱电压
+        // N----电池串联节数
+
+#define REG_SYS_CTL9    (0x09)  //SYS_CTL9（待机使能和低电电压设置）
+        #define  b_En_Standby  (BIT7)//待机使能
+        // 0：不使能
+        //! 1：使能
+
+        #define  b_Standby (BIT6)//写1进待机，单次有效（bit7必须为使能才能写1）
+        //! 0：正常流程
+        // 1：非充电情况下立刻进入待机，
+
+
+        #define  b_En_BAT_Low   (BIT5)//5V低电关机使能
+        //! 0：disable
+        // 1：Enable（使能后关机电压固定为5V，只有软件保护，且涓流转恒流电压也会关联变化）
+
+
+#define REG_SYS_CTL10  (0x0A)  //电池低电电压设置
+        // [7:5] Set_BATlow电池低电电压设置（涓流转恒流电压会关联变化,2.7V及以下设置后只有软件低电保护）
+        // 000:2.50V*N
+        // 001:2.60V*N
+        // 010:2.70V*N
+        // 011:2.80V*N
+        // 100:2.90V*N
+        // 101:3.00V*N  //default value
+        // 110:3.10V*N
+        // 111:3.20V*N
+        // N:电池串联节数
+        // [4:0] Reserved
+        #define CONST_2V5xN     (0)
+        #define CONST_2V6xN     (1)
+        #define CONST_2V7xN     (2)
+        #define CONST_2V8xN     (3)
+        #define CONST_2V9xN     (4)
+        #define CONST_3V0xN     (5)
+        #define CONST_3V1xN     (6)
+        #define CONST_3V2xN     (7)
+
+
+#define REG_SYS_CTL11   (0x0B)  //（输出使能寄存器）
+        #define  b_En_Dc_Dc_Output  (BIT7)//放电输出使能（关闭后不可输出）
+        // 1：使能
+        // 0：不使能
+        // （C口有充电输入时，A口放电不受输出使能影响）
+
+        #define  b_En_Vbus_Src_DPDM       (BIT6)//C口输出DP/DM快充使能
+        // 1：Enable
+        // 0：disable
+
+        #define  b_En_Vbus_Src_Pd   (BIT5) //C口输出Pd快充使能
+        // 1：Enable
+        // 0：disable
+
+        #define  b_En_Vbus_Src_SCP (BIT4) //C 口输出SCP快充使能
+        // 1：Enable
+        // 0：disable
+
+        #define  b_En_Vin_Src_DPDM (BIT3) //VOUT1口输出DP/DM快充使能
+        // 1：Enable
+        // 0：disable
+ 
+        #define  b_En_Vin_SrcSCP   (BIT2)//VOUT1口输出SCP快充使能
+        // 1：Enable
+        // 0：disable
+
+        // [1:0]  Reserved
+
+#define REG_SYS_CTL12       (0x0C)//（VBUS最大功率选择寄存器）
+        // [7：5] Vbus_Src_Power Vbus输出/输入功率选择：
+        // 000：20W
+        // 001：27W
+        // 010：30W
+        // 011：36W
+        // 100：45W
+        #define CONST_VBUS_20W  (0)
+        #define CONST_VBUS_27W  (1)
+        #define CONST_VBUS_30W  (2)
+        #define CONST_VBUS_36W  (3)
+        #define CONST_VBUS_45W  (4)  //default
+
+
+#define REG_SELECT_PDO  (0x0D)//（选择充电PDO档位）
+        //需要先读到0x35对应档位才能选择,默认选择适配器的最大PD档位，适配器拔出后配置失效，需要重新识别适配器档位再行配置。
+        // [7:3] Reserved
+        // [2:0] Pdo_select选择充电PDO档位
+        // 000：默认为适配器最大档位
+        // 001：5V
+        // 010：9V
+        // 011：12V
+        // 100：15V
+        // 101：20V
+        #define CONST_PDO_MAX  (0)
+        #define CONST_PDO_5V   (1)
+        #define CONST_PDO_9V   (2)
+        #define CONST_PDO_12V  (3)
+        #define CONST_PDO_15V  (4)  
+        #define CONST_PDO_20V  (5) //default
+
+#define REG_TypeC_CTL8  (0x22)// （TYPE-C 模式控制寄存器）
+        // [7:6] Vbus_Mode_Set Vbus CC 模式选择
+        // 00：UFP  从vbus取电 -- 手机
+        // 01：DFP  向vbus供电 -- 充电头
+        // 11：DRP  双角色 -- 移动电源
+        #define CONST_ROLE_UFP   (0)
+        #define CONST_ROLE_DFP   (1)
+        #define CONST_ROLE_DRP   (3)
+
+#define REG_TypeC_CTL9   (0x23)//（VBUS输出Pdo电流设置寄存器）
+        #define  b_En_5VPdo_3A_2p4A (BIT7)//5VPdo电流设置
+        //! 1：3A
+        // 0：2.4A
+
+        #define  b_En_Pps2Pdo_Iset (BIT6)//Pps2Pdo电流设置使能
+        // 1：Enable
+        //! 0：disable
+        // *使能后输出功率、过流以设置的Pdo电流为准，过流为设置Pdo电流1.1倍
+
+        #define  b_En_Pps1Pdo_Iset (BIT5)//Pps1Pdo电流设置使能
+        // 1：Enable
+        //! 0：disable
+        // *使能后输出功率、过流以设置的Pdo电流为准，过流为设置Pdo电流1.1倍
+
+
+        #define  b_En_20VPdo_Iset (BIT4)//20VPdo电流设置使能
+        // 1：Enable
+        //! 0：disable
+        // *使能后输出功率、过流以设置的Pdo电流为准，过流为设置Pdo电流1.1倍
+
+        #define  b_En_15VPdo_Iset (BIT3)//15VPdo电流设置使能
+        // 1：Enable
+        //! 0：disable
+        // *使能后输出功率、过流以设置的Pdo电流为准，过流为设置Pdo电流1.1倍
+
+        #define  b_En_12VPdo_Iset (BIT2)//12VPdo电流设置使能
+        // 1：Enable
+        //! 0：disable
+        // *使能后输出功率、过流以设置的Pdo电流为准，过流为设置Pdo电流1.1倍
+
+        #define  b_En_9VPdo_Iset (BIT1)//9VPdo电流设置使能
+        // 1：Enable
+        //! 0：disable
+        // *使能后输出功率、过流以设置的Pdo电流为准，过流为设置Pdo电流1.1倍
+
+        #define  b_En_5VPdo_Iset (BIT0)//5VPdo电流设置使能
+        // 1：Enable
+        //! 0：disable
+
+
+ #define REG_TypeC_CTL10 (0x24)//（VBUS5VPdo电流设置寄存器）
+        // [7:0]=0x96 (10进制 = 150 -- 3A) 5VPdo_Iset 5VPdo电流设置 5VPdo=20mA*N  
+        #define CONST_5V_PDO_3A (150)
+        #define CONST_5V_PDO_2A5 (125)
+
+#define REG_TypeC_CTL11 (0x25)//（VBUS9VPdo电流设置寄存器）
+        //  [7:0]= 0x96 9VPdo_Iset 9VPdo电流设置9VPdo=20mA*N
+        #define CONST_9V_PDO_3A (150)
+        #define CONST_9V_PDO_2A5 (125)
+
+ #define REG_TypeC_CTL12 (0x26)//（VBUS 12VPdo 电流设置寄存器）
+        //  [7:0]= 0x96 12VPdo_Iset 12VPdo 电流设置 12VPdo=20mA*N
+        #define CONST_12V_PDO_3A (150)
+        #define CONST_12V_PDO_2A5 (125)
+
+ #define REG_TypeC_CTL13  (0x27)//（VBUS 15VPdo 电流设置寄存器）
+        //  [7:0] = 0x96 15VPdo_Iset 15VPdo 电流设置 15VPdo=20mA*N
+        #define CONST_15V_PDO_3A (150)
+        #define CONST_15V_PDO_2A5 (125)
+
+#define REG_TypeC_CTL14 (0x28)//（VBUS 20VPdo 电流设置寄存器）
+        //  [7:0]=  0x96 20VPdo_Iset 20VPdo 电流设置 20VPdo=20mA*N
+        #define CONST_20V_PDO_5A (250)
+        #define CONST_20V_PDO_4A (200)
+        #define CONST_20V_PDO_3A (150)
+
+#define REG_TypeC_CTL23 (0x29)//（VBUS Pps1 Pdo 电流设置寄存器）
+        //  [7:0] = 0x3C;Pps1Pdo_Iset;Pps1 Pdo 电流设置;Pps1 Pdo=50mA*N
+        #define CONST_PPS1_PDO_3A       (60)
+        #define CONST_PPS1_PDO_2A5      (50)
+
+#define REG_TypeC_CTL24  (0x2A)//（VBUS Pps2 Pdo 电流设置寄存器）
+        //  [7:0] =0x3C ;Pps2Pdo_Iset ;Pps2 Pdo 电流设置 ;Pps2 Pdo=50mA*N
+        #define CONST_PPS2_PDO_3A       (60)
+        #define CONST_PPS2_PDO_2A5      (50)
+
+
+#define REG_TypeC_CTL17  (0x2B)//（VBUS输出Pdo设置寄存器）
+        //  [7] Reserved R/W R
+        #define  b_En_Src_Pps2Pdo (BIT6) // Pps2Pdo使能
+        // 1：Enable
+        // 0：disable
+        // *disable后没有Pps2Pdo
+        
+        #define  b_En_Src_Pps1Pdo (BIT5) // Pps1Pdo使能
+        // 1：Enable
+        // 0：disable
+        // *disable后没有Pps1Pdo
+       
+        #define  b_En_Src_20VPdo (BIT4) // 20VPdo使能
+        // 1：Enable
+        // 0：disable
+        // *disable后没有20VPdo
+
+        #define  b_En_Src_15VPdo (BIT3) // 15VPdo使能
+        // 1：Enable
+        // 0：disable
+        // *disable后没有15VPdo
+
+        #define  b_En_Src_12VPdo (BIT2) // 12VPdo使能
+        // 1：Enable
+        // 0：disable
+        // *disable后没有12VPdo
+
+        #define  b_En_Src_9VPdo (BIT1) // 9VPdo使能
+        // 1：Enable
+        // 0：disable
+        // *disable后没有9VPdo
+
+        // [0] Reserved
+
+#define REG_TYPEC_CTL18  (0x2C)//（VBUSPDO加10mA电流使能，需要和电流设置寄存器一起配置）
+        // [7:5] Reserved R/W 0
+        #define  b_EN_20VPDO_ADD (BIT4) //20VPDO加10mA电流使能
+        // 1：enable
+        // 0：disable
+        
+        #define  b_EN_15VPDO_ADD (BIT3) //15VPDO加10mA电流使能
+        // 1：enable
+        // 0：disable
+       
+        #define  b_EN_12VPDO_ADD (BIT2) //12VPDO加10mA电流使能
+        // 1：enable
+        // 0：disable
+       
+        #define  b_EN_9VPDO_ADD (BIT1) //9VPDO加10mA电流使能
+        // 1：enable
+        // 0：disable
+        
+        #define  b_EN_5VPDO_ADD (BIT0) //5VPDO加10mA电流使能
+        // 1：enable
+        // 0：disable
+
+
+//! -------------------只读状态指示寄存器 ---------------------------------    
+// 多个寄存器表示同一个状态的，每次读低8位寄存器会更新一次高8位和低8位的数据，所
+// 以读寄存器必须按照先读低8位再读高8位的顺序，才能保证读到的是同一个数据。例：读
+// BAT端电压两个寄存器，顺序应该是先读0x50,再读0x51。
+
+
+#define REG_STATE_CTL0 (0X31) //(充电状态控制寄存器)
+
+        //! 放电时，电流存放在 0X56 和 0x57 中。0x31 寄存器 bit3 是放电标志位。
+        #define b_high_voltage  (BIT6) // 7:6 //fast_Chg_State 
+        // 00：5V输入充电
+        // 01：高压输入快充充电
+        #define b_CHG_En  (BIT5) //充电标志位
+        // 1：充电状态（VbusOk 就算充电状态）
+        // 0：非充电状态
+
+        #define b_CHG_End (BIT4)//充满状态标志位
+        // 1：充电已充满
+        // 0：充电未充满
+
+        #define b_Output_En  (BIT3)
+        // 3 Output_En 放电状态标志位
+        // 1：放电状态且输出口已经打开，没有任何异常
+        // 0：放电状态输出没有打开或者有放电异常
+
+        // [2:0] Chg_state 
+        // 000：待机
+        // 001：涓流
+        // 010：恒流充电
+        // 011：恒压充电
+        // 100：充电等待中（包括未开启充电等情况）
+        // 101：充满状态
+        // 110：充电超时
+
+#define REG_STATE_CTL1      (0x32)//(放电状态控制寄存器及MOS状态指示寄存器)
+        #define b_Vbus_Output_State (BIT7)//VBUS输出快充状态
+        // 1：快充放电
+        // 0：5V放电
+
+        #define b_Vout1_Output_State (BIT6)//VOUT1输出快充状态
+        // 1：快充放电
+        // 0：5V放电
+
+        #define b_Mos_Vbus (BIT5)//VBUS口输出MOS状态
+        // 1：开启状态
+        // 0：关闭状态
+
+        #define b_Mos_Vout1 (BIT4)//VOUT1口输出MOS状态
+        // 1：开启状态
+        // 0：关闭状态
+
+        #define b_At_Same (BIT3)//同放标志位
+        // 1：在同放
+        // 0：未在同放
+
+        // [2:0] Reserved
+
+#define REG_STATE_CTL2  (0x33)  //(输入Pd状态控制寄存器)
+        #define b_Vbus_Ok (BIT7)//Vbus_Ok
+        // 1：Vbus有电
+        // 0：Vbus没电
+
+        #define b_Vbus_Ov (BIT6)//Vbus_Ov
+        // 1：Vbus输入过压
+        // 0：Vbus输入没有过压
+        // [5:3] Reserved
+        // [2:0] Chg_Vbus充电电压
+        // 110：20V充电
+        // 101：15V充电
+        // 100：12V充电
+        // 011：9V充电
+        // 010：7V充电
+        // 001：5V充电
+
+
+#define REG_TypeC_STATE         (0x34)//（系统状态指示寄存器）
+        #define b_Sink_Ok (BIT7)//TypeCSink输入连接标志位
+        // 1：有效
+        // 0：无效
+        #define b_Src_Ok (BIT6)//TypeCSrc输出连接标志位
+        // 1：有效
+        // 0：无效
+        #define b_Src_Pd_Ok (BIT5)//Src_Pd_Ok输出连接标志位
+        // 1：有效
+        // 0：无效
+        #define b_Sink_Pd_Ok (BIT4)//Sink_Pd_Ok输入连接标志位
+        // 1：有效
+        // 0：无效
+        #define b_Vbus_Sink_Qc_Ok (BIT3)//输入快充有效标志位Qc5V和Pd5V不算快充Ok
+        // 1：有效
+        // 0：无效
+        #define b_Vbus_Src_Qc_Ok (BIT2)//输出快充有效标志位Qc5V和Pd5V不算快充Ok
+        // 1：有效
+        // 0：无效
+
+#define REG_RECEIVED_PDO  (0x35)//（VBUS接收PDO档位）
+        // [7:5] Reserved 
+        #define b_PDO_20V       (BIT4)  //设备接收到PDO20V
+        // 1：有
+        // 0：无
+        #define b_PDO_15V       (BIT3)//设备接收到PDO15V
+        // 1：有
+        // 0：无
+        #define b_PDO_12V       (BIT2)//设备接收到PDO12V
+        // 1：有
+        // 0：无
+        #define b_PDO_9V        (BIT1)//设备接收到PDO9V
+        // 1：有
+        // 0：无
+        #define b_PDO_5V        (BIT0)//设备接收到PDO5V
+        // 1：有
+        // 0：无
+
+
+#define REG_STATE_CTL3  (0x38)//（系统过流指示寄存器）
+        // [7:6] Reserved R
+        #define b_Vsys_Oc (BIT5)// Vsys输出过流标志位，需写1清0
+        // 1：Vsys输出有触发过流信号
+        // 0：Vsys输出没有触发过流信号
+        // 系统在600mS内连续检测到两次以上的过流状态就
+        // 认为过流有效，并将此标志位置1，外部主控读取此
+        // 标志位即可判断是否有过流异常发生；从过流状态发
+        // 生到系统休眠，时间约1.5s
+
+        #define b_Vsys_Scdt (BIT4)  //Vsys输出短路标志位，需写1清0
+        // 1：Vsys输出有触发短路信号
+        // 0：Vsys输出没有触发短路信号
+        // 系统在600mS内连续检测到两次以上的短路状态就
+        // 认为短路有效，并将此标志位置1，外部主控读取此
+        // 标志位即可判断是否有短路异常发生；从短路状态发
+        // 生到系统休眠，时间约1.5s
+
+        // [3:0] Reserved
+
+#define REG_BATVADC_DAT0  (0x50)//（VBAT电压寄存器）
+        // [7:0] BATVADC[7:0] BATVADC数据的低8bitVBATPIN的电压
+#define REG_BATVADC_DAT1    (0x51)//（VBAT电压寄存器）
+        // [7:0] BATVADC[15:8] BATVADC数据的高8bitVBATPIN的电压
+        // VBAT=BATVADC(mV)
+
+#define REG_VsysVADC_DAT0  (0x52)//（Vsys 电压寄存器）
+        //  [7:0] VsysVADC[7:0] Vsys 电压数据的低8bit  -- VsysPIN 的电压
+#define REG_VsysVADC_DAT1 (0x53)//（Vsys 电压寄存器）
+        // [7:0]:VsysVADC[15:8] Vsys 电压数据的高 8bit
+        // Vsys= VsysVADC (mV)
+
+#define REG_TIMENODE1 (0x69)//（时间戳寄存器第一位）（时间戳符号为ASCII码字符）
+        //  [7:0] TimeNode1 第一个ASCII符号对应值
+        
+#define REG_TIMENODE2 (0x6A)//（时间戳寄存器第二位）（时间戳符号为ASCII码字符）
+        //  [7:0] TimeNode2 第二个ASCII符号对应值
+
+#define REG_TIMENODE3 (0x6B)//（时间戳寄存器第三位）（时间戳符号为ASCII码字符）
+        //  [7:0] TimeNode2 第三个ASCII符号对应值
+
+#define REG_TIMENODE4 (0x6C)//（时间戳寄存器第四位）（时间戳符号为ASCII码字符）
+        //  [7:0] TimeNode2 第四个ASCII符号对应值
+
+#define REG_TIMENODE5 (0x6D)//（时间戳寄存器第五位）（时间戳符号为ASCII码字符）
+        //  [7:0] TimeNode5 第五个ASCII符号对应值
+
+#define REG_IBATIADC_DAT0    (0x6E) //（BAT 端电流寄存器）
+        //  [7:0] IBATIADC[7:0] 电芯端电流IBATIADC数据的低8bit
+#define REG_IBATIADC_DAT1 (0x6F) //（BAT 端电流寄存器）
+        //  [7:0]IBATIADC[15:8] 电芯端电流BATIADC 数据的高8bitIBAT= IBATIADC(mA)
+
+#define REG_ISYS_IADC_DAT0  (0x70)//（Isys 端电流寄存器）
+        //  [7:0] ISYSIADC[7:0] IVsys 端电流 VsysIADC 数据的低8bit
+#define REG_Isys_IADC_DAT1  (0x71) //（Isys 端电流寄存器）
+        // [7:0] IVsysIADC[15:8] IVsys 端电流 VsysIADC 数据的高 8bit// IVsys = VsysIADC(mA)
+
+ #define REG_Vsys_POW_DAT0 (0x74)//（Vsys 端功率寄存器）
+        //  [7:0]  Vsys_POW_ADC[7:0] Vsys 端功率ADC数据的低8bit
+ #define REG_Vsys_POW_DAT1  (0x75) //（Vsys 端功率寄存器）
+        //  [7:0] Vsys_POW_ADC[15:8] Vsys 端功率ADC数据的高8bit// Vsys_POW= Vsys_POW_ADC(10mW）
+        
+ #define REG_INTC_IADC_DAT0 (0x77)//（NTC 输出电流寄存器）
+        #define b_INTC_80uA  (BIT7)
+        // 0:输出20uA
+        // 1:输出80uA
+        // [6:0]Reserved
+        #define CONST_20uA  (20)
+        #define CONST_80uA  (80)
+#define REG_VGPIO0_NTC_DAT0  (0x78)//（VGPIO0_NTC_ADC 电压寄存器）
+        //  [7:0]:VGPIO0_DAT0[7:0] VGPIO0_ADC 数据的低8bit
+#define REG_VGPIO0_NTC_DAT1  (0x79)  //（VGPIO0_NTC_ADC 电压寄存器）
+        //  [7:0] VGPIO0_DAT1[15:8] VGPIO0_ADC 数据的高8bit //VGPIO0_DAT= VGPIO0_ADC (mV)（0~3.3V）
+
+//--------------------------------------------------------------------------------------------------------------
+// 初始化ip23xs 每次ip23xs休眠唤醒都要调用一次  (io口int由低变高，持续100ms高电平)
+void init_ip23xs(void);
+
+//C口 输入 Pd 快充 设置
+void ipxs_vbus_scp(unsigned char on_off);
+
+// 充电 设置
+void ipxs_charge(unsigned char on_off);
+
+// VBUS口MOS输出 设置
+void ipxs_vbus_output(unsigned char on_off);
+
+// VBUS口MOS输入 设置
+void ipxs_vbus_input(unsigned char on_off);
+
+// VOUT1 口输出 设置
+void ipxs_usba_output(unsigned char on_off);
+
+// use case: vSet_single_battery_full(CONST_VSET_4V35);
+// 设定单节电池充满电压 （最高4.4V单节） 
+void vSet_single_battery_full(unsigned char vSet);
+
+// use case: set_current_limit_battery(CONST_ISET_8A5)
+// 设置电池端电流最大限制（不可配置小于停充电流） //Iset充电功率或电流设置
+void iSet_limit_battery(unsigned char iSet);
+
+//use case: iSet_trickle_charge(CONST_ITK_200MA)
+// 涓流充电电流设置
+void iSet_trickle_charge(unsigned char iTK);
+
+// use case: iSet_iStop(CONST_ISTOP_50MA)
+// 停充电流设置 
+void iSet_iStop(unsigned char iStop);
+//use case: vSet_reCharge(CONST_VTRGT_200mV)
+// 再充电阈值
+void vSet_reCharge(unsigned char Vrch);
+
+// 让ip2369进入常开模式
+void enter_always_on_mode(void);
+
+// 写寄存器的方式让IP2369进入休眠状态。
+void set_force_standby_mode(void);
+
+// use case: vSet_bat_low(CONST_2V8xN)
+// 电池低电电压设置
+void vSet_bat_low(unsigned char vSet);
+
+// 输出快充设置
+void quick_discharge(unsigned char on_off);
+
+//use case:pSet_vbus_Src_Power(CONST_VBUS_36W);
+// Vbus输出/输入功率选择 
+void pSet_vbus_Src_Power(unsigned char pSet);
+
+//use case: set_pdo_select(CONST_PDO_15V)
+// （选择充电PDO档位）
+//  需要先读到0x35对应档位才能选择,默认选择适配器的最大PD档位，适配器拔出后配置失效，需要重新识别适配器档位再行配置。
+void pSet_pdo_select(unsigned char pdo);
+
+// mSet_role_typec(CONST_ROLE_DRP)
+// TYPE-C 模式设置
+void mSet_role_typec(unsigned char role);
+
+// use case:iSet_5v_pdo(CONST_5V_PDO_2A5)
+// VBUS 5V Pdo电流设置 
+void iSet_5v_pdo(unsigned char ipdo);
+
+// use case: iSet_9v_pdo(CONST_9V_PDO_2A5)
+// VBUS 9V Pdo电流设置 
+void iSet_9v_pdo(unsigned char ipdo);
+
+// use case : iSet_12v_pdo(CONST_12V_PDO_2A5)
+// VBUS 12V Pdo电流设置 
+void iSet_12v_pdo(unsigned char ipdo);
+
+// use case: iSet_15v_pdo(CONST_15V_PDO_2A5)
+// VBUS 15V Pdo电流设置 
+void iSet_15v_pdo(unsigned char ipdo);
+
+// use case: iSet_20v_pdo(CONST_20V_PDO_3A)
+// VBUS 15V Pdo电流设置 
+void iSet_20v_pdo(unsigned char ipdo);
+
+// use case: iSet_pps1_pdo(CONST_20V_PDO_3A)
+// VBUS pps1 Pdo电流设置 iSet_pps1_pdo(CONST_20V_PDO_3A)
+void iSet_pps1_pdo(unsigned char ipdo);
+
+//use case: iSet_pps2_pdo(CONST_20V_PDO_3A)
+// VBUS pps2 Pdo电流设置 
+void iSet_pps2_pdo(unsigned char ipdo);
+
+//（VBUS输出Pdo设置 Pps2Pdo ）
+void pSet_src_pps2_pdo(unsigned char on_off);
+
+//（VBUS输出Pdo设置 Pps1Pdo ）
+void pSet_src_pps1_pdo(unsigned char on_off);
+
+//（VBUS输出Pdo设置 20VPdo ）
+void pSet_src_20v_pdo(unsigned char on_off);
+
+//（VBUS输出Pdo设置 15VPdo ）
+void pSet_src_15v_pdo(unsigned char on_off);
+
+//（VBUS输出Pdo设置 12VPdo ）
+void pSet_src_12v_pdo(unsigned char on_off);
+
+//（VBUS输出Pdo设置 9VPdo ）
+void pSet_src_9v_pdo(unsigned char on_off);
+
+// （VBUSPDO加10mA电流使能，需要和电流设置寄存器一起配置）
+void iSet_20v_pdo_add10mA(unsigned char on_off);
+
+// （VBUSPDO加10mA电流使能，需要和电流设置寄存器一起配置）
+void iSet_15v_pdo_add10mA(unsigned char on_off);        
+        
+// （VBUSPDO加10mA电流使能，需要和电流设置寄存器一起配置）
+void iSet_12v_pdo_add10mA(unsigned char on_off);
+
+// （VBUSPDO加10mA电流使能，需要和电流设置寄存器一起配置）
+void iSet_9v_pdo_add10mA(unsigned char on_off);
+
+// （VBUSPDO加10mA电流使能，需要和电流设置寄存器一起配置）
+void iSet_5v_pdo_add10mA(unsigned char on_off);
+
+//判断I2C的上升沿，下降沿，确认IC状态：休眠 -> 唤醒; 工作 --> 休眠
+void get_i2c_int_status(void);
+
+// 判断充电 放电 待机 状态
+void get_ipxs_state(void);
+
+// 通过 输出 MOS 状态 判断多口输出 和A口插入 播出
+void get_multi_port_status(void);
+
+//获取Vbus充电电压
+void get_chg_vbus_voltage(void);
+
+// 判断是否在快充状态
+void get_quick_charge_status(void);
+
+// 获取VBUS接收PDO档位
+void get_received_pdo(void);
+
+//获取Vsys输出过流或者短路状态
+void get_vsys_OC_SC_status(void);
+
+// 获取电池电压mV
+void get_voltage_battery(void);
+
+// 获取vsys电压
+void get_voltage_vsys(void);
+
+// 获取ic固件版本
+void get_ipxs_firmware_version(void);
+
+// 获取BAT 端电流
+void get_current_battery(void);
+
+// 获取vsys电流
+void get_current_vsys(void);
+
+// 获取vsys 功率 单位 10mW ; // Vsys_POW= Vsys_POW_ADC(10mW)
+void get_power_vsys(void);
+
+//根据ntc电压和电流，计算ntc电阻，然后推算出当前检测区域的温度
+void get_current_ntc(void);
+
+//根据ntc电压和电流，计算ntc电阻，然后推算出当前检测区域的温度
+void get_voltage_ntc(void);
+
+
+
+unsigned char ipxs_readByte(unsigned char deviceAddr, unsigned char regAddr);
+void ipxs_writeByte(unsigned char deviceAddr, unsigned char regAddr, unsigned char sendByte);
+
+unsigned char gek1109_ipxs_readByte(unsigned char deviceAddr, unsigned char regAddr);
+
+void gek1109_ipxs_writeByte(unsigned char deviceAddr, unsigned char regAddr, unsigned char sendByte);
+
+#endif

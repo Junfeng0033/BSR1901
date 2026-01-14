@@ -1,0 +1,11 @@
+.\objects\bms_ip2366.o: user\bms_ip2366.c
+.\objects\bms_ip2366.o: .\include\platform_config.h
+.\objects\bms_ip2366.o: .\include\bsr1901.h
+.\objects\bms_ip2366.o: .\include\gpio.h
+.\objects\bms_ip2366.o: user\bms_ip2366.h
+.\objects\bms_ip2366.o: user\bms_global.h
+.\objects\bms_ip2366.o: .\tft_lcd\lcd_driver.h
+.\objects\bms_ip2366.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\bms_ip2366.o: .\include\iomux.h
+.\objects\bms_ip2366.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdarg.h
+.\objects\bms_ip2366.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h

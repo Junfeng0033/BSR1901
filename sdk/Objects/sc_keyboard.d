@@ -1,0 +1,15 @@
+.\objects\sc_keyboard.o: SCGUI\sc_keyboard.c
+.\objects\sc_keyboard.o: SCGUI\sc_keyboard.h
+.\objects\sc_keyboard.o: SCGUI\sc_gui.h
+.\objects\sc_keyboard.o: SCGUI\sc_common.h
+.\objects\sc_keyboard.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\objects\sc_keyboard.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\sc_keyboard.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\sc_keyboard.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
+.\objects\sc_keyboard.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\objects\sc_keyboard.o: SCGUI\lvgl.h
+.\objects\sc_keyboard.o: SCGUI\sc_lvgl_font.h
+.\objects\sc_keyboard.o: SCGUI\sc_event_task.h
+.\objects\sc_keyboard.o: SCGUI\sc_arc.h
+.\objects\sc_keyboard.o: SCGUI\sc_transform.h
+.\objects\sc_keyboard.o: SCGUI\sc_compose.h

@@ -1,0 +1,913 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html><head>
+<title>Static Call Graph - [.\Objects\bsr1901_demo.axf]</title></head>
+<body><HR>
+<H1>Static Call Graph for image .\Objects\bsr1901_demo.axf</H1><HR>
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Wed Jan 14 13:48:40 2026
+<BR><P>
+<H3>Maximum Stack Usage =        160 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
+Call chain for Maximum Stack Depth:</H3>
+main &rArr; Get_Vbat_Voltage &rArr; __aeabi_dmul &rArr; _double_epilogue &rArr; __aeabi_llsl
+<P>
+<H3>
+Mutually Recursive functions
+</H3> <LI><a href="#[1]">NMI_Handler</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[1]">NMI_Handler</a><BR>
+ <LI><a href="#[2]">HardFault_Handler</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[2]">HardFault_Handler</a><BR>
+ <LI><a href="#[3]">MemManage_Handler</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[3]">MemManage_Handler</a><BR>
+ <LI><a href="#[4]">BusFault_Handler</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[4]">BusFault_Handler</a><BR>
+ <LI><a href="#[5]">UsageFault_Handler</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[5]">UsageFault_Handler</a><BR>
+ <LI><a href="#[6]">SVC_Handler</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[6]">SVC_Handler</a><BR>
+ <LI><a href="#[7]">DebugMon_Handler</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[7]">DebugMon_Handler</a><BR>
+ <LI><a href="#[8]">PendSV_Handler</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[8]">PendSV_Handler</a><BR>
+ <LI><a href="#[a]">CMP1_IRQn</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[a]">CMP1_IRQn</a><BR>
+</UL>
+<P>
+<H3>
+Function Pointers
+</H3><UL>
+ <LI><a href="#[28]">AON_WKUP_IRQHandler</a> from isr.o(i.AON_WKUP_IRQHandler) referenced from startup_cm0.o(RESET)
+ <LI><a href="#[17]">APB_SPI0_IRQnHandler</a> from isr.o(i.APB_SPI0_IRQnHandler) referenced from startup_cm0.o(RESET)
+ <LI><a href="#[18]">APB_SPI1_IRQnHandler</a> from isr.o(i.APB_SPI1_IRQnHandler) referenced from startup_cm0.o(RESET)
+ <LI><a href="#[4]">BusFault_Handler</a> from startup_cm0.o(.text) referenced from startup_cm0.o(RESET)
+ <LI><a href="#[a]">CMP1_IRQn</a> from startup_cm0.o(.text) referenced from startup_cm0.o(RESET)
+ <LI><a href="#[b]">CMP2_IRQn</a> from startup_cm0.o(.text) referenced from startup_cm0.o(RESET)
+ <LI><a href="#[29]">CMU2AHB_IRQHandler</a> from isr.o(i.CMU2AHB_IRQHandler) referenced from startup_cm0.o(RESET)
+ <LI><a href="#[e]">DMA_IRQHandler</a> from isr.o(ram_code) referenced from startup_cm0.o(RESET)
+ <LI><a href="#[7]">DebugMon_Handler</a> from startup_cm0.o(.text) referenced from startup_cm0.o(RESET)
+ <LI><a href="#[11]">GPADC_IRQHandler</a> from isr.o(i.GPADC_IRQHandler) referenced from startup_cm0.o(RESET)
+ <LI><a href="#[16]">GPIO_A0_IRQHandler</a> from startup_cm0.o(.text) referenced from startup_cm0.o(RESET)
+ <LI><a href="#[15]">GPIO_A2_IRQHandler</a> from startup_cm0.o(.text) referenced from startup_cm0.o(RESET)
+ <LI><a href="#[19]">GPIO_A3_IRQHandler</a> from startup_cm0.o(.text) referenced from startup_cm0.o(RESET)
+ <LI><a href="#[1c]">GPIO_A4_IRQHandler</a> from startup_cm0.o(.text) referenced from startup_cm0.o(RESET)
+ <LI><a href="#[1d]">GPIO_A5_IRQHandler</a> from isr.o(i.GPIO_A5_IRQHandler) referenced from startup_cm0.o(RESET)
+ <LI><a href="#[1e]">GPIO_A6_IRQHandler</a> from startup_cm0.o(.text) referenced from startup_cm0.o(RESET)
+ <LI><a href="#[1f]">GPIO_A7_IRQHandler</a> from startup_cm0.o(.text) referenced from startup_cm0.o(RESET)
+ <LI><a href="#[20]">GPIO_B0_IRQHandler</a> from startup_cm0.o(.text) referenced from startup_cm0.o(RESET)
+ <LI><a href="#[21]">GPIO_B1_IRQHandler</a> from startup_cm0.o(.text) referenced from startup_cm0.o(RESET)
+ <LI><a href="#[22]">GPIO_B2_IRQHandler</a> from startup_cm0.o(.text) referenced from startup_cm0.o(RESET)
+ <LI><a href="#[23]">GPIO_B3_IRQHandler</a> from startup_cm0.o(.text) referenced from startup_cm0.o(RESET)
+ <LI><a href="#[24]">GPIO_B4_IRQHandler</a> from startup_cm0.o(.text) referenced from startup_cm0.o(RESET)
+ <LI><a href="#[25]">GPIO_B5_IRQHandler</a> from startup_cm0.o(.text) referenced from startup_cm0.o(RESET)
+ <LI><a href="#[26]">GPIO_B6_IRQHandler</a> from isr.o(i.GPIO_B6_IRQHandler) referenced from startup_cm0.o(RESET)
+ <LI><a href="#[27]">GPIO_B7_IRQHandler</a> from startup_cm0.o(.text) referenced from startup_cm0.o(RESET)
+ <LI><a href="#[2]">HardFault_Handler</a> from startup_cm0.o(.text) referenced from startup_cm0.o(RESET)
+ <LI><a href="#[3]">MemManage_Handler</a> from startup_cm0.o(.text) referenced from startup_cm0.o(RESET)
+ <LI><a href="#[1]">NMI_Handler</a> from startup_cm0.o(.text) referenced from startup_cm0.o(RESET)
+ <LI><a href="#[8]">PendSV_Handler</a> from startup_cm0.o(.text) referenced from startup_cm0.o(RESET)
+ <LI><a href="#[1a]">QSPI_CTRL_IRQHandler</a> from isr.o(i.QSPI_CTRL_IRQHandler) referenced from startup_cm0.o(RESET)
+ <LI><a href="#[1b]">RTC_IRQHandler</a> from startup_cm0.o(.text) referenced from startup_cm0.o(RESET)
+ <LI><a href="#[0]">Reset_Handler</a> from startup_cm0.o(.text) referenced from startup_cm0.o(RESET)
+ <LI><a href="#[6]">SVC_Handler</a> from startup_cm0.o(.text) referenced from startup_cm0.o(RESET)
+ <LI><a href="#[12]">SYS_GPIO_0_IRQHandler</a> from startup_cm0.o(.text) referenced from startup_cm0.o(RESET)
+ <LI><a href="#[13]">SYS_GPIO_1_IRQHandler</a> from startup_cm0.o(.text) referenced from startup_cm0.o(RESET)
+ <LI><a href="#[9]">SysTick_Handler</a> from isr.o(i.SysTick_Handler) referenced from startup_cm0.o(RESET)
+ <LI><a href="#[f]">TIMER0_IRQHandler</a> from isr.o(i.TIMER0_IRQHandler) referenced from startup_cm0.o(RESET)
+ <LI><a href="#[10]">TIMER1_IRQHandler</a> from isr.o(i.TIMER1_IRQHandler) referenced from startup_cm0.o(RESET)
+ <LI><a href="#[c]">UART0_IRQHandler</a> from isr.o(i.UART0_IRQHandler) referenced from startup_cm0.o(RESET)
+ <LI><a href="#[d]">UART1_IRQHandler</a> from isr.o(i.UART1_IRQHandler) referenced from startup_cm0.o(RESET)
+ <LI><a href="#[5]">UsageFault_Handler</a> from startup_cm0.o(.text) referenced from startup_cm0.o(RESET)
+ <LI><a href="#[14]">WDT_IRQHandler</a> from isr.o(i.WDT_IRQHandler) referenced from startup_cm0.o(RESET)
+ <LI><a href="#[2b]">__main</a> from entry.o(.ARM.Collect$$$$00000000) referenced from startup_cm0.o(.text)
+ <LI><a href="#[2a]">main</a> from main.o(i.main) referenced from entry9a.o(.ARM.Collect$$$$0000000B)
+</UL>
+<P>
+<H3>
+Global Symbols
+</H3>
+<P><STRONG><a name="[2b]"></a>__main</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry.o(.ARM.Collect$$$$00000000))
+<BR>[Address Reference Count : 1]<UL><LI> startup_cm0.o(.text)
+</UL>
+<P><STRONG><a name="[78]"></a>_main_stk</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry2.o(.ARM.Collect$$$$00000001))
+
+<P><STRONG><a name="[2c]"></a>_main_scatterload</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry5.o(.ARM.Collect$$$$00000004))
+<BR><BR>[Calls]<UL><LI><a href="#[2d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__scatterload
+</UL>
+
+<P><STRONG><a name="[3b]"></a>__main_after_scatterload</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry5.o(.ARM.Collect$$$$00000004))
+<BR><BR>[Called By]<UL><LI><a href="#[2d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__scatterload
+</UL>
+
+<P><STRONG><a name="[79]"></a>_main_clock</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry7b.o(.ARM.Collect$$$$00000008))
+
+<P><STRONG><a name="[7a]"></a>_main_cpp_init</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry8b.o(.ARM.Collect$$$$0000000A))
+
+<P><STRONG><a name="[7b]"></a>_main_init</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry9a.o(.ARM.Collect$$$$0000000B))
+
+<P><STRONG><a name="[7c]"></a>__rt_final_cpp</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry10a.o(.ARM.Collect$$$$0000000D))
+
+<P><STRONG><a name="[7d]"></a>__rt_final_exit</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry11a.o(.ARM.Collect$$$$0000000F))
+
+<P><STRONG><a name="[0]"></a>Reset_Handler</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, startup_cm0.o(.text))
+<BR>[Address Reference Count : 1]<UL><LI> startup_cm0.o(RESET)
+</UL>
+<P><STRONG><a name="[1]"></a>NMI_Handler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, startup_cm0.o(.text))
+<BR><BR>[Calls]<UL><LI><a href="#[1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NMI_Handler
+</UL>
+<BR>[Called By]<UL><LI><a href="#[1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NMI_Handler
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> startup_cm0.o(RESET)
+</UL>
+<P><STRONG><a name="[2]"></a>HardFault_Handler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, startup_cm0.o(.text))
+<BR><BR>[Calls]<UL><LI><a href="#[2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HardFault_Handler
+</UL>
+<BR>[Called By]<UL><LI><a href="#[2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HardFault_Handler
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> startup_cm0.o(RESET)
+</UL>
+<P><STRONG><a name="[3]"></a>MemManage_Handler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, startup_cm0.o(.text))
+<BR><BR>[Calls]<UL><LI><a href="#[3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MemManage_Handler
+</UL>
+<BR>[Called By]<UL><LI><a href="#[3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MemManage_Handler
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> startup_cm0.o(RESET)
+</UL>
+<P><STRONG><a name="[4]"></a>BusFault_Handler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, startup_cm0.o(.text))
+<BR><BR>[Calls]<UL><LI><a href="#[4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BusFault_Handler
+</UL>
+<BR>[Called By]<UL><LI><a href="#[4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BusFault_Handler
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> startup_cm0.o(RESET)
+</UL>
+<P><STRONG><a name="[5]"></a>UsageFault_Handler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, startup_cm0.o(.text))
+<BR><BR>[Calls]<UL><LI><a href="#[5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UsageFault_Handler
+</UL>
+<BR>[Called By]<UL><LI><a href="#[5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UsageFault_Handler
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> startup_cm0.o(RESET)
+</UL>
+<P><STRONG><a name="[6]"></a>SVC_Handler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, startup_cm0.o(.text))
+<BR><BR>[Calls]<UL><LI><a href="#[6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SVC_Handler
+</UL>
+<BR>[Called By]<UL><LI><a href="#[6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SVC_Handler
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> startup_cm0.o(RESET)
+</UL>
+<P><STRONG><a name="[7]"></a>DebugMon_Handler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, startup_cm0.o(.text))
+<BR><BR>[Calls]<UL><LI><a href="#[7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DebugMon_Handler
+</UL>
+<BR>[Called By]<UL><LI><a href="#[7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DebugMon_Handler
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> startup_cm0.o(RESET)
+</UL>
+<P><STRONG><a name="[8]"></a>PendSV_Handler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, startup_cm0.o(.text))
+<BR><BR>[Calls]<UL><LI><a href="#[8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PendSV_Handler
+</UL>
+<BR>[Called By]<UL><LI><a href="#[8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PendSV_Handler
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> startup_cm0.o(RESET)
+</UL>
+<P><STRONG><a name="[a]"></a>CMP1_IRQn</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup_cm0.o(.text))
+<BR><BR>[Calls]<UL><LI><a href="#[a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CMP1_IRQn
+</UL>
+<BR>[Called By]<UL><LI><a href="#[a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CMP1_IRQn
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> startup_cm0.o(RESET)
+</UL>
+<P><STRONG><a name="[b]"></a>CMP2_IRQn</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup_cm0.o(.text))
+<BR>[Address Reference Count : 1]<UL><LI> startup_cm0.o(RESET)
+</UL>
+<P><STRONG><a name="[15]"></a>GPIO_A2_IRQHandler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup_cm0.o(.text))
+<BR>[Address Reference Count : 1]<UL><LI> startup_cm0.o(RESET)
+</UL>
+<P><STRONG><a name="[19]"></a>GPIO_A3_IRQHandler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup_cm0.o(.text))
+<BR>[Address Reference Count : 1]<UL><LI> startup_cm0.o(RESET)
+</UL>
+<P><STRONG><a name="[1c]"></a>GPIO_A4_IRQHandler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup_cm0.o(.text))
+<BR>[Address Reference Count : 1]<UL><LI> startup_cm0.o(RESET)
+</UL>
+<P><STRONG><a name="[1e]"></a>GPIO_A6_IRQHandler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup_cm0.o(.text))
+<BR>[Address Reference Count : 1]<UL><LI> startup_cm0.o(RESET)
+</UL>
+<P><STRONG><a name="[1f]"></a>GPIO_A7_IRQHandler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup_cm0.o(.text))
+<BR>[Address Reference Count : 1]<UL><LI> startup_cm0.o(RESET)
+</UL>
+<P><STRONG><a name="[20]"></a>GPIO_B0_IRQHandler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup_cm0.o(.text))
+<BR>[Address Reference Count : 1]<UL><LI> startup_cm0.o(RESET)
+</UL>
+<P><STRONG><a name="[21]"></a>GPIO_B1_IRQHandler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup_cm0.o(.text))
+<BR>[Address Reference Count : 1]<UL><LI> startup_cm0.o(RESET)
+</UL>
+<P><STRONG><a name="[22]"></a>GPIO_B2_IRQHandler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup_cm0.o(.text))
+<BR>[Address Reference Count : 1]<UL><LI> startup_cm0.o(RESET)
+</UL>
+<P><STRONG><a name="[23]"></a>GPIO_B3_IRQHandler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup_cm0.o(.text))
+<BR>[Address Reference Count : 1]<UL><LI> startup_cm0.o(RESET)
+</UL>
+<P><STRONG><a name="[24]"></a>GPIO_B4_IRQHandler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup_cm0.o(.text))
+<BR>[Address Reference Count : 1]<UL><LI> startup_cm0.o(RESET)
+</UL>
+<P><STRONG><a name="[25]"></a>GPIO_B5_IRQHandler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup_cm0.o(.text))
+<BR>[Address Reference Count : 1]<UL><LI> startup_cm0.o(RESET)
+</UL>
+<P><STRONG><a name="[27]"></a>GPIO_B7_IRQHandler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup_cm0.o(.text))
+<BR>[Address Reference Count : 1]<UL><LI> startup_cm0.o(RESET)
+</UL>
+<P><STRONG><a name="[1b]"></a>RTC_IRQHandler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup_cm0.o(.text))
+<BR>[Address Reference Count : 1]<UL><LI> startup_cm0.o(RESET)
+</UL>
+<P><STRONG><a name="[12]"></a>SYS_GPIO_0_IRQHandler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup_cm0.o(.text))
+<BR>[Address Reference Count : 1]<UL><LI> startup_cm0.o(RESET)
+</UL>
+<P><STRONG><a name="[13]"></a>SYS_GPIO_1_IRQHandler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup_cm0.o(.text))
+<BR>[Address Reference Count : 1]<UL><LI> startup_cm0.o(RESET)
+</UL>
+<P><STRONG><a name="[7e]"></a>UART2_IRQHandler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup_cm0.o(.text), UNUSED)
+
+<P><STRONG><a name="[7f]"></a>__aeabi_uidiv</STRONG> (Thumb, 0 bytes, Stack size 12 bytes, uidiv.o(.text), UNUSED)
+
+<P><STRONG><a name="[45]"></a>__aeabi_uidivmod</STRONG> (Thumb, 44 bytes, Stack size 12 bytes, uidiv.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 12<LI>Call Chain = __aeabi_uidivmod
+</UL>
+<BR>[Called By]<UL><LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Get_Vbat_Voltage
+<LI><a href="#[44]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Gecko_Set_BaudRate
+</UL>
+
+<P><STRONG><a name="[76]"></a>__aeabi_uread4</STRONG> (Thumb, 20 bytes, Stack size 0 bytes, uread4.o(.text), UNUSED)
+<BR><BR>[Called By]<UL><LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ProgramPage (via Veneer)
+</UL>
+
+<P><STRONG><a name="[80]"></a>__rt_uread4</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, uread4.o(.text), UNUSED)
+
+<P><STRONG><a name="[81]"></a>_uread4</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, uread4.o(.text), UNUSED)
+
+<P><STRONG><a name="[2e]"></a>__aeabi_fadd</STRONG> (Thumb, 162 bytes, Stack size 24 bytes, fadd.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 36<LI>Call Chain = __aeabi_fadd &rArr; _float_epilogue
+</UL>
+<BR>[Calls]<UL><LI><a href="#[30]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_float_round
+<LI><a href="#[2f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_float_epilogue
+</UL>
+<BR>[Called By]<UL><LI><a href="#[31]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_fsub
+<LI><a href="#[32]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_frsub
+</UL>
+
+<P><STRONG><a name="[31]"></a>__aeabi_fsub</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, fadd.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 36<LI>Call Chain = __aeabi_fsub &rArr; __aeabi_fadd &rArr; _float_epilogue
+</UL>
+<BR>[Calls]<UL><LI><a href="#[2e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_fadd
+</UL>
+<BR>[Called By]<UL><LI><a href="#[47]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;adc_delay_us
+</UL>
+
+<P><STRONG><a name="[32]"></a>__aeabi_frsub</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, fadd.o(.text), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[2e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_fadd
+</UL>
+
+<P><STRONG><a name="[33]"></a>__aeabi_dmul</STRONG> (Thumb, 202 bytes, Stack size 72 bytes, dmul.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 128<LI>Call Chain = __aeabi_dmul &rArr; _double_epilogue &rArr; __aeabi_llsl
+</UL>
+<BR>[Calls]<UL><LI><a href="#[34]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_double_epilogue
+</UL>
+<BR>[Called By]<UL><LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Get_Vbat_Voltage
+</UL>
+
+<P><STRONG><a name="[35]"></a>__aeabi_i2d</STRONG> (Thumb, 34 bytes, Stack size 16 bytes, dflti.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 72<LI>Call Chain = __aeabi_i2d &rArr; _double_epilogue &rArr; __aeabi_llsl
+</UL>
+<BR>[Calls]<UL><LI><a href="#[34]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_double_epilogue
+</UL>
+<BR>[Called By]<UL><LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Get_Vbat_Voltage
+</UL>
+
+<P><STRONG><a name="[36]"></a>__aeabi_d2iz</STRONG> (Thumb, 62 bytes, Stack size 16 bytes, dfixi.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = __aeabi_d2iz &rArr; __aeabi_llsr
+</UL>
+<BR>[Calls]<UL><LI><a href="#[37]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_llsr
+</UL>
+<BR>[Called By]<UL><LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Get_Vbat_Voltage
+</UL>
+
+<P><STRONG><a name="[37]"></a>__aeabi_llsr</STRONG> (Thumb, 34 bytes, Stack size 8 bytes, llushr.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = __aeabi_llsr
+</UL>
+<BR>[Called By]<UL><LI><a href="#[36]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_d2iz
+<LI><a href="#[34]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_double_epilogue
+</UL>
+
+<P><STRONG><a name="[82]"></a>_ll_ushift_r</STRONG> (Thumb, 0 bytes, Stack size 8 bytes, llushr.o(.text), UNUSED)
+
+<P><STRONG><a name="[83]"></a>__I$use$fp</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, iusefp.o(.text), UNUSED)
+
+<P><STRONG><a name="[30]"></a>_float_round</STRONG> (Thumb, 16 bytes, Stack size 0 bytes, fepilogue.o(.text))
+<BR><BR>[Called By]<UL><LI><a href="#[2e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_fadd
+</UL>
+
+<P><STRONG><a name="[2f]"></a>_float_epilogue</STRONG> (Thumb, 114 bytes, Stack size 12 bytes, fepilogue.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 12<LI>Call Chain = _float_epilogue
+</UL>
+<BR>[Called By]<UL><LI><a href="#[2e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_fadd
+</UL>
+
+<P><STRONG><a name="[3a]"></a>_double_round</STRONG> (Thumb, 26 bytes, Stack size 8 bytes, depilogue.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = _double_round
+</UL>
+<BR>[Called By]<UL><LI><a href="#[34]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_double_epilogue
+</UL>
+
+<P><STRONG><a name="[34]"></a>_double_epilogue</STRONG> (Thumb, 164 bytes, Stack size 48 bytes, depilogue.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = _double_epilogue &rArr; __aeabi_llsl
+</UL>
+<BR>[Calls]<UL><LI><a href="#[39]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_llsl
+<LI><a href="#[38]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__ARM_clz
+<LI><a href="#[3a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_double_round
+<LI><a href="#[37]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_llsr
+</UL>
+<BR>[Called By]<UL><LI><a href="#[35]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_i2d
+<LI><a href="#[33]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dmul
+</UL>
+
+<P><STRONG><a name="[2d]"></a>__scatterload</STRONG> (Thumb, 28 bytes, Stack size 0 bytes, init.o(.text))
+<BR><BR>[Calls]<UL><LI><a href="#[3b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__main_after_scatterload
+</UL>
+<BR>[Called By]<UL><LI><a href="#[2c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_main_scatterload
+</UL>
+
+<P><STRONG><a name="[84]"></a>__scatterload_rt2</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, init.o(.text), UNUSED)
+
+<P><STRONG><a name="[39]"></a>__aeabi_llsl</STRONG> (Thumb, 32 bytes, Stack size 8 bytes, llshl.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = __aeabi_llsl
+</UL>
+<BR>[Called By]<UL><LI><a href="#[34]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_double_epilogue
+</UL>
+
+<P><STRONG><a name="[85]"></a>_ll_shift_l</STRONG> (Thumb, 0 bytes, Stack size 8 bytes, llshl.o(.text), UNUSED)
+
+<P><STRONG><a name="[28]"></a>AON_WKUP_IRQHandler</STRONG> (Thumb, 8 bytes, Stack size 8 bytes, isr.o(i.AON_WKUP_IRQHandler))
+<BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = AON_WKUP_IRQHandler &rArr; gecko_aon_wakeup_irq_handler
+</UL>
+<BR>[Calls]<UL><LI><a href="#[3c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gecko_aon_wakeup_irq_handler
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> startup_cm0.o(RESET)
+</UL>
+<P><STRONG><a name="[17]"></a>APB_SPI0_IRQnHandler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, isr.o(i.APB_SPI0_IRQnHandler))
+<BR>[Address Reference Count : 1]<UL><LI> startup_cm0.o(RESET)
+</UL>
+<P><STRONG><a name="[18]"></a>APB_SPI1_IRQnHandler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, isr.o(i.APB_SPI1_IRQnHandler))
+<BR>[Address Reference Count : 1]<UL><LI> startup_cm0.o(RESET)
+</UL>
+<P><STRONG><a name="[29]"></a>CMU2AHB_IRQHandler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, isr.o(i.CMU2AHB_IRQHandler))
+<BR>[Address Reference Count : 1]<UL><LI> startup_cm0.o(RESET)
+</UL>
+<P><STRONG><a name="[3d]"></a>DMA_Configuration</STRONG> (Thumb, 56 bytes, Stack size 8 bytes, dma.o(i.DMA_Configuration))
+<BR><BR>[Stack]<UL><LI>Max Depth = 12<LI>Call Chain = DMA_Configuration &rArr; hal_nvic_set_priority
+</UL>
+<BR>[Calls]<UL><LI><a href="#[3f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hal_nvic_set_priority
+<LI><a href="#[3e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hal_nvic_clear_pending_irq
+<LI><a href="#[40]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NVIC_EnableIRQ
+</UL>
+<BR>[Called By]<UL><LI><a href="#[2a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+</UL>
+
+<P><STRONG><a name="[11]"></a>GPADC_IRQHandler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, isr.o(i.GPADC_IRQHandler))
+<BR>[Address Reference Count : 1]<UL><LI> startup_cm0.o(RESET)
+</UL>
+<P><STRONG><a name="[1d]"></a>GPIO_A5_IRQHandler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, isr.o(i.GPIO_A5_IRQHandler))
+<BR>[Address Reference Count : 1]<UL><LI> startup_cm0.o(RESET)
+</UL>
+<P><STRONG><a name="[26]"></a>GPIO_B6_IRQHandler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, isr.o(i.GPIO_B6_IRQHandler))
+<BR>[Address Reference Count : 1]<UL><LI> startup_cm0.o(RESET)
+</UL>
+<P><STRONG><a name="[41]"></a>Gecko_DMA_Transport</STRONG> (Thumb, 44 bytes, Stack size 24 bytes, dma.o(i.Gecko_DMA_Transport))
+<BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = Gecko_DMA_Transport
+</UL>
+<BR>[Calls]<UL><LI><a href="#[43]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pExitCriticalSection
+<LI><a href="#[42]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pEnterCriticalSection
+</UL>
+<BR>[Called By]<UL><LI><a href="#[4c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HW_SPI_Tx_DMA_32bit
+<LI><a href="#[4b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HW_SPI_Tx_DMA_16bit_ColorBlock
+<LI><a href="#[48]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HW_SPI_Tx_DMA
+</UL>
+
+<P><STRONG><a name="[44]"></a>Gecko_Set_BaudRate</STRONG> (Thumb, 198 bytes, Stack size 24 bytes, uart.o(i.Gecko_Set_BaudRate))
+<BR><BR>[Stack]<UL><LI>Max Depth = 36<LI>Call Chain = Gecko_Set_BaudRate &rArr; __aeabi_uidivmod
+</UL>
+<BR>[Calls]<UL><LI><a href="#[45]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_uidivmod
+</UL>
+<BR>[Called By]<UL><LI><a href="#[66]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Uart_16550_Initialise
+</UL>
+
+<P><STRONG><a name="[46]"></a>Get_Vbat_Voltage</STRONG> (Thumb, 96 bytes, Stack size 16 bytes, adc.o(i.Get_Vbat_Voltage))
+<BR><BR>[Stack]<UL><LI>Max Depth = 144<LI>Call Chain = Get_Vbat_Voltage &rArr; __aeabi_dmul &rArr; _double_epilogue &rArr; __aeabi_llsl
+</UL>
+<BR>[Calls]<UL><LI><a href="#[35]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_i2d
+<LI><a href="#[33]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dmul
+<LI><a href="#[36]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_d2iz
+<LI><a href="#[47]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;adc_delay_us
+<LI><a href="#[45]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_uidivmod
+</UL>
+<BR>[Called By]<UL><LI><a href="#[2a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+</UL>
+
+<P><STRONG><a name="[6e]"></a>HW_SPI_Initialise</STRONG> (Thumb, 106 bytes, Stack size 24 bytes, spi.o(i.HW_SPI_Initialise))
+<BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = HW_SPI_Initialise
+</UL>
+<BR>[Called By]<UL><LI><a href="#[2a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+</UL>
+
+<P><STRONG><a name="[48]"></a>HW_SPI_Tx_DMA</STRONG> (Thumb, 46 bytes, Stack size 16 bytes, spi.o(i.HW_SPI_Tx_DMA))
+<BR><BR>[Stack]<UL><LI>Max Depth = 40<LI>Call Chain = HW_SPI_Tx_DMA &rArr; Gecko_DMA_Transport
+</UL>
+<BR>[Calls]<UL><LI><a href="#[4a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dma_sram_delay (via Veneer)
+<LI><a href="#[41]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Gecko_DMA_Transport
+<LI><a href="#[49]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_set_value
+</UL>
+<BR>[Called By]<UL><LI><a href="#[2a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+</UL>
+
+<P><STRONG><a name="[4b]"></a>HW_SPI_Tx_DMA_16bit_ColorBlock</STRONG> (Thumb, 46 bytes, Stack size 16 bytes, spi.o(i.HW_SPI_Tx_DMA_16bit_ColorBlock))
+<BR><BR>[Stack]<UL><LI>Max Depth = 40<LI>Call Chain = HW_SPI_Tx_DMA_16bit_ColorBlock &rArr; Gecko_DMA_Transport
+</UL>
+<BR>[Calls]<UL><LI><a href="#[4a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dma_sram_delay (via Veneer)
+<LI><a href="#[41]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Gecko_DMA_Transport
+<LI><a href="#[49]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_set_value
+</UL>
+<BR>[Called By]<UL><LI><a href="#[6c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lcd_dma_refresh_colorblock
+</UL>
+
+<P><STRONG><a name="[4c]"></a>HW_SPI_Tx_DMA_32bit</STRONG> (Thumb, 46 bytes, Stack size 16 bytes, spi.o(i.HW_SPI_Tx_DMA_32bit))
+<BR><BR>[Stack]<UL><LI>Max Depth = 40<LI>Call Chain = HW_SPI_Tx_DMA_32bit &rArr; Gecko_DMA_Transport
+</UL>
+<BR>[Calls]<UL><LI><a href="#[4a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dma_sram_delay (via Veneer)
+<LI><a href="#[41]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Gecko_DMA_Transport
+<LI><a href="#[49]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_set_value
+</UL>
+<BR>[Called By]<UL><LI><a href="#[2a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+</UL>
+
+<P><STRONG><a name="[4d]"></a>LCD_GPIO_Init</STRONG> (Thumb, 52 bytes, Stack size 8 bytes, lcd_driver.o(i.LCD_GPIO_Init))
+<BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = LCD_GPIO_Init &rArr; gecko_pinmux_config &rArr; __ARM_common_switch8
+</UL>
+<BR>[Calls]<UL><LI><a href="#[4e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gecko_pinmux_config
+<LI><a href="#[4f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_set_output
+</UL>
+<BR>[Called By]<UL><LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Lcd_Init
+</UL>
+
+<P><STRONG><a name="[50]"></a>LCD_WriteData_16Bit</STRONG> (Thumb, 30 bytes, Stack size 8 bytes, lcd_driver.o(i.LCD_WriteData_16Bit))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = LCD_WriteData_16Bit
+</UL>
+<BR>[Calls]<UL><LI><a href="#[49]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_set_value
+</UL>
+<BR>[Called By]<UL><LI><a href="#[59]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Lcd_SetRegion
+</UL>
+
+<P><STRONG><a name="[51]"></a>LDO33_AUX_Enable</STRONG> (Thumb, 24 bytes, Stack size 8 bytes, aon.o(i.LDO33_AUX_Enable))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = LDO33_AUX_Enable
+</UL>
+<BR>[Calls]<UL><LI><a href="#[53]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;reg_write (via Veneer)
+<LI><a href="#[52]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;reg_read (via Veneer)
+</UL>
+<BR>[Called By]<UL><LI><a href="#[2a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+</UL>
+
+<P><STRONG><a name="[54]"></a>Lcd_Init</STRONG> (Thumb, 690 bytes, Stack size 8 bytes, lcd_driver.o(i.Lcd_Init))
+<BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = Lcd_Init &rArr; LCD_GPIO_Init &rArr; gecko_pinmux_config &rArr; __ARM_common_switch8
+</UL>
+<BR>[Calls]<UL><LI><a href="#[56]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_ms
+<LI><a href="#[57]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Lcd_WriteIndex
+<LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Lcd_WriteData
+<LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Lcd_Reset
+<LI><a href="#[4d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_GPIO_Init
+</UL>
+<BR>[Called By]<UL><LI><a href="#[2a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+</UL>
+
+<P><STRONG><a name="[55]"></a>Lcd_Reset</STRONG> (Thumb, 54 bytes, Stack size 8 bytes, lcd_driver.o(i.Lcd_Reset))
+<BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = Lcd_Reset &rArr; delay_ms
+</UL>
+<BR>[Calls]<UL><LI><a href="#[49]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_set_value
+<LI><a href="#[56]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_ms
+</UL>
+<BR>[Called By]<UL><LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Lcd_Init
+</UL>
+
+<P><STRONG><a name="[59]"></a>Lcd_SetRegion</STRONG> (Thumb, 54 bytes, Stack size 24 bytes, lcd_driver.o(i.Lcd_SetRegion))
+<BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = Lcd_SetRegion &rArr; Lcd_WriteIndex
+</UL>
+<BR>[Calls]<UL><LI><a href="#[57]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Lcd_WriteIndex
+<LI><a href="#[50]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_WriteData_16Bit
+</UL>
+<BR>[Called By]<UL><LI><a href="#[6c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lcd_dma_refresh_colorblock
+<LI><a href="#[2a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+</UL>
+
+<P><STRONG><a name="[58]"></a>Lcd_WriteData</STRONG> (Thumb, 24 bytes, Stack size 8 bytes, lcd_driver.o(i.Lcd_WriteData))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = Lcd_WriteData
+</UL>
+<BR>[Calls]<UL><LI><a href="#[49]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_set_value
+</UL>
+<BR>[Called By]<UL><LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Lcd_Init
+</UL>
+
+<P><STRONG><a name="[57]"></a>Lcd_WriteIndex</STRONG> (Thumb, 24 bytes, Stack size 8 bytes, lcd_driver.o(i.Lcd_WriteIndex))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = Lcd_WriteIndex
+</UL>
+<BR>[Calls]<UL><LI><a href="#[49]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_set_value
+</UL>
+<BR>[Called By]<UL><LI><a href="#[59]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Lcd_SetRegion
+<LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Lcd_Init
+</UL>
+
+<P><STRONG><a name="[6b]"></a>NVIC_ClearPendingIRQ</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, system_initial.o(i.NVIC_ClearPendingIRQ))
+<BR><BR>[Called By]<UL><LI><a href="#[3e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hal_nvic_clear_pending_irq
+</UL>
+
+<P><STRONG><a name="[40]"></a>NVIC_EnableIRQ</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, system_initial.o(i.NVIC_EnableIRQ))
+<BR><BR>[Called By]<UL><LI><a href="#[60]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hal_nvic_enable_irq
+<LI><a href="#[3d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA_Configuration
+</UL>
+
+<P><STRONG><a name="[5d]"></a>NVIC_SetPriority</STRONG> (Thumb, 60 bytes, Stack size 0 bytes, system_initial.o(i.NVIC_SetPriority))
+<BR><BR>[Called By]<UL><LI><a href="#[3f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hal_nvic_set_priority
+<LI><a href="#[5c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysTick_Config
+</UL>
+
+<P><STRONG><a name="[5a]"></a>Osc32M_Freq_Trimming</STRONG> (Thumb, 110 bytes, Stack size 16 bytes, aon.o(i.Osc32M_Freq_Trimming))
+<BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = Osc32M_Freq_Trimming
+</UL>
+<BR>[Calls]<UL><LI><a href="#[53]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;reg_write (via Veneer)
+<LI><a href="#[52]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;reg_read (via Veneer)
+</UL>
+<BR>[Called By]<UL><LI><a href="#[5e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemInit
+</UL>
+
+<P><STRONG><a name="[1a]"></a>QSPI_CTRL_IRQHandler</STRONG> (Thumb, 8 bytes, Stack size 8 bytes, isr.o(i.QSPI_CTRL_IRQHandler))
+<BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = QSPI_CTRL_IRQHandler &rArr; gecko_ahb2qspi_ctrl_irq_handler
+</UL>
+<BR>[Calls]<UL><LI><a href="#[5b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gecko_ahb2qspi_ctrl_irq_handler
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> startup_cm0.o(RESET)
+</UL>
+<P><STRONG><a name="[5c]"></a>SysTick_Config</STRONG> (Thumb, 38 bytes, Stack size 8 bytes, systick.o(i.SysTick_Config))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = SysTick_Config
+</UL>
+<BR>[Calls]<UL><LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NVIC_SetPriority
+</UL>
+<BR>[Called By]<UL><LI><a href="#[2a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+</UL>
+
+<P><STRONG><a name="[9]"></a>SysTick_Handler</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, isr.o(i.SysTick_Handler))
+<BR>[Address Reference Count : 1]<UL><LI> startup_cm0.o(RESET)
+</UL>
+<P><STRONG><a name="[5e]"></a>SystemInit</STRONG> (Thumb, 36 bytes, Stack size 8 bytes, main.o(i.SystemInit))
+<BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = SystemInit &rArr; Osc32M_Freq_Trimming
+</UL>
+<BR>[Calls]<UL><LI><a href="#[5f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gecko_cmu_init
+<LI><a href="#[5a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Osc32M_Freq_Trimming
+<LI><a href="#[3f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hal_nvic_set_priority
+<LI><a href="#[60]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hal_nvic_enable_irq
+<LI><a href="#[3e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hal_nvic_clear_pending_irq
+<LI><a href="#[61]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gecko_task_cm0_sw_flash (via Veneer)
+</UL>
+<BR>[Called By]<UL><LI><a href="#[2a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+</UL>
+
+<P><STRONG><a name="[f]"></a>TIMER0_IRQHandler</STRONG> (Thumb, 8 bytes, Stack size 8 bytes, isr.o(i.TIMER0_IRQHandler))
+<BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = TIMER0_IRQHandler &rArr; Timer0_Interrupt_Handler
+</UL>
+<BR>[Calls]<UL><LI><a href="#[62]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Timer0_Interrupt_Handler
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> startup_cm0.o(RESET)
+</UL>
+<P><STRONG><a name="[10]"></a>TIMER1_IRQHandler</STRONG> (Thumb, 8 bytes, Stack size 8 bytes, isr.o(i.TIMER1_IRQHandler))
+<BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = TIMER1_IRQHandler &rArr; gecko_timer1_irq_handler
+</UL>
+<BR>[Calls]<UL><LI><a href="#[63]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gecko_timer1_irq_handler
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> startup_cm0.o(RESET)
+</UL>
+<P><STRONG><a name="[62]"></a>Timer0_Interrupt_Handler</STRONG> (Thumb, 10 bytes, Stack size 8 bytes, timer.o(i.Timer0_Interrupt_Handler))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = Timer0_Interrupt_Handler
+</UL>
+<BR>[Called By]<UL><LI><a href="#[f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIMER0_IRQHandler
+</UL>
+
+<P><STRONG><a name="[c]"></a>UART0_IRQHandler</STRONG> (Thumb, 8 bytes, Stack size 8 bytes, isr.o(i.UART0_IRQHandler))
+<BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = UART0_IRQHandler &rArr; UART0_Interrupt_Handler
+</UL>
+<BR>[Calls]<UL><LI><a href="#[64]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART0_Interrupt_Handler
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> startup_cm0.o(RESET)
+</UL>
+<P><STRONG><a name="[64]"></a>UART0_Interrupt_Handler</STRONG> (Thumb, 48 bytes, Stack size 8 bytes, uart.o(i.UART0_Interrupt_Handler))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = UART0_Interrupt_Handler
+</UL>
+<BR>[Called By]<UL><LI><a href="#[c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART0_IRQHandler
+</UL>
+
+<P><STRONG><a name="[d]"></a>UART1_IRQHandler</STRONG> (Thumb, 8 bytes, Stack size 8 bytes, isr.o(i.UART1_IRQHandler))
+<BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = UART1_IRQHandler &rArr; UART1_Interrupt_Handler
+</UL>
+<BR>[Calls]<UL><LI><a href="#[65]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART1_Interrupt_Handler
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> startup_cm0.o(RESET)
+</UL>
+<P><STRONG><a name="[65]"></a>UART1_Interrupt_Handler</STRONG> (Thumb, 48 bytes, Stack size 8 bytes, uart.o(i.UART1_Interrupt_Handler))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = UART1_Interrupt_Handler
+</UL>
+<BR>[Called By]<UL><LI><a href="#[d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART1_IRQHandler
+</UL>
+
+<P><STRONG><a name="[66]"></a>Uart_16550_Initialise</STRONG> (Thumb, 76 bytes, Stack size 24 bytes, uart.o(i.Uart_16550_Initialise))
+<BR><BR>[Stack]<UL><LI>Max Depth = 60<LI>Call Chain = Uart_16550_Initialise &rArr; Gecko_Set_BaudRate &rArr; __aeabi_uidivmod
+</UL>
+<BR>[Calls]<UL><LI><a href="#[44]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Gecko_Set_BaudRate
+</UL>
+<BR>[Called By]<UL><LI><a href="#[2a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+</UL>
+
+<P><STRONG><a name="[14]"></a>WDT_IRQHandler</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, isr.o(i.WDT_IRQHandler))
+<BR>[Address Reference Count : 1]<UL><LI> startup_cm0.o(RESET)
+</UL>
+<P><STRONG><a name="[38]"></a>__ARM_clz</STRONG> (Thumb, 46 bytes, Stack size 0 bytes, depilogue.o(i.__ARM_clz))
+<BR><BR>[Called By]<UL><LI><a href="#[34]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_double_epilogue
+</UL>
+
+<P><STRONG><a name="[69]"></a>__ARM_common_switch8</STRONG> (Thumb, 26 bytes, Stack size 8 bytes, adc.o(i.__ARM_common_switch8))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = __ARM_common_switch8
+</UL>
+<BR>[Called By]<UL><LI><a href="#[4e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gecko_pinmux_config
+<LI><a href="#[68]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;bsr1901_pullup_pulldown_config
+</UL>
+
+<P><STRONG><a name="[86]"></a>__scatterload_copy</STRONG> (Thumb, 14 bytes, Stack size unknown bytes, handlers.o(i.__scatterload_copy), UNUSED)
+
+<P><STRONG><a name="[87]"></a>__scatterload_null</STRONG> (Thumb, 2 bytes, Stack size unknown bytes, handlers.o(i.__scatterload_null), UNUSED)
+
+<P><STRONG><a name="[88]"></a>__scatterload_zeroinit</STRONG> (Thumb, 14 bytes, Stack size unknown bytes, handlers.o(i.__scatterload_zeroinit), UNUSED)
+
+<P><STRONG><a name="[47]"></a>adc_delay_us</STRONG> (Thumb, 36 bytes, Stack size 24 bytes, adc.o(i.adc_delay_us))
+<BR><BR>[Stack]<UL><LI>Max Depth = 60<LI>Call Chain = adc_delay_us &rArr; __aeabi_fsub &rArr; __aeabi_fadd &rArr; _float_epilogue
+</UL>
+<BR>[Calls]<UL><LI><a href="#[31]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_fsub
+</UL>
+<BR>[Called By]<UL><LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Get_Vbat_Voltage
+</UL>
+
+<P><STRONG><a name="[67]"></a>aon_wakeup_irq_cfg</STRONG> (Thumb, 24 bytes, Stack size 8 bytes, aon.o(i.aon_wakeup_irq_cfg))
+<BR><BR>[Stack]<UL><LI>Max Depth = 12<LI>Call Chain = aon_wakeup_irq_cfg &rArr; hal_nvic_set_priority
+</UL>
+<BR>[Calls]<UL><LI><a href="#[3f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hal_nvic_set_priority
+<LI><a href="#[60]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hal_nvic_enable_irq
+<LI><a href="#[3e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hal_nvic_clear_pending_irq
+</UL>
+<BR>[Called By]<UL><LI><a href="#[2a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+</UL>
+
+<P><STRONG><a name="[68]"></a>bsr1901_pullup_pulldown_config</STRONG> (Thumb, 326 bytes, Stack size 16 bytes, iomux.o(i.bsr1901_pullup_pulldown_config))
+<BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = bsr1901_pullup_pulldown_config &rArr; __ARM_common_switch8
+</UL>
+<BR>[Calls]<UL><LI><a href="#[53]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;reg_write (via Veneer)
+<LI><a href="#[52]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;reg_read (via Veneer)
+<LI><a href="#[69]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__ARM_common_switch8
+</UL>
+<BR>[Called By]<UL><LI><a href="#[2a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+</UL>
+
+<P><STRONG><a name="[6a]"></a>delay_1ms</STRONG> (Thumb, 22 bytes, Stack size 0 bytes, lcd_driver.o(i.delay_1ms))
+<BR><BR>[Called By]<UL><LI><a href="#[56]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_ms
+</UL>
+
+<P><STRONG><a name="[6f]"></a>delay_1us</STRONG> (Thumb, 16 bytes, Stack size 0 bytes, dpi_common.o(i.delay_1us))
+<BR><BR>[Called By]<UL><LI><a href="#[2a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+<LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;QSPI_NorFlash_ReadWord (via Veneer)
+<LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ProgramPage (via Veneer)
+<LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EraseSector (via Veneer)
+</UL>
+
+<P><STRONG><a name="[56]"></a>delay_ms</STRONG> (Thumb, 20 bytes, Stack size 8 bytes, lcd_driver.o(i.delay_ms))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = delay_ms
+</UL>
+<BR>[Calls]<UL><LI><a href="#[6a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_1ms
+</UL>
+<BR>[Called By]<UL><LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Lcd_Reset
+<LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Lcd_Init
+</UL>
+
+<P><STRONG><a name="[5b]"></a>gecko_ahb2qspi_ctrl_irq_handler</STRONG> (Thumb, 32 bytes, Stack size 8 bytes, xt25f32.o(i.gecko_ahb2qspi_ctrl_irq_handler))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = gecko_ahb2qspi_ctrl_irq_handler
+</UL>
+<BR>[Calls]<UL><LI><a href="#[53]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;reg_write (via Veneer)
+<LI><a href="#[52]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;reg_read (via Veneer)
+</UL>
+<BR>[Called By]<UL><LI><a href="#[1a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;QSPI_CTRL_IRQHandler
+</UL>
+
+<P><STRONG><a name="[3c]"></a>gecko_aon_wakeup_irq_handler</STRONG> (Thumb, 12 bytes, Stack size 8 bytes, xt25f32.o(i.gecko_aon_wakeup_irq_handler))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = gecko_aon_wakeup_irq_handler
+</UL>
+<BR>[Calls]<UL><LI><a href="#[53]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;reg_write (via Veneer)
+</UL>
+<BR>[Called By]<UL><LI><a href="#[28]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AON_WKUP_IRQHandler
+</UL>
+
+<P><STRONG><a name="[5f]"></a>gecko_cmu_init</STRONG> (Thumb, 16 bytes, Stack size 8 bytes, cmu.o(i.gecko_cmu_init))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = gecko_cmu_init
+</UL>
+<BR>[Called By]<UL><LI><a href="#[5e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemInit
+</UL>
+
+<P><STRONG><a name="[4e]"></a>gecko_pinmux_config</STRONG> (Thumb, 434 bytes, Stack size 8 bytes, iomux.o(i.gecko_pinmux_config))
+<BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = gecko_pinmux_config &rArr; __ARM_common_switch8
+</UL>
+<BR>[Calls]<UL><LI><a href="#[69]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__ARM_common_switch8
+</UL>
+<BR>[Called By]<UL><LI><a href="#[2a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+<LI><a href="#[4d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_GPIO_Init
+</UL>
+
+<P><STRONG><a name="[6d]"></a>gecko_pinmux_default_config</STRONG> (Thumb, 12 bytes, Stack size 0 bytes, iomux.o(i.gecko_pinmux_default_config))
+<BR><BR>[Called By]<UL><LI><a href="#[2a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+</UL>
+
+<P><STRONG><a name="[63]"></a>gecko_timer1_irq_handler</STRONG> (Thumb, 26 bytes, Stack size 8 bytes, timer.o(i.gecko_timer1_irq_handler))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = gecko_timer1_irq_handler
+</UL>
+<BR>[Called By]<UL><LI><a href="#[10]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIMER1_IRQHandler
+</UL>
+
+<P><STRONG><a name="[4f]"></a>gpio_set_output</STRONG> (Thumb, 52 bytes, Stack size 12 bytes, gpio.o(i.gpio_set_output))
+<BR><BR>[Stack]<UL><LI>Max Depth = 12<LI>Call Chain = gpio_set_output
+</UL>
+<BR>[Called By]<UL><LI><a href="#[4d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_GPIO_Init
+</UL>
+
+<P><STRONG><a name="[49]"></a>gpio_set_value</STRONG> (Thumb, 28 bytes, Stack size 0 bytes, gpio.o(i.gpio_set_value))
+<BR><BR>[Called By]<UL><LI><a href="#[4c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HW_SPI_Tx_DMA_32bit
+<LI><a href="#[4b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HW_SPI_Tx_DMA_16bit_ColorBlock
+<LI><a href="#[48]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HW_SPI_Tx_DMA
+<LI><a href="#[57]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Lcd_WriteIndex
+<LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Lcd_WriteData
+<LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Lcd_Reset
+<LI><a href="#[50]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_WriteData_16Bit
+<LI><a href="#[71]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA_ISR_Routine (via Veneer)
+</UL>
+
+<P><STRONG><a name="[3e]"></a>hal_nvic_clear_pending_irq</STRONG> (Thumb, 8 bytes, Stack size 4 bytes, system_initial.o(i.hal_nvic_clear_pending_irq))
+<BR><BR>[Stack]<UL><LI>Max Depth = 4<LI>Call Chain = hal_nvic_clear_pending_irq
+</UL>
+<BR>[Calls]<UL><LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NVIC_ClearPendingIRQ
+</UL>
+<BR>[Called By]<UL><LI><a href="#[67]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;aon_wakeup_irq_cfg
+<LI><a href="#[5e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemInit
+<LI><a href="#[3d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA_Configuration
+</UL>
+
+<P><STRONG><a name="[60]"></a>hal_nvic_enable_irq</STRONG> (Thumb, 8 bytes, Stack size 4 bytes, system_initial.o(i.hal_nvic_enable_irq))
+<BR><BR>[Stack]<UL><LI>Max Depth = 4<LI>Call Chain = hal_nvic_enable_irq
+</UL>
+<BR>[Calls]<UL><LI><a href="#[40]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NVIC_EnableIRQ
+</UL>
+<BR>[Called By]<UL><LI><a href="#[67]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;aon_wakeup_irq_cfg
+<LI><a href="#[5e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemInit
+</UL>
+
+<P><STRONG><a name="[3f]"></a>hal_nvic_set_priority</STRONG> (Thumb, 8 bytes, Stack size 4 bytes, system_initial.o(i.hal_nvic_set_priority))
+<BR><BR>[Stack]<UL><LI>Max Depth = 4<LI>Call Chain = hal_nvic_set_priority
+</UL>
+<BR>[Calls]<UL><LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NVIC_SetPriority
+</UL>
+<BR>[Called By]<UL><LI><a href="#[67]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;aon_wakeup_irq_cfg
+<LI><a href="#[5e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemInit
+<LI><a href="#[3d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA_Configuration
+</UL>
+
+<P><STRONG><a name="[6c]"></a>lcd_dma_refresh_colorblock</STRONG> (Thumb, 36 bytes, Stack size 16 bytes, spi.o(i.lcd_dma_refresh_colorblock))
+<BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = lcd_dma_refresh_colorblock &rArr; HW_SPI_Tx_DMA_16bit_ColorBlock &rArr; Gecko_DMA_Transport
+</UL>
+<BR>[Calls]<UL><LI><a href="#[59]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Lcd_SetRegion
+<LI><a href="#[4b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HW_SPI_Tx_DMA_16bit_ColorBlock
+</UL>
+<BR>[Called By]<UL><LI><a href="#[2a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+</UL>
+
+<P><STRONG><a name="[2a]"></a>main</STRONG> (Thumb, 274 bytes, Stack size 16 bytes, main.o(i.main))
+<BR><BR>[Stack]<UL><LI>Max Depth = 160<LI>Call Chain = main &rArr; Get_Vbat_Voltage &rArr; __aeabi_dmul &rArr; _double_epilogue &rArr; __aeabi_llsl
+</UL>
+<BR>[Calls]<UL><LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gecko_pinmux_default_config
+<LI><a href="#[4e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gecko_pinmux_config
+<LI><a href="#[68]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;bsr1901_pullup_pulldown_config
+<LI><a href="#[6f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_1us
+<LI><a href="#[67]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;aon_wakeup_irq_cfg
+<LI><a href="#[51]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LDO33_AUX_Enable
+<LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Get_Vbat_Voltage
+<LI><a href="#[5c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysTick_Config
+<LI><a href="#[59]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Lcd_SetRegion
+<LI><a href="#[6c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lcd_dma_refresh_colorblock
+<LI><a href="#[4c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HW_SPI_Tx_DMA_32bit
+<LI><a href="#[48]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HW_SPI_Tx_DMA
+<LI><a href="#[6e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HW_SPI_Initialise
+<LI><a href="#[66]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Uart_16550_Initialise
+<LI><a href="#[5e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemInit
+<LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Lcd_Init
+<LI><a href="#[3d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA_Configuration
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> entry9a.o(.ARM.Collect$$$$0000000B)
+</UL>
+<P><STRONG><a name="[42]"></a>pEnterCriticalSection</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, system_initial.o(i.pEnterCriticalSection))
+<BR><BR>[Called By]<UL><LI><a href="#[41]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Gecko_DMA_Transport
+</UL>
+
+<P><STRONG><a name="[43]"></a>pExitCriticalSection</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, system_initial.o(i.pExitCriticalSection))
+<BR><BR>[Called By]<UL><LI><a href="#[41]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Gecko_DMA_Transport
+</UL>
+
+<P><STRONG><a name="[e]"></a>DMA_IRQHandler</STRONG> (Thumb, 14 bytes, Stack size 8 bytes, isr.o(ram_code))
+<BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = DMA_IRQHandler &rArr; Clear_DMA_Interrupt
+</UL>
+<BR>[Calls]<UL><LI><a href="#[70]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Clear_DMA_Interrupt
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> startup_cm0.o(RESET)
+</UL>
+<P><STRONG><a name="[4a]"></a>dma_sram_delay</STRONG> (Thumb, 34 bytes, Stack size 0 bytes, isr.o(ram_code))
+<BR><BR>[Called By]<UL><LI><a href="#[4c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HW_SPI_Tx_DMA_32bit (via Veneer)
+<LI><a href="#[4b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HW_SPI_Tx_DMA_16bit_ColorBlock (via Veneer)
+<LI><a href="#[48]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HW_SPI_Tx_DMA (via Veneer)
+</UL>
+
+<P><STRONG><a name="[70]"></a>Clear_DMA_Interrupt</STRONG> (Thumb, 22 bytes, Stack size 8 bytes, dma.o(ram_code))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = Clear_DMA_Interrupt
+</UL>
+<BR>[Called By]<UL><LI><a href="#[e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA_IRQHandler
+</UL>
+
+<P><STRONG><a name="[71]"></a>DMA_ISR_Routine</STRONG> (Thumb, 32 bytes, Stack size 8 bytes, dma.o(ram_code), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[49]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_set_value (via Veneer)
+</UL>
+
+<P><STRONG><a name="[52]"></a>reg_read</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, dpi_common.o(ram_code))
+<BR><BR>[Called By]<UL><LI><a href="#[5b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gecko_ahb2qspi_ctrl_irq_handler (via Veneer)
+<LI><a href="#[68]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;bsr1901_pullup_pulldown_config (via Veneer)
+<LI><a href="#[5a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Osc32M_Freq_Trimming (via Veneer)
+<LI><a href="#[51]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LDO33_AUX_Enable (via Veneer)
+<LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;QSPI_NorFlash_ReadWord
+<LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ProgramPage
+<LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EraseSector
+<LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nor_write_en
+</UL>
+
+<P><STRONG><a name="[53]"></a>reg_write</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, dpi_common.o(ram_code))
+<BR><BR>[Called By]<UL><LI><a href="#[3c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gecko_aon_wakeup_irq_handler (via Veneer)
+<LI><a href="#[5b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gecko_ahb2qspi_ctrl_irq_handler (via Veneer)
+<LI><a href="#[68]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;bsr1901_pullup_pulldown_config (via Veneer)
+<LI><a href="#[5a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Osc32M_Freq_Trimming (via Veneer)
+<LI><a href="#[51]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LDO33_AUX_Enable (via Veneer)
+<LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;QSPI_NorFlash_ReadWord
+<LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ProgramPage
+<LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EraseSector
+<LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nor_write_en
+<LI><a href="#[61]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gecko_task_cm0_sw_flash
+</UL>
+
+<P><STRONG><a name="[74]"></a>sram_run_delay</STRONG> (Thumb, 20 bytes, Stack size 0 bytes, dpi_common.o(ram_code), UNUSED)
+<BR><BR>[Called By]<UL><LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ProgramPage
+<LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EraseSector
+</UL>
+
+<P><STRONG><a name="[61]"></a>gecko_task_cm0_sw_flash</STRONG> (Thumb, 66 bytes, Stack size 16 bytes, xt25f32.o(ram_code))
+<BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = gecko_task_cm0_sw_flash
+</UL>
+<BR>[Calls]<UL><LI><a href="#[53]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;reg_write
+</UL>
+<BR>[Called By]<UL><LI><a href="#[5e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemInit (via Veneer)
+</UL>
+
+<P><STRONG><a name="[72]"></a>spi_nor_write_en</STRONG> (Thumb, 62 bytes, Stack size 16 bytes, xt25f32.o(ram_code), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[53]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;reg_write
+<LI><a href="#[52]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;reg_read
+</UL>
+<BR>[Called By]<UL><LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ProgramPage
+<LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EraseSector
+</UL>
+
+<P><STRONG><a name="[73]"></a>EraseSector</STRONG> (Thumb, 136 bytes, Stack size 24 bytes, xt25f32.o(ram_code), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[53]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;reg_write
+<LI><a href="#[52]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;reg_read
+<LI><a href="#[6f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_1us (via Veneer)
+<LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nor_write_en
+<LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sram_run_delay
+</UL>
+
+<P><STRONG><a name="[75]"></a>ProgramPage</STRONG> (Thumb, 194 bytes, Stack size 24 bytes, xt25f32.o(ram_code), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[53]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;reg_write
+<LI><a href="#[52]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;reg_read
+<LI><a href="#[6f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_1us (via Veneer)
+<LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nor_write_en
+<LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sram_run_delay
+<LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_uread4 (via Veneer)
+</UL>
+
+<P><STRONG><a name="[77]"></a>QSPI_NorFlash_ReadWord</STRONG> (Thumb, 50 bytes, Stack size 8 bytes, xt25f32.o(ram_code), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[53]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;reg_write
+<LI><a href="#[52]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;reg_read
+<LI><a href="#[6f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_1us (via Veneer)
+</UL>
+<P>
+<H3>
+Local Symbols
+</H3>
+<P><STRONG><a name="[16]"></a>GPIO_A0_IRQHandler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup_cm0.o(.text))
+<BR>[Address Reference Count : 1]<UL><LI> startup_cm0.o(RESET)
+</UL><P>
+<H3>
+Undefined Global Symbols
+</H3><HR></body></html>

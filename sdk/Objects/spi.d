@@ -1,0 +1,14 @@
+.\objects\spi.o: peripheral\spi.c
+.\objects\spi.o: .\include\spi.h
+.\objects\spi.o: .\include\platform_config.h
+.\objects\spi.o: .\SCGUI\sc_common.h
+.\objects\spi.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\objects\spi.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\spi.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\spi.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
+.\objects\spi.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\objects\spi.o: .\SCGUI\lvgl.h
+.\objects\spi.o: .\include\uart.h
+.\objects\spi.o: .\include\dma.h
+.\objects\spi.o: .\include\gpio.h
+.\objects\spi.o: .\tft_lcd\lcd_driver.h
