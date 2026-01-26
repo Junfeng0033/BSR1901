@@ -1,7 +1,7 @@
 /******************************************************************************
  * @file:    system_initial.c
  * @purpose: CMSIS Cortex-M0 Device Peripheral Access Layer Source File
- *           for the Gecko Device Series 
+ *           for the BSR Ltd. Device Series 
  * @version: V1.0
  * @date:    26. Oct. 2020
  *----------------------------------------------------------------------------

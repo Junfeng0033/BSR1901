@@ -370,7 +370,7 @@ int main (void)
 	#endif
 
 
-  //RefreshColorBlockDynamic(BLUE32);
+
 	
 
   //sc_gui_init(lcd_dma_refresh, 0x777, C_ROYAL_BLUE, C_BLUE, &lv_font_16);

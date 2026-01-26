@@ -1,7 +1,7 @@
 Dependencies for Project 'bsr1901_demo', Target 'Target 1': (DO NOT MODIFY !)
 CompilerVersion: 5060750::V5.06 update 6 (build 750)::ARMCC
 F (.\startup\startup_cm0.s)(0x696095C9)(--cpu Cortex-M0 --li -g --apcs=interwork --pd "__MICROLIB SETA 1"-ID:\Keil_v5\ARM\PACK\ARM\CMSIS\5.9.0\Device\ARM\ARMCM0\Include-ID:\Keil_v5\ARM\CMSIS\Include--pd "__UVISION_VERSION SETA 538" --pd "ARMCM0 SETA 1"--list .\listings\startup_cm0.lst --xref -o .\objects\startup_cm0.o --depend .\objects\startup_cm0.d)
-F (.\startup\system_initial.c)(0x6960915E)(--c99 --gnu -c --cpu Cortex-M0 -D__MICROLIB --li -g -O3 --apcs=interwork --split_sections -I .\include -I .\user -I .\tft_lcd -I .\SCGUI\example -I .\SCGUI --locale=english-ID:\Keil_v5\ARM\PACK\ARM\CMSIS\5.9.0\Device\ARM\ARMCM0\Include-ID:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="538" -DARMCM0-o .\objects\system_initial.o --omf_browse .\objects\system_initial.crf --depend .\objects\system_initial.d)
+F (.\startup\system_initial.c)(0x6977080C)(--c99 --gnu -c --cpu Cortex-M0 -D__MICROLIB --li -g -O3 --apcs=interwork --split_sections -I .\include -I .\user -I .\tft_lcd -I .\SCGUI\example -I .\SCGUI --locale=english-ID:\Keil_v5\ARM\PACK\ARM\CMSIS\5.9.0\Device\ARM\ARMCM0\Include-ID:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="538" -DARMCM0-o .\objects\system_initial.o --omf_browse .\objects\system_initial.crf --depend .\objects\system_initial.d)
 I (.\include\platform_config.h)(0x6960BD44)
 I (.\include\bsr1901.h)(0x696090DB)
 I (.\include\hci.h)(0x670A805A)
@@ -157,7 +157,7 @@ I (D:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x599ECD2C)
 I (.\SCGUI\lvgl.h)(0x694FAE2A)
 I (.\include\iomux.h)(0x6960B5B7)
 I (.\include\dma.h)(0x695CC8A4)
-F (.\user\main.c)(0x69660F62)(--c99 --gnu -c --cpu Cortex-M0 -D__MICROLIB --li -g -O3 --apcs=interwork --split_sections -I .\include -I .\user -I .\tft_lcd -I .\SCGUI\example -I .\SCGUI --locale=english-ID:\Keil_v5\ARM\PACK\ARM\CMSIS\5.9.0\Device\ARM\ARMCM0\Include-ID:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="538" -DARMCM0-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
+F (.\user\main.c)(0x69770321)(--c99 --gnu -c --cpu Cortex-M0 -D__MICROLIB --li -g -O3 --apcs=interwork --split_sections -I .\include -I .\user -I .\tft_lcd -I .\SCGUI\example -I .\SCGUI --locale=english-ID:\Keil_v5\ARM\PACK\ARM\CMSIS\5.9.0\Device\ARM\ARMCM0\Include-ID:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="538" -DARMCM0-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
 I (.\include\platform_config.h)(0x6960BD44)
 I (.\include\bsr1901.h)(0x696090DB)
 I (D:\Keil_v5\ARM\ARMCC\include\stdarg.h)(0x599ECD2A)
