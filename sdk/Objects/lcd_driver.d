@@ -4,11 +4,5 @@
 .\objects\lcd_driver.o: .\include\gpio.h
 .\objects\lcd_driver.o: .\include\platform_config.h
 .\objects\lcd_driver.o: .\include\spi.h
-.\objects\lcd_driver.o: .\SCGUI\sc_common.h
-.\objects\lcd_driver.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
-.\objects\lcd_driver.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
-.\objects\lcd_driver.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
-.\objects\lcd_driver.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
-.\objects\lcd_driver.o: .\SCGUI\lvgl.h
 .\objects\lcd_driver.o: .\include\iomux.h
 .\objects\lcd_driver.o: .\include\dma.h

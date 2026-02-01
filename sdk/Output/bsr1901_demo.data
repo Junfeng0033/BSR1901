@@ -31,22 +31,22 @@
     Program header entries: 1
     Section header entries: 16
 
-    Program header offset: 265684 (0x00040dd4)
-    Section header offset: 265716 (0x00040df4)
+    Program header offset: 246444 (0x0003c2ac)
+    Section header offset: 246476 (0x0003c2cc)
 
     Section header string table index: 15
 
 ========================================================================
 
 ** Program header #0 (PT_LOAD) [PF_X + PF_W + PF_R + PF_ARM_ENTRY]
-    Size : 124388 bytes
+    Size : 124384 bytes
     Virtual address: 0x00000000 (Alignment 4)
 
 
 ========================================================================
 
 ** Section #1 'ER_IROM1' (SHT_PROGBITS) [SHF_ALLOC + SHF_EXECINSTR]
-    Size   : 123588 bytes (alignment 4)
+    Size   : 123584 bytes (alignment 4)
     Address: 0x00000000
 
 
@@ -75,11 +75,11 @@
 
 
 ** Section #6 '.debug_info' (SHT_PROGBITS)
-    Size   : 40008 bytes
+    Size   : 36528 bytes
 
 
 ** Section #7 '.debug_line' (SHT_PROGBITS)
-    Size   : 13320 bytes
+    Size   : 12824 bytes
 
 
 ** Section #8 '.debug_loc' (SHT_PROGBITS)
@@ -87,21 +87,21 @@
 
 
 ** Section #9 '.debug_macinfo' (SHT_PROGBITS)
-    Size   : 29204 bytes
+    Size   : 22624 bytes
 
 
 ** Section #10 '.debug_pubnames' (SHT_PROGBITS)
-    Size   : 7698 bytes
+    Size   : 7683 bytes
 
 
 ** Section #11 '.symtab' (SHT_SYMTAB)
-    Size   : 8720 bytes (alignment 4)
+    Size   : 8368 bytes (alignment 4)
     String table #12 '.strtab'
-    Last local symbol no. 319
+    Last local symbol no. 297
 
 
 ** Section #12 '.strtab' (SHT_STRTAB)
-    Size   : 7168 bytes
+    Size   : 6724 bytes
 
 
 ** Section #13 '.note' (SHT_NOTE)
@@ -109,7 +109,7 @@
 
 
 ** Section #14 '.comment' (SHT_PROGBITS)
-    Size   : 26260 bytes
+    Size   : 18392 bytes
 
 
 ** Section #15 '.shstrtab' (SHT_STRTAB)
@@ -117,16 +117,16 @@
 
 
 address     size       variable name                            type
-0x000162a4  0x8000     gImage_128x128_battery_32b               array[8192] of const unsigned int
+0x000162a0  0x8000     gImage_128x128_battery_32b               array[8192] of const unsigned int
 
 address     size       variable name                            type
-0x00011484  0x4e20     gImage_circle_100x100                    array[20000] of const unsigned char
+0x00011480  0x4e20     gImage_circle_100x100                    array[20000] of const unsigned char
 
 address     size       variable name                            type
-0x00009484  0x8000     gImage_128x128_charging_32bit            array[8192] of const unsigned int
+0x00009480  0x8000     gImage_128x128_charging_32bit            array[8192] of const unsigned int
 
 address     size       variable name                            type
-0x00001484  0x8000     gImage_128x128_star_32bit                array[8192] of const unsigned int
+0x00001480  0x8000     gImage_128x128_star_32bit                array[8192] of const unsigned int
 
 address     size       variable name                            type
 0x00000000  0x4        ack_status                               volatile unsigned int

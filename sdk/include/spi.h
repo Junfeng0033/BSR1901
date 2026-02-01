@@ -1,7 +1,7 @@
 
 #include "platform_config.h"
 
-#include "sc_common.h"
+//#include "sc_common.h"
 
 
 #define    GECKO_APB_SPI_BASE						0X4001B000
@@ -174,7 +174,7 @@ void HW_SPI_Tx_DMA(HAL_SPI_ID_T id,uint16 *pData, uint16 DataLen);
 
 void HW_SPI_Tx_DMA_32bit(HAL_SPI_ID_T id,uint16 *pData, uint16 DataLen);
 
-void lcd_dma_refresh(uint16_t xs, uint16_t ys, uint16_t w, uint16_t h, color_t *color);
+//void lcd_dma_refresh(uint16_t xs, uint16_t ys, uint16_t w, uint16_t h, color_t *color);
 
 
 

@@ -1,11 +1,3 @@
-/*
-
-SC_GUI for V2. 0 一个小内存(1-3k)的开源GUI,支持LVGL抗锯齿字体,动态文字,实用波形图,支持双DMA,简易图层叠加
-
-
-https://gitee.com/li_yucheng/scgui
-
-*/
 
 
 #include "platform_config.h"
@@ -34,8 +26,8 @@ https://gitee.com/li_yucheng/scgui
 #include "gui.h"
 #include "ui.h"
 
-#include "sc_demo_test.h"
-#include "sc_common.h"
+//#include "sc_demo_test.h"
+//#include "sc_common.h"
 
 
 #include "key_handle.h"
@@ -138,7 +130,7 @@ extern KeyHandle keyHandle;
 extern void Key_Process(void);
 
 
-extern lv_font_t lv_font_16; 
+//extern lv_font_t lv_font_16; 
 
 extern void lcd_dma_refresh_colorblock(uint16_t xs, uint16_t ys, uint16_t w, uint16_t h, color_t *color);
 
@@ -265,7 +257,7 @@ int main (void)
 	delay_1us(8000);
 
   //Lcd_Clear(BLACK);
-  uint16_t blue_color = C_RED;//C_TOMATO;//C_BLACK;//C_BLUE;
+  uint16_t blue_color = BLACK;//C_TOMATO;//C_BLACK;//C_BLUE;
   lcd_dma_refresh_colorblock(0, 0, X_MAX_PIXEL, Y_MAX_PIXEL,&blue_color);
 	delay_1us(8000);
 	
@@ -368,35 +360,10 @@ int main (void)
 	printf("\r\n");
 	printf(VERSION);
 	#endif
-
-
-
-	
-
-  //sc_gui_init(lcd_dma_refresh, 0x777, C_ROYAL_BLUE, C_BLUE, &lv_font_16);
-	//sc_clear(0, 0, SC_SCREEN_WIDTH, SC_SCREEN_HEIGHT, gui->bkc);             // 清屏
-	
-	//sc_create_task(0, sc_demo_drity_tesk, 2);	
-	//sc_create_task(0, sc_demo_menu_task, 2);	
-	//sc_create_task(0, sc_demo_DrawEye_tesk, 2);
-	
-	//sc_create_task(0, sc_demo_trans_tesk, 2);
-	
-	//sc_create_task(0, sc_demo_arc, 2);
-
-	//sc_create_task(0, sc_watch_demo_test, 5);
-	
 	
 	
 	while(1)
 	{
-		//sc_task_loop(NULL);
-		
-		//system_tick=TimeTick;
-		
-		//system_tick++;
-
-		
 	
 		
 		Get_Vbat_Voltage();

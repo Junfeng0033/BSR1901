@@ -53,6 +53,10 @@ typedef unsigned short  	kal_uint16;
 typedef unsigned short   	u_intHW;
 typedef unsigned short   	ushort;
 
+typedef uint16_t color_t;
+
+
+
 typedef signed int   		  int32;
 typedef signed int   		  INT32;
 typedef signed int   		  INT32S;

@@ -158,8 +158,8 @@ end
 
 
 //status
-#define GPADC_THRSHD0_IRQ           (1<<0)
-#define GPADC_THRSHD1_IRQ           (1<<4)
+//#define GPADC_THRSHD0_IRQ           (1<<0)
+//#define GPADC_THRSHD1_IRQ           (1<<4)
 
 
 //#define GPADC_EOC                   (1<<16)//20210210 JunfengZhou
