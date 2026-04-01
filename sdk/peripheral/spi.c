@@ -57,8 +57,11 @@ void SPI_32bit_Transfer(void)
 /*
 
 在reg32_04[0:11]这12个bit中, size有两个bit，分别是bit4和bit5.
-input [1:0] size; //2'b00:8bits; 2'b01:16bits(bit4=1,bit5=0); 2'b10:32bits(bit4=0,bit5=1);2'b11:24bits
-bit4和bit5 是00，表示8bit; 
+input [1:0] size; 
+2'b00:8bits; 
+2'b01:16bits(bit5=0,bit4=1); 
+2'b10:32bits(bit5=1,bit4=0);
+2'b11:24bits
 
 */
 
@@ -84,8 +87,11 @@ void SPI_16bit_Transfer(void)
 /*
 
 在reg32_04[0:11]这12个bit中, size有两个bit，分别是bit4和bit5.
-input [1:0] size; //2'b00:8bits; 2'b01:16bits(bit4=1,bit5=0); 2'b10:32bits(bit4=0,bit5=1);2'b11:24bits
-bit4和bit5 是00，表示8bit; 
+input [1:0] size; 
+2'b00:8bits; 
+2'b01:16bits(bit5=0,bit4=1); 
+2'b10:32bits(bit5=1,bit4=0);
+2'b11:24bits
 
 */
 
@@ -269,6 +275,13 @@ void HW_SPI_Tx_DMA_16bit(HAL_SPI_ID_T id,uint16 *pData, uint16 DataLen)
 }
 
 
+
+/************************************************************************************
+
+When testing LCD color blocks, call "HW_SPI_Tx_DMA_16bit_ColorBlock" function
+
+*************************************************************************************/
+
 void HW_SPI_Tx_DMA_16bit_ColorBlock(HAL_SPI_ID_T id,uint16 *pData, uint16 DataLen)
 {
 	LCD_RS_SET;	
@@ -281,7 +294,22 @@ void HW_SPI_Tx_DMA_16bit_ColorBlock(HAL_SPI_ID_T id,uint16 *pData, uint16 DataLe
 
 
 
+
+
+
 void HW_SPI_Tx_DMA(HAL_SPI_ID_T id,uint16 *pData, uint16 DataLen)
+{
+	LCD_RS_SET;
+  SPI_8bit_Transfer();
+	Gecko_DMA_Transport((volatile uint32 *)(XR7_SPI_BASE + XR7_SPI_FIFO), pData, DataLen, 
+						AHB_DMA_CONTROL_BYTE_TR, AHB_DMA_CONTROL_SRC_INC_DES_NOINC);
+
+	dma_sram_delay(1000);
+}
+
+
+
+void HW_SPI_Tx_DMA_8bit(HAL_SPI_ID_T id,uint16 *pData, uint16 DataLen)
 {
 	LCD_RS_SET;
   SPI_8bit_Transfer();
@@ -328,15 +356,6 @@ __RAM_CODE__ void HW_SPI_Tx_DMA(HAL_SPI_ID_T id,uint16 *pData, uint16 DataLen)
 extern void Lcd_SetRegion(uint16_t x_start,uint16_t y_start,uint16_t x_end,uint16_t y_end);
 
 
-void lcd_dma_refresh(uint16_t xs, uint16_t ys, uint16_t w, uint16_t h, color_t *color)
-{
-	uint32_t len = w*h;
-	
-	Lcd_SetRegion(xs, ys, xs+w-1, ys+h-1);	
-	HW_SPI_Tx_DMA_16bit(HAL_SPI_0,color,len);
-	
-}
-
 
 
 void lcd_dma_refresh_colorblock(uint16_t xs, uint16_t ys, uint16_t w, uint16_t h, color_t *color)
@@ -351,27 +370,16 @@ void lcd_dma_refresh_colorblock(uint16_t xs, uint16_t ys, uint16_t w, uint16_t h
 
 
 
-/*
 
-
-void app_lcd_fill_color(uint16_t xs, uint16_t ys, uint16_t w, uint16_t h, uint16_t *color)
+void lcd_dma_8bit_refresh(uint16_t xs, uint16_t ys, uint16_t w, uint16_t h, color_t *color)
 {
-	uint32_t tx_count = 0;
-  uint16_t xe=xs+w-1;
-	uint16_t ye=ys+h-1;
-	tx_count = w*h;//设置需要清除的区域的字节大小;
-	app_lcd_set_address(xs,ys,xe,ye);
-  
-#ifdef CFG_LCD_CS_SOFT
-  CFG_LCD_CS_ENABLE;
-#endif
-  HAL_SPI_Transmit_DMA(&CFG_LCD_SPI, (uint8_t*)color, tx_count*2);
-
-  app_lcd_wait_spi_state(100);
+	uint32_t len = w*h;
+	
+	Lcd_SetRegion(xs, ys, xs+w-1, ys+h-1);	
+	
+	HW_SPI_Tx_DMA_8bit(HAL_SPI_0,color,len);
+	
 }
-
-
-*/
 
 
 
@@ -406,7 +414,7 @@ void HW_SPI_Tx_Block(HAL_SPI_ID_T id,uint16 *pData, uint16 DataLen)
 		//Before initiating the second DMA-SPI transfer, 
 		//it is necessary to check whether SPI has completed the previous data transfer at this time
 		//so we need to check spi_busy flag here.
-		//The speed of DMA is much faster than that of SPI.	
+		//The speed of DMA is much faster than  SPI.	
 
 		//reg_0x08(status register) check busy bit first	
 
@@ -459,7 +467,7 @@ void HW_SPI_Tx_Block(HAL_SPI_ID_T id,uint16 *pData, uint16 DataLen)
 		//Before initiating the second DMA-SPI transfer, 
 		//it is necessary to check whether SPI has completed the previous data transfer at this time
 		//so we need to check spi_busy flag here.
-		//The speed of DMA is much faster than that of SPI.	
+		//The speed of DMA is much faster than  SPI.	
 
 		//reg_0x08(status register) check busy bit first	
 		while((HW_SPI_GET_REG(XR7_SPI_STATUS)) & busy_spi_sync)

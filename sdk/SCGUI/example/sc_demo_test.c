@@ -279,7 +279,7 @@ void sc_demo_menu_task(sc_event_t *event)
 void sc_demo_DrawEye_task(sc_event_t *event)
 {
     sc_rect_t rect1 = (sc_rect_t){10, 10, 120, 120};
-    sc_rect_t rect2 = (sc_rect_t){160, 10, 120, 120};
+    //sc_rect_t rect2 = (sc_rect_t){160, 10, 120, 120};
     static int Eye = 0;
     static int stup = 2;
 

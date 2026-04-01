@@ -16,7 +16,7 @@
 //              RES   接PB0
 //              DC    接PB1
 //              CS    接PA4//可以直接接地
-//              BLK    接P10 BLK可以悬空不接；在需要关闭背光的时候将BLK置低电平
+//              BLK   接P10 BLK可以悬空不接；在需要关闭背光的时候将BLK置低电平
 *******************************************************************************/
 // 修改历史   :
 // 日    期   : 
@@ -51,33 +51,31 @@
 #define BLUE 			0x001f
 #define WHITE			0xffff
 #define BLACK			0x0000
-#define YELLOW  		0xFFE0
-#define GRAY0   		0xEF7D   	//灰色0 3165 00110 001011 00101
-#define GRAY1   		0x8410      //灰色1      00000 000000 00000
-#define GRAY2   		0x4208      //灰色2  1111111111011111
+#define YELLOW  	0xFFE0
+#define GRAY0   	0xEF7D
+#define GRAY1   	0x8410
+#define GRAY2   	0x4208
+
+
+#define RED32  		0xf800f800
+#define GREEN32		0x07e007e0
+#define BLUE32 		0x001f001f
+#define WHITE32		0xffffffff
+#define BLACK32		0x00000000
 
 
 
-
-#define RED32  			0xf800f800
-#define GREEN32			0x07e007e0
-#define BLUE32 			0x001f001f
-#define WHITE32			0xffffffff
-#define BLACK32			0x00000000
-
-
-
-
+//==================================================================================================
 
 // backlight control
 #define LCD_BL_PORT  		GPIOB			//MCU_PB2--->>TFT --LCD_LEDK
-#define LCD_BL_PIN       	2  	//MCU_PB2--->>TFT --BL
+#define LCD_BL_PIN       	  2  	  //MCU_PB2--->>TFT --BL
 
 #define LCD_RS_PORT			GPIOB
-#define LCD_RS_PIN         	1		//PB1--->>TFT --RS/DC
+#define LCD_RS_PIN         	1		  //PB1--->>TFT --RS/DC
 
 #define LCD_RST_PORT		GPIOB
-#define LCD_RST_PIN     	0		//PB0--->>TFT --RST
+#define LCD_RST_PIN     	  0		  //PB0--->>TFT --RST
 
 //液晶控制口置1操作语句宏定义
 
@@ -92,6 +90,7 @@
 #define	LCD_BL_CLR  	gpio_set_value(LCD_BL_PORT, 0, LCD_BL_PIN)
 #define	LCD_RST_CLR  	gpio_set_value(LCD_RST_PORT, 0, LCD_RST_PIN)
 
+//==================================================================================================
 
 
 #define IP2366_INT_PORT		GPIOA
@@ -101,12 +100,18 @@
 #define	IP2366_INT_CLR  	gpio_set_value(IP2366_INT_PORT, 0, IP2366_INT_PIN)
 
 
+
+
+
+
 #define LCD_WR_DATA(data){\
 LCD_RS_SET;\
 LCD_DATAOUT(data);\
 LCD_WR_CLR;\
 LCD_WR_SET;\
 }
+
+
 
 void LCD_GPIO_Init(void);
 void Lcd_WriteIndex(uint8_t Index);
@@ -125,7 +130,6 @@ unsigned int Lcd_ReadPoint(uint16_t x,uint16_t y);
 void Lcd_SetRegion(uint16_t x_start,uint16_t y_start,uint16_t x_end,uint16_t y_end);
 void LCD_WriteData_16Bit(uint16_t Data);
 void Lcd_Fill(uint16_t x,uint16_t y,uint16_t xend,uint16_t yend,uint16_t Color);
-//向lcd写入数据通过dma的方式
-void Lcd_Write_data_dma(uint8_t *p_data, uint16_t len);
+
 
 #endif

@@ -81,8 +81,8 @@
             <nStopB2X>0</nStopB2X>
           </BeforeMake>
           <AfterMake>
-            <RunUserProg1>1</RunUserProg1>
-            <RunUserProg2>1</RunUserProg2>
+            <RunUserProg1>0</RunUserProg1>
+            <RunUserProg2>0</RunUserProg2>
             <UserProg1Name>build.bat</UserProg1Name>
             <UserProg2Name>Keil5_disp_size_bar_v0.3.exe</UserProg2Name>
             <UserProg1Dos16Mode>0</UserProg1Dos16Mode>
@@ -341,7 +341,7 @@
               <MiscControls>--locale=english</MiscControls>
               <Define></Define>
               <Undefine></Undefine>
-              <IncludePath>.\include;.\user;.\tft_lcd;.\SCGUI\example;.\SCGUI</IncludePath>
+              <IncludePath>.\include;.\bms\ip2366;.\tft_lcd;.\user;.\SCGUI;.\SCGUI\example;.\SCGUI\touch_lib</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -446,6 +446,11 @@
               <FilePath>.\peripheral\spi.c</FilePath>
             </File>
             <File>
+              <FileName>spi2ahb.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\peripheral\spi2ahb.c</FilePath>
+            </File>
+            <File>
               <FileName>timer.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\peripheral\timer.c</FilePath>
@@ -488,6 +493,16 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>bms</GroupName>
+          <Files>
+            <File>
+              <FileName>bms_ip2366.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\bms\ip2366\bms_ip2366.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>norflash</GroupName>
           <Files>
             <File>
@@ -513,17 +528,107 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>scgui</GroupName>
+          <Files>
+            <File>
+              <FileName>SCGUI GUIDE.md</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\SCGUI GUIDE.md</FilePath>
+            </File>
+            <File>
+              <FileName>sc_arc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\SCGUI\sc_arc.c</FilePath>
+            </File>
+            <File>
+              <FileName>sc_common.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\SCGUI\sc_common.c</FilePath>
+            </File>
+            <File>
+              <FileName>sc_compose.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\SCGUI\sc_compose.c</FilePath>
+            </File>
+            <File>
+              <FileName>sc_event_task.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\SCGUI\sc_event_task.c</FilePath>
+            </File>
+            <File>
+              <FileName>sc_gui.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\SCGUI\sc_gui.c</FilePath>
+            </File>
+            <File>
+              <FileName>sc_keyboard.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\SCGUI\sc_keyboard.c</FilePath>
+            </File>
+            <File>
+              <FileName>sc_lvgl_font.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\SCGUI\sc_lvgl_font.c</FilePath>
+            </File>
+            <File>
+              <FileName>sc_menu.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\SCGUI\sc_menu.c</FilePath>
+            </File>
+            <File>
+              <FileName>sc_transform.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\SCGUI\sc_transform.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>scgui/font</GroupName>
+          <Files>
+            <File>
+              <FileName>lv_font_12.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\SCGUI\font\lv_font_12.c</FilePath>
+            </File>
+            <File>
+              <FileName>lv_font_16.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\SCGUI\font\lv_font_16.c</FilePath>
+            </File>
+            <File>
+              <FileName>lv_font_20.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\SCGUI\font\lv_font_20.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>scgui/bmp</GroupName>
+          <Files>
+            <File>
+              <FileName>bashen.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\SCGUI\bmp\bashen.c</FilePath>
+            </File>
+            <File>
+              <FileName>test_img.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\SCGUI\bmp\test_img.c</FilePath>
+            </File>
+            <File>
+              <FileName>watch_106_64.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\SCGUI\bmp\watch_106_64.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>user</GroupName>
           <Files>
             <File>
               <FileName>main.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\user\main.c</FilePath>
-            </File>
-            <File>
-              <FileName>bms_ip2366.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\user\bms_ip2366.c</FilePath>
             </File>
             <File>
               <FileName>img_cake_32b.c</FileName>
@@ -566,11 +671,6 @@
               <FilePath>.\user\img_battery.c</FilePath>
             </File>
             <File>
-              <FileName>circle_100x100.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\gui\circle_100x100.c</FilePath>
-            </File>
-            <File>
               <FileName>img_battery_32b.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\user\img_battery_32b.c</FilePath>
@@ -579,6 +679,16 @@
               <FileName>fire_eye_img.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\user\fire_eye_img.c</FilePath>
+            </File>
+            <File>
+              <FileName>ui_circle_100x100.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\user\ui_circle_100x100.c</FilePath>
+            </File>
+            <File>
+              <FileName>sc_demo_test.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\SCGUI\example\sc_demo_test.c</FilePath>
             </File>
           </Files>
         </Group>

@@ -1836,7 +1836,7 @@ void xtxflash_test_entry(void)
 
 
 
-
+#if 0
 
 void write_norflash(unsigned int base,unsigned int offset,unsigned int word)
 {
@@ -1850,6 +1850,8 @@ unsigned int read_norflash(unsigned int base,unsigned int offset)
 		 volatile unsigned short * p=(volatile unsigned short *)(base+(offset<<1));
 		 return *p;
 }
+
+#endif
 
 
 

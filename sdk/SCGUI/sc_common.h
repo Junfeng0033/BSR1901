@@ -9,9 +9,19 @@
 #include "lvgl.h"
 
 /* 全局屏幕配置（统一修改）*/
-#define PY32_MCU 1
+#define BSR1901_MCU 1
 
-#if PY32_MCU
+#define PY32_MCU 0
+
+#if BSR1901_MCU
+
+#define SC_SCREEN_WIDTH (240)
+#define SC_SCREEN_HEIGHT (240)
+#define SC_PFB_BUF_SIZE (SC_SCREEN_WIDTH * 2) // 示例：2行高度
+#define SC_LCD_DMA_2BUF (0)                   // 是否启用DMA双buf传输
+#define SC_LCD_DMA_WAP (0)                    // 是否DMA传输时高低位WAP
+
+#elif PY32_MCU
 #define SC_SCREEN_WIDTH (280)
 #define SC_SCREEN_HEIGHT (240)
 #define SC_PFB_BUF_SIZE (SC_SCREEN_WIDTH * 10) // 示例：10行高度
@@ -24,6 +34,7 @@
 #define SC_LCD_DMA_2BUF (0)                   // 是否启用DMA双buf传输
 #define SC_LCD_DMA_WAP (0)                    // 是否DMA传输时高低位WAP
 #endif
+
 
 /* 脏区管理配置，单桶8字节*/
 #define SC_DIRTY_BUCKET_N (8)             // 脏桶数量，用满强制合并到第一个，多个控件同时更新时适当改大

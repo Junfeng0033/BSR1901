@@ -11,6 +11,27 @@ void spiflash_read(uint8_t *buf, uint32_t offset, uint32_t size);
 
 typedef void (*lcd_refresh_cb)(uint16_t x, uint16_t y, uint16_t w, uint16_t h, color_t *color); // 点绘制函数指针
 
+/*
+===================================================================================================	
+
+  uint16_t blue_color = BLACK;//C_TOMATO;//C_BLACK;//C_BLUE;
+  lcd_dma_refresh_colorblock(0, 0, X_MAX_PIXEL, Y_MAX_PIXEL,&blue_color);
+	
+===================================================================================================	
+
+void lcd_dma_refresh_colorblock(uint16_t xs, uint16_t ys, uint16_t w, uint16_t h, color_t *color)
+{
+	uint32_t len = w*h;
+	
+	Lcd_SetRegion(xs, ys, xs+w-1, ys+h-1);	
+	
+	HW_SPI_Tx_DMA_16bit_ColorBlock(HAL_SPI_0,color,len);
+	
+}
+===================================================================================================	
+*/
+
+
 /* SC_GUI结构体 */
 typedef struct sc_gui_t
 {

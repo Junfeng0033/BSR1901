@@ -208,7 +208,8 @@ void sc_draw_kb_btn(sc_pfb_t *dest, int xs, int ys, const kbBtnInfo_t *p, color_
     sc_label_t label;
     if (p->pText)
     {
-        sc_init_Label(&coord, 0, 0, &label, gui->font, p->pText, ALIGN_CENTER);
+			  //sc_init_Label(&coord, 0, 0, &label, gui->font, p->pText, ALIGN_CENTER);
+        sc_init_Label(&coord, 0, 0, &label, gui->font, (char *)p->pText, ALIGN_CENTER);
     }
     else
     {

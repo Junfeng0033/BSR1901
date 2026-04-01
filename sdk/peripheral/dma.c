@@ -20,6 +20,8 @@ extern void pExitCriticalSection (uint32 status);
 extern void NVIC_EnableIRQ(IRQn_Type IRQn);
 extern void NVIC_DisableIRQ(IRQn_Type IRQn);
 
+
+
 void DMA_Configuration(void)
 {
 	volatile uint32 dma_ctrl;
@@ -57,7 +59,9 @@ void DMA_Configuration(void)
 
 
 
+
 __RAM_CODE__ void Clear_DMA_Interrupt(void)
+	
 {
 	volatile uint32 dma_ctrl_tmp0=0;
 	
@@ -107,10 +111,10 @@ void Gecko_DMA_Transport(volatile void *dest,volatile const void *src, uint16 si
 	
 }
 
-#define POINT_NUM (25600/2)
-extern uint16 sine12bit[POINT_NUM];
 
 extern void HW_SPI_Tx_DMA(HAL_SPI_ID_T id,uint16 *pData, uint16 DataLen);
+extern void HW_SPI_Tx_DMA_8bit(HAL_SPI_ID_T id,uint16 *pData, uint16 DataLen);
+
 extern const unsigned char gImage_libai[25600];
 extern const unsigned char gImage_taizi[25600];
 
@@ -130,7 +134,7 @@ __RAM_CODE__ void DMA_ISR_Routine(void)
 	
 	DMA_WRITE_REG((volatile uint32 *)AHB_DMA_STEP_CTRL_REG, dma_ctrl_tmp1);		
 
-	//HW_SPI_Tx_Block(HAL_SPI_0,sine12bit,POINT_NUM);
+
 	//void Gecko_DMA_Transport(volatile void *dest,volatile const void *src, uint16 size,uint8 type, uint8 direct)
 	//Gecko_DMA_Transport((volatile uint32 *)(XR7_SPI_BASE + XR7_SPI_FIFO), pData, count, AHB_DMA_CONTROL_HWORD_TR, AHB_DMA_CONTROL_SRC_INC_DES_NOINC);	
 
@@ -153,7 +157,11 @@ __RAM_CODE__ void DMA_ISR_Routine(void)
 
 	
 	location = ~location;
+	
 }
+
+
+
 
 /*****************************************************************************
  * FUNCTION: hw_memcpy8
@@ -186,6 +194,8 @@ void * hw_memcpy8(void * dest, const void * src, uint16 size)
 
     return dest;
 }
+
+
 
 /*****************************************************************************
  * FUNCTION: hw_memset8

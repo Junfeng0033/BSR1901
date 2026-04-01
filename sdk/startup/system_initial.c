@@ -29,8 +29,7 @@
 #include "timer.h"
 #include "pwm.h"
 
-extern void charger_control_init(void);
-extern void HW_lightning_Setup(void);
+
 extern void ADC_Init(void);
 
 

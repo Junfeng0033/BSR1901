@@ -5,6 +5,9 @@
 #include "../norflash/xtxflash/dpi_common.h"
 
 #include "uart.h"
+
+
+
 extern void h2l_wr_busy(void);
 
 extern void gecko_aon_wakeup_irq_handler(void);

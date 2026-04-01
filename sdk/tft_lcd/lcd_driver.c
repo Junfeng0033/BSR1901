@@ -5,21 +5,26 @@
 #include "iomux.h"
 #include "dma.h"
 
+/******************************************************************************************************
 
 //游程编码（Run-Length Encoding, RLE）压缩算法
 
 //https://gitee.com/li_yucheng/scgui
 
+******************************************************************************************************/
 
 
-//hwp_spi0->CTROL = 0x10f8b;	//8bit spi data
-#define 	SPI_WriteData(data) 				{hwp_spi0->CTROL = 0x10f8b;hwp_spi0->FIFODATA = data;}
 
-#define 	LCD_NV3022_CMD						Lcd_WriteIndex
-#define 	LCD_NV3022_Parameter				Lcd_WriteData
+//hwp_spi0->CTROL = 0x10f8b;						//8bit spi data
+#define 	SPI_WriteData(data) 					{hwp_spi0->CTROL = 0x10f8b;hwp_spi0->FIFODATA = data;}
 
-#define 	LCD_NV3023_CMD						Lcd_WriteIndex
-#define 	LCD_NV3023_Parameter				Lcd_WriteData
+#define 	LCD_NV3022_CMD								Lcd_WriteIndex
+#define 	LCD_NV3022_Parameter					Lcd_WriteData
+
+#define 	LCD_NV3023_CMD								Lcd_WriteIndex
+#define 	LCD_NV3023_Parameter					Lcd_WriteData
+
+
 
 //液晶IO初始化配置
 void LCD_GPIO_Init(void)
@@ -57,14 +62,8 @@ void delay_ms(unsigned int delay_val)
     }
 }
 
-//向lcd写入数据通过dma的方式
-void Lcd_Write_data_dma(uint8_t *p_data, uint16_t len)
-{
-	LCD_RS_SET;
 
-	Gecko_DMA_Transport((volatile uint32 *)(XR7_SPI_BASE + XR7_SPI_FIFO), p_data, len, 
-						AHB_DMA_CONTROL_BYTE_TR, AHB_DMA_CONTROL_SRC_INC_DES_NOINC);
-}
+
 
 //向液晶屏写一个8位指令
 void Lcd_WriteIndex(uint8_t Index)
@@ -216,7 +215,10 @@ void Lcd_Init(void)
 返回值：无
 *************************************************/
 void Lcd_SetRegion(uint16_t x_start,uint16_t y_start,uint16_t x_end,uint16_t y_end)
-{		
+{	
+
+  SPI_8bit_Transfer();
+	
 	Lcd_WriteIndex(0x2a);
 	//Lcd_WriteData(0x00);
 	LCD_WriteData_16Bit(x_start);//LCD_WriteData_16Bit
@@ -276,16 +278,31 @@ unsigned int Lcd_ReadPoint(uint16_t x,uint16_t y)
 功能：全屏清屏函数
 入口参数：填充颜色COLOR
 返回值：无
+
+uint16_t blue_color = BLACK;//C_TOMATO;//C_BLACK;//C_BLUE;
+lcd_dma_refresh_colorblock(0, 0, X_MAX_PIXEL, Y_MAX_PIXEL,&blue_color);
+
 *************************************************/
 void Lcd_Clear(uint16_t Color)               
 {	
+	
+#if 0
    unsigned int i,m;
    Lcd_SetRegion(0,0,X_MAX_PIXEL-1,Y_MAX_PIXEL-1);
    for(i=0;i<X_MAX_PIXEL;i++)
     for(m=0;m<Y_MAX_PIXEL;m++)
     {	
 	  	LCD_WriteData_16Bit(Color);
-    }   
+    } 
+#endif
+
+	
+	uint32_t len = X_MAX_PIXEL*Y_MAX_PIXEL;
+	
+	Lcd_SetRegion(0,0,X_MAX_PIXEL-1,Y_MAX_PIXEL-1);
+	
+	HW_SPI_Tx_DMA_16bit_ColorBlock(HAL_SPI_0,&Color,len);
+  
 }
 
 
@@ -323,10 +340,15 @@ void RefreshColorBlockDynamic(uint32_t Color)
 *************************************************/
 void Lcd_Fill(uint16_t x,uint16_t y,uint16_t xend,uint16_t yend,uint16_t Color)               
 {	
-	unsigned int i;
+	//unsigned int i;
 	uint16_t num = (xend-x+1)*(yend-y+1);
 	
 	Lcd_SetRegion(x,y,xend,yend);
+	#if 0
 	for(i=0; i<num; i++)
 		LCD_WriteData_16Bit(Color);
+	#endif
+	HW_SPI_Tx_DMA_16bit_ColorBlock(HAL_SPI_0,&Color,num);
+	
 }
+

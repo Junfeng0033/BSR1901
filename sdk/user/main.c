@@ -26,8 +26,12 @@
 #include "gui.h"
 #include "ui.h"
 
-//#include "sc_demo_test.h"
-//#include "sc_common.h"
+#include "sc_demo_test.h"
+#include "sc_common.h"
+#include "lvgl.h"
+
+#include "sc_gui.h"
+
 
 
 #include "key_handle.h"
@@ -130,7 +134,9 @@ extern KeyHandle keyHandle;
 extern void Key_Process(void);
 
 
-//extern lv_font_t lv_font_16; 
+
+extern lv_font_t lv_font_16; 
+
 
 extern void lcd_dma_refresh_colorblock(uint16_t xs, uint16_t ys, uint16_t w, uint16_t h, color_t *color);
 
@@ -268,7 +274,9 @@ int main (void)
 	//delay_1us(8000);
 	
 	Lcd_SetRegion(10, 10, 109, 109);						//◊¯±Í…Ë÷√
-	HW_SPI_Tx_DMA(HAL_SPI_0, (uint16*)gImage_circle_100x100, 20000);
+	//HW_SPI_Tx_DMA(HAL_SPI_0, (uint16*)gImage_circle_100x100, 20000);
+	HW_SPI_Tx_DMA_8bit(HAL_SPI_0, (uint16*)gImage_circle_100x100, 20000);
+	
 	delay_1us(8000);
   
 
@@ -361,10 +369,18 @@ int main (void)
 	printf(VERSION);
 	#endif
 	
+	//sc_gui_init(lcd_dma_8bit_refresh, 0, C_ROYAL_BLUE,C_BLUE, &lv_font_16);	
+	//sc_demo_text();
 	
+		
 	while(1)
 	{
 	
+		//sc_task_loop(NULL);
+		
+		//system_tick++;
+		//TimeTick++;
+		//system_tick=TimeTick;
 		
 		Get_Vbat_Voltage();
 		
@@ -396,14 +412,10 @@ int main (void)
 			Lcd_SetRegion(0, 0, 127, 127);
 			//Lcd_Clear(YELLOW);
 			
-			HW_SPI_Tx_DMA(HAL_SPI_0, (uint16*)gImage_charging, 32768);
+			HW_SPI_Tx_DMA_8bit(HAL_SPI_0, (uint16*)gImage_charging, 32768);
 			//dma_sram_delay(1000);
 
-//			DMA_Configuration();			
-//			SPI_32bit_Transfer();
-//			HW_SPI_Tx_DMA_32bit(HAL_SPI_0, (uint16*)gImage_128x128_charging_32bit, 8192);		
-//			dma_sram_delay(1000);	
-//			SPI_8bit_Transfer();	
+
 		}
 		else if(wr_data==0x0)
 		{
@@ -411,14 +423,11 @@ int main (void)
 			Lcd_SetRegion(0, 0, 127, 127);
 			//Lcd_Clear(RED);
 			//HW_SPI_Tx_DMA(HAL_SPI_0, (uint16*)gImage_128x128_cake, 32768);
-			HW_SPI_Tx_DMA(HAL_SPI_0, (uint16*)gImage_128x128_battery, 32768);
+			HW_SPI_Tx_DMA_8bit(HAL_SPI_0, (uint16*)gImage_128x128_battery, 32768);
 			//dma_sram_delay(1000);
 			
 
-	//		SPI_32bit_Transfer();
-	//		HW_SPI_Tx_DMA_32bit(HAL_SPI_0, (uint16*)gImage_128x128_star_32bit, 8192);	
-	//		dma_sram_delay(1000);
-	//		SPI_8bit_Transfer();
+
 			#endif			
 		}
 		
@@ -449,20 +458,16 @@ int main (void)
 			{
 				//UATR1_PRINT_LOG((unsigned char *)("K27 KEY Press Down"));
         printf("\r\n K27 KEY Press Down \r\n ");
-				HW_SPI_Tx_DMA(HAL_SPI_0, (uint16*)gImage_128x128_star, 32768);
-				//dma_sram_delay(1000);
-				//HW_SPI_Tx_DMA(HAL_SPI_0, (uint16*)gImage_128x128_star_32bit, 8192);
-				//Lcd_Clear(BLUE);				
+				HW_SPI_Tx_DMA_8bit(HAL_SPI_0, (uint16*)gImage_128x128_star, 32768);
+			
 				
 				flag_key1=1;
 			}
 			else
 			{
 				printf("\r\n K27 KEY Press Down Again \r\n ");				
-				HW_SPI_Tx_DMA(HAL_SPI_0, (uint16*)gImage_128x128_cake, 32768);
-				//dma_sram_delay(1000);
-				//HW_SPI_Tx_DMA(HAL_SPI_0, (uint16*)gImage_128x128_cake_32bit, 8192);
-				//Lcd_Clear(RED);					
+				HW_SPI_Tx_DMA_8bit(HAL_SPI_0, (uint16*)gImage_128x128_cake, 32768);
+					
 				flag_key1=0;								
 			}
 		}
@@ -583,4 +588,9 @@ int main (void)
 
 
 	}
+	
+	
 }
+
+
+

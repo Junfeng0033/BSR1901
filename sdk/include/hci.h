@@ -2,7 +2,7 @@
 #define VERSION "(\"GECKO TWS CHARGER\" - Charger MCU Firware  - "__DATE__" - "__TIME__")"
 //#define GECKO_FW_VERSION 			0121 			/*  software revision */
 #define PLATFORMSTRING 				"GECKO1109-v0101"
-#define MANUFACTURER_NAME  		"Gecko Inc."
+#define MANUFACTURER_NAME  		"BSR Inc."
 //////////#define CHIP_LOCAL_NAME        "B52"
 #define CHIP_LOCAL_NAME        "AK47"
 
@@ -34,10 +34,6 @@ enum{
 	MSG_DELETE_PAIRED_DEVICE_REQ,
 	MSG_BATCASE_OPEN_IND,
 	MSG_BATCASE_CLOSE_IND,
-	
-	/* lightning message define */	
-	MSG_74_CMD_RES,
-	MSG_75_CMD_CNF,
 };
 
 

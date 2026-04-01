@@ -11,15 +11,7 @@
 #include "bsr1901.h"
 #include "cmu.h"
 
-#if 0
 
-#endif
-
-
-	
-/*
-
-*/	
 	
 
 void gecko_cmu_init(void)

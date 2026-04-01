@@ -74,7 +74,7 @@ void pendsv_handler(void)
 
 //static volatile uint32_t TimeTick = 0;
 volatile uint32_t TimeTick = 0;
-
+extern uint32_t system_tick;
 
 //int pwm_freq=147000;
 //int pwm2_duty=80;
@@ -89,7 +89,7 @@ volatile uint32_t TimeTick = 0;
 
 
 
-void SysTick_Handler(void)  //interrupt routine
+__RAM_CODE__ void SysTick_Handler(void)  //interrupt routine
 {
 //	  char *string;	
 
@@ -102,6 +102,10 @@ void SysTick_Handler(void)  //interrupt routine
 	
 
 	TimeTick++;//TimeTick will increase by "1"  every 100us
+	
+	//system_tick=TimeTick;
+	
+	
 	
 #if 0			
 	if(TimeTick%2)

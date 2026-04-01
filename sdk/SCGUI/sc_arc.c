@@ -365,7 +365,8 @@ void DrawEye_Blink_test(sc_pfb_t *dest, int x, int y, int w, int h, int up, int 
     }
     if (!sc_pfb_intersection(dest, &rect, &intersection))
         return;
-    int cx = x + w / 2; // X中心（左右对称）
+    //mask this line for compiler warning
+		//int cx = x + w / 2; // X中心（左右对称）
     int cy = y + h / 2; // Y中心（上下对称）
     do
     {

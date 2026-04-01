@@ -288,7 +288,8 @@ void sc_draw_Image(sc_pfb_t *dest, int xs, int ys, const sc_image_t *src, uint32
     {
         uint32_t len = intersection.xe - intersection.xs;
         uint16_t *dest_buf = dest->buf + (intersection.ys - dest->y) * dest->w - dest->x + intersection.xs;
-        uint8_t alpha = gui->alpha;
+        //mask this line for compiler warning
+				//uint8_t alpha = gui->alpha;
         for (int y = intersection.ys; y < intersection.ye; y++, dest_buf += dest->w)
         {
             int src_offs = (y - ys) * src->w - xs + intersection.xs;
