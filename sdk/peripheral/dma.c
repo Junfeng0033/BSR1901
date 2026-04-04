@@ -58,6 +58,23 @@ void DMA_Configuration(void)
 
 
 
+void DMA_Req_Buslock_Enable(void)
+{
+	volatile uint32 dma_ctrl;
+	
+	dma_ctrl=0;
+//===========================================================================
+//new function in chip BSR0035	
+	dma_ctrl = DMA_READ_REG(AHB_DMA_CONTROL_REG);
+	
+	dma_ctrl |= dma_buslock_req_en;
+
+	DMA_WRITE_REG((volatile uint32 *)AHB_DMA_CONTROL_REG, dma_ctrl);
+
+//===========================================================================
+}
+
+
 
 
 __RAM_CODE__ void Clear_DMA_Interrupt(void)

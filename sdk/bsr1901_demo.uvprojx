@@ -490,6 +490,11 @@
               <FileType>1</FileType>
               <FilePath>.\peripheral\mos.c</FilePath>
             </File>
+            <File>
+              <FileName>charger.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\peripheral\charger.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -689,6 +694,21 @@
               <FileName>sc_demo_test.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\SCGUI\example\sc_demo_test.c</FilePath>
+            </File>
+            <File>
+              <FileName>GUI.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\user\GUI.c</FilePath>
+            </File>
+            <File>
+              <FileName>font_0_9_digital_32b.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\user\font_0_9_digital_32b.c</FilePath>
+            </File>
+            <File>
+              <FileName>font_A_z_32b.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\user\font_A_z_32b.c</FilePath>
             </File>
           </Files>
         </Group>

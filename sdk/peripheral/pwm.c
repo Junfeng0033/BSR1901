@@ -30,23 +30,7 @@
 #define BEEP_PIN      				GPIO_Pin_5
 
 
-typedef enum
-{
-  	HW_PWM_CHAN_0=0,
-    HW_PWM_CHAN_1,
-    HW_PWM_CHAN_2,
-    HW_PWM_CHAN_3,
-    HW_PWM_CHAN_4,
-    HW_PWM_CHAN_5,
-#if 1//def GEK1109	
-    HW_PWM_CHAN_6,
-    HW_PWM_CHAN_7,	
-#endif
-    HW_PWM_CHAN_QTY,
-	
-} HW_PWM_CHAN_T;
 
- 
 
 //#define GECKO_PWM_BASE_NEW                0x40013000
 
@@ -103,7 +87,7 @@ static int gecko_pwm_start(void)
 	return 0;
 }
 
-static int gecko_pwm_stop(void)
+int gecko_pwm_stop(void)
 {
 	Gecko_PWM->pwm_select_en =0x00;
 	return 0;
@@ -891,4 +875,26 @@ void CST6118_Motor_PWM7_Control_Optimized(int freq,int duty)
 					//break;
 
 }
+
+
+
+
+
+
+void Set_PWM_CH3_Duty(uint8 duty_count)
+{
+	struct HAL_PWM_CFG_T PwmCh3Cfg;
+	
+	if((duty_count<10) || (duty_count>90))
+	return;
+	
+	PwmCh3Cfg.freq= 150000;//300000;
+	PwmCh3Cfg.ratio= duty_count;//50;	
+	PwmCh3Cfg.Tdead_cycle_count=0;
+	Config_PWM(HW_PWM_CHAN_3,&PwmCh3Cfg);
+
+}
+
+
+
 

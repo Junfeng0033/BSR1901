@@ -10,6 +10,23 @@
 #define GECKO_PWM_BASE								0x40005000
 
 
+typedef enum
+{
+  	HW_PWM_CHAN_0=0,
+    HW_PWM_CHAN_1,
+    HW_PWM_CHAN_2,
+    HW_PWM_CHAN_3,
+    HW_PWM_CHAN_4,
+    HW_PWM_CHAN_5,
+#if 1//def GEK1109	
+    HW_PWM_CHAN_6,
+    HW_PWM_CHAN_7,	
+#endif
+    HW_PWM_CHAN_QTY,
+	
+} HW_PWM_CHAN_T;
+
+ 
 
 
 //#define PWM_SLOW_CLOCK                  32000
@@ -139,7 +156,19 @@
 
 
 
+
+
 uint8 gecko_pwm_init(void);
+
+
+int gecko_pwm_start(void);
+int gecko_pwm_stop(void);
+
+void hw_pwm_enable(HW_PWM_CHAN_T channel);
+void hw_pwm_disable(HW_PWM_CHAN_T channel);
+void hw_pwm_invert(HW_PWM_CHAN_T channel);
+
+
 void SixCh_PWM5_Config(void);
 
 void PWM2_PWM7_Enable(void);
@@ -149,4 +178,8 @@ void CST6118_Motor_PWM_Control(int freq,int duty2,int duty7);
 
 void CST6118_Motor_PWM2_Control_Optimized(int freq,int duty);
 void CST6118_Motor_PWM7_Control_Optimized(int freq,int duty);
+
+
+void Set_PWM_CH3_Duty(uint8 duty_count);
+	
 

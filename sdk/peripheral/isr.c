@@ -159,6 +159,14 @@ void GPIO_B6_IRQHandler(void)
 
 
 
+uint8 dc5v_online_flag=0;
+//DC Insert Detect
+void GPIO_0_6_IRQHandler(void)
+{
+	 dc5v_online_flag=1;//DC 5V insert
+}
+
+
 
 void GPIO_A5_IRQHandler(void)
 {

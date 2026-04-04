@@ -163,6 +163,7 @@ void HW_SPI_Empty_FIFO(void);
 #define XR7_LSR_intDR               0x100
 
 
+extern void DMA_Req_Buslock_Enable(void);
 
 extern void dma_sram_delay(unsigned long delay);
 

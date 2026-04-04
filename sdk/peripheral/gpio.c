@@ -755,6 +755,50 @@ uint8 mi_tou_detect(void)
 
 
 
+//DC Insert Detect  ---> GPIO_0_6
+//set GPIO_A_6 Input 
+void GPIO_5V_DCIN_Init(void)
+{
+    uint8 gpio_offset=6;
+	
+	  gpio_offset = BIT(gpio_offset);
+	
+	  GPIOIE_0_Shadow=gpio_offset;
+		GPIOIE_0=0;//disable gpio group0 interrupt
+
+//gpio input	
+	  GPIODIR_0_Shadow &= (~gpio_offset);
+	  GPIODIR_0 = GPIODIR_0_Shadow;//input,set Corresponding bit to "0" ,input mode
+	
+	  GPIOIE_0_Shadow |= gpio_offset;
+	  GPIOIE_0 = GPIOIE_0_Shadow;//set Corresponding bit to "1" ,interrupt enable
+
+
+
+		//Disable level detection 
+		GPIOIS_0_Shadow &= (~gpio_offset);
+    GPIOIS_0 = GPIOIS_0_Shadow;	
+		
+    //Clear detection on both edges */
+		GPIOIBE_0_Shadow &= (~gpio_offset);
+    GPIOIBE_0 = GPIOIBE_0_Shadow;
+		//if (rising)
+		//GPIOIEV |= bit;
+		//else
+		//GPIOIEV &= ~bit;
+		
+		GPIOIEV_0_Shadow &= (~gpio_offset);
+		GPIOIEV_0 = GPIOIEV_0_Shadow;//falling edge trigger
+
+#if 1
+		/******* configure the GPIO NVIC ********************************/
+		hal_nvic_clear_pending_irq(GPIO_A6_IRQn);//GPIO_0_6(GPIOA6)
+		hal_nvic_set_priority(GPIO_A6_IRQn, 0);
+		hal_nvic_enable_irq(GPIO_A6_IRQn);	
+#endif	
+	
+}
+
 
 
 

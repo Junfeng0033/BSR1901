@@ -32,7 +32,7 @@
 
 #include "sc_gui.h"
 
-
+#include "charger.h"
 
 #include "key_handle.h"
 //#include "bms_global.h"
@@ -86,6 +86,8 @@ extern void ip2366_reg_write(void);
 extern void ip2366_reg_read(void);
 
 extern void bsr1901_prepare_sleep_for_pin_wakeup(void);
+
+extern void GPIO_5V_DCIN_Init(void);
 
 extern void delay_1us(unsigned int delay_val);
 
@@ -210,8 +212,10 @@ int main (void)
 
 	SystemInit();
 
-
+	aon_wakeup_irq_cfg();	
 	//gecko_efuse_read();
+	
+	
 	
 	//LDO33_AUX enable, power supply for LCD module
 	LDO33_AUX_Enable();
@@ -234,15 +238,13 @@ int main (void)
 	Lcd_Init();
 	bsr1901_pullup_pulldown_config(PAD_14,PAD_PULLUP);	//BL control	
 	//LCD_BL_SET;//turn on backlight
-	Lcd_SetRegion(0, 0, 127, 127);						//×ø±êÉèÖÃ
+	Lcd_SetRegion(0, 0, 127, 127);						//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	//Lcd_Clear(BLACK);
 	//delay_1us(8000);	
 	//Lcd_Clear(RED);		
 	
 	DMA_Configuration();	
 	
-	
-	//RefreshColorBlockDynamic(BLUE32);
 	
 	
 	HW_SPI_Tx_DMA_32bit(HAL_SPI_0, (uint16*)gImage_128x128_star_32bit, 8192);	
@@ -269,16 +271,40 @@ int main (void)
 	
   //while(1);
 
-	//Lcd_SetRegion(20, 39, 109, 87);						//×ø±êÉèÖÃ
+	//Lcd_SetRegion(20, 39, 109, 87);						//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	//HW_SPI_Tx_DMA(HAL_SPI_0, (uint16*)gImage_bat_90x49, 8820);
 	//delay_1us(8000);
 	
-	Lcd_SetRegion(10, 10, 109, 109);						//×ø±êÉèÖÃ
+	Lcd_SetRegion(10, 10, 109, 109);						//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	//HW_SPI_Tx_DMA(HAL_SPI_0, (uint16*)gImage_circle_100x100, 20000);
 	HW_SPI_Tx_DMA_8bit(HAL_SPI_0, (uint16*)gImage_circle_100x100, 20000);
 	
 	delay_1us(8000);
-  
+ 
+
+
+
+/*
+
+PWM Charger
+
+		//PAD10 gpio_0_6 as DC_IN detect
+		gecko_pinmux_config(PAD10,GPIO_A_6);//config PAD10 as gpio_0_6(A6)	
+		GPIO_5V_DCIN_Init();//set GPIO_0_6 as falling edge interrupt
+		GPIO_WakeUp_Setting();//GPIO_A_6 wakeup pin	
+	
+	  ADC_Init();
+
+	  pwm_io_init();
+	
+    hw_pwm_disable(HW_PWM_CHAN_3);	
+	  Set_PWM_CH3_Duty(10);//10% duty
+	  hw_pwm_enable(HW_PWM_CHAN_3);
+
+*/
+
+
+
 
 	/***************************************************************/
 	//config ADC port
@@ -330,11 +356,7 @@ int main (void)
 		
 	//	gecko_pinmux_config(PAD12,PCLK_OUT);//2024-09-14 Shanghai	
 
-	//----SysTick Init-----
 
-	SysTick_Config(20000);//SysTick Test === 1ms tick for KEY detect
-
-	aon_wakeup_irq_cfg();	
 
 
 /************************i2c configure***************************************/
@@ -355,7 +377,7 @@ int main (void)
 
 	//gpio_i2c_initialize();
 	
-  bFlag_init_ipxs = 1;
+    bFlag_init_ipxs = 1;
 
 	
 /************************i2c configure***************************************/
@@ -363,16 +385,22 @@ int main (void)
 
 	
 	#if 0
-  printf("date:%s \r\n",gSysDate);
-  printf("time:%s \r\n",gSysTime);
+    printf("date:%s \r\n",gSysDate);
+    printf("time:%s \r\n",gSysTime);
 	printf("\r\n");
 	printf(VERSION);
 	#endif
 	
 	//sc_gui_init(lcd_dma_8bit_refresh, 0, C_ROYAL_BLUE,C_BLUE, &lv_font_16);	
 	//sc_demo_text();
-	
-		
+
+
+/************************SysTick configure***************************************/
+	//----SysTick Init-----
+	SysTick_Config(20000);//SysTick Test === 1ms tick for KEY detect
+/************************SysTick configure***************************************/
+
+
 	while(1)
 	{
 	
@@ -383,6 +411,8 @@ int main (void)
 		//system_tick=TimeTick;
 		
 		Get_Vbat_Voltage();
+		
+		bulk_func();
 		
 		//printf("\r\n  Charger Bank Solution Software, Copyright (c) 2020-2022 BraveStarr Inc.\r\n");
 		
@@ -399,9 +429,9 @@ int main (void)
 		//read 0x31 register(STATE_CTL0)
 		//wr_data = ipxs_readByte(DEVICE_ADDR_IP, REG_STATE_CTL0);
 	
-	  //printf("\r\n !!!!!!!!get_ip2366_state!!!!!  reg_ipxs = %x \r\n",wr_data);		
+	  	//printf("\r\n !!!!!!!!get_ip2366_state!!!!!  reg_ipxs = %x \r\n",wr_data);		
 		//wr_data=wr_data & 0x20;//(bit5,CHG_EN-------1,charging;0, not charging)
-	 // printf("\r\n !!!!22222!!!!get_ip2366_state!!22222!!!  reg_ipxs = %x \r\n",wr_data);	
+	 	// printf("\r\n !!!!22222!!!!get_ip2366_state!!22222!!!  reg_ipxs = %x \r\n",wr_data);	
 		
 		#if 0
 		
@@ -457,7 +487,7 @@ int main (void)
 			if(flag_key1==0)
 			{
 				//UATR1_PRINT_LOG((unsigned char *)("K27 KEY Press Down"));
-        printf("\r\n K27 KEY Press Down \r\n ");
+        		printf("\r\n K27 KEY Press Down \r\n ");
 				HW_SPI_Tx_DMA_8bit(HAL_SPI_0, (uint16*)gImage_128x128_star, 32768);
 			
 				
@@ -484,7 +514,7 @@ int main (void)
 			  #if 0
 				//LCD_BL_CLR;
 				//bsr1901_pullup_pulldown_config(PAD_14,PAD_PULLDOWN);	
-        #endif
+        	  #endif
 
 				//LDO33_AUX disable, power down LCD module			
 				LDO33_AUX_Disable();
@@ -497,8 +527,8 @@ int main (void)
 //				wr_data |= 0x200;//(set bit10=1)
 //				reg_write(0x40020000+0x000, wr_data);
 			
-        bsr1901_prepare_sleep_for_pin_wakeup();
-			  //sleep-wakeup setting
+        		bsr1901_prepare_sleep_for_pin_wakeup();
+			  	//sleep-wakeup setting
 				BSR1901_GPIO_WakeUp_From_DeepSleep();//
 				tc_gecko_cm0_aon_sleep();//deep sleep test for low power design
 

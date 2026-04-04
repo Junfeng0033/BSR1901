@@ -35,4 +35,5 @@
 .\objects\main.o: .\SCGUI\sc_transform.h
 .\objects\main.o: .\SCGUI\sc_compose.h
 .\objects\main.o: .\SCGUI\sc_menu.h
+.\objects\main.o: .\include\charger.h
 .\objects\main.o: .\include\key_handle.h

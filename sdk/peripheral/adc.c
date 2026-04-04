@@ -706,3 +706,52 @@ uint16 Get_Vbat_Voltage(void)
 		
 		return adc_convert;
 }
+
+
+
+//ADC7
+//detect battery charging current 
+uint16 adc_buck_curr_read(void) 
+{
+	//char *string;
+	uint16 rawdata=GeckoGpadcGetRawData(GPADC_CHAN_7);
+	//uint16 mv = GeckoGpadcRawData2Volt(rawdata);
+	uint16 mv=(rawdata*1.2)/1023;
+	
+	#if 0//DEBUG_UATR0_PRINT_LOG
+	UATR0_PRINT_LOG((unsigned char *)("\r\n"));						
+	UATR0_PRINT_LOG((unsigned char *)("GPADC_CHAN_7 battery charging current---:"));
+	string=my_itoa(mv);
+	UATR0_PRINT_LOG((unsigned char *)(string));
+	UATR0_PRINT_LOG((unsigned char *)("\r\n"));		
+	#endif
+	
+	return 0x0;
+}
+
+
+
+
+//ADC4
+//detect battery voltage 
+uint16 adc_vbatvalue_read(void) 
+{
+	//char *string;
+	uint16 rawdata=GeckoGpadcGetRawData(GPADC_CHAN_4);
+	//uint16 mv = GeckoGpadcRawData2Volt(rawdata);
+	uint16 mv=(rawdata*1.2)/1023;
+	
+	#if 0//DEBUG_UATR0_PRINT_LOG
+	UATR0_PRINT_LOG((unsigned char *)("\r\n"));						
+	UATR0_PRINT_LOG((unsigned char *)("GPADC_CHAN_4 adc_vbatvalue_read---:"));
+	string=my_itoa(mv);
+	UATR0_PRINT_LOG((unsigned char *)(string));
+	UATR0_PRINT_LOG((unsigned char *)("\r\n"));		
+	#endif	
+	
+	return 0x0;
+}
+
+
+
+

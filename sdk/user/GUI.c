@@ -255,6 +255,15 @@ void GuiShowChar_16(uint16_t x, uint16_t y, uint8_t s)
 	}
 }
 
+
+
+
+
+
+
+
+
+#if 1
 extern const uint8_t Font16_dital_Table [];
 
 //ÏÔÊ¾×Ö·û
@@ -320,6 +329,12 @@ void GuiShowChar_32(uint16_t x, uint16_t y, uint8_t n)
 		}
 	}
 }
+
+#endif
+
+
+
+
 
 static int oled_pow(uint8_t m, uint8_t n)
 {

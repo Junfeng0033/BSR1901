@@ -103,10 +103,15 @@ input [1:0] size;
 	 hwp_spi0->CTROL=0x10f9b;
 
 }
+
+
+
 void SPI_8bit_Transfer(void)
 {
 		hwp_spi0->CTROL = 0x10f8b;	//8bit spi data
 }
+
+
 
 
 void HW_SPI_Initialise(HAL_SPI_ID_T id)
@@ -258,6 +263,9 @@ void HW_SPI_Tx_DMA_32bit(HAL_SPI_ID_T id,uint16 *pData, uint16 DataLen)
 {
 	LCD_RS_SET;	
   SPI_32bit_Transfer();
+	
+	//DMA_Req_Buslock_Enable();
+	
 	Gecko_DMA_Transport((volatile uint32 *)(XR7_SPI_BASE + XR7_SPI_FIFO), pData, DataLen, 
 						AHB_DMA_CONTROL_WORD_TR, AHB_DMA_CONTROL_SRC_INC_DES_NOINC);	
 	dma_sram_delay(1000);		
@@ -268,6 +276,9 @@ void HW_SPI_Tx_DMA_16bit(HAL_SPI_ID_T id,uint16 *pData, uint16 DataLen)
 {
 	LCD_RS_SET;	
   SPI_16bit_Transfer();
+	
+	//DMA_Req_Buslock_Enable();
+	
 	Gecko_DMA_Transport((volatile uint32 *)(XR7_SPI_BASE + XR7_SPI_FIFO), pData, DataLen, 
 						AHB_DMA_CONTROL_HWORD_TR, AHB_DMA_CONTROL_SRC_INC_DES_NOINC);	
 	dma_sram_delay(1000);	
@@ -286,6 +297,9 @@ void HW_SPI_Tx_DMA_16bit_ColorBlock(HAL_SPI_ID_T id,uint16 *pData, uint16 DataLe
 {
 	LCD_RS_SET;	
   SPI_16bit_Transfer();
+	
+	//DMA_Req_Buslock_Enable();
+	
 	Gecko_DMA_Transport((volatile uint32 *)(XR7_SPI_BASE + XR7_SPI_FIFO), pData, DataLen, 
 						AHB_DMA_CONTROL_HWORD_TR, AHB_DMA_CONTROL_SRC_NOINC_DES_NOINC);	
 	dma_sram_delay(1000);	
@@ -301,6 +315,9 @@ void HW_SPI_Tx_DMA(HAL_SPI_ID_T id,uint16 *pData, uint16 DataLen)
 {
 	LCD_RS_SET;
   SPI_8bit_Transfer();
+	
+	//DMA_Req_Buslock_Enable();
+	
 	Gecko_DMA_Transport((volatile uint32 *)(XR7_SPI_BASE + XR7_SPI_FIFO), pData, DataLen, 
 						AHB_DMA_CONTROL_BYTE_TR, AHB_DMA_CONTROL_SRC_INC_DES_NOINC);
 
@@ -313,6 +330,9 @@ void HW_SPI_Tx_DMA_8bit(HAL_SPI_ID_T id,uint16 *pData, uint16 DataLen)
 {
 	LCD_RS_SET;
   SPI_8bit_Transfer();
+	
+	//DMA_Req_Buslock_Enable();
+	
 	Gecko_DMA_Transport((volatile uint32 *)(XR7_SPI_BASE + XR7_SPI_FIFO), pData, DataLen, 
 						AHB_DMA_CONTROL_BYTE_TR, AHB_DMA_CONTROL_SRC_INC_DES_NOINC);
 

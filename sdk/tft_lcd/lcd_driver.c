@@ -18,6 +18,11 @@
 //hwp_spi0->CTROL = 0x10f8b;						//8bit spi data
 #define 	SPI_WriteData(data) 					{hwp_spi0->CTROL = 0x10f8b;hwp_spi0->FIFODATA = data;}
 
+//hwp_spi0->CTROL=0x10f9b;							//16bit spi data
+#define 	SPI_Write16bitData(data) 			{hwp_spi0->CTROL = 0x10f9b;hwp_spi0->FIFODATA = data;}
+
+
+
 #define 	LCD_NV3022_CMD								Lcd_WriteIndex
 #define 	LCD_NV3022_Parameter					Lcd_WriteData
 
@@ -254,9 +259,16 @@ void Lcd_SetXY(uint16_t x,uint16_t y)
 void Gui_DrawPoint(uint16_t x,uint16_t y,uint16_t Data)
 {
 	Lcd_SetRegion(x,y,x+1,y+1);
-	LCD_WriteData_16Bit(Data);
+	
+	//LCD_WriteData_16Bit(Data);
+	
+	LCD_RS_SET;
+	SPI_Write16bitData(Data);
 
 }    
+
+
+
 
 /*****************************************
  函数功能：读TFT某一点的颜色                          

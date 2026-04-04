@@ -19,6 +19,7 @@
 ".\objects\efuse.o"
 ".\objects\opa.o"
 ".\objects\mos.o"
+".\objects\charger.o"
 ".\objects\bms_ip2366.o"
 ".\objects\dpi_common.o"
 ".\objects\xt25f32.o"
@@ -51,6 +52,9 @@
 ".\objects\fire_eye_img.o"
 ".\objects\ui_circle_100x100.o"
 ".\objects\sc_demo_test.o"
+".\objects\gui.o"
+".\objects\font_0_9_digital_32b.o"
+".\objects\font_a_z_32b.o"
 --library_type=microlib --strict --scatter ".\scatter_bsr1901_demo.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers

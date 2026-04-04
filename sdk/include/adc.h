@@ -305,3 +305,9 @@ void adc_qi_vc_read(void);
 
 void ADC_Window_Comparator(void);
 
+uint16 adc_vbatvalue_read(void);
+
+uint16 adc_buck_curr_read(void);
+
+
+	

@@ -44,6 +44,8 @@ typedef unsigned char   	uint8_t;
 typedef unsigned char   	kal_uint8;
 typedef unsigned char   	u8;
 
+typedef unsigned char   	U8;
+
 typedef unsigned char BYTE;
 
 typedef signed short   	  int16;
@@ -52,6 +54,8 @@ typedef unsigned short   	uint16_t;
 typedef unsigned short  	kal_uint16;
 typedef unsigned short   	u_intHW;
 typedef unsigned short   	ushort;
+
+typedef unsigned short   	u16;
 
 typedef uint16_t color_t;
 
