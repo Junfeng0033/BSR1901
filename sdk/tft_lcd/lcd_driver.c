@@ -89,8 +89,35 @@ void Lcd_WriteData(uint8_t Data)
 void LCD_WriteData_16Bit(uint16_t Data)
 {
 	LCD_RS_SET;
+
+#if 0	
 	SPI_WriteData(Data>>8); 	//写入高8位数据
 	SPI_WriteData(Data); 			//写入低8位数据
+	
+	
+#else
+
+//#define LSBF								(1<<6)
+/*
+input lsbf;
+
+1'b0:MSB first (高位在前)
+
+1'b1:LSB first
+*/
+	
+	//hwp_spi0->CTROL=0x10f9b;							//16bit spi data
+  //#define 	SPI_Write16bitData(data) 			{hwp_spi0->CTROL = 0x10f9b;hwp_spi0->FIFODATA = data;}
+
+
+
+
+	SPI_Write16bitData(Data);
+	
+	
+	
+#endif	
+	
 }
 
 void Lcd_WriteReg(uint8_t Index,uint8_t Data)
@@ -222,7 +249,7 @@ void Lcd_Init(void)
 void Lcd_SetRegion(uint16_t x_start,uint16_t y_start,uint16_t x_end,uint16_t y_end)
 {	
 
-  SPI_8bit_Transfer();
+  //SPI_8bit_Transfer();
 	
 	Lcd_WriteIndex(0x2a);
 	//Lcd_WriteData(0x00);
@@ -259,11 +286,13 @@ void Lcd_SetXY(uint16_t x,uint16_t y)
 void Gui_DrawPoint(uint16_t x,uint16_t y,uint16_t Data)
 {
 	Lcd_SetRegion(x,y,x+1,y+1);
-	
+
+#if 0	
 	//LCD_WriteData_16Bit(Data);
-	
+#else	
 	LCD_RS_SET;
 	SPI_Write16bitData(Data);
+#endif
 
 }    
 
@@ -359,8 +388,8 @@ void Lcd_Fill(uint16_t x,uint16_t y,uint16_t xend,uint16_t yend,uint16_t Color)
 	#if 0
 	for(i=0; i<num; i++)
 		LCD_WriteData_16Bit(Color);
-	#endif
+	#else
 	HW_SPI_Tx_DMA_16bit_ColorBlock(HAL_SPI_0,&Color,num);
-	
+	#endif	
 }
 

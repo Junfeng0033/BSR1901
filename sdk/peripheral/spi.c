@@ -56,7 +56,7 @@ void SPI_32bit_Transfer(void)
 {
 /*
 
-在reg32_04[0:11]这12个bit中, size有两个bit，分别是bit4和bit5.
+在reg32_04[0:11]这12个bit中, size有两个bit，分别是bit5和bit4.
 input [1:0] size; 
 2'b00:8bits; 
 2'b01:16bits(bit5=0,bit4=1); 
@@ -86,7 +86,7 @@ void SPI_16bit_Transfer(void)
 {
 /*
 
-在reg32_04[0:11]这12个bit中, size有两个bit，分别是bit4和bit5.
+在reg32_04[0:11]这12个bit中, size有两个bit，分别是bit5和bit4.
 input [1:0] size; 
 2'b00:8bits; 
 2'b01:16bits(bit5=0,bit4=1); 

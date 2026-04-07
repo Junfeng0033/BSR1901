@@ -478,10 +478,70 @@ void hw_pwm_enable(HW_PWM_CHAN_T channel)
 
 
 
+
+
+
+void hw_pwm_disable(HW_PWM_CHAN_T channel)
+{
+	volatile uint32 regval=Gecko_PWM->pwm_select_en;
+	
+	switch (channel)
+	{
+		case HW_PWM_CHAN_0:
+				regval&=~(1<<0); //bit0
+				Gecko_PWM->pwm_select_en=regval;
+				break;
+
+		case HW_PWM_CHAN_1:
+				regval&= ~(1<<1); //bit1
+				Gecko_PWM->pwm_select_en=regval;
+				break;
+
+		case HW_PWM_CHAN_2:
+				regval&= ~(1<<2); //bit2
+				Gecko_PWM->pwm_select_en=regval;
+				break;
+
+		case HW_PWM_CHAN_3:
+				regval&= ~(1<<3); //bit3
+				Gecko_PWM->pwm_select_en=regval;
+				break;
+		
+		
+		case HW_PWM_CHAN_4:
+				regval&= ~(1<<4); //bit4
+				Gecko_PWM->pwm_select_en=regval;
+				break;
+
+		case HW_PWM_CHAN_5:
+				regval&= ~(1<<5); //bit5
+				Gecko_PWM->pwm_select_en=regval;
+				break;
+		
+		case HW_PWM_CHAN_6:
+				regval&= ~(1<<6); //bit6
+				Gecko_PWM->pwm_select_en=regval;
+				break;
+
+		case HW_PWM_CHAN_7:
+				regval&= ~(1<<7); //bit7
+				Gecko_PWM->pwm_select_en=regval;
+				break;		
+		
+		default:
+		    break;
+	}
+	
+	
+	
+}
+
+
+
 // =============================================================================
 // hw_pwm_invert
 // -----------------------------------------------------------------------------
-// This function not work correctly
+
 // =============================================================================
 void hw_pwm_invert(HW_PWM_CHAN_T channel)
 {

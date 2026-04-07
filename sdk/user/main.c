@@ -223,22 +223,38 @@ int main (void)
 	
 	gecko_pinmux_default_config();
 
-	gecko_pinmux_config(PAD15,SPI_CSN1);
-	gecko_pinmux_config(PAD16,SPI_MOSI);
-	gecko_pinmux_config(PAD17,SPI_CLK);
+//   CS    接SPI_CSN_1-(PAD20)
+//   SCL   接SPI_CLK---(PAD22)
+//   SDA   接SPI_MOSI--(PAD23）
+
+//   RES   接PB4-------(PAD24)--->(PAD07)//default fucntion
+//   DC    接PA3-------(PAD21)
+
+//   BLK   接PB7-------(PAD07)--->(PAD24)
+
+	gecko_pinmux_config(PAD20,SPI_CSN_1);
+	gecko_pinmux_config(PAD22,SPICLK);
+	gecko_pinmux_config(PAD23,SPIMOSI);
+
+	//gecko_pinmux_config(PAD24,GPIO_B_4);//default function,do not needed to config
+	gecko_pinmux_config(PAD21,GPIO_A_3);
+	
+	gecko_pinmux_config(PAD7,GPIOB_7);//BL control(BSR1901 use MOS to control backlight)
 	
 	
-	gecko_pinmux_config(PAD18,SPI_MISO);
-	//gecko_pinmux_config(PAD18,SPI_MISO);
-	gecko_pinmux_config(PAD18,GPIO_B_6);
+	
 
 
 	HW_SPI_Initialise(HAL_SPI_0);
+	
+	
+	
+	
 
 	Lcd_Init();
-	bsr1901_pullup_pulldown_config(PAD_14,PAD_PULLUP);	//BL control	
+	//bsr1901_pullup_pulldown_config(PAD_14,PAD_PULLUP);	//BL control	
 	//LCD_BL_SET;//turn on backlight
-	Lcd_SetRegion(0, 0, 127, 127);						//��������
+	Lcd_SetRegion(0, 0, 127, 127);
 	//Lcd_Clear(BLACK);
 	//delay_1us(8000);	
 	//Lcd_Clear(RED);		
@@ -385,8 +401,8 @@ PWM Charger
 
 	
 	#if 0
-    printf("date:%s \r\n",gSysDate);
-    printf("time:%s \r\n",gSysTime);
+  printf("date:%s \r\n",gSysDate);
+  printf("time:%s \r\n",gSysTime);
 	printf("\r\n");
 	printf(VERSION);
 	#endif

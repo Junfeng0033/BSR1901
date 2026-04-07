@@ -76,6 +76,14 @@ typedef volatile struct
 //{size,lsbf}
 #define SPI_SIZE(n)					(((n)&0x3)<<4)
 #define LSBF								(1<<6)
+/*
+input lsbf;
+
+1'b0:MSB first (高位在前)
+
+1'b1:LSB first
+*/
+
 
 #define CPHA								(1<<7)
 #define CPOL								(1<<8)
@@ -89,11 +97,30 @@ typedef volatile struct
 /*
 
 在reg32_04[0:11]这12个bit中, size有两个bit，分别是bit4和bit5.
-input [1:0] size; //2'b00:8bits; 2'b01:16bits(bit4=1,bit5=0); 2'b10:32bits(bit4=0,bit5=1);2'b11:24bits
-bit4和bit5 是00，表示8bit; 
+input [1:0] size; 
+2'b00:8bits; 
+2'b01:16bits(bit5=0,bit4=1); 
+2'b10:32bits(bit5=1,bit4=0);
+2'b11:24bits
+bit5和bit4 是00，表示8bit; 
+
+input lsbf;
+
+1'b0:MSB first (高位在前)
+
+1'b1:LSB first
 
 */
-//#define 	SPI_WriteData(data) 				{hwp_spi0->CTROL = 0x10f8b;hwp_spi0->FIFODATA = data;}
+
+
+//hwp_spi0->CTROL = 0x10f8b;						//8bit spi data
+//#define 	SPI_WriteData(data) 					{hwp_spi0->CTROL = 0x10f8b;hwp_spi0->FIFODATA = data;}
+
+//hwp_spi0->CTROL=0x10f9b;							//16bit spi data
+//#define 	SPI_Write16bitData(data) 			{hwp_spi0->CTROL = 0x10f9b;hwp_spi0->FIFODATA = data;}
+
+
+
 
 #define SPI_8bit_TRSF					{hwp_spi0->CTROL|= SPI_SIZE(0);}
 #define SPI_16bit_TRSF				{hwp_spi0->CTROL|= SPI_SIZE(1);}

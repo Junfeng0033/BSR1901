@@ -15,6 +15,10 @@ Gui_DrawLine(100, 100, 200, 200, 0);
 //#define Lcd_SetXY(X, Y) 			LCD_1IN69_SetWindows(X, Y, X, Y)
 //#define Gui_DrawPoint(x, y, c) 	LCD_1IN69_DrawPoint(x, y, c)
 
+
+
+
+
 // Bresenham算法
 void Gui_arc(uint16_t X, uint16_t Y, uint16_t R, uint16_t fc)
 {
@@ -56,6 +60,23 @@ void Gui_arc(uint16_t X, uint16_t Y, uint16_t R, uint16_t fc)
 		Gui_DrawPoint(X - b, Y - a, fc);
 	}
 }
+
+
+
+
+
+
+
+/*
+X	uint16_t	圆心的 水平坐标（左上角为 (0,0)）
+Y	uint16_t	圆心的 垂直坐标
+R	uint16_t	圆的 半径（像素数）
+fc	uint16_t	前景颜色 color
+
+该函数不填充圆内部，只绘制圆的边缘。
+
+*/
+
 
 // Bresenham算法
 void Gui_Circle(uint16_t X, uint16_t Y, uint16_t R, uint16_t fc)
