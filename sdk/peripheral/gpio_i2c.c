@@ -312,6 +312,7 @@ VOID gpio_i2c_stop(VOID)
 
 UINT8 gpio_i2c_TxByte(UINT8 data) /* return 0 --> ack */
 {
+	
 #ifndef MCU_WIFI_PLAT
 	int32 i;
 	uint8 temp_value = 0;
@@ -341,6 +342,8 @@ UINT8 gpio_i2c_TxByte(UINT8 data) /* return 0 --> ack */
 	
 	
 	return temp_value;
+	
+	
 #else
 	int32 i;
 	uint8 temp_value = 0;
@@ -433,7 +436,7 @@ VOID gpio_i2c_RxByte(uint8 *data, uint8 ack)
 
 
 
-
+#if 0
 VOID i2c_test(void)
 {
 	//gpio_i2c_Start();///start
@@ -444,7 +447,7 @@ VOID i2c_test(void)
   temp_value = GPIO_ReadIO(SDA_PIN);
   //printf("i2c_test  temp_value=%d\n",temp_value);
 }
-
+#endif
 
 
 
@@ -471,6 +474,8 @@ VOID gpio_i2c_write_data(UINT32 addr,UINT8 * regaddr,UINT8 addrlen,UINT8 *data, 
 	}
 	gpio_i2c_stop();
 }
+
+
 
 UINT8 gpio_i2c_read_data(UINT32 addr,UINT8 * regaddr, UINT8 addrlen,UINT8 *datas, UINT8 datalen)
 {

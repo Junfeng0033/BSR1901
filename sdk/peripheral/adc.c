@@ -2,6 +2,9 @@
 #include "bsr1901.h"
 #include "adc.h"
 #include "uart.h"
+
+#include <stdarg.h>
+#include <stdio.h>
 /****************************************************************************
 //
 //PIN MAP
@@ -596,51 +599,7 @@ uint16 GeckoGpadcGetRawData(GPADC_CHAN_T channel)
 
 
 
-// =============================================================================
-// GpadcGet
-// -----------------------------------------------------------------------------
-/// Return the more up-to-date value measure for the given channel in mV. 
-/// If the conversion is not finished yet, #GPADC_BAD_VALUE is returned.
-///
-/// Once the first measured has been correctly done, there will always
-/// be a value ready to read for all the enabled channel.
-///
-/// @param channel Channel whose more up to date measured value
-/// will be returned.
-/// @return Measured value, in mV, or #GPADC_BAD_VALUE if no result is 
-/// available yet.
-// =============================================================================
-uint16 GpadcGet(GPADC_CHAN_T channel)
-{
-    //uint16 mv = GeckoGpadcRawData2Volt(GeckoGpadcGetRawData(channel));
-    return 0;//(mv);
-}
 
-// just for the factory mode now
-// note: the battery volt is double of the return value.
-//       0xffff mean the bad value
-
-uint16 GetGpadcValue(GECKO_GPADC_CHAN_T channel)
-{
-//GetBatteryGpadcChannel();
-//GetVINGpadcChannel();
-//GetNTCGpadcChannel();
-//GetBoostGpadcChannel();
- return 0;
-}
-
-void adc_qi_vc_read()
-{
-	
-}
-
-void Update_ADC_Hdlr()
-{
-    //uint8 i=0, j=0;
-    //int8 buffer[32];
-    //uint16 adc_value;
-		
-}
 
 
 
@@ -717,6 +676,8 @@ uint16 adc_buck_curr_read(void)
 	uint16 rawdata=GeckoGpadcGetRawData(GPADC_CHAN_7);
 	//uint16 mv = GeckoGpadcRawData2Volt(rawdata);
 	uint16 mv=(rawdata*1.2)/1023;
+	
+	printf("\r\n adc_buck_curr_read  mv = %d",mv);
 	
 	#if 0//DEBUG_UATR0_PRINT_LOG
 	UATR0_PRINT_LOG((unsigned char *)("\r\n"));						

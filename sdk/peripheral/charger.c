@@ -9,6 +9,18 @@
 #include "adc.h"
 
 
+/*****************************************************************************************************************************
+Note:
+
+At the moment of powering up the chip, before the software takes over the hardware, 
+
+it must be ensured that both Q1 and Q2 are non-conductive, which means that the default state of the PWM pin must be correct.
+
+*****************************************************************************************************************************/
+
+
+
+
 extern uint8 dc5v_online_flag;
 uint16 batterycase_voltage;
 //uint8 chg_insert_flag;
@@ -97,46 +109,7 @@ void hal_set_pwm_duty(uint16_t duty) {
 
 
 
-void charger_control_init (void) 
-{
 
-}
-
-
-void charger_control_procedure(void) 
-{
-	//unsigned char i;
-	
-	if(batterycase_voltage<30)
-	{
-		
-	}
-	else if(batterycase_voltage>30)
-	{
-		
-	}
-	else{
-		
-		//set charge current
-		
-	}
-
-
-}
-
-
-
-//extern void PWR_MOS_Gate_CTRL(uint8 gate);
-
-
-void Control_Boost_Output(void)
-{
-	
-	//boost output 5V
-	
-	
-	
-}
 
 
 

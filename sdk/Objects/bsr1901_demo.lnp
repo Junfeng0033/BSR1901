@@ -1,7 +1,6 @@
 --cpu Cortex-M0
 ".\objects\startup_cm0.o"
 ".\objects\system_initial.o"
-".\objects\adc.o"
 ".\objects\aon.o"
 ".\objects\cmu.o"
 ".\objects\iomux.o"
@@ -9,6 +8,7 @@
 ".\objects\uart.o"
 ".\objects\gpio.o"
 ".\objects\gpio_i2c.o"
+".\objects\adc.o"
 ".\objects\spi.o"
 ".\objects\spi2ahb.o"
 ".\objects\timer.o"
@@ -52,6 +52,7 @@
 ".\objects\fire_eye_img.o"
 ".\objects\ui_circle_100x100.o"
 ".\objects\sc_demo_test.o"
+".\objects\ui.o"
 ".\objects\gui.o"
 ".\objects\font_0_9_digital_32b.o"
 ".\objects\font_a_z_32b.o"

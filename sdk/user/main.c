@@ -117,7 +117,7 @@ extern  unsigned char gImage_128x128_cake[32768];
 extern  unsigned char gImage_128x128_star[32768];
 extern  unsigned char gImage_128x128_battery[32768];
 
-extern unsigned char gImage_bat_90x49[8820];
+//extern unsigned char gImage_bat_90x49[8820];
 extern const unsigned char gImage_circle_100x100[20000];
 extern const unsigned char gImage_black_128x128[32768];
 extern const unsigned char gImage_charge_10[20000];
@@ -135,7 +135,8 @@ extern uint8 gpio_i2c_initialize(VOID);
 extern KeyHandle keyHandle;
 extern void Key_Process(void);
 
-
+extern void charger_init(charger_manager_t *charger);
+extern void charger_process(charger_manager_t *charger);
 
 extern lv_font_t lv_font_16; 
 
@@ -344,7 +345,7 @@ PWM Charger
 		extern void Set_GPIO_B7_Input(void);
 		Set_GPIO_B7_Input();
 
-		aon_wakeup_irq_cfg();
+
 
 	#endif
 
@@ -353,7 +354,7 @@ PWM Charger
 		gecko_pinmux_config(PAD10,GPIO_A_6);
 		extern void Set_GPIOA6_Input(void);
 		Set_GPIOA6_Input();
-		//aon_wakeup_irq_cfg();		
+	
 	#endif
 
 	/**********************************************************************************	
@@ -407,7 +408,7 @@ PWM Charger
 	printf(VERSION);
 	#endif
 	
-	//sc_gui_init(lcd_dma_8bit_refresh, 0, C_ROYAL_BLUE,C_BLUE, &lv_font_16);	
+	sc_gui_init(lcd_dma_8bit_refresh, 0, C_ROYAL_BLUE,C_BLUE, &lv_font_16);	
 	//sc_demo_text();
 
 
@@ -417,6 +418,19 @@ PWM Charger
 /************************SysTick configure***************************************/
 
 
+  //iWatchDog for FSM Control
+  //iWDT_Timer_Init();
+
+
+
+/************************Buck-Boost Control***************************************/
+  charger_manager_t my_charger;
+    
+  charger_init(&my_charger);
+	
+/************************Buck-Boost Control***************************************/	
+	
+	
 	while(1)
 	{
 	
@@ -428,7 +442,8 @@ PWM Charger
 		
 		Get_Vbat_Voltage();
 		
-		bulk_func();
+		//bulk_func();
+		//charger_process(&my_charger);
 		
 		//printf("\r\n  Charger Bank Solution Software, Copyright (c) 2020-2022 BraveStarr Inc.\r\n");
 		

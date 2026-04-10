@@ -301,7 +301,7 @@ uint16 GeckoGpadcGetRawData(GPADC_CHAN_T channel);
 
 
 void Get_Advalue_Func(void);
-void adc_qi_vc_read(void);
+
 
 void ADC_Window_Comparator(void);
 
