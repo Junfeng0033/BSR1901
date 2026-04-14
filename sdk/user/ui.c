@@ -3,20 +3,17 @@
 #include "string.h"
 #include "stdbool.h"
 
-typedef struct source{
-	uint8_t *p_img;
-	uint16_t width;
-	uint16_t high;
-}img_source_t;
+#include "ui.h"
 
-extern const uint8_t Font_8x32_percent[];
-extern const uint8_t gImage_black_128x128[32768];
-extern const uint8_t Font48_dital_Table [];
-//extern const uint8_t gImage_bat_90x49[];
-extern const unsigned char gImage_circle_100x100[20000];
+
+
 static uint8_t ui_buf[2560];
 //static img_source_t bat_persent_img = {(uint8_t*)gImage_bat_90x49, 90, 49};
 static volatile bool dma_busy = 0;
+
+
+
+#if 0
 
 //dma发送结束后会调用此函数通知
 __RAM_CODE__ void ui_dma_busy_release(void)
@@ -24,6 +21,12 @@ __RAM_CODE__ void ui_dma_busy_release(void)
 	dma_busy = 0;
 }
 	
+#endif
+
+
+
+
+
 //通过大的区域截取小区域
 void img_cut_out(img_source_t *source, uint16_t x, uint16_t y, uint16_t width, uint16_t high)
 {
@@ -96,11 +99,15 @@ void ui_paint_bat_remain(uint8_t percent)
 }
 
 
+
+#if 0
 __RAM_CODE__ static void wait_dma(void)
 {
 	dma_busy = 1;
 	while(dma_busy);	
 }
+#endif
+
 
 
 //电池百分比
@@ -112,41 +119,41 @@ void ui_paint_bat_percent(uint8_t percent)
 		Lcd_SetRegion(22, 35, 22+23, 35+47);
 		ShowNum_48(ui_buf, 1);
 		//Lcd_Write_data_dma(ui_buf, 48*48);
-		wait_dma();
+		//wait_dma();
 
 		Lcd_SetRegion(46, 35, 46+23, 35+47);
 		ShowNum_48(ui_buf, 0);
 		//Lcd_Write_data_dma(ui_buf, 48*48);
-		wait_dma();
+		//wait_dma();
 		
 		Lcd_SetRegion(70, 35, 70+23, 35+47);
 		ShowNum_48(ui_buf, 0);
 		//Lcd_Write_data_dma(ui_buf, 48*48);	
-		wait_dma();
+		//wait_dma();
 	}
 	else{
 		if(history == 100){
 			Lcd_SetRegion(22, 35, 70+23, 35+47);
 			//Lcd_Write_data_dma((uint8_t*)gImage_black_128x128, 72*47*2);
-			wait_dma();
+			//wait_dma();
 		}
 		
 		if(percent%10 == 0){
 			Lcd_SetRegion(32, 35, 32+23, 35+47);
 			ShowNum_48(ui_buf, percent/10);
 			//Lcd_Write_data_dma(ui_buf, 48*48);
-			wait_dma();
+			//wait_dma();
 			
 			Lcd_SetRegion(80, 40, 80+7, 40+31);
 			ShowPersent(ui_buf);
 			//Lcd_Write_data_dma(ui_buf, 8*32*2);
-			wait_dma();
+			//wait_dma();
 		}
 		
 		Lcd_SetRegion(56, 35, 56+23, 35+47);
 		ShowNum_48(ui_buf, percent%10);
 		//Lcd_Write_data_dma(ui_buf, 48*48);
-		wait_dma();
+		//wait_dma();
 	}
 	
 	history = percent;

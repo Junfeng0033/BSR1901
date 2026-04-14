@@ -1,4 +1,4 @@
-#include "platform_config.h"
+
 #include "bsr1901.h"
 #include "gpio.h"
 #include "bms_ip2366.h"
@@ -22,6 +22,10 @@
 #define P_I2C_INT_CLR   gpio_set_value(PORT_P_INT, 0, PIN_P_INT)
 #define P_I2C_INT_SET   gpio_set_value(PORT_P_INT, 1, PIN_P_INT)
 
+
+
+
+
 void HAL_Delay(uint32_t Delay)
 {
 	
@@ -41,6 +45,11 @@ void _dly_ms(unsigned char timer)
     }
   }
 }
+
+
+
+
+
 
 /*
 
@@ -76,8 +85,7 @@ void ipxs_writeByte(unsigned char deviceAddr, unsigned char regAddr, unsigned ch
 
 */
 
-extern void gpio_i2c_rdabt_rf_write_data(UINT32 addr,unsigned char regaddr, unsigned char *data, unsigned char datalen);
-extern void gpio_i2c_rdabt_rf_read_data(UINT32 addr,unsigned char regaddr, unsigned char *data, unsigned char datalen);
+
 
 unsigned char ipxs_readByte(unsigned char deviceAddr, unsigned char regAddr)
 {
@@ -95,6 +103,13 @@ void ipxs_writeByte(unsigned char deviceAddr, unsigned char regAddr, unsigned ch
     }	
 }
 
+
+
+
+
+
+
+#if 0
 
 unsigned char gek1109_ipxs_readByte(unsigned char deviceAddr, unsigned char regAddr)
 {
@@ -125,6 +140,9 @@ void gek1109_ipxs_writeByte(unsigned char deviceAddr, unsigned char regAddr, uns
     }	
 		
 }
+
+
+#endif
 
 
 
@@ -195,6 +213,8 @@ void ipxs_vbus_scp(unsigned char on_off)
     }
     ipxs_writeByte(DEVICE_ADDR_IP, REG_SYS_CTL0, reg_ipxs);
 }
+
+
 
 // 充电 设置
 void ipxs_charge(unsigned char on_off)
@@ -754,6 +774,14 @@ void get_i2c_int_status(void)
     }
 }
 
+
+
+
+
+
+
+
+
 //------------------------------------------------------------------------
 #define CNST_FILTER_COM (3)
 // 多个寄存器表示同一个状态的，每次读低8位寄存器会更新一次高8位和低8位的数据，
@@ -879,6 +907,10 @@ void get_multi_port_status(void)
         }
     }
 }
+
+
+
+
 
 // 获取Vbus充电电压
 void get_chg_vbus_voltage(void)

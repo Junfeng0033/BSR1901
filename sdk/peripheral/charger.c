@@ -9,6 +9,20 @@
 #include "adc.h"
 
 
+
+
+
+//uint8 chg_insert_flag;
+uint8 pwm_init_flag=0;
+
+
+
+
+
+
+
+
+
 /*****************************************************************************************************************************
 Note:
 
@@ -19,12 +33,6 @@ it must be ensured that both Q1 and Q2 are non-conductive, which means that the 
 *****************************************************************************************************************************/
 
 
-
-
-extern uint8 dc5v_online_flag;
-uint16 batterycase_voltage;
-//uint8 chg_insert_flag;
-uint8 pwm_init_flag=0;
 
 
 /**
@@ -238,12 +246,6 @@ void charger_process(charger_manager_t *charger) {
 
 
 
-#define PERIOD      				60//60//80 //195khz  80step can adjust 260K----60
-#define BOOST_MAXDUTY      	PERIOD/2 //BOOST duty max 1/2 period
-#define BULK_MAXDUTY     		PERIOD 
-#define MINDUTY     				1
- 
-
 
 
 
@@ -387,6 +389,13 @@ void boost_fun(void)
 #endif
 
 
+
+
+
+
+
+
+
 u16 Vbat_advalue;
 u16 bulk_adcvalue;
 
@@ -412,6 +421,13 @@ BOOL charge_full_flag;
 
 #define  Icharge_100ma   20 
 #define  Icharge_350ma   71
+
+
+
+
+
+
+
 
 //High-Efficiency, 1.5-MHz,Synchronous Switch-Mode Buck Charge
 void bulk_func(void)

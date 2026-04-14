@@ -1,7 +1,6 @@
 ;/*****************************************************************************
 ; * @file:    startup_gecko.s
 ; * @purpose: CMSIS Cortex-M0 Core Device Startup File 
-; *           for the TWS Charger Device  
 ; * @version: V1.0
 ; * @date:    25 July 2020
 ;	Author:	  Junfeng

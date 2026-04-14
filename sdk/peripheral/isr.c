@@ -15,8 +15,20 @@
 #include "spi.h"
 #include "lcd_driver.h"
 
+
+uint8 dc5v_online_flag=0;
+
 extern const unsigned char gImage_60X160_2[19200];
 extern const unsigned char gImage_60X160_flower[19200];
+
+extern void watchdog_irq_clear(void);
+
+extern void gecko_timer1_irq_handler(void);
+
+extern void Clear_DMA_Interrupt(void);
+extern void SPI_DMA_Simulation(void);
+extern void DMA_ISR_Routine(void);
+
 
 
 
@@ -64,24 +76,10 @@ void pendsv_handler(void)
 
 
 
-//uint16_t ms_couter = 0;
-//void delay_ms(uint16_t couter)
-//{
-////	ms_couter = couter;
-////	while(ms_couter);
-//}
 
-
-//static volatile uint32_t TimeTick = 0;
 volatile uint32_t TimeTick = 0;
 extern uint32_t system_tick;
 
-//int pwm_freq=147000;
-//int pwm2_duty=80;
-//int pwm7_duty=20;
-
-//#define LCD_BL_PORT  		GPIOB			//MCU_PB2--->>TFT --BL
-//#define LCD_BL_PIN       	2  	//MCU_PB2--->>TFT --BL
 
 //(*(volatile uint32*)(0x40019000 + (1 << (pin + 2)) ) ) = (uint32)(1 << pin);	
 //(*(volatile uint32*)(0x40019000 + (1 << (pin + 2)) ) ) = (uint32)(0 << pin);	
@@ -91,21 +89,11 @@ extern uint32_t system_tick;
 
 __RAM_CODE__ void SysTick_Handler(void)  //interrupt routine
 {
-//	  char *string;	
-
-		
-//		UATR1_PRINT_LOG((unsigned char *)("\r\n"));						
-//		UATR1_PRINT_LOG((unsigned char *)("K27_KEY_Detect"));
-//		string=my_itoa(gpio_status);
-//		UATR1_PRINT_LOG((unsigned char *)(string));
-//		UATR1_PRINT_LOG((unsigned char *)("\r\n"));	
 	
 
 	TimeTick++;//TimeTick will increase by "1"  every 100us
 	
 	//system_tick=TimeTick;
-	
-	
 	
 #if 0			
 	if(TimeTick%2)
@@ -119,15 +107,17 @@ __RAM_CODE__ void SysTick_Handler(void)  //interrupt routine
 	  //(*(volatile uint32*)(0x40019000 + (1 << (2 + 2)) ) ) = (uint32)(1 << 2);
 	  CST6118_Motor_PWM7_Control_Optimized(150000,80);
 #endif	
+	
+	
 }
 
 
 
 
-uint32_t Get_SysTick(void)
-{
-	return TimeTick;
-}
+//uint32_t Get_SysTick(void)
+//{
+//	return TimeTick;
+//}
 
 	
 
@@ -159,7 +149,7 @@ void GPIO_B6_IRQHandler(void)
 
 
 
-uint8 dc5v_online_flag=0;
+
 //DC Insert Detect
 void GPIO_0_6_IRQHandler(void)
 {
@@ -188,7 +178,7 @@ void TIMER0_IRQHandler(void)
 }
 
 
-extern void gecko_timer1_irq_handler(void);
+
 void TIMER1_IRQHandler(void)
 {
 	//timer1 interrupt service routine
@@ -230,10 +220,7 @@ void GPADC_IRQHandler(void)
 
 
 
-extern void Clear_DMA_Interrupt(void);
-extern void SPI_DMA_Simulation(void);
 
-extern void DMA_ISR_Routine(void);
 
 
 volatile unsigned char dma_int_flag=0;
@@ -278,7 +265,7 @@ __RAM_CODE__ void dma_sram_delay(unsigned long delay)
 
 
 
-extern void watchdog_irq_clear(void);
+
 
 
 
@@ -336,6 +323,9 @@ void QSPI_CTRL_IRQHandler(void)
   gecko_ahb2qspi_ctrl_irq_handler();
   
 }
+
+
+
 
 extern void gecko_aon_wakeup_irq_handler(void);
 

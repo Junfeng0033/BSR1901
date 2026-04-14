@@ -1,6 +1,6 @@
 .\objects\bms_ip2366.o: bms\ip2366\bms_ip2366.c
-.\objects\bms_ip2366.o: .\include\platform_config.h
 .\objects\bms_ip2366.o: .\include\bsr1901.h
+.\objects\bms_ip2366.o: .\include\platform_config.h
 .\objects\bms_ip2366.o: .\include\gpio.h
 .\objects\bms_ip2366.o: bms\ip2366\bms_ip2366.h
 .\objects\bms_ip2366.o: bms\ip2366\bms_global.h

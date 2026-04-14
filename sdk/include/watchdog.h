@@ -28,7 +28,7 @@ void watchdog_irq_clear(void);         /* clear watchdog interrupt */
 //define APB watchdog base address
 #define	 	 GECKO_APB_WATCHDOG_BASE_ADDR		    		0x40014000
 
-//#define    GECKO_iWATCHDOG_BASE                   0x40002000 //0x40022000
+
 
 #define    GECKO_iWATCHDOG_BASE                   0x40022000
 
@@ -329,8 +329,45 @@ typedef struct
 
 
 
+
+
+
+
+
+
+/****************************************************************************/
+/* Program watchdog: */
+/* type = 0 : No action */
+/* type = 1 : Interrupt */
+/* type = 2 : Reset */
+/****************************************************************************/
 void watchdog_init(unsigned int cycle, int type);
+
+
+/****************************************************************************/
+/* update watchdog counter */
+/****************************************************************************/
 void watchdog_set(unsigned int cycle);
+
+
+/****************************************************************************/
+/* unlock watchdog */
+/****************************************************************************/
+void watchdog_unlock(void);
+
+/****************************************************************************/
+/* lock watchdog */
+/****************************************************************************/
+void watchdog_lock(void);
+
+/****************************************************************************/
+/* clear watchdog interrupt */
+/****************************************************************************/
+void watchdog_irq_clear(void);         
+
+
+//void watchdog_init(unsigned int cycle, int type);
+//void watchdog_set(unsigned int cycle);
 void feed_dog(unsigned int cycle);
 
 void iWDT_REG_RW(void);

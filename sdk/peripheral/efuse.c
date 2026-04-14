@@ -39,8 +39,7 @@ EFUSE block 3:
 
 volatile uint32 efuse_data_buf;
 
-extern int reg_read(int addr);	
-extern void reg_write(int addr, int data);
+
 
 
 /*

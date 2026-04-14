@@ -7,7 +7,7 @@
 
 /******************************************************************************************************
 
-//ÓÎ³Ì±àÂë£¨Run-Length Encoding, RLE£©Ñ¹ËõËã·¨
+//æ¸¸ç¨‹ç¼–ç ï¼ˆRun-Length Encoding, RLEï¼‰å‹ç¼©ç®—æ³•
 
 //https://gitee.com/li_yucheng/scgui
 
@@ -23,15 +23,11 @@
 
 
 
-#define 	LCD_NV3022_CMD								Lcd_WriteIndex
-#define 	LCD_NV3022_Parameter					Lcd_WriteData
-
-#define 	LCD_NV3023_CMD								Lcd_WriteIndex
-#define 	LCD_NV3023_Parameter					Lcd_WriteData
 
 
 
-//Òº¾§IO³õÊ¼»¯ÅäÖÃ
+
+//æ¶²æ™¶IOåˆå§‹åŒ–é…ç½®
 void LCD_GPIO_Init(void)
 {
 	//gecko_pinmux_config(PAD18,GPIO_B_6);
@@ -70,38 +66,36 @@ void delay_ms(unsigned int delay_val)
 
 
 
-//ÏòÒº¾§ÆÁĞ´Ò»¸ö8Î»Ö¸Áî
+//å‘æ¶²æ™¶å±å†™ä¸€ä¸ª8ä½æŒ‡ä»¤
 void Lcd_WriteIndex(uint8_t Index)
 {
-	//SPI Ğ´ÃüÁîÊ±Ğò¿ªÊ¼
+	//SPI å†™å‘½ä»¤æ—¶åºå¼€å§‹
 	LCD_RS_CLR;
 	SPI_WriteData(Index);
 }
 
-//ÏòÒº¾§ÆÁĞ´Ò»¸ö8Î»Êı¾İ
+//å‘æ¶²æ™¶å±å†™ä¸€ä¸ª8ä½æ•°æ®
 void Lcd_WriteData(uint8_t Data)
 {
    LCD_RS_SET;
    SPI_WriteData(Data); 
 }
 
-//ÏòÒº¾§ÆÁĞ´Ò»¸ö16Î»Êı¾İ
+//å‘æ¶²æ™¶å±å†™ä¸€ä¸ª16ä½æ•°æ®
 void LCD_WriteData_16Bit(uint16_t Data)
 {
 	LCD_RS_SET;
 
 #if 0	
-	SPI_WriteData(Data>>8); 	//Ğ´Èë¸ß8Î»Êı¾İ
-	SPI_WriteData(Data); 			//Ğ´ÈëµÍ8Î»Êı¾İ
-	
-	
+	SPI_WriteData(Data>>8); 	//å†™å…¥é«˜8ä½æ•°æ®
+	SPI_WriteData(Data); 			//å†™å…¥ä½8ä½æ•°æ®
 #else
 
 //#define LSBF								(1<<6)
 /*
 input lsbf;
 
-1'b0:MSB first (¸ßÎ»ÔÚÇ°)
+1'b0:MSB first (é«˜ä½åœ¨å‰)
 
 1'b1:LSB first
 */
@@ -241,10 +235,10 @@ void Lcd_Init(void)
 }
 
 /*************************************************
-º¯ÊıÃû£ºLCD_Set_Region
-¹¦ÄÜ£ºÉèÖÃlcdÏÔÊ¾ÇøÓò£¬ÔÚ´ËÇøÓòĞ´µãÊı¾İ×Ô¶¯»»ĞĞ
-Èë¿Ú²ÎÊı£ºxyÆğµãºÍÖÕµã
-·µ»ØÖµ£ºÎŞ
+å‡½æ•°åï¼šLCD_Set_Region
+åŠŸèƒ½ï¼šè®¾ç½®lcdæ˜¾ç¤ºåŒºåŸŸï¼Œåœ¨æ­¤åŒºåŸŸå†™ç‚¹æ•°æ®è‡ªåŠ¨æ¢è¡Œ
+å…¥å£å‚æ•°ï¼šxyèµ·ç‚¹å’Œç»ˆç‚¹
+è¿”å›å€¼ï¼šæ— 
 *************************************************/
 void Lcd_SetRegion(uint16_t x_start,uint16_t y_start,uint16_t x_end,uint16_t y_end)
 {	
@@ -267,10 +261,10 @@ void Lcd_SetRegion(uint16_t x_start,uint16_t y_start,uint16_t x_end,uint16_t y_e
 }
 
 /*************************************************
-º¯ÊıÃû£ºLCD_Set_XY
-¹¦ÄÜ£ºÉèÖÃlcdÏÔÊ¾ÆğÊ¼µã
-Èë¿Ú²ÎÊı£ºxy×ø±ê
-·µ»ØÖµ£ºÎŞ
+å‡½æ•°åï¼šLCD_Set_XY
+åŠŸèƒ½ï¼šè®¾ç½®lcdæ˜¾ç¤ºèµ·å§‹ç‚¹
+å…¥å£å‚æ•°ï¼šxyåæ ‡
+è¿”å›å€¼ï¼šæ— 
 *************************************************/
 void Lcd_SetXY(uint16_t x,uint16_t y)
 {
@@ -278,10 +272,10 @@ void Lcd_SetXY(uint16_t x,uint16_t y)
 }
 	
 /*************************************************
-º¯ÊıÃû£ºLCD_DrawPoint
-¹¦ÄÜ£º»­Ò»¸öµã
-Èë¿Ú²ÎÊı£ºÎŞ
-·µ»ØÖµ£ºÎŞ
+å‡½æ•°åï¼šLCD_DrawPoint
+åŠŸèƒ½ï¼šç”»ä¸€ä¸ªç‚¹
+å…¥å£å‚æ•°ï¼šæ— 
+è¿”å›å€¼ï¼šæ— 
 *************************************************/
 void Gui_DrawPoint(uint16_t x,uint16_t y,uint16_t Data)
 {
@@ -300,25 +294,25 @@ void Gui_DrawPoint(uint16_t x,uint16_t y,uint16_t Data)
 
 
 /*****************************************
- º¯Êı¹¦ÄÜ£º¶ÁTFTÄ³Ò»µãµÄÑÕÉ«                          
- ³ö¿Ú²ÎÊı£ºcolor  µãÑÕÉ«Öµ                                 
+ å‡½æ•°åŠŸèƒ½ï¼šè¯»TFTæŸä¸€ç‚¹çš„é¢œè‰²                          
+ å‡ºå£å‚æ•°ï¼šcolor  ç‚¹é¢œè‰²å€¼                                 
 ******************************************/
 unsigned int Lcd_ReadPoint(uint16_t x,uint16_t y)
 {
   unsigned int Data;
   Lcd_SetXY(x,y);
 
-  //Lcd_ReadData();//¶ªµôÎŞÓÃ×Ö½Ú
+  //Lcd_ReadData();//ä¸¢æ‰æ— ç”¨å­—èŠ‚
   //Data=Lcd_ReadData();
   Lcd_WriteData(Data);
   return Data;
 }
 
 /*************************************************
-º¯ÊıÃû£ºLcd_Clear
-¹¦ÄÜ£ºÈ«ÆÁÇåÆÁº¯Êı
-Èë¿Ú²ÎÊı£ºÌî³äÑÕÉ«COLOR
-·µ»ØÖµ£ºÎŞ
+å‡½æ•°åï¼šLcd_Clear
+åŠŸèƒ½ï¼šå…¨å±æ¸…å±å‡½æ•°
+å…¥å£å‚æ•°ï¼šå¡«å……é¢œè‰²COLOR
+è¿”å›å€¼ï¼šæ— 
 
 uint16_t blue_color = BLACK;//C_TOMATO;//C_BLACK;//C_BLUE;
 lcd_dma_refresh_colorblock(0, 0, X_MAX_PIXEL, Y_MAX_PIXEL,&blue_color);
@@ -353,14 +347,14 @@ void Lcd_Clear(uint16_t Color)
 //DMA refresh 
 void RefreshColorBlockDynamic(uint32_t Color)
 {
-    static uint32_t colorBuffer[128];  // Ğ¡»º³åÇø
+    static uint32_t colorBuffer[128];  // å°ç¼“å†²åŒº
 	
 	  Lcd_SetRegion(0,0,X_MAX_PIXEL-1,Y_MAX_PIXEL-1);	
     
-    // ¼ÆËãÌî³äÖµ
+    // è®¡ç®—å¡«å……å€¼
     uint32_t color32 = (uint32_t)Color;
     
-    // Ìî³ä»º³åÇø
+    // å¡«å……ç¼“å†²åŒº
     for(int i = 0; i < 128; i++)
     {
         colorBuffer[i] = color32;
@@ -374,10 +368,10 @@ void RefreshColorBlockDynamic(uint32_t Color)
 
 
 /*************************************************
-º¯ÊıÃû£ºLcd_Fill
-¹¦ÄÜ£ºÖ¸¶¨ÇøÓòÌî³äÑÕÉ«
-Èë¿Ú²ÎÊı£ºÌî³äÑÕÉ«COLOR
-·µ»ØÖµ£ºÎŞ
+å‡½æ•°åï¼šLcd_Fill
+åŠŸèƒ½ï¼šæŒ‡å®šåŒºåŸŸå¡«å……é¢œè‰²
+å…¥å£å‚æ•°ï¼šå¡«å……é¢œè‰²COLOR
+è¿”å›å€¼ï¼šæ— 
 *************************************************/
 void Lcd_Fill(uint16_t x,uint16_t y,uint16_t xend,uint16_t yend,uint16_t Color)               
 {	
@@ -391,5 +385,32 @@ void Lcd_Fill(uint16_t x,uint16_t y,uint16_t xend,uint16_t yend,uint16_t Color)
 	#else
 	HW_SPI_Tx_DMA_16bit_ColorBlock(HAL_SPI_0,&Color,num);
 	#endif	
+}
+
+/*************************************************
+åŠŸ  èƒ½ï¼šä½¿ç”¨ DMA å¿«é€Ÿç»˜åˆ¶å›¾åƒå—
+å‚  æ•°ï¼šx, y - èµ·å§‹åæ ‡
+        w, h - å›¾åƒå®½åº¦å’Œé«˜åº¦
+        pData - å›¾åƒåƒç´ æ•°æ®æŒ‡é’ˆ
+*************************************************/
+void Lcd_DrawImageDMA(uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint16_t *pData)
+{
+    uint32_t len = w * h;
+    Lcd_SetRegion(x, y, x + w - 1, y + h - 1);
+    // å‡è®¾ä½¿ç”¨ HAL_SPI_0 ä½œä¸ºä¸»æ˜¾ç¤ºæ¥å£
+    HW_SPI_Tx_DMA(HAL_SPI_0, (uint16_t*)pData, (uint16_t)len);
+}
+
+/*************************************************
+åŠŸ  èƒ½ï¼šä½¿ç”¨ DMA å¿«é€Ÿå¡«å……åŒºåŸŸé¢œè‰²
+å‚  æ•°ï¼šx, y - èµ·å§‹åæ ‡
+        w, h - åŒºåŸŸå®½åº¦å’Œé«˜åº¦
+        color - å¡«å……é¢œè‰²
+*************************************************/
+void Lcd_FillDMA(uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint16_t color)
+{
+    uint32_t len = w * h;
+    Lcd_SetRegion(x, y, x + w - 1, y + h - 1);
+    HW_SPI_Tx_DMA_16bit_ColorBlock(HAL_SPI_0, &color, (uint16_t)len);
 }
 

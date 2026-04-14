@@ -164,6 +164,12 @@ typedef enum {
 
 
 
+
+extern int reg_read(int addr);
+extern void reg_write(int addr, int data);
+
+
+
 int gpio_set_input(GPIO_GROUP_ID_T group_id, uint8 offset);
 int gpio_set_output(GPIO_GROUP_ID_T group_id, uint8 offset);
 void gpio_set_value(GPIO_GROUP_ID_T group_id,BOOL gpio_val,uint8 gpio_offset);

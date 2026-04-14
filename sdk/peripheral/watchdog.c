@@ -12,35 +12,10 @@
 #include "watchdog.h"
 #include "uart.h"
 
-/****************************************************************************/
-/* Program watchdog: */
-/* type = 0 : No action */
-/* type = 1 : Interrupt */
-/* type = 2 : Reset */
-/****************************************************************************/
-void watchdog_init(unsigned int cycle, int type);
 
 
-/****************************************************************************/
-/* update watchdog counter */
-/****************************************************************************/
-void watchdog_set(unsigned int cycle);
 
 
-/****************************************************************************/
-/* unlock watchdog */
-/****************************************************************************/
-void watchdog_unlock(void);
-
-/****************************************************************************/
-/* lock watchdog */
-/****************************************************************************/
-void watchdog_lock(void);
-
-/****************************************************************************/
-/* clear watchdog interrupt */
-/****************************************************************************/
-void watchdog_irq_clear(void);         
 
 
 /* ----------------------------------------------------------------- */
@@ -227,6 +202,15 @@ void watchdog_irq_clear(void)
 
 
 
+
+
+
+
+
+
+
+
+#if 0
 /* Software variables for testing */
 volatile int nmi_occurred;
 volatile int nmi_expected;
@@ -237,7 +221,7 @@ volatile int integration_test=0;  /* set to 1 during watchdog integration test s
 
 
 
-#if 0
+
 
 /* ----------------------------------------------------------------- */
 void NMI_Handler(void)
@@ -267,67 +251,4 @@ void NMI_Handler(void)
 
 
 
-#if 0
-struct HAL_WDT_CTX hal_wdt_ctx[HAL_WDT_ID_NUM];
 
-
-int hal_wdt_set_timeout(enum HAL_WDT_ID_T id,  unsigned int timeout)
-{
-    unsigned long long load;
-		struct HAL_WDT_CTX *wdt = &hal_wdt_ctx[id];
-
-    /*
-     * sp805 runs counter with given value twice, after the end of first
-     * counter it gives an interrupt and then starts counter again. If
-     * interrupt already occurred then it resets the system. This is why
-     * load is half of what should be required.
-     */
-    load = (WDT_RATE/2) * timeout - 1;
-
-    load = (load > WDTLOAD_LOAD_MAX) ? WDTLOAD_LOAD_MAX: load;
-    load = (load < WDTLOAD_LOAD_MIN) ? WDTLOAD_LOAD_MIN: load;
-
-    wdt->load_val = load;
-    /* roundup timeout to closest positive integer value */
-    wdt->timeout = ((load + 1) * 2 + (WDT_RATE / 2))/WDT_RATE;
-
-    return 0;
-}
-
-#endif
-
-
-#if 0
-
-
-/* This routine finds load value that will reset system in required timout */
-static int wdt_setload(struct watchdog_device *wdd, unsigned int timeout)
-{
-	struct sp805_wdt *wdt = watchdog_get_drvdata(wdd);
-	u64 load, rate;
-
-	rate = wdt->rate;
-
-	/*
-	 * sp805 runs counter with given value twice, after the end of first
-	 * counter it gives an interrupt and then starts counter again. If
-	 * interrupt already occurred then it resets the system. This is why
-	 * load is half of what should be required.
-	 */
-	load = div_u64(rate, 2) * timeout - 1;
-
-	load = (load > LOAD_MAX) ? LOAD_MAX : load;
-	load = (load < LOAD_MIN) ? LOAD_MIN : load;
-
-	spin_lock(&wdt->lock);
-	wdt->load_val = load;
-	/* roundup timeout to closest positive integer value */
-	wdd->timeout = div_u64((load + 1) * 2 + (rate / 2), rate);
-	spin_unlock(&wdt->lock);
-
-	return 0;
-}
-
-
-
-#endif

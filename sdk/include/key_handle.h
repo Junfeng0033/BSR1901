@@ -3,8 +3,6 @@
 #include <stdbool.h>
 
 
-#define LONG_PRESS_THRESHOLD  1000 				// Long press time threshold in milliseconds
-
 
 // Key state machine definition
 typedef enum {
@@ -26,6 +24,20 @@ typedef struct {
 	  bool key_released_flag;	
     uint32_t press_start;    // Press start time (for long press timing)
 } KeyHandle;
+
+
+
+
+
+#define LONG_PRESS_THRESHOLD  1000 				// Long press time threshold in milliseconds
+
+
+extern uint32_t TimeTick;  								// SysTick counter
+
+
+extern uint8 KP85_KEY2_Detect(void);
+extern uint8 K27_KEY_Detect(void);
+
 
 
 

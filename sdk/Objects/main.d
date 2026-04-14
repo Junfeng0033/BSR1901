@@ -1,4 +1,5 @@
 .\objects\main.o: user\main.c
+.\objects\main.o: user\main.h
 .\objects\main.o: .\include\platform_config.h
 .\objects\main.o: .\include\bsr1901.h
 .\objects\main.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdarg.h

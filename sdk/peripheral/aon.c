@@ -8,34 +8,12 @@
 
 
 
-extern void h2l_wr_busy(void);
-
-extern void gecko_aon_wakeup_irq_handler(void);
-
-extern void manba_task_clr_aon_wakeup_int (void);
-
-extern void manba_task_cpu_goto_sleep(void);
-extern void manba_task_cpu_goto_sleep (void);
-
-extern void tc_gecko_aon_sanity_cm0(void);//deep sleep
-extern void tc_gecko_cm0_aon_sleep(void);
-
-//switch to quad spi nor flash mode
-extern void gecko_task_cm0_sw_flash_quad(void);
-
-//SPI-to-AHB config to Dual-wire access NOR Flash
-extern void gecko_task_cm0_sw_flash(void);
-extern void delay_1us(unsigned int delay_val);
-
-//#define MREAD_32(addr) *((volatile UINT32 *)(addr))
-//#define MWRITE_32(addr,data)  { *((volatile UINT32 *)(addr)) = data; }
-#define ANA_READ_CTLREG(REG)      				(*(volatile unsigned int*)(REG))
-#define ANA_WRITE_CTLREG(REG,VAL)    			(*(volatile unsigned int*)(REG)) = (unsigned int)(VAL) 
-
 
 uint32 AON_CFG_ANA_CTRL_1_0x20_Default=0x808E7885;//
 uint32 AON_CFG_ANA_CTRL_2_0x24_Default=0;
 uint32 AON_CFG_GPIO_WAKEUP_CTRL_0x10_Default=0;//
+
+
 
 
 
@@ -310,6 +288,8 @@ void GPIO_WakeUp_Setting(void)
   reg_write(ADDR_AON_CFG_GPIO_WAKEUP_CTRL, wr_data);
   AON_CFG_GPIO_WAKEUP_CTRL_0x10_Default=wr_data;	
 }
+
+
 
 /*
 assign reg_aon_ena_wakeup_int				=reg_0x004[0];
@@ -914,5 +894,7 @@ void bsr1901_adc_8_9_analog_port(void)
 	  wr_data |= 0x300000;//bit20 and bit21 (PAD20 and PAD21 as ADC function)
 	  reg_write(GECKO_AON_BASE_ADDR+0x080, wr_data);		
 }
+
+
 
 

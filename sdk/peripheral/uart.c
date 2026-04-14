@@ -34,10 +34,6 @@
 #include "dma.h"
 
 
-extern void NVIC_EnableIRQ(IRQn_Type IRQn);
-extern void NVIC_DisableIRQ(IRQn_Type IRQn);
-
-
 
 /*---------------------------------------------------------------------------------------------------------*/
 /* Global variables                                                                                        */
@@ -47,10 +43,9 @@ bt_uart_ptr  *bt_tws_uart;
 
 
 
+extern void NVIC_EnableIRQ(IRQn_Type IRQn);
+extern void NVIC_DisableIRQ(IRQn_Type IRQn);
 
-
-
-#define UART_TX_RX_GPIO_PIN  				8  		//configure uart tx/rx pin as gpio  
 
 
 
@@ -68,18 +63,6 @@ void uart_delay_us(uint32 units_of_u_secs)
 	
 }
 
-
-
-//Set uart as GPIO mode
-void Set_Uart_Tx_High(void)
-{
-	//SYSinit_Gpio_Write(UART_TX_RX_GPIO_PIN,1);
-}
-
-void Set_Uart_Tx_Low(void)
-{
-	//SYSinit_Gpio_Write(UART_TX_RX_GPIO_PIN,0);
-}
 
 
 

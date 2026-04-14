@@ -6,6 +6,9 @@
 //////////#define CHIP_LOCAL_NAME        "B52"
 #define CHIP_LOCAL_NAME        "AK47"
 
+
+
+
 enum{
 	UART1=0x01,
 	UART2,

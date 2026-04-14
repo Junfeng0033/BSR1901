@@ -120,6 +120,7 @@ typedef volatile unsigned int       REG32;
 #endif
 
 
+
 #define     __I     volatile                  /*!< defines 'read only' permissions      */
 #define     __O     volatile                  /*!< defines 'write only' permissions     */
 #define     __IO    volatile                  /*!< defines 'read / write' permissions   */

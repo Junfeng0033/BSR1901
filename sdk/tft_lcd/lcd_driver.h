@@ -1,43 +1,43 @@
 
 //////////////////////////////////////////////////////////////////////////////////	 
-//±¾³ÌÐòÖ»¹©Ñ§Ï°Ê¹ÓÃ£¬Î´¾­×÷ÕßÐí¿É£¬²»µÃÓÃÓÚÆäËüÈÎºÎÓÃÍ¾
+//æœ¬ç¨‹åºåªä¾›å­¦ä¹ ä½¿ç”¨ï¼Œæœªç»ä½œè€…è®¸å¯ï¼Œä¸å¾—ç”¨äºŽå…¶å®ƒä»»ä½•ç”¨é€”
 //
-//  ÎÄ ¼þ Ãû   : main.c
-//  °æ ±¾ ºÅ   : v2.0
-//  Éú³ÉÈÕÆÚ   : 2018-1111
-//  ×î½üÐÞ¸Ä   : 
-//  ¹¦ÄÜÃèÊö   : 0.96´çISP LCD 4½Ó¿ÚÑÝÊ¾Àý³Ì
+//  æ–‡ ä»¶ å   : main.c
+//  ç‰ˆ æœ¬ å·   : v2.0
+//  ç”Ÿæˆæ—¥æœŸ   : 2018-1111
+//  æœ€è¿‘ä¿®æ”¹   : 
+//  åŠŸèƒ½æè¿°   : 0.96å¯¸ISP LCD 4æŽ¥å£æ¼”ç¤ºä¾‹ç¨‹
 /******************************************************************************
-//±¾³ÌÐòÊÊÓÃÓëSTM32F103C8
-//              GND   µçÔ´µØ
-//              VCC   ½Ó5V»ò3.3vµçÔ´
-//              SCL   ½ÓPA5£¨SCL£©
-//              SDA   ½ÓPA7£¨SDA£©
-//              RES   ½ÓPB0
-//              DC    ½ÓPB1
-//              CS    ½ÓPA4//¿ÉÒÔÖ±½Ó½ÓµØ
-//              BLK   ½ÓP10 BLK¿ÉÒÔÐü¿Õ²»½Ó£»ÔÚÐèÒª¹Ø±Õ±³¹âµÄÊ±ºò½«BLKÖÃµÍµçÆ½
+//æœ¬ç¨‹åºé€‚ç”¨ä¸ŽSTM32F103C8
+//              GND   ç”µæºåœ°
+//              VCC   æŽ¥5Væˆ–3.3vç”µæº
+//              SCL   æŽ¥PA5ï¼ˆSCLï¼‰
+//              SDA   æŽ¥PA7ï¼ˆSDAï¼‰
+//              RES   æŽ¥PB0
+//              DC    æŽ¥PB1
+//              CS    æŽ¥PA4//å¯ä»¥ç›´æŽ¥æŽ¥åœ°
+//              BLK   æŽ¥P10 BLKå¯ä»¥æ‚¬ç©ºä¸æŽ¥ï¼›åœ¨éœ€è¦å…³é—­èƒŒå…‰çš„æ—¶å€™å°†BLKç½®ä½Žç”µå¹³
 
 
 
 
-//±¾³ÌÐòÊÊÅä BSR1901 Ó²¼þ¶Ë¿Ú
-//              GND   µçÔ´µØ
-//              VCC   ½Ó3.3vµçÔ´--LDO33_AUX_OUT
+//æœ¬ç¨‹åºé€‚é… BSR1901 ç¡¬ä»¶ç«¯å£
+//              GND   ç”µæºåœ°
+//              VCC   æŽ¥3.3vç”µæº--LDO33_AUX_OUT
 
-//              SCL   ½ÓSPI_CLK--(PAD22)
-//              SDA   ½ÓSPI_MOSI-(PAD23£©
-//              RES   ½ÓPB4------(PAD24)--->(PAD07)
+//              SCL   æŽ¥SPI_CLK--(PAD22)
+//              SDA   æŽ¥SPI_MOSI-(PAD23ï¼‰
+//              RES   æŽ¥PB4------(PAD24)--->(PAD07)
 
-//              DC    ½ÓPA3------(PAD21)
-//              CS    ½ÓPA2------(PAD20)//¿ÉÒÔÖ±½Ó½ÓµØ
+//              DC    æŽ¥PA3------(PAD21)
+//              CS    æŽ¥PA2------(PAD20)//å¯ä»¥ç›´æŽ¥æŽ¥åœ°
 
-//              BLK   ½ÓPB7------(PAD07)--->(PAD24)
+//              BLK   æŽ¥PB7------(PAD07)--->(PAD24)
 
 *******************************************************************************/
-// ÐÞ¸ÄÀúÊ·   :
-// ÈÕ    ÆÚ   : 
-// ÐÞ¸ÄÄÚÈÝ   : 
+// ä¿®æ”¹åŽ†å²   :
+// æ—¥    æœŸ   : 
+// ä¿®æ”¹å†…å®¹   : 
 //******************************************************************************/
 
 #ifndef _LCD_DRIVER_H_
@@ -51,7 +51,7 @@
 
 
 
-#define USE_HORIZONTAL 1  //ÉèÖÃºáÆÁ»òÕßÊúÆÁÏÔÊ¾ 0»ò1ÎªÊúÆÁ 2»ò3ÎªºáÆÁ
+#define USE_HORIZONTAL 1  //è®¾ç½®æ¨ªå±æˆ–è€…ç«–å±æ˜¾ç¤º 0æˆ–1ä¸ºç«–å± 2æˆ–3ä¸ºæ¨ªå±
 
 
 #if USE_HORIZONTAL==0||USE_HORIZONTAL==1
@@ -94,14 +94,14 @@
 #define LCD_RST_PORT		GPIOB
 #define LCD_RST_PIN     	  0		  //PB0--->>TFT --RST
 
-//Òº¾§¿ØÖÆ¿ÚÖÃ1²Ù×÷Óï¾äºê¶¨Òå
+//æ¶²æ™¶æŽ§åˆ¶å£ç½®1æ“ä½œè¯­å¥å®å®šä¹‰
 
 #define	LCD_RS_SET  	gpio_set_value(LCD_RS_PORT, 1, LCD_RS_PIN)
 #define	LCD_BL_SET  	gpio_set_value(LCD_BL_PORT, 1, LCD_BL_PIN)
 #define	LCD_RST_SET  	gpio_set_value(LCD_RST_PORT, 1, LCD_RST_PIN)
 
 
-//Òº¾§¿ØÖÆ¿ÚÖÃ0²Ù×÷Óï¾äºê¶¨Òå
+//æ¶²æ™¶æŽ§åˆ¶å£ç½®0æ“ä½œè¯­å¥å®å®šä¹‰
 
 #define	LCD_RS_CLR  	gpio_set_value(LCD_RS_PORT, 0, LCD_RS_PIN)
 #define	LCD_BL_CLR  	gpio_set_value(LCD_BL_PORT, 0, LCD_BL_PIN)
@@ -111,13 +111,14 @@
 
 
 #define IP2366_INT_PORT		GPIOA
-#define IP2366_INT_PIN     	6		//PA6--->>INT_IP2366
+#define IP2366_INT_PIN    6			//PA6--->>INT_IP2366
 
 #define	IP2366_INT_SET  	gpio_set_value(IP2366_INT_PORT, 1, IP2366_INT_PIN)
 #define	IP2366_INT_CLR  	gpio_set_value(IP2366_INT_PORT, 0, IP2366_INT_PIN)
 
 
-
+//hwp_spi0->CTROL = 0x10f8b;						//8bit spi data
+//#define 	SPI_WriteData(data) 					{hwp_spi0->CTROL = 0x10f8b;hwp_spi0->FIFODATA = data;}
 
 
 
@@ -127,6 +128,23 @@ LCD_DATAOUT(data);\
 LCD_WR_CLR;\
 LCD_WR_SET;\
 }
+
+
+
+
+
+
+#define 	LCD_NV3022_CMD								Lcd_WriteIndex
+#define 	LCD_NV3022_Parameter					Lcd_WriteData
+
+#define 	LCD_NV3023_CMD								Lcd_WriteIndex
+#define 	LCD_NV3023_Parameter					Lcd_WriteData
+
+
+
+
+
+
 
 
 
@@ -147,6 +165,10 @@ unsigned int Lcd_ReadPoint(uint16_t x,uint16_t y);
 void Lcd_SetRegion(uint16_t x_start,uint16_t y_start,uint16_t x_end,uint16_t y_end);
 void LCD_WriteData_16Bit(uint16_t Data);
 void Lcd_Fill(uint16_t x,uint16_t y,uint16_t xend,uint16_t yend,uint16_t Color);
+
+// DMA-based optimized functions
+void Lcd_DrawImageDMA(uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint16_t *pData);
+void Lcd_FillDMA(uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint16_t color);
 
 
 #endif

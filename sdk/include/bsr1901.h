@@ -1,4 +1,9 @@
 
+
+//#ifndef __BSR1901_H__
+//#define __BSR1901_H__
+
+
 #include "platform_config.h"
 
 #define	 	 GECKO_ROM_BASE		    							0x00000000
@@ -46,187 +51,10 @@
 #define  MIC_DET_EN		1
 
 
-
-#if 0
-
-New GEK1109
-
-//AHB Peripherals Base Addr.
-`define ADDR_BASE_AHB_FLASH      32'h0000_0000
-`define ADDR_BASE_AHB_RAM        32'h2000_0000
-
-`define ADDR_BASE_AHB_UART0      32'h4000_1000
-`define ADDR_BASE_AHB_QSPI       32'h4000_2000
-`define ADDR_BASE_AHB_UART1      32'h4000_3000
-`define ADDR_BASE_AHB_UART2      32'h4000_4000
-`define ADDR_BASE_AHB_PWM        32'h4000_5000
-//`define ADDR_BASE_AHB_UART3      32'h4000_6000
-`define ADDR_BASE_AHB_DMA        32'h4000_6000
-`define ADDR_BASE_AHB_APB0       32'h4001_0000
-`define ADDR_BASE_AHB_APB1       32'h4002_0000
+//uart clock source, 20Mhz/26Mhz
+#define HCI_clock_frequency                                  (10000000)	//10MHZ
 
 
-//APB0 Peripherals Base Addr.
-`define ADDR_BASE_APB_CMU       32'h4001_0000
-`define ADDR_BASE_APB_TIMER0    32'h4001_1000
-`define ADDR_BASE_APB_TIMER1    32'h4001_2000
-`define ADDR_BASE_APB_GPIO2     32'h4001_3000
-`define ADDR_BASE_APB_WDT       32'h4001_4000
-`define ADDR_BASE_APB_ADC       32'h4001_6000
-`define ADDR_BASE_APB_LTNING    32'h4001_7000
-`define ADDR_BASE_APB_GPIO0     32'h4001_8000
-`define ADDR_BASE_APB_GPIO1     32'h4001_9000
-`define ADDR_BASE_APB_I2C0      32'h4001_A000
-`define ADDR_BASE_APB_SPI0      32'h4001_B000
-`define ADDR_BASE_APB_I2C1      32'h4001_C000
-`define ADDR_BASE_APB_SPI1      32'h4001_D000
-`define ADDR_BASE_APB_QI        32'h4001_E000
-`define ADDR_BASE_APB_LED       32'h4001_F000
-
-//APB1 Peripherals Base Addr.
-`define ADDR_BASE_APB_AON       32'h4002_0000
-`define ADDR_BASE_APB_RTC       32'h4002_1000
-`define ADDR_BASE_APB_IWDT      32'h4002_2000
-`define ADDR_BASE_APB_DMA       32'h4003_0000
-`define ADDR_BASE_APB_SYSCTRL   32'h4004_0000
-
-
-`define OFFSET_SYSCTRL_PAD_FUN0 16'h0300 
-`define OFFSET_SYSCTRL_PAD_FUN1 16'h0304
-`define OFFSET_SYSCTRL_PAD_FUN2 16'h0308
-
-`define OFFSET_AON_RET_RAM_0  16'h0040
-`define OFFSET_AON_RET_RAM_1  16'h0044
-`define OFFSET_AON_RET_RAM_2  16'h0048
-`define OFFSET_AON_RET_RAM_3  16'h004C
-`define OFFSET_AON_RET_RAM_4  16'h0050
-`define OFFSET_AON_RET_RAM_5  16'h0054
-`define OFFSET_AON_RET_RAM_6  16'h0058
-`define OFFSET_AON_RET_RAM_7  16'h005C
-
-
-`define  PWM_CH0 tbench.PAD_GPIO18
-
-//DAC check registers
-#define ADDR_BASE_APB_DAC                     	0x40013000
-#define GEK_DAC_BASE_ADDR												0x40013000
-//`define ADDR_BASE_APB_DAC   32'h4003_0000
-
-`define OFFSET_DAC_CTRL     16'h0004
-
-//GPIO Check Registers
-`define GPIO_GFIN_ST_OFFSET    16'h0614
-`define GPIO_AFSEL_OFFSET      16'h0420
-
-//UART Check Registers
-`define OFFSET_UART_MCR_TEST   16'h0010
-`define OFFSET_UART_FFR_TEST   16'h0024
-
-//SPI Check Registers
-`define OFFSET_SPI_0X04_TEST   16'h0004
-`define OFFSET_SPI_0X0C_TEST   16'h000C
-
-//I2C Check Registers
-`define OFFSET_I2C_INT_EN_TEST   16'h0014
-`define OFFSET_I2C_SETUP_TEST    16'h002C
-
-//Timer Check Registers
-`define OFFSET_TIMER_LOAD_CNT  16'h0000
-`define OFFSET_TIMER_CTRL_REG  16'h0008
-
-//ADC Check Registers
-`define OFFSET_ADC_IRQ_MASK   16'h002C
-`define OFFSET_ADC_THRESHOD9  16'h005C
-
-//LGT Check Registers
-`define OFFSET_LGT_0X04_TEST   16'h0004
-`define OFFSET_LGT_BUF00_TEST  16'h0060
-
-//QI Check Registers
-`define OFFSET_QI_INTEN_TEST   16'h0008
-`define OFFSET_QI_US_CTRL_TEST  16'h0030
-
-//LCD Check Registers
-`define OFFSET_LCD_REG0C_TEST  16'h000C
-`define OFFSET_LCD_REG28_TEST  16'h0028
-
-
-
-
-
-
-/******************************************************************************/
-/*                         Peripheral Module Address Map                      */
-/******************************************************************************/
-#define	 	 GECKO_ROM_BASE		    							0x00000000
-#define	 	 GECKO_SRAM_BASE		    						0x20000000
-//define APB lightning interface base address
-#define	 	 GECKO_APB_APPLE_LIGHTNING_BASE		  0x40017000
-////define APB GPIO interface base address
-#define 	 GPIO0_BASE       									0x40018000
-#define 	 GPIO1_BASE       									0x40019000
-//define AHB I2C base address
-#define    GECKO_AHB_I2C_BASE                 0X40000000
-#define    GECKO_APB_I2C_BASE                 0X40000000
-//define AHB uart base address
-#define    GECKO_AHB_UART0_BASE               0x40001000
-#define    GECKO_AHB_UART2_BASE               0x40003000
-#define 	 GECKO_UART_BASE  									0x40001000
-#define	   GECKO_AHB_UART_2_BASE			        0x40003000
-#define 	 REG_UART_BASE               				0x40001000
-#define 	 REG_UART2_BASE              				0x40003000
-//define APB ADC base address
-#define	 	 GECKO_APB_ADC_BASE		    					0x40016000
-#define 	 REG_GPADC_BASE              				0x40016000
-//define APB timer base address
-#define    GECKO_APB_TIMER0_BASE    					0X40011000
-#define    GECKO_APB_TIMER1_BASE    					0X40012000
-#define 	 REG_TIMER0_BASE             				0x40011000
-#define 	 REG_TIMER1_BASE             				0x40012000
-
-//define APB PWM base address
-#define 	 GECKO_PWM_BASE                			0x40013000
-//define APB EFUSE base address
-#define  	 GECKO_APB_EFFUSE_ADDR							0X40015000
-//define APB watchdog base address
-#define	 	 GECKO_APB_WATCHDOG_BASE_ADDR		    0X40014000
-//define APB CMU base address
-#define    GECKO_APB_CMU_BASE                 0x40010000
-#define    GECKO_APB_SCU_BASE                 0x40010000
-
-//define APB SPI Master base address
-#define    GECKO_APB_SPI_MASTER_BASE          0x4001B000
-
-//define APB AON base address
-#define    GECKO_APB_AON_BASE                 0x4001A000
-
-//define APB LCD base address
-#define    GECKO_APB_LCD_BASE                 0x4001C000
-
-//define APB PMU base address
-#define    GECKO_APB_PMU_BASE                 0x4001D000
-
-//define AHB flash config register base address
-#define    GECKO_AHB_FLASHCTRL_REG_BASE       0x40002000 //
-#define    ADDR_BASE_GECKO_QSPI_CONFIG        0x40002000
-
-#define ADDR_BASE_GECKO_QSPI_ACCESS     0x10000000
-#define ADDR_BASE_GECKO_QSPI_CONFIG     0x40002000
-
-#endif
-
-
-
-#define HCI_clock_frequency                                  (10000000)
-
-#ifdef BSR1901_SYS_8MHZ_MODE
-
-//#define HCI_clock_frequency                                  (8000000)
-
-#else
-//uart clock source, 16Mhz/26Mhz
-#define HCI_clock_frequency                                  (16000000)
-#endif
 
 
 #define    BSR1901_SPI_MASTER_TEST      0
@@ -236,13 +64,17 @@ New GEK1109
 
 
 
+#if 0
+
 
 #define     __I     volatile                  /*!< defines 'read only' permissions      */
 #define     __O     volatile                  /*!< defines 'write only' permissions     */
 #define     __IO    volatile                  /*!< defines 'read / write' permissions   */
 
 
-#if 0
+
+
+
 
 #define BIT0  0x0001
 #define BIT1  0x0002
@@ -349,6 +181,8 @@ typedef enum IRQn
   CMU2AHB_IRQ                   =   31,      /*!< Reserved Interrupt                  */
   INVALID_IRQn
 } IRQn_Type;
+
+
 
 
 /*
@@ -711,4 +545,7 @@ extern void hal_nvic_clear_pending_irq(IRQn_Type irq_number);
 
 extern uint32_t SysTick_Config(uint32_t ticks);
 extern uint32_t Get_SysTick(void);
+
+
+//#endif
 

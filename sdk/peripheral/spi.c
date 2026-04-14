@@ -18,19 +18,14 @@
 
 
 
-
-#define GECKO_BIT(num)							(1u << num)
-
-#define SPI_READ_DATAREG(REG)      				(*(volatile unsigned short*)(REG))
-#define SPI_WRITE_DATAREG(REG,VAL)    			(*(volatile unsigned short*)(GECKO_APB_SPI_DATAACCESS_REG + REG)) = (unsigned short)(VAL) 
-
-#define SPI_READ_CTLREG(REG)      				(*(volatile unsigned int*)(REG))
-#define SPI_WRITE_CTLREG(REG,VAL)    			(*(volatile unsigned int*)(REG)) = (unsigned int)(VAL) 
-
 volatile uint8 *hw_spi_rx_buffer;
 uint16 hw_spi_rx_length;
 
-//static void (*hw_spi_tx_fptr)(void);
+
+
+
+
+
 
 uint16  HW_SPI_Read_Data(uint16 address)
 {
@@ -202,8 +197,8 @@ void HW_SPI_Initialise(HAL_SPI_ID_T id)
 
 void HW_SPI_Tx_Char_Polled(volatile uint8 **buf, volatile uint32 *length, uint8 flag)
 {
-    uint32 count = *length;
-    volatile uint8 *temp_buf;
+  uint32 count = *length;
+  volatile uint8 *temp_buf;
 	
 	temp_buf = *buf;
 

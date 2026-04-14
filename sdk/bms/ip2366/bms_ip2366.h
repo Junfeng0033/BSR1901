@@ -2,6 +2,12 @@
 #define _BMS_IPXS_H_
 
 
+#include "platform_config.h"
+
+
+
+
+
 #define BIT0 0x01
 #define BIT1 0x02
 #define BIT2 0x04
@@ -705,8 +711,18 @@ void get_voltage_ntc(void);
 unsigned char ipxs_readByte(unsigned char deviceAddr, unsigned char regAddr);
 void ipxs_writeByte(unsigned char deviceAddr, unsigned char regAddr, unsigned char sendByte);
 
-unsigned char gek1109_ipxs_readByte(unsigned char deviceAddr, unsigned char regAddr);
 
-void gek1109_ipxs_writeByte(unsigned char deviceAddr, unsigned char regAddr, unsigned char sendByte);
+
+extern void gpio_i2c_rdabt_rf_write_data(UINT32 addr,unsigned char regaddr, unsigned char *data, unsigned char datalen);
+extern void gpio_i2c_rdabt_rf_read_data(UINT32 addr,unsigned char regaddr, unsigned char *data, unsigned char datalen);
+
+
+
+
+//unsigned char gek1109_ipxs_readByte(unsigned char deviceAddr, unsigned char regAddr);
+
+//void gek1109_ipxs_writeByte(unsigned char deviceAddr, unsigned char regAddr, unsigned char sendByte);
+
+
 
 #endif

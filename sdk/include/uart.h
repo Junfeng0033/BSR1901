@@ -486,3 +486,6 @@ void Gecko_16550_DMA_Tx_Char(uint16 *pData, uint16 DataLen);
 
 
 
+
+
+

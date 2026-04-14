@@ -1,6 +1,12 @@
 
 #include "platform_config.h"
 
+
+#define ADC_12BIT_RANGE             0xFFF
+
+#define ADC_RANGE    ADC_12BIT_RANGE
+
+
 //define APB ADC base address
 #define	 	 GECKO_APB_ADC_BASE		    							0x40016000
 #define 	 REG_GPADC_BASE              						0x40016000
@@ -8,35 +14,6 @@
 extern int hal_analogif_reg_read(unsigned short reg, unsigned short *val);
 extern int hal_analogif_reg_write(unsigned short reg, unsigned short val);
 
-
-typedef struct
-{
-  __IO uint32 gain0db;//x1
-  __IO uint32 gain6db;//x2
-       uint32 gain12db;//x4
-  __IO uint32 gain16p8db;//x7
-  __IO uint32 gain21p4db;//x12
-  __I  uint32 gain26p2db;//x21
-	__IO uint32 gain31p2db;//x36
-  __IO uint32 gain36db;//x64
-} ADCBuf_GainSel;
-
-
-
-typedef enum
-{
-	GECKO_GPADC_CHAN_0=0,
-	GECKO_GPADC_CHAN_1=1,
-	GECKO_GPADC_CHAN_2=2,
-	GECKO_GPADC_CHAN_3=3,
-	GECKO_GPADC_CHAN_4=4,
-	GECKO_GPADC_CHAN_5=5,	
-	GECKO_GPADC_CHAN_6=6,
-	GECKO_GPADC_CHAN_7=7,	
-	GECKO_GPADC_CHAN_8=8,
-	GECKO_GPADC_CHAN_9=9,	
-  GECKO_GPADC_CHAN_QTY
-} GECKO_GPADC_CHAN_T;
 
 
 typedef volatile struct
@@ -75,15 +52,7 @@ typedef volatile struct
 #define hw_gpadc                   ((HWP_GPADC_T*) GECKO_APB_ADC_BASE)
 
 
-//adc register write
-//#define	HWgpadc_reg_write(_offset_,_value_)								(*(volatile uint32*)(GECKO_APB_ADC_BASE + (_offset_))) = (uint32)(_value_)
 
-//#define HWgpadc_reg_read(x)																(*(volatile uint32*)(GECKO_APB_ADC_BASE + (x)))
-
-
-
-//#define 		gpadc_reg_read(reg,val)  											  hal_analogif_reg_read(reg,val)
-//#define 		gpadc_reg_write(reg,val) 											  hal_analogif_reg_write(reg,val)
 
 
 #define 		HWgpadc_reg_read(reg,val)  											  hal_analogif_reg_read(reg,val)
@@ -93,22 +62,7 @@ typedef volatile struct
 
 
 
-#if 0
 
-typedef struct
-{
-  __IO uint32 CR;                     /*!< Offset: 0x000       A/D Control Register (R/W) */
-  __IO uint32 GDR;                    /*!< Offset: 0x004       A/D Global Data Register (R/W) */
-       uint32 RESERVED0;
-  __IO uint32 INTEN;                  /*!< Offset: 0x00C       A/D Interrupt Enable Register (R/W) */
-  __IO uint32 DR[8];                  /*!< Offset: 0x010-0x02C A/D Channel 0...7 Data Register (R/W) */
-  __I  uint32 STAT;                   /*!< Offset: 0x030       A/D Status Register (R/ ) */
-} ADC_TypeDef;
-
-
-#define GECKO_ADC               ((ADC_TypeDef    *) GECKO_APB_ADC_ADDRESS_BASE)
-
-#endif
 
 
 
@@ -157,10 +111,6 @@ end
 #define ADC_EN                 			((uint32)1<<16) //New: 1109 change it to bit16 --->2022-09-01
 
 
-//status
-//#define GPADC_THRSHD0_IRQ           (1<<0)
-//#define GPADC_THRSHD1_IRQ           (1<<4)
-
 
 //#define GPADC_EOC                   (1<<16)//20210210 JunfengZhou
 //#define GPADC_BUSY                  (1<<17)
@@ -175,63 +125,18 @@ end
 //data
 #define GPADC_DATA(n)               (((n)&0xFFF)<<0)
 
-//data_ch0
-//#define GPADC_DATA(n)             (((n)&0x3FF)<<0)
-
-//data_ch1
-//#define GPADC_DATA(n)             (((n)&0x3FF)<<0)
-
-//data_ch2
-//#define GPADC_DATA(n)             (((n)&0x3FF)<<0)
-
-//data_ch3
-//#define GPADC_DATA(n)             (((n)&0x3FF)<<0)
-
-//irq_mask
-//#define GPADC_THRSHD0_IRQ         (1<<0)
-//#define GPADC_THRSHD1_IRQ         (1<<4)
-//#define GPADC_EOC                 (1<<8)
-
-//irq_cause
-//#define GPADC_THRSHD0_IRQ         (1<<0)
-//#define GPADC_THRSHD1_IRQ         (1<<4)
-//#define GPADC_EOC                 (1<<8)
-
-//irq_clr
-//#define GPADC_THRSHD0_IRQ         (1<<0)
-//#define GPADC_THRSHD1_IRQ         (1<<4)
-//#define GPADC_EOC                 (1<<8)
-
-//thrshd
-#define GPADC_THRSHD0(n)            (((n)&0xFFF)<<0)
-#define GPADC_THRSHD1(n)            (((n)&0xFFF)<<16)
-
-//cmd_set
-//#define GPADC_GPADC_PD              (1<<0)
-//#define GPADC_GPADC_RESET           (1<<4)
-//#define GPADC_START_MEASURE         (1<<8)
-
-//cmd_clr
-//#define GPADC_GPADC_PD            (1<<0)
-//#define GPADC_GPADC_RESET         (1<<4)
 
 
 
-// =============================================================================
-// GPADC_BAD_VALUE
-// -----------------------------------------------------------------------------
-/// Value returned when the gpadc has not finished its convertion.
-// =============================================================================
-#define GPADC_BAD_VALUE  0xFFFF
 
-// =============================================================================
-// TYPES
-// =============================================================================
+
+
+
 
 // =============================================================================
 // GPADC_CHAN_T
 // -----------------------------------------------------------------------------
-/// Channel selection.
+// Channel selection.
 // =============================================================================
 typedef enum
 {
@@ -252,27 +157,18 @@ typedef enum
 
 
 
-// =============================================================================
-// HAL_ANA_GPADC_MV_T
-// -----------------------------------------------------------------------------
-/// MilliVolt type, used to return value from the GPADC.
-// =============================================================================
+
 typedef uint16 HAL_ANA_GPADC_MV_T;
 
 
-//#define GPADC_FAST_CLOSE 1
+
 
 // Battery voltage = gpadc voltage * 3
 #define HAL_ANA_GPADC_MVOLT_A   1133
 #define HAL_ANA_GPADC_MVOLT_B   1400
 
 
-//static int32 g_halGpadcSlope = 0;
-//static int32 g_halGpadcIntcpt = 0;
-//static BOOL  g_halGpadcCalibrated = FALSE;
-
-//static uint32 g_halgpadcCalibHigh = 0;
-//static uint32 g_halgpadcCalibLow = 0;
+#define GPADC_BAD_VALUE  0xFFFF
 
 
 
@@ -286,24 +182,56 @@ typedef struct{
 
 
 
+//voltage = data * 3.3f / 4096.0f;
+
+//ADC Calibration
+
+//__IO uint16_t VREF_BG_CAL=0;
+//VREF_BG_CAL=*(__IO uint16_t *)(0x1FF80078);//1.2V adc value
 
 
-//void gecko_handle_adc_channels(void);
+//store 3 groups calibration value:
+//0v---------0xXXXX XXXX address
+//1.2v-------0x1FF80078  address
+//3.3v-------0xXXXX XXXX address
+
+
+//#define GPADC_CH_INGN(n)            (((n)&0x3)<<9)
+//#define GPADC_REF_SEL               (1<<11)
+//#define GPADC_CK_DIV(n)             (((n)&0x7)<<12)
+
+
+//#define 			GECKO_ADC_CLK_DIV(n)        (((n) & 0x7) << 0)
+//#define 			GECKO_ADC_EN     						(1 << 3)
+//#define 			GECKO_ADC_REF_SEL     			(1 << 4)
+//#define 			GECKO_ADC_INBUF_EN     			(1 << 5)
+
+
+//#define 			GECKO_ADC_CHAN_INGN(n)     	(((n) & 0x3) << 6)
+//#define 			GECKO_ADC_CHAN_SEL(n)     	(((n) & 0xF) << 9)
+
+
+
+
+
+//uint16  GeckoGpadcGetRawData(GPADC_CHAN_T channel);
+//uint16  GeckoGpadcGetRawData(uint8 channel);
+
+
+
+
+
 
 void ADC_Init(void);
 
 //uint16 GeckoGpadcGetRawData(uint8 channel);
 
-//uint16 adc_sampling_test(void);
 
-//uint16 adc_sampling_test(GPADC_CHAN_T channel);
 uint16 GeckoGpadcGetRawData(GPADC_CHAN_T channel);
 
 
 void Get_Advalue_Func(void);
 
-
-void ADC_Window_Comparator(void);
 
 uint16 adc_vbatvalue_read(void);
 

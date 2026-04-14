@@ -1,9 +1,6 @@
 #include "dpi_common.h"
 #include "platform_config.h"
 
-//typedef unsigned char       UINT8;
-//typedef unsigned short      UINT16;
-//typedef unsigned int        UINT32;
 
 
 #define MREAD_8(addr) *((volatile UINT8 *)(addr))

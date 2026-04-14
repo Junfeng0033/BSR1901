@@ -32,53 +32,11 @@
 
 
 
-//#define GECKO_PWM_BASE_NEW                0x40013000
 
 
 
-//define AHB base address
-//AHB Address
-#define GECKO_PWM_BASE_NEW								0x40005000
 
 
-
-typedef volatile struct
-{
-    REG32                          pwm_select_en;                   //0x00000000
-    REG32                          r_pwm01_initial;                 //0x00000004
-    REG32                          r_pwm23_initial;                 //0x00000008
-    REG32                          r_pwm01_toggle;                  //0x0000000C
-    REG32                          r_pwm23_toggle;                  //0x00000010
-    REG32                          r_pwm01_phase;                   //0x00000014	
-    REG32                          r_pwm23_phase;                   //0x00000018
-	
-    REG32                          r_pwm45_initial;                 //0x0000001C
-    REG32                          r_pwm45_toggle;                  //0x00000020
-    REG32                          r_pwm45_phase;                   //0x00000024
-	
-    REG32                          r_pwm03_Td_cycle;                //0x00000028
-    REG32                          r_pwm47_Td_cycle;                //0x0000002C	
-#if 1//def GEK1109		
-    REG32                          r_pwm67_initial;                 //0x00000030
-    REG32                          r_pwm67_toggle;                  //0x00000034
-    REG32                          r_pwm67_phase;                   //0x00000038
-	
-    REG32                          pwm_reg0x3c;                     //0x0000003C
-    REG32                          pwm_reg0x40;                     //0x00000040
-    REG32                          pwm_reg0x44;                     //0x00000044
-    REG32                          pwm_reg0x48;                     //0x00000048	
-    REG32                          pwm_reg0x4c;                     //0x0000004C
-    REG32                          pwm_reg0x50;                     //0x00000050		
-
-#endif	
-	
-} Gecko_PWM_T;
-
-#define Gecko_PWM                   ((Gecko_PWM_T*) GECKO_PWM_BASE_NEW)
-
-
-
-void hw_pwm_invert(HW_PWM_CHAN_T channel);
 
 
 static int gecko_pwm_start(void)
@@ -126,47 +84,9 @@ uint8 gecko_pwm_init(void)
 
 
 
-#if 0
-
-// =============================================================================
-// SysSetupClkPwm
-// -----------------------------------------------------------------------------
-/// Setup the PWM clock
-/// The PWM clock is got by dividing the system clock    
-/// @param divider The divider used
-// =============================================================================
-void SetupSysClkPwm(uint8 divider)
-{
-		//update divider to regiser
-    HW_SysClkUnit->CLK_DIV = PWM_CLK_DIV(divider);
-}
-
-
-#endif
-
-
-#define APB_PWM_CLOCK                  	10000000
-
-#ifdef BSR1901_SYS_8MHZ_MODE
-
-//#define APB_PWM_CLOCK                  	8000000
-
-#else
-#define APB_PWM_CLOCK                  	16000000
-//#define APB_PWM_CLOCK                  	4000000
-#endif
 
 
 
-#define PWM_MAX_VALUE                   0xFFFF
-
-
-
-struct HAL_PWM_CFG_T {
-    uint32_t freq; //expected frequency
-    uint8_t ratio; //expected duty
-	  uint8   Tdead_cycle_count;
-};
 
 
 //PWM_CLK  4Mhz, 4 000 000hz,4000000/137000=29(29.197)

@@ -2,10 +2,6 @@
 #include "key_handle.h"
 
 
-extern uint32_t TimeTick;  								// SysTick counter
-extern uint8 KP85_KEY2_Detect(void);
-extern uint8 K27_KEY_Detect(void);
-
 
 // Initialize key handle structure
 KeyHandle keyHandle = {

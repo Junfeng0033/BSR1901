@@ -30,7 +30,7 @@
 #include "pwm.h"
 
 
-extern void ADC_Init(void);
+
 
 
 uint32 bsr1901_sram_test(void)
@@ -141,21 +141,7 @@ void BootInit(void)
 
 
 
-//void UserGpioInit(void) 
-//{
 
-//    #ifdef __SWD_DISABLED__
-//    LPC_IOCON->R_PIO1_0  &= ~0x07;
-//    LPC_IOCON->R_PIO1_0  |=  0x01;
-//    LPC_IOCON->R_PIO1_1  &= ~0x07;
-//    LPC_IOCON->R_PIO1_1  |=  0x01;
-//    LPC_IOCON->R_PIO1_2  &= ~0x07;
-//    LPC_IOCON->R_PIO1_2 |=  0x01;	
-//    LPC_IOCON->R_PIO0_11 &= ~0x07;	   
-//    LPC_IOCON->R_PIO0_11 |=  0x01;
-//    #endif	
-//}
-  
 
 
 //typedef enum
@@ -200,7 +186,9 @@ void pExitCriticalSection (uint32 status)
     __enable_irq();
 }
 
-//extern volatile uint32* g_SysCsAddress;
+
+
+
 
 // =============================================================================
 // SysEnterCriticalSection

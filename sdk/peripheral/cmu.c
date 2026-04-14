@@ -23,6 +23,7 @@ void gecko_cmu_init(void)
 	HW_SysClkUnit->CLK_DIV_3=Val; //speed up SPI0 CLK
 	
 #if 0
+	
 //register 0x04
 //system clock enable
 //corresponding module's enable 
@@ -76,9 +77,7 @@ void gecko_cmu_init(void)
 
 //register 0x08, "1" not reset module, "0" reset module
 		HW_SysClkUnit->Sys_Soft_Rst_N=0xffffffff;
-		
-		
-	
+
 #endif
 
 

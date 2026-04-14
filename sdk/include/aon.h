@@ -295,6 +295,42 @@ assign reg_aon_sleep_cnt_val			  =reg_0x060[23:0];
 
 
 
+
+
+
+
+#define ANA_READ_CTLREG(REG)      				(*(volatile unsigned int*)(REG))
+#define ANA_WRITE_CTLREG(REG,VAL)    			(*(volatile unsigned int*)(REG)) = (unsigned int)(VAL) 
+
+
+
+
+
+
+extern void h2l_wr_busy(void);
+
+extern void gecko_aon_wakeup_irq_handler(void);
+
+extern void manba_task_clr_aon_wakeup_int (void);
+
+extern void manba_task_cpu_goto_sleep(void);
+extern void manba_task_cpu_goto_sleep (void);
+
+extern void tc_gecko_aon_sanity_cm0(void);//deep sleep
+extern void tc_gecko_cm0_aon_sleep(void);
+
+//switch to quad spi nor flash mode
+extern void gecko_task_cm0_sw_flash_quad(void);
+
+//SPI-to-AHB config to Dual-wire access NOR Flash
+extern void gecko_task_cm0_sw_flash(void);
+extern void delay_1us(unsigned int delay_val);
+
+
+
+
+
+
 void LDO33_AUX_Enable(void);
 void LDO33_AUX_Disable(void);
 

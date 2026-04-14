@@ -70,5 +70,7 @@ st_EFUSE_config 		g_efuse_cfg;
 
 
 
+extern int reg_read(int addr);	
+extern void reg_write(int addr, int data);
 
 

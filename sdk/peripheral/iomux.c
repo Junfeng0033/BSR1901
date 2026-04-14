@@ -32,6 +32,12 @@ reg_pclk_out_div=3: 64·ÖÆµ
 
 #define reg_pclk_out_div(n)           (((n) & 0x3) << 0) //2-bit [1:0]//default value n=0
 
+
+
+
+
+
+
 void gecko_branchnode_pclkout_cfg(void)
 {
 	uint32 TempV;

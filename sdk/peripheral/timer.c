@@ -16,12 +16,11 @@
 
 
 extern void hal_nvic_disable_irq(IRQn_Type irq_number);
-//extern void tc_qspi_to_xtx_sanity(void);
-static void  Gecko_Timer_Disable_One(uint8 num);
 
-void Gecko_Timer_Unmask(uint8 num);
 static void Gecko_Timer_Enable_One(uint8 num);
 static void Gecko_Timer_Disable_One(uint8 num);
+
+
 
 
 void Gecko_Timer_Init(void)
@@ -44,6 +43,23 @@ void Gecko_Timer_Init(void)
 
 
 
+
+void Gecko_Timer_Mask(uint8 num)
+{
+	uint32  temp_val;
+	temp_val = HWreg_Get_Register(Gecko_Timer_Control_REG(num));	
+	temp_val |= GECKO_BIT(GECKO_REG_BIT02);	
+	HWreg_Assign_Register(Gecko_Timer_Control_REG(num), temp_val);	
+}
+
+
+void Gecko_Timer_Unmask(uint8 num)
+{
+	uint32  temp_val;	
+	temp_val = HWreg_Get_Register(Gecko_Timer_Control_REG(num));	
+	temp_val &= ~ GECKO_BIT(GECKO_REG_BIT02);	
+	HWreg_Assign_Register(Gecko_Timer_Control_REG(num), temp_val);	
+}
 
 
 
@@ -118,6 +134,9 @@ static void  Gecko_Timer_Disable_One(uint8 num)
 	HWreg_Assign_Register(Gecko_Timer_Control_REG(num), temp_val);	
 }
 
+
+
+
 #if 0
 void Gecko_Timer_Enable(void)
 {
@@ -133,6 +152,8 @@ void Gecko_Timer_Disable(void)
 #endif
 
 
+
+
 #if 1
 void Gecko_Timer_ClearInt(void)
 {
@@ -143,22 +164,10 @@ void Gecko_Timer_ClearInt(void)
 #endif
 
 
-void Gecko_Timer_Mask(uint8 num)
-{
-	uint32  temp_val;
-	temp_val = HWreg_Get_Register(Gecko_Timer_Control_REG(num));	
-	temp_val |= GECKO_BIT(GECKO_REG_BIT02);	
-	HWreg_Assign_Register(Gecko_Timer_Control_REG(num), temp_val);	
-}
 
 
-void Gecko_Timer_Unmask(uint8 num)
-{
-	uint32  temp_val;	
-	temp_val = HWreg_Get_Register(Gecko_Timer_Control_REG(num));	
-	temp_val &= ~ GECKO_BIT(GECKO_REG_BIT02);	
-	HWreg_Assign_Register(Gecko_Timer_Control_REG(num), temp_val);	
-}
+
+
 
 
 //extern void Timer0_Toggle_GPIO0(void);
@@ -176,12 +185,9 @@ void Gecko_Timer_Unmask(uint8 num)
 void Timer0_Interrupt_Handler(void)
 {
 	volatile uint32 temp_value;
-
-
-	
 	temp_value = HWreg_Get_Register(Gecko_Timer_EOI_REG(Gecko_Timer0_Int_Index));
-	
 }
+
 
 
 

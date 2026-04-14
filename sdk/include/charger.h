@@ -2,6 +2,8 @@
 #include "platform_config.h"
 
 
+
+
 /*
 
 
@@ -37,6 +39,7 @@ PWM 动作：软件切换目标。此时不再追求电流恒定，而是通过 ADC7 严密监控 V_{bat}。
 
 
 */
+
 
 
 
@@ -91,6 +94,21 @@ typedef struct {
 
 
 
+
+
+#define PERIOD      				60//60//80 //195khz  80step can adjust 260K----60
+#define BOOST_MAXDUTY      	PERIOD/2 //BOOST duty max 1/2 period
+#define BULK_MAXDUTY     		PERIOD 
+#define MINDUTY     				1
+ 
+
+
+
+
+
+
+
+extern uint8 dc5v_online_flag;
 
 void pwm_io_init(void);
 void pwm_init(u8 index);

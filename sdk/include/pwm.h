@@ -1,13 +1,57 @@
 
 #include "platform_config.h"
 
-//define APB base address
-//APB Address
-//#define GECKO_PWM_BASE                0x40013000
 
 //define AHB base address
 //AHB Address
-#define GECKO_PWM_BASE								0x40005000
+#define GECKO_PWM_BASE_NEW								0x40005000
+
+
+//define AHB base address
+//AHB Address
+#define GECKO_PWM_BASE										0x40005000
+
+
+
+
+typedef volatile struct
+{
+    REG32                          pwm_select_en;                   //0x00000000
+    REG32                          r_pwm01_initial;                 //0x00000004
+    REG32                          r_pwm23_initial;                 //0x00000008
+    REG32                          r_pwm01_toggle;                  //0x0000000C
+    REG32                          r_pwm23_toggle;                  //0x00000010
+    REG32                          r_pwm01_phase;                   //0x00000014	
+    REG32                          r_pwm23_phase;                   //0x00000018
+	
+    REG32                          r_pwm45_initial;                 //0x0000001C
+    REG32                          r_pwm45_toggle;                  //0x00000020
+    REG32                          r_pwm45_phase;                   //0x00000024
+	
+    REG32                          r_pwm03_Td_cycle;                //0x00000028
+    REG32                          r_pwm47_Td_cycle;                //0x0000002C	
+#if 1//def GEK1109		
+    REG32                          r_pwm67_initial;                 //0x00000030
+    REG32                          r_pwm67_toggle;                  //0x00000034
+    REG32                          r_pwm67_phase;                   //0x00000038
+	
+    REG32                          pwm_reg0x3c;                     //0x0000003C
+    REG32                          pwm_reg0x40;                     //0x00000040
+    REG32                          pwm_reg0x44;                     //0x00000044
+    REG32                          pwm_reg0x48;                     //0x00000048	
+    REG32                          pwm_reg0x4c;                     //0x0000004C
+    REG32                          pwm_reg0x50;                     //0x00000050		
+
+#endif	
+	
+} Gecko_PWM_T;
+
+
+
+
+#define Gecko_PWM                   ((Gecko_PWM_T*) GECKO_PWM_BASE_NEW)
+
+
 
 
 typedef enum
@@ -29,9 +73,31 @@ typedef enum
  
 
 
+
+
+struct HAL_PWM_CFG_T {
+    uint32_t freq; //expected frequency
+    uint8_t ratio; //expected duty
+	  uint8   Tdead_cycle_count;
+};
+
+
+
+
+
+#define APB_PWM_CLOCK                  	10000000
+
+
+#define PWM_MAX_VALUE                   0xFFFF
+//#define PWM_MAX_VALUE                   0xFFFF
+
+
+
+
+
 //#define PWM_SLOW_CLOCK                  32000
 //#define PWM_FAST_CLOCK                  16000000
-#define PWM_MAX_VALUE                   0xFFFF
+
 
 
 

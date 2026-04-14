@@ -1,7 +1,6 @@
 #include "platform_config.h"
 
-//#define AHB_DMA_BASE                     				0x4001E000
-//0x4000_6000
+
 
 #define AHB_DMA_BASE                     				0x40006000
 //| Slv 7 | UART3         										| 0x4000_6000 - 0x4000_6fff
@@ -98,23 +97,16 @@
 #define DMA_WRITE_REG(REG,VAL)    							(*(volatile uint32*)(REG)) = (uint32)(VAL) 
 
 
-/*
-typedef struct
-{
-	uint32_t DMA_Channel;
-	uint32_t DMA_PeripheralBaseAddr;
-	uint32_t DMA_MemoryBaseAddr;
-	uint32_t DMA_DIR;
-	uint32_t DMA_PeripheralDataSize;
-	uint32_t DMA_MemoryDataSize;	
-	uint32_t DMA_Mode;	
-	uint32_t DMA_Priority;	
-	uint32_t DMA_FIFOMode;	
-	uint32_t DMA_FIFOThreshold;
-	uint32_t DMA_MemoryBurst;			
-	uint32_t DMA_PeripheralBurst;		
-} DMA_InitTypeDef;
-*/
+
+
+
+
+extern const unsigned char gImage_libai[25600];
+extern const unsigned char gImage_taizi[25600];
+
+extern const unsigned char gImage_icon_1[3990];
+
+
 
 void Gecko_DMA_Transport(volatile void *dest,volatile const void *src, uint16 size,uint8 type, uint8 direct);
 void DMA_Configuration(void);

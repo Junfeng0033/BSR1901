@@ -1,160 +1,26 @@
 
-
-#include "platform_config.h"
-#include "bsr1901.h"
-
-#include <stdarg.h>
-#include <stdio.h>
-
-#include "gpio.h"
-#include "watchdog.h"
-#include "adc.h"
-#include "cmu.h"
-#include "iomux.h"
-#include "dma.h"
-//#include "led.h"
-#include "uart.h"
-#include "hci.h"
-#include "norflash.h"
-#include "aon.h"
-#include "spi.h"
-#include "pwm.h"
-#include "i2c.h"
-#include "timer.h"
-#include "bms_ip2366.h"
-#include "lcd_driver.h"
-#include "gui.h"
-#include "ui.h"
-
-#include "sc_demo_test.h"
-#include "sc_common.h"
-#include "lvgl.h"
-
-#include "sc_gui.h"
-
-#include "charger.h"
-
-#include "key_handle.h"
-//#include "bms_global.h"
+#include "main.h"
 
 
-#define KEY_PIN  (PA7)
 
-#define POINT_NUM (1024/2)
 
 
 //#define __RAM_CODE__ 		__attribute__((section("ram_code")))
-
-
 //int Trim[] __attribute__ ((section(".ARM.__at_0x0001F000"))) = {0x12345678,0x22334455};
 //volatile int *myVariable = (volatile int *)0x0001F000;
 
 const uint8 gSysDate[12] = __DATE__;
 const uint8 gSysTime[16] = __TIME__;
 
-//#define VERSION "(\"BraveStarr 1900+ GPU\" - GPU MCU Firware  - "__DATE__" - "__TIME__")"
-
-
-
-volatile uint16 ram_color=0x1234;
-//uint16 ram_color=0;
-uint8 flag_key1=0;
-uint8 flag_key2=0;
-
-extern int gecko_efuse_read(void);
-
-extern uint32_t TimeTick;
-
-extern void gecko_branchnode_pclkout_cfg(void);
-
-extern void * hw_memcpy8(void * dest, const void * src, uint16 size);
-
-extern unsigned char bFlag_init_ipxs;
-extern unsigned char bFlag_p_i2c_int_is_high;
-extern unsigned char timer_test;
-
-extern void get_ipxs_state(void);
-extern void get_chg_vbus_voltage(void);
-extern void get_voltage_battery(void);
-extern void get_voltage_vsys(void);
-
-extern uint8 K27_KEY_Detect(void);
-	
-extern void ui_paint_color_circle(void);
-
-extern void ip2366_reg_write(void);
-extern void ip2366_reg_read(void);
-
-extern void bsr1901_prepare_sleep_for_pin_wakeup(void);
-
-extern void GPIO_5V_DCIN_Init(void);
-
-extern void delay_1us(unsigned int delay_val);
-
-extern uint32 bsr1901_sram_test(void);
-//extern void AON_Analog_Digital_Interface_Reading_Writing(void);
-extern void BSR1901_MOS_Gate_CTRL(void);
-
-extern void gecko_task_cm0_sw_flash(void);
-extern void gecko_task_cm0_sw_flash_quad(void);
-
-
-extern void OP_Amp_Config(void);
-extern int reg_read(int addr);
-extern void reg_write(int addr, int data);
-
-extern void sram_gecko_task_cm0_sw_flash(void);
-
-extern void ui_paint_bat_percent(uint8_t percent);
-
-
-extern unsigned int gImage_128x128_charging_32bit[8192];
-extern const unsigned int gImage_128x128_battery_32b[8192];
-
-extern unsigned int gImage_128x128_star_32bit[8192];
-extern unsigned int gImage_128x128_cake_32bit[8192];
-extern  unsigned char gImage_128x128_cake[32768];
-extern  unsigned char gImage_128x128_star[32768];
-extern  unsigned char gImage_128x128_battery[32768];
-
-//extern unsigned char gImage_bat_90x49[8820];
-extern const unsigned char gImage_circle_100x100[20000];
-extern const unsigned char gImage_black_128x128[32768];
-extern const unsigned char gImage_charge_10[20000];
-extern const unsigned char gImage_charge_20[20000];
-extern const unsigned char gImage_charge_30[20000];
-
-extern const unsigned char gImage_charging[32768];
-
-extern uint16 Get_Vbat_Voltage(void);
-
-extern void sc_demo_text(void);
-
-extern uint8 gpio_i2c_initialize(VOID);
-
-extern KeyHandle keyHandle;
-extern void Key_Process(void);
-
-extern void charger_init(charger_manager_t *charger);
-extern void charger_process(charger_manager_t *charger);
-
-extern lv_font_t lv_font_16; 
-
-
-extern void lcd_dma_refresh_colorblock(uint16_t xs, uint16_t ys, uint16_t w, uint16_t h, color_t *color);
+//#define VERSION "(\"BraveStarr 1901+ GPU\" - GPU MCU Firware  - "__DATE__" - "__TIME__")"
 
 
 
 
-/**
- * Initialize the system
- *
- * @param  none
- * @return none
- *
- * @brief  Setup the microcontroller system.
- *         Initialize the System and update the SystemFrequency variable.
- */
+
+
+
+
 void SystemInit(void)
 {
 
@@ -195,6 +61,34 @@ void SystemInit(void)
 #endif
 #endif
 
+}
+
+
+
+
+void EnterDeepSleepMode(void)
+{
+	
+		#if 0
+		//LCD_BL_CLR;
+		//bsr1901_pullup_pulldown_config(PAD_14,PAD_PULLDOWN);	
+		#endif
+
+		//LDO33_AUX disable, power down LCD module			
+		LDO33_AUX_Disable();
+
+//				wr_data = 0x608e7885;
+//				reg_write(0x40020000+0x020, wr_data);
+//				
+//				reg_aon_sel_aon_clk16k(bit10)
+//				wr_data=reg_read(0x40020000+0x000);
+//				wr_data |= 0x200;//(set bit10=1)
+//				reg_write(0x40020000+0x000, wr_data);
+
+		bsr1901_prepare_sleep_for_pin_wakeup();
+		//sleep-wakeup setting
+		BSR1901_GPIO_WakeUp_From_DeepSleep();//
+		tc_gecko_cm0_aon_sleep();//deep sleep test for low power design
 }
 
 
@@ -257,8 +151,7 @@ int main (void)
 	//LCD_BL_SET;//turn on backlight
 	Lcd_SetRegion(0, 0, 127, 127);
 	//Lcd_Clear(BLACK);
-	//delay_1us(8000);	
-	//Lcd_Clear(RED);		
+	
 	
 	DMA_Configuration();	
 	
@@ -267,35 +160,27 @@ int main (void)
 	HW_SPI_Tx_DMA_32bit(HAL_SPI_0, (uint16*)gImage_128x128_star_32bit, 8192);	
 
 	delay_1us(10000);	
-//	HW_SPI_Tx_DMA_32bit(HAL_SPI_0, (uint16*)gImage_128x128_cake_32bit, 8192);	
+  //HW_SPI_Tx_DMA_32bit(HAL_SPI_0, (uint16*)gImage_128x128_cake_32bit, 8192);	
 
 	
-	HW_SPI_Tx_DMA_32bit(HAL_SPI_0, (uint16*)gImage_128x128_charging_32bit, 8192);		
-  //dma_sram_delay(1000);	
-	//while(1);
+	HW_SPI_Tx_DMA_32bit(HAL_SPI_0, (uint16*)gImage_128x128_charging_32bit, 8192);
 	delay_1us(8000);
 	
 	HW_SPI_Tx_DMA_32bit(HAL_SPI_0, (uint16*)gImage_128x128_battery_32b, 8192);
-	
-  //dma_sram_delay(1000);	
-	//while(1);
 	delay_1us(8000);
 
-  //Lcd_Clear(BLACK);
   uint16_t blue_color = BLACK;//C_TOMATO;//C_BLACK;//C_BLUE;
   lcd_dma_refresh_colorblock(0, 0, X_MAX_PIXEL, Y_MAX_PIXEL,&blue_color);
 	delay_1us(8000);
 	
-  //while(1);
 
-	//Lcd_SetRegion(20, 39, 109, 87);						//��������
+	//Lcd_SetRegion(20, 39, 109, 87);
 	//HW_SPI_Tx_DMA(HAL_SPI_0, (uint16*)gImage_bat_90x49, 8820);
-	//delay_1us(8000);
+
 	
-	Lcd_SetRegion(10, 10, 109, 109);						//��������
+	Lcd_SetRegion(10, 10, 109, 109);
 	//HW_SPI_Tx_DMA(HAL_SPI_0, (uint16*)gImage_circle_100x100, 20000);
-	HW_SPI_Tx_DMA_8bit(HAL_SPI_0, (uint16*)gImage_circle_100x100, 20000);
-	
+	HW_SPI_Tx_DMA_8bit(HAL_SPI_0, (uint16*)gImage_circle_100x100, 20000);	
 	delay_1us(8000);
  
 
@@ -339,15 +224,12 @@ PWM Charger
 	/***************************************************************/
 
 	#if  0//CHRG_INSET_DET_EN //charger insert detect
-
 		//config PAD19(GPIOB7) as GPIO input
 		gecko_pinmux_config(PAD19,GPIO_B_7);
 		extern void Set_GPIO_B7_Input(void);
 		Set_GPIO_B7_Input();
-
-
-
 	#endif
+
 
 	#if 0//MIC_DET_EN  //air flow sensor
 		//config PAD10(GPIOA6) as GPIO input
@@ -371,7 +253,7 @@ PWM Charger
 		Uart_16550_Initialise(HAL_UART_0,115200,0x3);	
 		Uart_16550_Initialise(HAL_UART_1,115200,0x3);	
 		
-	//	gecko_pinmux_config(PAD12,PCLK_OUT);//2024-09-14 Shanghai	
+//	gecko_pinmux_config(PAD12,PCLK_OUT);//2024-09-14 Shanghai	
 
 
 
@@ -652,6 +534,34 @@ PWM Charger
 	
 	
 }
+
+
+
+
+
+
+
+
+#if 0
+
+  while(1) {
+      uint32_t current_tick = Get_SysTick();
+      
+      // 20ms 任务：按键扫描与消抖
+      if (current_tick % 20 == 0) Task_KeyScan();
+      
+      // 50ms 任务：充电管理与 PID 计算 (高优先级安全任务)
+      if (current_tick % 50 == 0) Task_Charger_Control();
+      
+      // 100ms 任务：BMS 状态采样 (电压、电流、SOC)
+      if (current_tick % 100 == 0) Task_BMS_Update();
+      
+      // 200ms 任务：UI 界面刷新 (低优先级显示任务)
+      if (current_tick % 200 == 0) Task_UI_Refresh();
+  }
+	
+#endif
+
 
 
 

@@ -18,8 +18,7 @@
 
 #include "iomux.h"
 #include "aon.h"
-extern int reg_read(int addr);
-extern void reg_write(int addr, int data);
+
 
 
 uint8 GPIODIR_0_Shadow=0;

@@ -18,10 +18,6 @@ extern void NVIC_DisableIRQ(IRQn_Type IRQn);
 extern void NVIC_EnableIRQ(IRQn_Type IRQn);
 
 
-//extern void Gecko_Timer_Setting(uint8 TIM_IDX);
-//extern void Gecko_Timer_Init(void);
-
-
 
 
 #define TB_CPU_BEHAVIOR_CTRL            0

@@ -7,6 +7,23 @@
 #define    GECKO_APB_SPI_BASE						0X4001B000
 
 
+
+
+
+#define GECKO_BIT(num)										(1u << num)
+
+#define SPI_READ_DATAREG(REG)      				(*(volatile unsigned short*)(REG))
+#define SPI_WRITE_DATAREG(REG,VAL)    		(*(volatile unsigned short*)(GECKO_APB_SPI_DATAACCESS_REG + REG)) = (unsigned short)(VAL) 
+
+#define SPI_READ_CTLREG(REG)      				(*(volatile unsigned int*)(REG))
+#define SPI_WRITE_CTLREG(REG,VAL)    			(*(volatile unsigned int*)(REG)) = (unsigned int)(VAL) 
+
+
+
+
+
+
+
 typedef enum {
     HAL_SPI_0                                  = 0x00000000,
     HAL_SPI_1                                  = 0x00000001,//New SPI--->2022-09-04	
