@@ -23,7 +23,10 @@
 #define P_I2C_INT_SET   gpio_set_value(PORT_P_INT, 1, PIN_P_INT)
 
 
-
+//#define P_I2C_INT_CLR   {GpiopinMode(PA6,OUTPUT);GpiopinWrite(PA6,LOW);}
+//#define P_I2C_INT_SET   {GpiopinMode(PA6,OUTPUT);GpiopinWrite(PA6,HIGH);}
+			
+			
 
 
 void HAL_Delay(uint32_t Delay)
@@ -119,8 +122,7 @@ unsigned char gek1109_ipxs_readByte(unsigned char deviceAddr, unsigned char regA
 	  gecko_pinmux_config(PAD10,GPIO_A_6);
 	  Set_GPIOA6_Input();
 	  bsr1901_pullup_pulldown_config(PAD_10,PAD_HIZ);
-	
-	
+
     gpio_i2c_rdabt_rf_read_data(deviceAddr,regAddr,&value,1);
     //Delay_us(100);
     return (value);	
@@ -129,15 +131,13 @@ unsigned char gek1109_ipxs_readByte(unsigned char deviceAddr, unsigned char regA
 
 void gek1109_ipxs_writeByte(unsigned char deviceAddr, unsigned char regAddr, unsigned char sendByte)
 {
-	
 		//config INT pin for I2C talk
 	  gecko_pinmux_config(PAD10,GPIO_A_6);
 	  Set_GPIOA6_output();
     IP2366_INT_SET;
-	
-    {
+
 		gpio_i2c_rdabt_rf_write_data(deviceAddr,regAddr,&sendByte,1);
-    }	
+
 		
 }
 

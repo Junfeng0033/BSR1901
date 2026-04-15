@@ -1644,7 +1644,17 @@ char  *myitoa(int num,char*str,int radix){
 #endif
 
 
-#if 1//
+
+
+
+
+
+
+
+
+
+
+#if 1
 
 
 char *reverse(char *s)

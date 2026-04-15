@@ -323,7 +323,6 @@ void gecko_ahb2qspi_ctrl_irq_handler(void)
 
 
 //------------------------------------------------------------------
-//  ZGF TBD:
 //  1. TokenEn, TokenValue in ADDR_QSPI_CFG_TRANS_CTRL
 //  2. WrTranCnt in ADDR_QSPI_CFG_TRANS_CTRL
 //------------------------------------------------------------------
@@ -401,6 +400,11 @@ void qspi_task_config_trans(unsigned char trans_type, unsigned char cmd_en, unsi
     reg_write(ADDR_QSPI_CFG_SPI_ADDR, addr_value); // DUMMY address for XTX Flash Device ID
 }
 
+
+
+
+
+
 void qspi_task_reset_rxfifo()
 {
     unsigned int ahb_wr_data;
@@ -415,6 +419,9 @@ void qspi_task_reset_rxfifo()
     }
 }
 
+
+
+
 void qspi_task_reset_spi()
 {
     unsigned int ahb_wr_data;
@@ -428,7 +435,9 @@ void qspi_task_reset_spi()
         ahb_rd_data = reg_read(ADDR_QSPI_CFG_SPI_CTRL);
     }
 }
-//------------------------------------------------------------------
+
+
+
 
 
 void tc_qspi_to_xtx_sanity()
@@ -571,7 +580,11 @@ void tc_qspi_to_xtx_sanity()
         printf("Gecko Test: tc_qspi_to_xtx_sanity finished.\n");
     #endif
 }
-//------------------------------------------------------------------
+
+
+
+
+
 
 
 void tc_qspi_to_xtx_single_wr()
@@ -1362,7 +1375,9 @@ void bsr1901_prepare_sleep_for_pin_wakeup(void)
 {
 	unsigned int ahb_wr_data;
 /*
-#define GECKO_AON_BASE_ADDR             0x40020000//New for 1109
+	
+#define GECKO_AON_BASE_ADDR             						0x40020000//New for 1109
+	
 #define OFFSET_REG_AON_ANA_CTRL_1                   0x020
 #define OFFSET_REG_AON_ANA_CTRL_2                   0x024	
 #define ADDR_AON_CFG_ANA_CTRL_1                     GECKO_AON_BASE_ADDR + OFFSET_REG_AON_ANA_CTRL_1

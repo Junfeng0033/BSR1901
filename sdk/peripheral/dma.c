@@ -6,19 +6,18 @@
  *   Description: 
 ****************************************************************************/
 
-#include "bsr1901.h"
+
 #include "dma.h"
-#include "spi.h"
+#include "bsr1901.h"
 #include "lcd_driver.h"
 #include "gpio.h"
 #include "ui.h"
+#include "spi.h"
 
-
-extern uint32 pEnterCriticalSection (void);
-extern void pExitCriticalSection (uint32 status);
 
 extern void NVIC_EnableIRQ(IRQn_Type IRQn);
 extern void NVIC_DisableIRQ(IRQn_Type IRQn);
+
 
 extern void HW_SPI_Tx_DMA(HAL_SPI_ID_T id,uint16 *pData, uint16 DataLen);
 extern void HW_SPI_Tx_DMA_8bit(HAL_SPI_ID_T id,uint16 *pData, uint16 DataLen);
@@ -79,6 +78,26 @@ void DMA_Req_Buslock_Enable(void)
 
 //===========================================================================
 }
+
+
+
+
+void DMA_Req_Buslock_Disable(void)
+{
+	volatile uint32 dma_ctrl;
+	
+	dma_ctrl=0;
+//===========================================================================
+//new function in chip BSR0035	
+	dma_ctrl = DMA_READ_REG(AHB_DMA_CONTROL_REG);
+	
+	dma_ctrl &= (~dma_buslock_req_en);
+
+	DMA_WRITE_REG((volatile uint32 *)AHB_DMA_CONTROL_REG, dma_ctrl);
+
+//===========================================================================
+}
+
 
 
 

@@ -4,10 +4,9 @@
  *
  *   Description: PWM Tone
  *   Author:
- *   	 JF Zhou
+ *   	 JF
 ****************************************************************************/
 
-#include "platform_config.h"
 #include "bsr1901.h"
 #include "pwm.h"
 
@@ -22,24 +21,12 @@
 // __________________________________________________________|                                  |___________________
 
 
-/* Number of PWM Channels */
-//#define NUM_CHANNELS						6
-
-#define GPIO_Pin_5							6
-#define PwmOut    						GPIO_Pin_5           // PB0 pin output PWM wave
-#define BEEP_PIN      				GPIO_Pin_5
 
 
 
 
 
-
-
-
-
-
-
-static int gecko_pwm_start(void)
+int gecko_pwm_start(void)
 {
 	Gecko_PWM->pwm_select_en =0xff;
 	return 0;
@@ -114,6 +101,10 @@ void PWM_Config_DeadZone_Td(HW_PWM_CHAN_T channel)
 }
 
 
+
+
+
+
 void Config_PWM(HW_PWM_CHAN_T channel,const struct HAL_PWM_CFG_T *cfg)
 {
     uint32 load;
@@ -167,15 +158,10 @@ void Config_PWM(HW_PWM_CHAN_T channel,const struct HAL_PWM_CFG_T *cfg)
 			case HW_PWM_CHAN_0:
 					Gecko_PWM->r_pwm01_initial = SET_BITFIELD(Gecko_PWM->r_pwm01_initial, PWM_LOAD01_0, load);
 			
-#if 0//DEBUG_UATR0_PRINT_LOG
-	tempval_d=Gecko_PWM->r_pwm01_initial;	
-	UATR0_PRINT_LOG((unsigned char *)("\r\n"));						
-	UATR0_PRINT_LOG((unsigned char *)("PWM_CHAN_0 Gecko_PWM->r_pwm01_initial --- = 0x"));
-	string=my_itoa(tempval_d);
-	UATR0_PRINT_LOG((unsigned char *)(string));
-	UATR0_PRINT_LOG((unsigned char *)("\r\n"));		
+					printf("\r\n PWM_CHAN_0 Gecko_PWM->r_pwm01_initial = %d",Gecko_PWM->r_pwm01_initial);
+					printf("\r\n PWM_CHAN_0 Gecko_PWM->r_pwm01_initial = %x",Gecko_PWM->r_pwm01_initial);			
+			
 
-#endif
 		
 					Gecko_PWM->r_pwm01_toggle = SET_BITFIELD(Gecko_PWM->r_pwm01_toggle, PWM_TOGGLE01_0, toggle);
 					//PWM DeadZone config register
@@ -189,35 +175,16 @@ void Config_PWM(HW_PWM_CHAN_T channel,const struct HAL_PWM_CFG_T *cfg)
 			
 					Gecko_PWM->r_pwm01_toggle = tempval+PWM_TOGGLE01_0(regval);	//inclue toggle0 and toggle1			 			
 
-#if 0//DEBUG_UATR0_PRINT_LOG
-	tempval_d=Gecko_PWM->r_pwm01_toggle;
-	UATR0_PRINT_LOG((unsigned char *)("\r\n"));						
-	UATR0_PRINT_LOG((unsigned char *)("PWM_CHAN_0 Gecko_PWM->r_pwm01_toggle --- = 0x"));
-	string=my_itoa(tempval_d);
-	UATR0_PRINT_LOG((unsigned char *)(string));
-	UATR0_PRINT_LOG((unsigned char *)("\r\n"));	
-#endif	
-
+					printf("\r\n PWM_CHAN_0 Gecko_PWM->r_pwm01_toggle = %d",Gecko_PWM->r_pwm01_toggle);
+					printf("\r\n PWM_CHAN_0 Gecko_PWM->r_pwm01_toggle = %x",Gecko_PWM->r_pwm01_toggle);				
+			
 
 					Gecko_PWM->r_pwm03_Td_cycle |= PWM0_Td_Cycle(Tdead_Cycle);
-					
-#if 0//DEBUG_UATR0_PRINT_LOG
-	tempval=Gecko_PWM->r_pwm03_Td_cycle;
-	UATR0_PRINT_LOG((unsigned char *)("\r\n"));						
-	UATR0_PRINT_LOG((unsigned char *)("PWM_CHAN_0 Gecko_PWM->r_pwm03_Td_cycle --- = 0x"));
-	string=my_itoa(tempval);
-	UATR0_PRINT_LOG((unsigned char *)(string));
-	UATR0_PRINT_LOG((unsigned char *)("\r\n"));	
-#endif					
 
-#if 0//DEBUG_UATR0_PRINT_LOG
-	tempval=Gecko_PWM->r_pwm03_Td_cycle;
-	UATR0_PRINT_LOG((unsigned char *)("\r\n"));						
-	UATR0_PRINT_LOG((unsigned char *)("PWM_CHAN_0 Gecko_PWM->r_pwm03_Td_cycle --- = 0x"));
-	string=my_itoa(tempval);
-	UATR0_PRINT_LOG((unsigned char *)(string));
-	UATR0_PRINT_LOG((unsigned char *)("\r\n"));	
-#endif	
+					printf("\r\n PWM_CHAN_0 Gecko_PWM->r_pwm03_Td_cycle = %d",Gecko_PWM->r_pwm03_Td_cycle);
+					printf("\r\n PWM_CHAN_0 Gecko_PWM->r_pwm03_Td_cycle = %x",Gecko_PWM->r_pwm03_Td_cycle);		
+
+	
 					break;
 
 			case HW_PWM_CHAN_1:
@@ -342,6 +309,9 @@ void Config_PWM(HW_PWM_CHAN_T channel,const struct HAL_PWM_CFG_T *cfg)
 
 
 
+
+
+
 void hw_pwm_enable(HW_PWM_CHAN_T channel)
 {
 	volatile uint32 regval=Gecko_PWM->pwm_select_en;
@@ -455,6 +425,10 @@ void hw_pwm_disable(HW_PWM_CHAN_T channel)
 	
 	
 }
+
+
+
+
 
 
 
@@ -744,10 +718,7 @@ void CST6118_Motor_PWM2_Control_Optimized(int freq,int duty)
         toggle = PWM_MAX_VALUE;
     } 
 		else 
-			
-		
-		
-		{
+	  {
 /******************************************************			
         load = APB_PWM_CLOCK / freq;
         toggle = load * ratio / 100;
@@ -817,8 +788,6 @@ void CST6118_Motor_PWM7_Control_Optimized(int freq,int duty)
         toggle = PWM_MAX_VALUE;
     } 
 		else 
-		
-		
 		{
 			
 /******************************************************			

@@ -211,20 +211,27 @@ extern void DMA_Req_Buslock_Enable(void);
 
 extern void dma_sram_delay(unsigned long delay);
 
+
+
 void HW_SPI_Initialise(HAL_SPI_ID_T id);
+
+
 void HW_SPI_Tx_Block(HAL_SPI_ID_T id,uint16 *pData, uint16 DataLen);
 void HW_SPI_Write_Data(uint16 address, uint16 data);
-
 void HW_SPI_Tx_DMA(HAL_SPI_ID_T id,uint16 *pData, uint16 DataLen);
 
-void HW_SPI_Tx_DMA_32bit(HAL_SPI_ID_T id,uint16 *pData, uint16 DataLen);
-void HW_SPI_Tx_DMA_8bit(HAL_SPI_ID_T id,uint16 *pData, uint16 DataLen);
+
 
 void SPI_8bit_Transfer(void);
+void SPI_16bit_Transfer(void);
+void SPI_24bit_Transfer(void);
+void SPI_32bit_Transfer(void);
 
 void lcd_dma_8bit_refresh(uint16_t xs, uint16_t ys, uint16_t w, uint16_t h, color_t *color);
 
 
-void HW_SPI_Tx_DMA_16bit_ColorBlock(HAL_SPI_ID_T id,uint16 *pData, uint16 DataLen);
 
+void HW_SPI_Tx_DMA_8bit(HAL_SPI_ID_T id,uint16 *pData, uint16 DataLen);
+void HW_SPI_Tx_DMA_16bit_ColorBlock(HAL_SPI_ID_T id,uint16 *pData, uint16 DataLen);
+void HW_SPI_Tx_DMA_32bit(HAL_SPI_ID_T id,uint16 *pData, uint16 DataLen);
 

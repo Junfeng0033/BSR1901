@@ -1,3 +1,6 @@
+
+#include "platform_config.h"
+
 #include "lcd_driver.h"
 #include "GUI.h"
 #include "Font.h"
@@ -10,58 +13,6 @@ GuiShowString(30, 90, 0, 0xFFFF, "STRING");
 Gui_Circle(60, 60, 10, 0);
 Gui_DrawLine(100, 100, 200, 200, 0);
 */
-
-//如果报错可以替换以下两个函数定义以匹配显示驱动
-//#define Lcd_SetXY(X, Y) 			LCD_1IN69_SetWindows(X, Y, X, Y)
-//#define Gui_DrawPoint(x, y, c) 	LCD_1IN69_DrawPoint(x, y, c)
-
-
-
-
-
-// Bresenham算法
-void Gui_arc(uint16_t X, uint16_t Y, uint16_t R, uint16_t fc)
-{
-	unsigned short a, b;
-	int c;
-	a = 0;
-	b = R;
-	c = 3 - 2 * R;
-	while (a < b)
-	{
-		Gui_DrawPoint(X + a, Y + b, fc); //        7
-		Gui_DrawPoint(X - a, Y + b, fc); //        6
-		Gui_DrawPoint(X + a, Y - b, fc); //        2
-		Gui_DrawPoint(X - a, Y - b, fc); //        3
-		Gui_DrawPoint(X + b, Y + a, fc); //        8
-		Gui_DrawPoint(X - b, Y + a, fc); //        5
-		Gui_DrawPoint(X + b, Y - a, fc); //        1
-		Gui_DrawPoint(X - b, Y - a, fc); //        4
-
-		if (c < 0)
-			c = c + 4 * a + 6;
-		else
-		{
-			c = c + 4 * (a - b) + 10;
-			b -= 1;
-		}
-		a += 1;
-	}
-	
-	if (a == b)
-	{
-		Gui_DrawPoint(X + a, Y + b, fc);
-		Gui_DrawPoint(X + a, Y + b, fc);
-		Gui_DrawPoint(X + a, Y - b, fc);
-		Gui_DrawPoint(X - a, Y - b, fc);
-		Gui_DrawPoint(X + b, Y + a, fc);
-		Gui_DrawPoint(X - b, Y + a, fc);
-		Gui_DrawPoint(X + b, Y - a, fc);
-		Gui_DrawPoint(X - b, Y - a, fc);
-	}
-}
-
-
 
 
 
@@ -77,7 +28,7 @@ fc	uint16_t	前景颜色 color
 
 */
 
-
+#if 0
 // Bresenham算法
 void Gui_Circle(uint16_t X, uint16_t Y, uint16_t R, uint16_t fc)
 {
@@ -119,10 +70,53 @@ void Gui_Circle(uint16_t X, uint16_t Y, uint16_t R, uint16_t fc)
 	}
 }
 
+#endif
 
 
 
 
+void Gui_Circle(uint16_t X, uint16_t Y, uint16_t R, uint16_t fc)
+{
+    int a, b;
+    int p;  // 判别式
+
+    a = 0;
+    b = R;
+    p = 3 - 2 * R;  // 初始判别式
+
+    // 正确循环：a <= b，覆盖到45°最后一个点
+    while (a <= b)
+    {
+        // 八分法对称画 8 个点
+        Gui_DrawPoint(X + a, Y + b, fc);
+        Gui_DrawPoint(X - a, Y + b, fc);
+        Gui_DrawPoint(X + a, Y - b, fc);
+        Gui_DrawPoint(X - a, Y - b, fc);
+
+        Gui_DrawPoint(X + b, Y + a, fc);
+        Gui_DrawPoint(X - b, Y + a, fc);
+        Gui_DrawPoint(X + b, Y - a, fc);
+        Gui_DrawPoint(X - b, Y - a, fc);
+
+        // 中点算法判别式更新
+        if (p < 0)
+        {
+            p += 4 * a + 6;
+        }
+        else
+        {
+            p += 4 * (a - b) + 10;
+            b--;
+        }
+        a++;
+    }
+}
+
+
+
+
+
+#if 0
 // 画线函数，使用Bresenham 画线算法
 void Gui_DrawLine(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1, uint16_t Color)
 {
@@ -218,6 +212,211 @@ void Gui_DrawLine(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1, uint16_t C
 	} // end else |slope| > 1
 }
 
+#endif
+
+
+// Bresenham 完美画线函数（优化版）
+void Gui_DrawLine(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1, uint16_t Color)
+{
+    int dx = x1 - x0;
+    int dy = y1 - y0;
+    int x_inc = (dx >= 0) ? 1 : -1;
+    int y_inc = (dy >= 0) ? 1 : -1;
+
+    dx = (dx >= 0) ? dx : -dx;
+    dy = (dy >= 0) ? dy : -dy;
+
+    int dx2 = dx << 1;
+    int dy2 = dy << 1;
+    int error;
+
+    if (dx > dy)  // 斜率 |k| < 1，以 x 为主步进
+    {
+        error = dy2 - dx;
+        for (int i = 0; i <= dx; i++)
+        {
+            Gui_DrawPoint(x0, y0, Color);
+
+            if (error >= 0)
+            {
+                error -= dx2;
+                y0 += y_inc;
+            }
+
+            error += dy2;
+            x0 += x_inc;
+        }
+    }
+    else   // 斜率 |k| >= 1，以 y 为主步进
+    {
+        error = dx2 - dy;
+        for (int i = 0; i <= dy; i++)
+        {
+            Gui_DrawPoint(x0, y0, Color);
+
+            if (error >= 0)
+            {
+                error -= dy2;
+                x0 += x_inc;
+            }
+
+            error += dx2;
+            y0 += y_inc;
+        }
+    }
+}
+
+
+
+
+
+
+// 画空心矩形
+// x0,y0 = 左上角坐标
+// w    = 宽度
+// h    = 高度
+// Color= 颜色
+void Gui_DrawRect(uint16_t x0, uint16_t y0, uint16_t w, uint16_t h, uint16_t Color)
+{
+    uint16_t x1 = x0 + w;
+    uint16_t y1 = y0 + h;
+
+    // 上边框
+    Gui_DrawLine(x0, y0, x1, y0, Color);
+    // 下边框
+    Gui_DrawLine(x0, y1, x1, y1, Color);
+    // 左边框
+    Gui_DrawLine(x0, y0, x0, y1, Color);
+    // 右边框
+    Gui_DrawLine(x1, y0, x1, y1, Color);
+}
+
+
+
+// 画一个左上角在(50,50)，宽100，高60，红色的矩形
+//Gui_DrawRect(50, 50, 100, 60, RED);
+
+
+
+
+
+
+
+
+
+
+
+// 辅助函数：判断点 (x,y) 是否在 [angle_s, angle_e] 角度范围内
+// 纯整数运算，超快
+//static uint8_t Gui_PointInAngle(int x, int y, int angle_s, int angle_e)
+__RAM_CODE__  static uint8_t Gui_PointInAngle(int x, int y, int angle_s, int angle_e)
+{
+    int quad = 0;
+    int degrees;
+
+    if (x == 0 && y == 0) return 0;
+
+    if (x >= 0 && y > 0)  quad = 0;   // 0~90
+    else if (x < 0 && y >= 0) quad = 90;  // 90~180
+    else if (x <= 0 && y < 0) quad = 180; // 180~270
+    else if (x > 0 && y <= 0) quad = 270; // 270~360
+
+    int ax = (x >= 0) ? x : -x;
+    int ay = (y >= 0) ? y : -y;
+
+    if (ax == 0) degrees = 90;
+    else if (ay == 0) degrees = 0;
+    else
+    {
+        if (ay > ax) degrees = 90 - (ax * 45) / ay;
+        else         degrees = (ay * 45) / ax;
+    }
+
+    degrees += quad;
+
+    if (angle_s < angle_e)
+    {
+        return (degrees >= angle_s && degrees <= angle_e);
+    }
+    else
+    {
+        return (degrees >= angle_s || degrees <= angle_e);
+    }
+}
+
+
+
+
+
+
+// ===================== 核心函数 =====================
+// 功能：画圆弧 / 扇形
+// X0,Y0：圆心
+// R    ：半径
+// angleStart, angleEnd：0~360
+// color：颜色
+// isSector：0=圆弧  1=扇形
+void Gui_DrawSector_M0(uint16_t X0, uint16_t Y0, uint16_t R,
+                       int angleStart, int angleEnd,
+                       uint16_t color, uint8_t isSector)
+{
+    int x = 0, y = R;
+    int d = 3 - 2 * R;
+
+    // 画8对称点，但只画在角度范围内的
+    while (x <= y)
+    {
+        if (Gui_PointInAngle( x,  y, angleStart, angleEnd)) Gui_DrawPoint(X0 + x, Y0 - y, color);
+        if (Gui_PointInAngle(-x,  y, angleStart, angleEnd)) Gui_DrawPoint(X0 - x, Y0 - y, color);
+        if (Gui_PointInAngle( x, -y, angleStart, angleEnd)) Gui_DrawPoint(X0 + x, Y0 + y, color);
+        if (Gui_PointInAngle(-x, -y, angleStart, angleEnd)) Gui_DrawPoint(X0 - x, Y0 + y, color);
+        if (Gui_PointInAngle( y,  x, angleStart, angleEnd)) Gui_DrawPoint(X0 + y, Y0 - x, color);
+        if (Gui_PointInAngle(-y,  x, angleStart, angleEnd)) Gui_DrawPoint(X0 - y, Y0 - x, color);
+        if (Gui_PointInAngle( y, -x, angleStart, angleEnd)) Gui_DrawPoint(X0 + y, Y0 + x, color);
+        if (Gui_PointInAngle(-y, -x, angleStart, angleEnd)) Gui_DrawPoint(X0 - y, Y0 + x, color);
+
+        if (d < 0)
+        {
+            d += 4 * x + 6;
+        }
+        else
+        {
+            d += 4 * (x - y) + 10;
+            y--;
+        }
+        x++;
+    }
+
+    // 如果是扇形，画两条边线
+    if (isSector)
+    {
+        int x1 = X0 + R;
+        int y1 = Y0;
+        int x2 = X0;
+        int y2 = Y0 - R;
+
+        Gui_DrawLine(X0, Y0, x1, y1, color);
+        Gui_DrawLine(X0, Y0, x2, y2, color);
+    }
+}
+
+
+
+
+
+
+// 画 0~90 度 扇形（超快）
+//Gui_DrawSector_M0(120, 120, 40, 0, 90, RED, 1);
+
+// 画 90~180 度 圆弧
+//Gui_DrawSector_M0(120, 120, 40, 90, 180, BLUE, 0);
+
+
+
+
+
+
+
 void GuiShowString(uint16_t x, uint16_t y, uint16_t fc, uint16_t bc, uint8_t *s)
 {
 	unsigned char i, j;
@@ -259,6 +458,11 @@ void GuiShowString(uint16_t x, uint16_t y, uint16_t fc, uint16_t bc, uint8_t *s)
 		}
 	}
 }
+
+
+
+
+
 
 //显示字符
 void GuiShowChar_16(uint16_t x, uint16_t y, uint8_t s)
@@ -361,6 +565,7 @@ void GuiShowChar_32(uint16_t x, uint16_t y, uint8_t n)
 
 
 
+
 static int oled_pow(uint8_t m, uint8_t n)
 {
 	uint32_t result = 1;
@@ -368,6 +573,9 @@ static int oled_pow(uint8_t m, uint8_t n)
 		result *= m;
 	return result;
 }
+
+
+
 
 void GuiShowNum(uint8_t x, uint8_t y, uint16_t num, uint8_t len)
 {
@@ -493,6 +701,9 @@ void set_bat_percentage(uint8_t percent)
 	GuiShowNum(50, 55, percent, 3);
 	GuiShowChar_16(77,55, '%');
 }
+
+
+
 
 void set_charge_circle(uint8_t percent)
 {

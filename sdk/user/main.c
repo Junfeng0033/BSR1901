@@ -136,15 +136,9 @@ int main (void)
 	
 	gecko_pinmux_config(PAD7,GPIOB_7);//BL control(BSR1901 use MOS to control backlight)
 	
-	
-	
-
 
 	HW_SPI_Initialise(HAL_SPI_0);
-	
-	
-	
-	
+
 
 	Lcd_Init();
 	//bsr1901_pullup_pulldown_config(PAD_14,PAD_PULLUP);	//BL control	
@@ -188,7 +182,7 @@ int main (void)
 
 /*
 
-PWM Charger
+    //PWM Charger
 
 		//PAD10 gpio_0_6 as DC_IN detect
 		gecko_pinmux_config(PAD10,GPIO_A_6);//config PAD10 as gpio_0_6(A6)	
@@ -235,14 +229,13 @@ PWM Charger
 		//config PAD10(GPIOA6) as GPIO input
 		gecko_pinmux_config(PAD10,GPIO_A_6);
 		extern void Set_GPIOA6_Input(void);
-		Set_GPIOA6_Input();
-	
+		Set_GPIOA6_Input();	
 	#endif
 
-	/**********************************************************************************	
+/**********************************************************************************	
 		//Gecko_Timer_Init();
 		//Gecko_Timer_Setting(TIMER_INDEX0);	
-	*************************************************************************************/
+*************************************************************************************/
 
 //		gecko_pinmux_config(PAD0,UART0_OUT);
 //		gecko_pinmux_config(PAD1,UART0_IN);
@@ -328,13 +321,11 @@ PWM Charger
 		//charger_process(&my_charger);
 		
 		//printf("\r\n  Charger Bank Solution Software, Copyright (c) 2020-2022 BraveStarr Inc.\r\n");
-		
-		
+
 		
 		//ipxs_writeByte(DEVICE_ADDR_IP, 0x05, 0x75);//write value 0x75 to register 0x05
 		//wr_data=ipxs_readByte(DEVICE_ADDR_IP,0x05);//read register 0x05
 		//printf("\r\n!!!!!!!!!!!ipxs_readByte ~~~~5678~~~######### = 0x%x \r\n",wr_data);		
-
 
 		
 		
@@ -342,10 +333,12 @@ PWM Charger
 		//read 0x31 register(STATE_CTL0)
 		//wr_data = ipxs_readByte(DEVICE_ADDR_IP, REG_STATE_CTL0);
 	
-	  	//printf("\r\n !!!!!!!!get_ip2366_state!!!!!  reg_ipxs = %x \r\n",wr_data);		
+	  //printf("\r\n !!!!!!!!get_ip2366_state!!!!!  reg_ipxs = %x \r\n",wr_data);		
 		//wr_data=wr_data & 0x20;//(bit5,CHG_EN-------1,charging;0, not charging)
-	 	// printf("\r\n !!!!22222!!!!get_ip2366_state!!22222!!!  reg_ipxs = %x \r\n",wr_data);	
-		
+	 	//printf("\r\n !!!!22222!!!!get_ip2366_state!!22222!!!  reg_ipxs = %x \r\n",wr_data);	
+
+
+
 		#if 0
 		
 		if(wr_data==0x20)
@@ -357,28 +350,21 @@ PWM Charger
 			
 			HW_SPI_Tx_DMA_8bit(HAL_SPI_0, (uint16*)gImage_charging, 32768);
 			//dma_sram_delay(1000);
-
-
 		}
 		else if(wr_data==0x0)
 		{
-			#if 1//idle UI
+      //idle UI
 			Lcd_SetRegion(0, 0, 127, 127);
 			//Lcd_Clear(RED);
 			//HW_SPI_Tx_DMA(HAL_SPI_0, (uint16*)gImage_128x128_cake, 32768);
 			HW_SPI_Tx_DMA_8bit(HAL_SPI_0, (uint16*)gImage_128x128_battery, 32768);
-			//dma_sram_delay(1000);
-			
-
-
-			#endif			
+			//dma_sram_delay(1000);		
 		}
 		
 		get_ipxs_state();
 		get_chg_vbus_voltage();
 		get_voltage_battery();
-		get_voltage_vsys();
-		
+		get_voltage_vsys();		
 		
     #endif
 /************************usb insert charging detect***************************************/
@@ -400,9 +386,8 @@ PWM Charger
 			if(flag_key1==0)
 			{
 				//UATR1_PRINT_LOG((unsigned char *)("K27 KEY Press Down"));
-        		printf("\r\n K27 KEY Press Down \r\n ");
-				HW_SPI_Tx_DMA_8bit(HAL_SPI_0, (uint16*)gImage_128x128_star, 32768);
-			
+        printf("\r\n K27 KEY Press Down \r\n ");
+				HW_SPI_Tx_DMA_8bit(HAL_SPI_0, (uint16*)gImage_128x128_star, 32768);			
 				
 				flag_key1=1;
 			}
@@ -415,7 +400,11 @@ PWM Charger
 			}
 		}
 		#endif
-		
+
+
+
+
+
 		//KEY2
 		#if 0	
 		//PAD18(GPIOB6)		
@@ -427,7 +416,7 @@ PWM Charger
 			  #if 0
 				//LCD_BL_CLR;
 				//bsr1901_pullup_pulldown_config(PAD_14,PAD_PULLDOWN);	
-        	  #endif
+        #endif
 
 				//LDO33_AUX disable, power down LCD module			
 				LDO33_AUX_Disable();
@@ -440,8 +429,8 @@ PWM Charger
 //				wr_data |= 0x200;//(set bit10=1)
 //				reg_write(0x40020000+0x000, wr_data);
 			
-        		bsr1901_prepare_sleep_for_pin_wakeup();
-			  	//sleep-wakeup setting
+        bsr1901_prepare_sleep_for_pin_wakeup();
+			  //sleep-wakeup setting
 				BSR1901_GPIO_WakeUp_From_DeepSleep();//
 				tc_gecko_cm0_aon_sleep();//deep sleep test for low power design
 
@@ -467,7 +456,6 @@ PWM Charger
 //		GuiShowNumString_48(32, 35, count, 2);
 //		GuiShowPersent(45+40, 45);
 //		GuiShowNumString_16(50, 85, count, 2);
-
 
 
 
@@ -500,32 +488,29 @@ PWM Charger
 		if(gpio_status==0x40)
 		{
 			mi_tou_flag=1;//smoking in progress
-			
-//			UATR1_PRINT_LOG((unsigned char *)("\r\n"));						
-//			UATR1_PRINT_LOG((unsigned char *)("mi_tou_detect---gpio_a6 HIGH:0x="));
-//			string=my_itoa(gpio_status);
-//			UATR1_PRINT_LOG((unsigned char *)(string));
-//			UATR1_PRINT_LOG((unsigned char *)("\r\n"));
+			printf("\r\n !!!!mi_tou_detect---gpio_a6 HIGH !!! gpio_status = %x",gpio_status);
 		}
 		////////////////////////////////////////////////////////////////			
 		#endif		
 
+
+
 		#if 0
-			//LDO33_AUX disable, power down LCD module
-			wr_data = reg_read(0x40020000+0x28);
-			//wr_data &= (~0x340);
-			wr_data=0x0;
-			reg_write(0x40020000+0x28,wr_data);
+		//LDO33_AUX disable, power down LCD module
+		wr_data = reg_read(0x40020000+0x28);
+		//wr_data &= (~0x340);
+		wr_data=0x0;
+		reg_write(0x40020000+0x28,wr_data);
 
-			#if 0
-			delay_1us(1000);
+		#if 0
+		delay_1us(1000);
 
-			//LDO33_AUX enable, power on LCD module
-			wr_data |= 0x340;
-			reg_write(0x40020000+0x28,wr_data);
+		//LDO33_AUX enable, power on LCD module
+		wr_data |= 0x340;
+		reg_write(0x40020000+0x28,wr_data);
 
-			delay_1us(5000);
-      #endif			
+		delay_1us(5000);
+		#endif			
 		#endif
 		
 

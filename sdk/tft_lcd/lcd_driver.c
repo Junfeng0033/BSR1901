@@ -387,6 +387,9 @@ void Lcd_Fill(uint16_t x,uint16_t y,uint16_t xend,uint16_t yend,uint16_t Color)
 	#endif	
 }
 
+
+
+
 /*************************************************
 功  能：使用 DMA 快速绘制图像块
 参  数：x, y - 起始坐标

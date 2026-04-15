@@ -336,55 +336,57 @@ void pwm_close(void)
 
 
 #if 0
+
 #define  boost5v  0x363//
 #define  boost5v_adj  0x0a
+
 void boost_fun(void)
 {
 
-						u8 flag=0;
-					if(dc5v_online_flag)return;
-	        if(pwm_init_flag){
-						 pwm_init_flag=0;
-	           pwm_init(0);//
-					}
+			u8 flag=0;
+			if(dc5v_online_flag)return;
+			if(pwm_init_flag){
+				 pwm_init_flag=0;
+				 pwm_init(0);//
+			}
 
-					adc_vdd_read();
+			adc_vdd_read();
 
-					vdd_adcall += adc_121_chadc;
-					testcnt1++;
-					if(testcnt1<7){
-						return;
-					}
-					testcnt1=0;
-					vdd_adcall >>=3;// /8
-					
-					//uart0_send_byte(0xaa);	
-					//uart0_send_byte(0xaa);
-					//uart0_send_byte((vdd_adcall>>8));//adc_121_chadc//vdd_adcall
-					//uart0_send_byte((vdd_adcall&0xff));
-					
-					if(vdd_adcall<(boost5v-boost5v_adj)){
-						flag =1;//DEC
-						//uart0_send_byte(0xac);	
-					}else if(vdd_adcall>(boost5v+boost5v_adj)){
-						flag =2;//ADD
-						//uart0_send_byte(0xad);
-					}
-					//flag=0;
-					vdd_adcall=0;
-					if(flag){//
-						if(flag==1){
-							if(mypwmduty)
-							mypwmduty--;
-						}else{
-							if(mypwmduty<BOOST_MAXDUTY)
-							mypwmduty++;
-						}
-						flag=0;
-						pwm_dutyset(0);
-					}
-					testcnt1=0;
-					vdd_adcall  =0;// /8
+			vdd_adcall += adc_121_chadc;
+			testcnt1++;
+			if(testcnt1<7){
+				return;
+			}
+			testcnt1=0;
+			vdd_adcall >>=3;// /8
+			
+			//uart0_send_byte(0xaa);	
+			//uart0_send_byte(0xaa);
+			//uart0_send_byte((vdd_adcall>>8));//adc_121_chadc//vdd_adcall
+			//uart0_send_byte((vdd_adcall&0xff));
+			
+			if(vdd_adcall<(boost5v-boost5v_adj)){
+				flag =1;//DEC
+				//uart0_send_byte(0xac);	
+			}else if(vdd_adcall>(boost5v+boost5v_adj)){
+				flag =2;//ADD
+				//uart0_send_byte(0xad);
+			}
+			//flag=0;
+			vdd_adcall=0;
+			if(flag){//
+				if(flag==1){
+					if(mypwmduty)
+					mypwmduty--;
+				}else{
+					if(mypwmduty<BOOST_MAXDUTY)
+					mypwmduty++;
+				}
+				flag=0;
+				pwm_dutyset(0);
+			}
+			testcnt1=0;
+			vdd_adcall  =0;// /8
 }
 #endif
 

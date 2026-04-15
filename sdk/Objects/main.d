@@ -22,8 +22,6 @@
 .\objects\main.o: .\tft_lcd\lcd_driver.h
 .\objects\main.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 .\objects\main.o: user\gui.h
-.\objects\main.o: user\ui.h
-.\objects\main.o: .\SCGUI\example\sc_demo_test.h
 .\objects\main.o: .\SCGUI\sc_gui.h
 .\objects\main.o: .\SCGUI\sc_common.h
 .\objects\main.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
@@ -35,6 +33,8 @@
 .\objects\main.o: .\SCGUI\sc_arc.h
 .\objects\main.o: .\SCGUI\sc_transform.h
 .\objects\main.o: .\SCGUI\sc_compose.h
+.\objects\main.o: user\ui.h
+.\objects\main.o: .\SCGUI\example\sc_demo_test.h
 .\objects\main.o: .\SCGUI\sc_menu.h
 .\objects\main.o: .\include\charger.h
 .\objects\main.o: .\include\key_handle.h

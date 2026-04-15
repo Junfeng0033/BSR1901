@@ -5,6 +5,8 @@
 .\objects\isr.o: .\include\gpio.h
 .\objects\isr.o: .\include\watchdog.h
 .\objects\isr.o: .\include\pwm.h
+.\objects\isr.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdarg.h
+.\objects\isr.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 .\objects\isr.o: .\include\spi.h
 .\objects\isr.o: .\tft_lcd\lcd_driver.h
 .\objects\isr.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h

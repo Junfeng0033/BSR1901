@@ -6,3 +6,5 @@
 .\objects\system_initial.o: .\include\watchdog.h
 .\objects\system_initial.o: .\include\timer.h
 .\objects\system_initial.o: .\include\pwm.h
+.\objects\system_initial.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdarg.h
+.\objects\system_initial.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h

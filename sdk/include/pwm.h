@@ -1,6 +1,9 @@
 
 #include "platform_config.h"
 
+#include <stdarg.h>
+#include <stdio.h>
+
 
 //define AHB base address
 //AHB Address
@@ -218,10 +221,11 @@ struct HAL_PWM_CFG_T {
 
 
 
-//register 0x50
 
 
 
+
+void Config_PWM(HW_PWM_CHAN_T channel,const struct HAL_PWM_CFG_T *cfg);
 
 
 uint8 gecko_pwm_init(void);
@@ -233,6 +237,12 @@ int gecko_pwm_stop(void);
 void hw_pwm_enable(HW_PWM_CHAN_T channel);
 void hw_pwm_disable(HW_PWM_CHAN_T channel);
 void hw_pwm_invert(HW_PWM_CHAN_T channel);
+
+
+
+
+
+
 
 
 void SixCh_PWM5_Config(void);

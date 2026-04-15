@@ -5,36 +5,7 @@
 #define GPIO_GROUP1_BASE    0x40019000
 
 
-typedef enum {
-    GPIO_GROUP_0 = 0x0,
-    GPIO_GROUP_1 = 0x1,
-    GPIO_GROUP_QTY
-} GPIO_GROUP_ID_T;   
 
-
-#define GPIOA								GPIO_GROUP_0
-#define GPIOB								GPIO_GROUP_1
-
-
-/* GPIO bits defines */
-
-#define   GPIO_A0      		BIT(0)
-#define   GPIO_A1      		BIT(1)
-#define   GPIO_A2      		BIT(2)
-#define   GPIO_A3      		BIT(3)
-#define   GPIO_A4      		BIT(4)
-#define   GPIO_A5      		BIT(5)
-#define   GPIO_A6      		BIT(6)
-#define   GPIO_A7      		BIT(7)
-
-#define   GPIO_B0      		BIT(0)
-#define   GPIO_B1      		BIT(1)
-#define   GPIO_B2      		BIT(2)
-#define   GPIO_B3      		BIT(3)
-#define   GPIO_B4      		BIT(4)
-#define   GPIO_B5      		BIT(5)
-#define   GPIO_B6      		BIT(6)
-#define   GPIO_B7      		BIT(7)
 
 
 
@@ -86,11 +57,57 @@ typedef enum {
 
 
 
+
+
+
+
 #define HWreg_GPIO_0_SET_REG(x,offset)          					(*(volatile uint32*)(GPIO_GROUP0_BASE + (offset))) = (uint32)(x)
 #define HWreg_GPIO_0_GET_REG(offset)            					(*(volatile uint32*)(GPIO_GROUP0_BASE + (offset)))
 
 #define HWreg_GPIO_1_SET_REG(x,offset)          					(*(volatile uint32*)(GPIO_GROUP1_BASE + (offset))) = (uint32)(x)
 #define HWreg_GPIO_1_GET_REG(offset)            					(*(volatile uint32*)(GPIO_GROUP1_BASE + (offset)))
+	
+
+
+
+
+
+
+/* GPIO bits defines */
+
+#define   GPIO_A0      		BIT(0)
+#define   GPIO_A1      		BIT(1)
+#define   GPIO_A2      		BIT(2)
+#define   GPIO_A3      		BIT(3)
+#define   GPIO_A4      		BIT(4)
+#define   GPIO_A5      		BIT(5)
+#define   GPIO_A6      		BIT(6)
+#define   GPIO_A7      		BIT(7)
+
+#define   GPIO_B0      		BIT(0)
+#define   GPIO_B1      		BIT(1)
+#define   GPIO_B2      		BIT(2)
+#define   GPIO_B3      		BIT(3)
+#define   GPIO_B4      		BIT(4)
+#define   GPIO_B5      		BIT(5)
+#define   GPIO_B6      		BIT(6)
+#define   GPIO_B7      		BIT(7)
+
+
+
+
+typedef enum {
+    GPIO_GROUP_0 = 0x0,
+    GPIO_GROUP_1 = 0x1,
+    GPIO_GROUP_QTY
+} GPIO_GROUP_ID_T;   
+
+
+
+
+#define GPIOA								GPIO_GROUP_0
+#define GPIOB								GPIO_GROUP_1
+
 
 
 
@@ -129,8 +146,6 @@ typedef enum
 
 
 
-
-
 /*
  * GPIO interrupt trigger
  */
@@ -144,30 +159,18 @@ typedef enum {
 
 
 
-#define GPIO_Pin_0                 ((uint16_t)0x0001)  /* Pin 0 selected */
-#define GPIO_Pin_1                 ((uint16_t)0x0002)  /* Pin 1 selected */
-#define GPIO_Pin_2                 ((uint16_t)0x0004)  /* Pin 2 selected */
-#define GPIO_Pin_3                 ((uint16_t)0x0008)  /* Pin 3 selected */
-#define GPIO_Pin_4                 ((uint16_t)0x0010)  /* Pin 4 selected */
-#define GPIO_Pin_5                 ((uint16_t)0x0020)  /* Pin 5 selected */
-#define GPIO_Pin_6                 ((uint16_t)0x0040)  /* Pin 6 selected */
-#define GPIO_Pin_7                 ((uint16_t)0x0080)  /* Pin 7 selected */
-#define GPIO_Pin_8                 ((uint16_t)0x0100)  /* Pin 8 selected */
-#define GPIO_Pin_9                 ((uint16_t)0x0200)  /* Pin 9 selected */
-#define GPIO_Pin_10                ((uint16_t)0x0400)  /* Pin 10 selected */
-#define GPIO_Pin_11                ((uint16_t)0x0800)  /* Pin 11 selected */
-#define GPIO_Pin_12                ((uint16_t)0x1000)  /* Pin 12 selected */
-#define GPIO_Pin_13                ((uint16_t)0x2000)  /* Pin 13 selected */
-#define GPIO_Pin_14                ((uint16_t)0x4000)  /* Pin 14 selected */
-#define GPIO_Pin_15                ((uint16_t)0x8000)  /* Pin 15 selected */
-#define GPIO_Pin_All               ((uint16_t)0xFFFF)  /* All pins selected */
-
-
-
-
 extern int reg_read(int addr);
 extern void reg_write(int addr, int data);
 
+
+void GpiopinMode(uint8 pin,uint8 mode);
+void GpiopinWrite(uint8 pin,uint8 val);
+uint8 GpiopinRead(uint8 pin);
+
+
+extern VOID GPIO_InitIO(UINT8 direction, UINT8 port);
+extern VOID GPIO_WriteIO(UINT8 data, UINT8 port);
+extern UINT8 GPIO_ReadIO(UINT8 port);
 
 
 int gpio_set_input(GPIO_GROUP_ID_T group_id, uint8 offset);
@@ -175,9 +178,7 @@ int gpio_set_output(GPIO_GROUP_ID_T group_id, uint8 offset);
 void gpio_set_value(GPIO_GROUP_ID_T group_id,BOOL gpio_val,uint8 gpio_offset);
 uint8 gpio_get_value(GPIO_GROUP_ID_T group_id,uint8 gpio_offset);
 
-void GpiopinMode(uint8 pin,uint8 mode);
-void GpiopinWrite(uint8 pin,uint8 val);
-uint8 GpiopinRead(uint8 pin);
+
 
 void gpio_set_eint_rising(GPIO_GROUP_ID_T group_id,uint8 gpio_offset);
 void gpio_set_eint_falling(GPIO_GROUP_ID_T group_id,uint8 gpio_offset);
@@ -189,6 +190,8 @@ void gpio_hall_int_callback_func(void);
 void GPIO_Hall_IRQ_Init(void);
 void GPIO_Hall_LowLevel_Interrupt_Init(void);
 void GPIO_Hall_HighLevel_Interrupt_Init(void);
+
+
 
 uint8 KP85_KEY2_Detect(void);
 void Set_GPIO_B7_Input(void);

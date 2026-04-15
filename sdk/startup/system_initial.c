@@ -4,20 +4,6 @@
  *           for the BSR Ltd. Device Series 
  * @version: V1.0
  * @date:    26. Oct. 2020
- *----------------------------------------------------------------------------
- *
- * Copyright (C) 2008 ARM Limited. All rights reserved.
- *
- * ARM Limited (ARM) is supplying this software for use with Cortex-M0 
- * processor based microcontrollers.  This file can be freely distributed 
- * within development tools that are supporting such ARM based processors. 
- *
- * THIS SOFTWARE IS PROVIDED "AS IS".  NO WARRANTIES, WHETHER EXPRESS, IMPLIED
- * OR STATUTORY, INCLUDING, BUT NOT LIMITED TO, IMPLIED WARRANTIES OF
- * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE APPLY TO THIS SOFTWARE.
- * ARM SHALL NOT, IN ANY CIRCUMSTANCES, BE LIABLE FOR SPECIAL, INCIDENTAL, OR
- * CONSEQUENTIAL DAMAGES, FOR ANY REASON WHATSOEVER.
- *
  ******************************************************************************/
 
 
@@ -234,7 +220,7 @@ NVIC_SetVectorTable(NVIC_VectTab_RAM+0x2000, 0x0);
 
 
 
-#if 1
+
 
 
 
@@ -418,4 +404,4 @@ uint32_t hal_nvic_get_pending_irq(IRQn_Type irq_number)
 
 
 
-#endif
+

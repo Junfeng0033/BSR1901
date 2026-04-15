@@ -11,9 +11,6 @@
 #define	 	 GECKO_APB_ADC_BASE		    							0x40016000
 #define 	 REG_GPADC_BASE              						0x40016000
 
-extern int hal_analogif_reg_read(unsigned short reg, unsigned short *val);
-extern int hal_analogif_reg_write(unsigned short reg, unsigned short val);
-
 
 
 typedef volatile struct
@@ -52,6 +49,10 @@ typedef volatile struct
 #define hw_gpadc                   ((HWP_GPADC_T*) GECKO_APB_ADC_BASE)
 
 
+
+
+extern int hal_analogif_reg_read(unsigned short reg, unsigned short *val);
+extern int hal_analogif_reg_write(unsigned short reg, unsigned short val);
 
 
 

@@ -2,6 +2,9 @@
 
 
 
+
+
+
 #define AHB_DMA_BASE                     				0x40006000
 //| Slv 7 | UART3         										| 0x4000_6000 - 0x4000_6fff
 
@@ -107,8 +110,18 @@ extern const unsigned char gImage_taizi[25600];
 extern const unsigned char gImage_icon_1[3990];
 
 
+extern uint32 pEnterCriticalSection (void);
+extern void pExitCriticalSection (uint32 status);
 
-void Gecko_DMA_Transport(volatile void *dest,volatile const void *src, uint16 size,uint8 type, uint8 direct);
+
+void DMA_Req_Buslock_Enable(void);
+void DMA_Req_Buslock_Disable(void);
+
+
+
 void DMA_Configuration(void);
 
+void Clear_DMA_Interrupt(void);
 
+
+void Gecko_DMA_Transport(volatile void *dest,volatile const void *src, uint16 size,uint8 type, uint8 direct);

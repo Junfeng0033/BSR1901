@@ -16,6 +16,17 @@
 #define  BSR1901_SYS_8MHZ_MODE				1
 
 
+#define  DEBUG_UATR0_PRINT_LOG            1
+
+
+
+
+/* Debug option */
+#ifdef WIN32
+#define pDEBUG                              1
+#else
+#define pDEBUG                              0
+#endif
 
 
 
@@ -107,17 +118,6 @@ typedef volatile unsigned int       REG32;
 
 
 
-#define  DEBUG_UATR0_PRINT_LOG            1
-
-
-
-
-/* Debug option */
-#ifdef WIN32
-#define pDEBUG                              1
-#else
-#define pDEBUG                              0
-#endif
 
 
 

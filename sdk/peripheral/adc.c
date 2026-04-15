@@ -488,6 +488,9 @@ uint16 adc_buck_curr_read(void)
 
 
 
+
+
+
 //ADC4
 //detect battery voltage 
 uint16 adc_vbatvalue_read(void) 

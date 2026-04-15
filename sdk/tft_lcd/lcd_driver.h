@@ -74,12 +74,13 @@
 #define GRAY2   	0x4208
 
 
+#if 0
 #define RED32  		0xf800f800
 #define GREEN32		0x07e007e0
 #define BLUE32 		0x001f001f
 #define WHITE32		0xffffffff
 #define BLACK32		0x00000000
-
+#endif
 
 
 //==================================================================================================
@@ -115,6 +116,11 @@
 
 #define	IP2366_INT_SET  	gpio_set_value(IP2366_INT_PORT, 1, IP2366_INT_PIN)
 #define	IP2366_INT_CLR  	gpio_set_value(IP2366_INT_PORT, 0, IP2366_INT_PIN)
+
+
+//#define P_I2C_INT_CLR   {GpiopinMode(PA6,OUTPUT);GpiopinWrite(PA6,LOW);}
+//#define P_I2C_INT_SET   {GpiopinMode(PA6,OUTPUT);GpiopinWrite(PA6,HIGH);}
+
 
 
 //hwp_spi0->CTROL = 0x10f8b;						//8bit spi data
