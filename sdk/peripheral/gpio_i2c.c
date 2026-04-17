@@ -36,7 +36,7 @@
 #define SCL_PIN		PA5
 #define SDA_PIN		PA4
 
-UINT8 level = 0;
+UINT8 GpioLevel = 0;
 
 
 
@@ -208,8 +208,8 @@ VOID GPIO_WriteIO(UINT8 data, UINT8 port)
 
 UINT8 GPIO_ReadIO(UINT8 port)
 {
-    DRV_GpioGetLevel_I2C(port,&level);
-    return level;
+    DRV_GpioGetLevel_I2C(port,&GpioLevel);
+    return GpioLevel;
 }
 
 

@@ -31,6 +31,10 @@ reg_pclk_out_div=3: 64·ÖÆµ
 
 */
 
+
+
+
+
 #define reg_pclk_out_div(n)           (((n) & 0x3) << 0) //2-bit [1:0]//default value n=0
 
 
@@ -47,17 +51,7 @@ void gecko_branchnode_pclkout_cfg(void)
 	TempV|=reg_pclk_out_div(1);
 	SYS_HW32_REG_WR(0x30C,TempV);
 	
-	TempV=SYS_HW32_REG_RD(0x30C);	
-	TempV=SYS_HW32_REG_RD(0x30C);
-	TempV=SYS_HW32_REG_RD(0x30C);	
-	TempV=SYS_HW32_REG_RD(0x30C);	
-	TempV=SYS_HW32_REG_RD(0x30C);	
 
-	TempV=SYS_HW32_REG_RD(0x30C);	
-	TempV=SYS_HW32_REG_RD(0x30C);
-	TempV=SYS_HW32_REG_RD(0x30C);	
-	TempV=SYS_HW32_REG_RD(0x30C);	
-	TempV=SYS_HW32_REG_RD(0x30C);	
 	
 	TempV=SYS_HW32_REG_RD(0x30C);	
 	TempV&=(~reg_pclk_out_div(1));

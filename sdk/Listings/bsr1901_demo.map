@@ -200,6 +200,7 @@ Section Cross References
     adc.o(i.adc_delay_us) refers to fadd.o(.text) for __aeabi_fsub
     adc.o(i.adc_sampling_batterycase) refers to adc.o(i.GeckoGpadcGetRawData) for GeckoGpadcGetRawData
     adc.o(i.adc_sampling_ntc_sensor) refers to adc.o(i.GeckoGpadcGetRawData) for GeckoGpadcGetRawData
+    adc.o(i.adc_sampling_vin) refers to adc.o(i.GeckoGpadcGetRawData) for GeckoGpadcGetRawData
     adc.o(i.adc_vbatvalue_read) refers to adc.o(i.GeckoGpadcGetRawData) for GeckoGpadcGetRawData
     adc.o(i.adc_vbatvalue_read) refers to dfltui.o(.text) for __aeabi_ui2d
     adc.o(i.adc_vbatvalue_read) refers to dmul.o(.text) for __aeabi_dmul
@@ -1380,7 +1381,7 @@ Removing Unused input sections from the image.
     Removing cmu.o(i.cali32m_result_printf), (16 bytes).
     Removing cmu.o(i.gecko_cmu_reg_rw), (8 bytes).
     Removing iomux.o(i.bsr1901_pullup_pulldown_config), (332 bytes).
-    Removing iomux.o(i.gecko_branchnode_pclkout_cfg), (44 bytes).
+    Removing iomux.o(i.gecko_branchnode_pclkout_cfg), (24 bytes).
     Removing isr.o(i.GPIO_0_6_IRQHandler), (12 bytes).
     Removing isr.o(i.external_irq_handler), (2 bytes).
     Removing isr.o(i.hardfault_handler), (2 bytes).
@@ -1488,7 +1489,7 @@ Removing Unused input sections from the image.
     Removing adc.o(i.adc_sampling_ntc_sensor), (10 bytes).
     Removing adc.o(i.adc_sampling_reserved1), (4 bytes).
     Removing adc.o(i.adc_sampling_reserved2), (4 bytes).
-    Removing adc.o(i.adc_sampling_vin), (4 bytes).
+    Removing adc.o(i.adc_sampling_vin), (10 bytes).
     Removing adc.o(i.adc_vbatvalue_read), (48 bytes).
     Removing adc.o(.bss), (18 bytes).
     Removing spi.o(i.BSR1901_FireEye_Demo), (660 bytes).
@@ -2041,7 +2042,7 @@ Removing Unused input sections from the image.
     Removing cdrcmple.o(.text), (40 bytes).
     Removing sc_transform.o(i.__ARM_common_ll_mulss), (48 bytes).
 
-694 unused section(s) (total 769334 bytes) removed from the image.
+694 unused section(s) (total 769320 bytes) removed from the image.
 
 ==============================================================================
 

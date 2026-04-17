@@ -76,8 +76,7 @@ typedef volatile struct
 	  REG32                          REG32_0x14;                    //0x00000014		
 	  REG32                          REG32_0x18;                    //0x00000018	
 
-//	  REG32                          REG32_0x1C;                    //0x0000001C
-    REG32                          cali32m;                    	 //0x0000001C		
+    REG32                          cali32m;                    	  //0x0000001C		
 	  REG32                          REG32_0x20;                    //0x00000020
 
 	  REG32                          REG32_0x24;                    //0x00000024	

@@ -32,6 +32,8 @@ int gecko_pwm_start(void)
 	return 0;
 }
 
+
+
 int gecko_pwm_stop(void)
 {
 	Gecko_PWM->pwm_select_en =0x00;

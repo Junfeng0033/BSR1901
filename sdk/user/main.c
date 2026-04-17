@@ -117,15 +117,23 @@ int main (void)
 	
 	
 	gecko_pinmux_default_config();
+	
 
-//   CS    接SPI_CSN_1-(PAD20)
-//   SCL   接SPI_CLK---(PAD22)
-//   SDA   接SPI_MOSI--(PAD23）
+//本程序适配 BSR1901 推荐硬件端口
+//              GND   电源地
+//              VCC   接3.3v电源--LDO33_AUX_OUT
 
-//   RES   接PB4-------(PAD24)--->(PAD07)//default fucntion
-//   DC    接PA3-------(PAD21)
+//              SCL   接SPI_CLK--------(PAD22)
+//              SDA   接SPI_MOSI-------(PAD23)
 
-//   BLK   接PB7-------(PAD07)--->(PAD24)
+//              RES   接PB7------------(PAD07)
+//              DC    接PA3------------(PAD21)
+
+//              CS    接SPI_CSN_1------(PAD20)//有些显示屏可以直接接地
+
+//              BLK   接PB4(PWM4)------(PAD24)
+
+
 
 	gecko_pinmux_config(PAD20,SPI_CSN_1);
 	gecko_pinmux_config(PAD22,SPICLK);
@@ -281,6 +289,8 @@ int main (void)
   printf("time:%s \r\n",gSysTime);
 	printf("\r\n");
 	printf(VERSION);
+	printf("Manufacturer Name: %#04x\n\n", MANUFACTURER_NAME);
+	printf("Chip Local Name:    %s\n",   CHIP_LOCAL_NAME);
 	#endif
 	
 	sc_gui_init(lcd_dma_8bit_refresh, 0, C_ROYAL_BLUE,C_BLUE, &lv_font_16);	

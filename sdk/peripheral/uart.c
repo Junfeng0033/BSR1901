@@ -432,7 +432,13 @@ void Gecko_Uart_Set_AutoBaudRate_Enable(BOOL enable)
 }
 
 
-void  Gecko_Set_BaudRate(HAL_UART_ID_T id,uint32 baud_rate)
+
+
+
+
+
+
+void Gecko_Set_BaudRate(HAL_UART_ID_T id,uint32 baud_rate)
 {
     uint32 baud_divisor;
     uint32 baud_mod;

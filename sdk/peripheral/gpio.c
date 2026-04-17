@@ -574,6 +574,9 @@ void set_uart1_for_gpio_l(void)
 //	 gpio_set_value(GPIO_GROUP_0,0,3);//set GPIO_P0_3 =0		
 }
 
+
+
+
 void GpiopinMode(uint8 pin,uint8 mode) {
 		
  if(mode==INPUT)

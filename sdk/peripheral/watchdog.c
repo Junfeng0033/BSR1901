@@ -24,12 +24,19 @@ void watchdog_unlock(void)
 {
   GECKO1108_WATCHDOG->LOCK = 0x1ACCE551;
 }
+
+
+
 /* ----------------------------------------------------------------- */
 /* Lock watchdog access */
 void watchdog_lock(void)
 {
   GECKO1108_WATCHDOG->LOCK = 0;
 }
+
+
+
+
 
 
 /* ----------------------------------------------------------------- */
@@ -175,9 +182,12 @@ void feed_dog(unsigned int cycle)
 	if (read_data<100)
   watchdog_set(cycle);
 	
-	
-	
 }
+
+
+
+
+
 
 
 
@@ -198,6 +208,9 @@ void watchdog_irq_clear(void)
   //watchdog_lock();
 	GECKO1108_WATCHDOG->LOCK = 0;
 }
+
+
+
 
 
 

@@ -447,11 +447,18 @@ void pDebugPrintfEX(char *format, ...);
 void UART_PRINT_LOG(char *s);
 void UATR0_PRINT_LOG(unsigned char *s);
 void UATR1_PRINT_LOG(unsigned char *s);
+
+
+
+
 void Uart_16550_Initialise(HAL_UART_ID_T id,uint32 baud_rate, uint16 uart_setting);
 void Gecko_Uart_Tx_Data(HAL_UART_ID_T id,uint8 *pData, uint16 DataLen);
 uint8 Switch_UartTxRx_Mode(HAL_UART_ID_T id,uint8 mode);
 
 void Gecko_Set_BaudRate(HAL_UART_ID_T id,uint32 baud_rate);
+
+
+
 
 void gecko_uart0_init(uint16 uart_setting);
 void Gecko_Uart0_Send_Char(char s);

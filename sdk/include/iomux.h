@@ -452,9 +452,12 @@ extern void reg_write(int addr, int data);
 void gecko_pinmux_config(Pad_Num_Type pad_num, Pad_Func_Type pad_func);
 void bsr1901_pullup_pulldown_config(Pad_Num pad_num,Pad_PULL_CFG pull_type);
 void gecko_pinmux_default_config(void);
+
+
 void gecko_branchnode_pclkout_cfg(void);
 	
-
+extern void gecko_rootnode_clk32k_cfg(void);
+extern void gecko_rootnode_osc32mclk_cfg(void);
 
 
 

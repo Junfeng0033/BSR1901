@@ -364,7 +364,14 @@ void gecko_rootnode_clk32k_cfg(void);
 void gecko_rootnode_osc32mclk_cfg(void);
 void gecko_branchnode_pclkout_cfg(void);
 
-void bsr1901_adc_8_9_analog_port(void);
+
 
 void aon_wakeup_irq_cfg(void);
 	
+
+
+void ConfigPort_AnalogFunction(void);
+	
+void bsr1901_adc_8_9_analog_port(void);
+void gek1109_adc_0_1_analog_port(void);
+

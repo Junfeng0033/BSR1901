@@ -18,6 +18,17 @@
 
 
 
+//extern uint32_t __boot_sram_start_flash__[];
+//extern uint32_t __boot_sram_end_flash__[];
+//extern uint32_t __boot_sram_start__[];
+//extern uint32_t __boot_bss_sram_start__[];
+//extern uint32_t __boot_bss_sram_end__[];
+
+extern void SystemInit(void);
+
+
+
+
 
 uint32 bsr1901_sram_test(void)
 {
@@ -71,14 +82,6 @@ uint32 bsr1901_sram_test(void)
 
 
 
-//extern uint32_t __boot_sram_start_flash__[];
-//extern uint32_t __boot_sram_end_flash__[];
-//extern uint32_t __boot_sram_start__[];
-//extern uint32_t __boot_bss_sram_start__[];
-//extern uint32_t __boot_bss_sram_end__[];
-
-extern void SystemInit(void);
-
 
 
 void BootInit(void)
@@ -130,36 +133,15 @@ void BootInit(void)
 
 
 
-//typedef enum
-//{
-//    TWS_JieLi,
-//    TWS_ACTS,
-//    TWS_BES,
-//    TWS_BLUETRUM,
-//    TWS_QTY,
-//} Customer_ID;
 
 
 
 
 
-
-
-//void hal_nvic_enable_irq(IRQn_Type irq_number)
-//{
-//    /* Enable interrupt */
-//    NVIC_EnableIRQ(irq_number);
-//}
-
-
-//void hal_nvic_disable_irq(IRQn_Type irq_number)
-//{
-//	  /* Disable interrupt */
-//		NVIC_DisableIRQ(irq_number);
-//}
 
 //#define __enable_irq                              __enable_interrupt        /*!< global Interrupt enable */
 //#define __disable_irq                             __disable_interrupt       /*!< global Interrupt disable */
+
 
 uint32 pEnterCriticalSection (void)
 {
@@ -229,6 +211,12 @@ NVIC_SetVectorTable(NVIC_VectTab_RAM+0x2000, 0x0);
 #define _BIT_SHIFT(IRQn)         (  ((((uint32_t)(int32_t)(IRQn)))               &  0x03UL) * 8UL)
 #define _SHP_IDX(IRQn)           ( (((((uint32_t)(int32_t)(IRQn)) & 0x0FUL)-8UL) >>    2UL)      )
 #define _IP_IDX(IRQn)            (   (((uint32_t)(int32_t)(IRQn))                >>    2UL)      )
+
+
+
+
+
+
 
 
 /**

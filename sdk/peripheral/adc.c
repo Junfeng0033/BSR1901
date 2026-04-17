@@ -60,9 +60,10 @@ void adc_delay_us(float dly1us)
 uint16 adc_sampling_vin(void) 
 {
   //detect charger plug in or not
-	//uint16 rawdata=GeckoGpadcGetRawData(GPADC_CHAN_1);
-	//uint16 mv = GeckoGpadcRawData2Volt(rawdata);
-	return 0;
+	uint16 rawdata=GeckoGpadcGetRawData(GPADC_CHAN_0);
+
+	return rawdata;
+	//return 0;
 }
 
 
@@ -276,8 +277,6 @@ void ADC_Data_PRINT(unsigned int datavalue)
 uint16 GeckoGpadcGetRawData(GPADC_CHAN_T channel)
 {
 	
-		//volatile UINT32 enabledMask = 0;
-	
 		volatile unsigned int tmp=0,datavalue = 0;
 
 	  //hw_gpadc->ctrl |= ADC_EN; //ADC_EN=1	
@@ -327,37 +326,37 @@ uint16 GeckoGpadcGetRawData(GPADC_CHAN_T channel)
 		switch (channel)
 		{
 				case GPADC_CHAN_0:
-						//enabledMask = GPADC_CH0_EN;
+
 						datavalue = hw_gpadc->data_ch0;				
 				    printf("\r\n ADC GPADC_CHAN_0 --- data_ch0 data = %d",datavalue);						
 						break;
 				
 				case GPADC_CHAN_1:
-						//enabledMask = GPADC_CH1_EN;
+
 						datavalue = hw_gpadc->data_ch1;				    
 				    printf("\r\n ADC GPADC_CHAN_1 --- data_ch1 data = %d",datavalue);						
 						break;
 				
 				case GPADC_CHAN_2:
-						//enabledMask = GPADC_CH2_EN;
+
 						datavalue = hw_gpadc->data_ch2;				
 				    printf("\r\n ADC GPADC_CHAN_2 --- data_ch2 data = %d",datavalue);						
 						break;
 				
 				case GPADC_CHAN_3:
-						//enabledMask = GPADC_CH3_EN;
+
 						datavalue = hw_gpadc->data_ch3;
 				    printf("\r\n ADC GPADC_CHAN_3 --- data_ch3 data = %d",datavalue);	
 						break;
 				
 				case GPADC_CHAN_4:
-						//enabledMask = GPADC_CH4_EN;
+
 						datavalue = hw_gpadc->data_ch4;
 				    printf("\r\n ADC GPADC_CHAN_4 --- data_ch4 data = %d",datavalue);	
 						break;
 				
 				case GPADC_CHAN_5:
-						//enabledMask = GPADC_CH5_EN;
+
 						hw_gpadc->ctrl |= GPADC_REF_SEL;//0:1.2V reference;1:3.3V reference
 						adc_delay_us(20);
 						datavalue = hw_gpadc->data_ch5;
@@ -365,20 +364,20 @@ uint16 GeckoGpadcGetRawData(GPADC_CHAN_T channel)
 						break;
 				
 				case GPADC_CHAN_6:
-						//enabledMask = GPADC_CH6_EN;
+
 						datavalue = hw_gpadc->data_ch6;
 				    printf("\r\n ADC GPADC_CHAN_6 --- data_ch6 data = %d",datavalue);						
 						break;
 				
 				case GPADC_CHAN_7:
-						//enabledMask = GPADC_CH7_EN;
+
 						datavalue = hw_gpadc->data_ch7;
 				    printf("\r\n ADC GPADC_CHAN_7 --- data_ch7 = %d",datavalue);
 						break;
 				
 //2022-09-04
 				case GPADC_CHAN_8:
-						//enabledMask = GPADC_CH8_EN;
+
 						hw_gpadc->ctrl |= GPADC_REF_SEL;//0:1.2V reference;1:3.3V reference
 						datavalue = hw_gpadc->data_ch8;
 				    printf("\r\n ADC GPADC_CHAN_8 --- data_ch8 data = %d",datavalue);				
@@ -386,7 +385,7 @@ uint16 GeckoGpadcGetRawData(GPADC_CHAN_T channel)
 				
 //2022-09-04
 				case GPADC_CHAN_9:
-						//enabledMask = GPADC_CH8_EN;
+
 						hw_gpadc->ctrl |= GPADC_REF_SEL;//0:1.2V reference;1:3.3V reference
 						datavalue = hw_gpadc->data_ch9;
 				    printf("\r\n ADC GPADC_CHAN_9 --- data_ch9 data = %d",datavalue);

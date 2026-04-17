@@ -20,6 +20,25 @@ Simplified Chinese(GB 2312) Encoding
 
 
 
+//单屏（非双屏） BSR1901 推荐硬件端口
+//              GND   电源地
+//              VCC   接3.3v电源--LDO33_AUX_OUT
+
+//              SCL   接SPI_CLK--------(PAD22)
+//              SDA   接SPI_MOSI-------(PAD23)
+
+//              RES   接PB7------------(PAD07)
+//              DC    接PA3------------(PAD21)
+
+//              CS    接SPI_CSN_1------(PAD20)//有些显示屏可以直接接地
+
+//              BLK   接PB4(PWM4)------(PAD24)
+
+
+
+
+
+
 1,修改代码分辨率，适配客户显示屏分辨率
 
 
