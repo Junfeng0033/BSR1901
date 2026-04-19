@@ -77,7 +77,23 @@ uint16 adc_sampling_vin(void)
 //monitor the loading
 uint16 adc_sampling_boost_vout(void) 
 {
-	return 0;
+	
+		#if 0
+		adc_datavalue=GeckoGpadcGetRawData(GPADC_CHAN_5);//get VBAT voltage
+		/**********************************************************************/	  
+		gpio_set_value(GPIOA, 0, 5);//Check_ON ouptut LOW
+
+		//ADC_VOUT1
+		adc_datavalue=GeckoGpadcGetRawData(GPADC_CHAN_8);//ADC_VOUT1 (VOUT1)
+
+		//Check_ADC(PNP_OUT)
+		adc_datavalue=GeckoGpadcGetRawData(GPADC_CHAN_9);//Check_ADC (PNP_OUT)
+
+		gpio_set_value(GPIOA, 1, 5);//Check_ON ouptut HIGH
+		/**********************************************************************/		
+		#endif	
+	
+		return 0;
 }
 
 

@@ -7,7 +7,9 @@
 
 
 
-static uint8_t ui_buf[2560];
+static uint8_t ui_buf[512];
+
+
 //static img_source_t bat_persent_img = {(uint8_t*)gImage_bat_90x49, 90, 49};
 static volatile bool dma_busy = 0;
 
@@ -54,7 +56,7 @@ void ShowNum_48(uint8_t *buf, uint8_t n)
 {
 	unsigned char i, j;
 	
-	memset(ui_buf, 0, 48*48);
+	//memset(ui_buf, 0, 48*48);
 
 	for (i = 0; i < 48; i++){
 		for (j = 0; j < 24; j++){
@@ -71,7 +73,7 @@ void ShowPersent(uint8_t *buf)
 {
 	unsigned char i, j;
 
-	memset(ui_buf, 0, 48*48);
+	//memset(ui_buf, 0, 48*48);
 	
 	for (i = 0; i < 32; i++){
 		for (j = 0; j < 8; j++){
@@ -119,35 +121,35 @@ void ui_paint_bat_percent(uint8_t percent)
 		Lcd_SetRegion(22, 35, 22+23, 35+47);
 		ShowNum_48(ui_buf, 1);
 		//Lcd_Write_data_dma(ui_buf, 48*48);
-		//wait_dma();
+
 
 		Lcd_SetRegion(46, 35, 46+23, 35+47);
 		ShowNum_48(ui_buf, 0);
 		//Lcd_Write_data_dma(ui_buf, 48*48);
-		//wait_dma();
+
 		
 		Lcd_SetRegion(70, 35, 70+23, 35+47);
 		ShowNum_48(ui_buf, 0);
 		//Lcd_Write_data_dma(ui_buf, 48*48);	
-		//wait_dma();
+
 	}
 	else{
 		if(history == 100){
 			Lcd_SetRegion(22, 35, 70+23, 35+47);
 			//Lcd_Write_data_dma((uint8_t*)gImage_black_128x128, 72*47*2);
-			//wait_dma();
+
 		}
 		
 		if(percent%10 == 0){
 			Lcd_SetRegion(32, 35, 32+23, 35+47);
 			ShowNum_48(ui_buf, percent/10);
 			//Lcd_Write_data_dma(ui_buf, 48*48);
-			//wait_dma();
+
 			
 			Lcd_SetRegion(80, 40, 80+7, 40+31);
 			ShowPersent(ui_buf);
 			//Lcd_Write_data_dma(ui_buf, 8*32*2);
-			//wait_dma();
+
 		}
 		
 		Lcd_SetRegion(56, 35, 56+23, 35+47);
@@ -159,11 +161,14 @@ void ui_paint_bat_percent(uint8_t percent)
 	history = percent;
 }
 
+
+
+
 //绘制彩色圆形
 void ui_paint_color_circle(void)
 {
 	Lcd_SetRegion(10, 10, 109, 109);						//坐标设置
-	//Lcd_Write_data_dma((uint8_t*)gImage_circle_100x100, 20000);
+	Lcd_Write_data_dma((uint8_t*)gImage_circle_100x100, 20000);
 }
 
 //绘制圆圈百分比

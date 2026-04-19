@@ -101,3 +101,105 @@ void Key_Process(void)
 
 
 
+
+
+
+void Task_KeyScan(void)
+{
+	
+	
+	
+	
+/************************key process debug***************************************/
+		
+	
+		//KEY1
+		#if 0	
+		//PAD11(GPIOA7)
+		gpio_status=K27_KEY_Detect();//default gpio_status=0x80 
+		key_status=gpio_status & 0x80;
+
+		if(key_status==0x0)
+		{
+			Lcd_SetRegion(0, 0, 127, 127);
+			if(flag_key1==0)
+			{
+				//UATR1_PRINT_LOG((unsigned char *)("K27 KEY Press Down"));
+        printf("\r\n K27 KEY Press Down \r\n ");
+				HW_SPI_Tx_DMA_8bit(HAL_SPI_0, (uint16*)gImage_128x128_star, 32768);			
+				
+				flag_key1=1;
+			}
+			else
+			{
+				printf("\r\n K27 KEY Press Down Again \r\n ");				
+				HW_SPI_Tx_DMA_8bit(HAL_SPI_0, (uint16*)gImage_128x128_cake, 32768);
+					
+				flag_key1=0;								
+			}
+		}
+		#endif
+
+
+
+
+
+		//KEY2
+		#if 0	
+		//PAD18(GPIOB6)		
+		gpio_status=KP85_KEY2_Detect();//default gpio_status=0x40 
+		key_status=gpio_status & 0x40;
+
+		if(key_status==0x0)
+		{
+			  #if 0
+				//LCD_BL_CLR;
+				//bsr1901_pullup_pulldown_config(PAD_14,PAD_PULLDOWN);	
+        #endif
+
+				//LDO33_AUX disable, power down LCD module			
+				LDO33_AUX_Disable();
+			
+//				wr_data = 0x608e7885;
+//				reg_write(0x40020000+0x020, wr_data);
+//				
+//				//reg_aon_sel_aon_clk16k(bit10)
+//				wr_data=reg_read(0x40020000+0x000);
+//				wr_data |= 0x200;//(set bit10=1)
+//				reg_write(0x40020000+0x000, wr_data);
+			
+        bsr1901_prepare_sleep_for_pin_wakeup();
+			  //sleep-wakeup setting
+				BSR1901_GPIO_WakeUp_From_DeepSleep();//
+				tc_gecko_cm0_aon_sleep();//deep sleep test for low power design
+
+		}
+		#endif
+		
+
+
+
+
+
+		#if 0
+		//////////////////mi tou/////////////////////////////////////	
+		//PAD10(GPIOA6)
+		//PAD10 pulldown
+
+		//bsr1901_pullup_pulldown_config(PAD_10,PAD_PULLUP);
+		//bsr1901_pullup_pulldown_config(PAD_10,PAD_PULLDOWN);	
+
+		gpio_status=mi_tou_detect();
+		if(gpio_status==0x40)
+		{
+			mi_tou_flag=1;//smoking in progress
+			printf("\r\n !!!!mi_tou_detect---gpio_a6 HIGH !!! gpio_status = %x",gpio_status);
+		}
+		////////////////////////////////////////////////////////////////			
+		#endif	
+		
+		
+/************************key process debug***************************************/			
+
+
+}

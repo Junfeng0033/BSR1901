@@ -737,6 +737,14 @@ void LDO33_AUX_Enable(void)
 	wr_data |= 0x340;
 	reg_write(0x40020000+0x28,wr_data);
 
+	
+	#if 0
+	delay_1us(1000);
+	//LDO33_AUX enable, power on LCD module
+	wr_data |= 0x340;
+	reg_write(0x40020000+0x28,wr_data);
+	delay_1us(5000);
+	#endif
 }
 
 void LDO33_AUX_Disable(void)
@@ -746,6 +754,14 @@ void LDO33_AUX_Disable(void)
 		//wr_data &= (~0x340);
 		wr_data=0x0;
 		reg_write(0x40020000+0x28,wr_data);	
+	
+		#if 0
+		//LDO33_AUX disable, power down LCD module
+		wr_data = reg_read(0x40020000+0x28);
+		//wr_data &= (~0x340);
+		wr_data=0x0;
+		reg_write(0x40020000+0x28,wr_data);			
+		#endif	
 }
 
 

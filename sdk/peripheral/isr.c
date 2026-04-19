@@ -91,7 +91,7 @@ __RAM_CODE__ void SysTick_Handler(void)  //interrupt routine
 {
 	
 
-	TimeTick++;//TimeTick will increase by "1"  every 100us
+	TimeTick++;//TimeTick will increase by "1"  every 1000us
 	
 	//system_tick=TimeTick;
 	
@@ -114,10 +114,10 @@ __RAM_CODE__ void SysTick_Handler(void)  //interrupt routine
 
 
 
-//uint32_t Get_SysTick(void)
-//{
-//	return TimeTick;
-//}
+uint32_t Get_SysTick(void)
+{
+	return TimeTick;
+}
 
 	
 

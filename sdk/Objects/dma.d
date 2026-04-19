@@ -1,0 +1,9 @@
+.\objects\dma.o: peripheral\dma.c
+.\objects\dma.o: .\include\dma.h
+.\objects\dma.o: .\include\platform_config.h
+.\objects\dma.o: .\include\bsr1901.h
+.\objects\dma.o: .\tft_lcd\lcd_driver.h
+.\objects\dma.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\dma.o: .\include\gpio.h
+.\objects\dma.o: .\user\ui.h
+.\objects\dma.o: .\include\spi.h

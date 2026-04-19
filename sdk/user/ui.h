@@ -16,10 +16,12 @@ typedef struct source{
 extern const uint8_t Font_8x32_percent[];
 extern const uint8_t gImage_black_128x128[32768];
 extern const uint8_t Font48_dital_Table [];
-//extern const uint8_t gImage_bat_90x49[];
+extern const uint8_t gImage_bat_90x49[];
 extern const unsigned char gImage_circle_100x100[20000];
 
 
+
+extern void Lcd_Write_data_dma(uint8_t *p_data, uint16_t len);
 
 
 

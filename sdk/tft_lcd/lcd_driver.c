@@ -260,16 +260,8 @@ void Lcd_SetRegion(uint16_t x_start,uint16_t y_start,uint16_t x_end,uint16_t y_e
 
 }
 
-/*************************************************
-函数名：LCD_Set_XY
-功能：设置lcd显示起始点
-入口参数：xy坐标
-返回值：无
-*************************************************/
-void Lcd_SetXY(uint16_t x,uint16_t y)
-{
-  	Lcd_SetRegion(x,y,x,y);
-}
+
+
 	
 /*************************************************
 函数名：LCD_DrawPoint
@@ -293,20 +285,7 @@ void Gui_DrawPoint(uint16_t x,uint16_t y,uint16_t Data)
 
 
 
-/*****************************************
- 函数功能：读TFT某一点的颜色                          
- 出口参数：color  点颜色值                                 
-******************************************/
-unsigned int Lcd_ReadPoint(uint16_t x,uint16_t y)
-{
-  unsigned int Data;
-  Lcd_SetXY(x,y);
 
-  //Lcd_ReadData();//丢掉无用字节
-  //Data=Lcd_ReadData();
-  Lcd_WriteData(Data);
-  return Data;
-}
 
 /*************************************************
 函数名：Lcd_Clear
@@ -343,27 +322,7 @@ void Lcd_Clear(uint16_t Color)
 
 
 
-#if 0
-//DMA refresh 
-void RefreshColorBlockDynamic(uint32_t Color)
-{
-    static uint32_t colorBuffer[128];  // 小缓冲区
-	
-	  Lcd_SetRegion(0,0,X_MAX_PIXEL-1,Y_MAX_PIXEL-1);	
-    
-    // 计算填充值
-    uint32_t color32 = (uint32_t)Color;
-    
-    // 填充缓冲区
-    for(int i = 0; i < 128; i++)
-    {
-        colorBuffer[i] = color32;
-    }
-		
-		HW_SPI_Tx_DMA_32bit(HAL_SPI_0, (uint16_t*)colorBuffer, 128);		
-		
-}
-#endif
+
 
 
 
@@ -389,31 +348,4 @@ void Lcd_Fill(uint16_t x,uint16_t y,uint16_t xend,uint16_t yend,uint16_t Color)
 
 
 
-
-/*************************************************
-功  能：使用 DMA 快速绘制图像块
-参  数：x, y - 起始坐标
-        w, h - 图像宽度和高度
-        pData - 图像像素数据指针
-*************************************************/
-void Lcd_DrawImageDMA(uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint16_t *pData)
-{
-    uint32_t len = w * h;
-    Lcd_SetRegion(x, y, x + w - 1, y + h - 1);
-    // 假设使用 HAL_SPI_0 作为主显示接口
-    HW_SPI_Tx_DMA(HAL_SPI_0, (uint16_t*)pData, (uint16_t)len);
-}
-
-/*************************************************
-功  能：使用 DMA 快速填充区域颜色
-参  数：x, y - 起始坐标
-        w, h - 区域宽度和高度
-        color - 填充颜色
-*************************************************/
-void Lcd_FillDMA(uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint16_t color)
-{
-    uint32_t len = w * h;
-    Lcd_SetRegion(x, y, x + w - 1, y + h - 1);
-    HW_SPI_Tx_DMA_16bit_ColorBlock(HAL_SPI_0, &color, (uint16_t)len);
-}
 

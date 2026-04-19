@@ -715,6 +715,11 @@
               <FileType>1</FileType>
               <FilePath>.\user\font_A_z_32b.c</FilePath>
             </File>
+            <File>
+              <FileName>bat_90x49.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\user\bat_90x49.c</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>

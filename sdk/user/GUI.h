@@ -6,6 +6,7 @@
 #include "sc_gui.h"
 
 
+void Task_UI_Refresh(void);
 
 
 //void Gui_Circle(uint16_t X, uint16_t Y, uint16_t R, uint16_t fc);
@@ -52,6 +53,8 @@ extern void sc_draw_Text(sc_pfb_t *dest, int tx, int ty, lv_font_t *font, const 
 extern void sc_draw_Num(sc_pfb_t *dest, int tx, int ty, int w, int h, lv_font_t *font, int num, int den, color_t tc, color_t bc);	
 
 									 
-											 
+extern void ui_paint_bat_percent(uint8_t percent);
+
+	
 #endif
 

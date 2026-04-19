@@ -1361,3 +1361,66 @@ void init_ip23xs(void)
 }
 
 #endif
+
+
+
+
+
+
+
+void Task_BMS_Update(void)
+{
+	
+
+
+		//ipxs_writeByte(DEVICE_ADDR_IP, 0x05, 0x75);//write value 0x75 to register 0x05
+		//wr_data=ipxs_readByte(DEVICE_ADDR_IP,0x05);//read register 0x05
+		//printf("\r\n!!!!!!!!!!!ipxs_readByte ~~~~5678~~~######### = 0x%x \r\n",wr_data);	
+
+
+	
+	/************************usb insert charging detect***************************************/
+		//read 0x31 register(STATE_CTL0)
+		//wr_data = ipxs_readByte(DEVICE_ADDR_IP, REG_STATE_CTL0);
+	
+	  //printf("\r\n !!!!!!!!get_ip2366_state!!!!!  reg_ipxs = %x \r\n",wr_data);		
+		//wr_data=wr_data & 0x20;//(bit5,CHG_EN-------1,charging;0, not charging)
+	 	//printf("\r\n !!!!22222!!!!get_ip2366_state!!22222!!!  reg_ipxs = %x \r\n",wr_data);	
+
+
+
+		#if 0
+		
+		if(wr_data==0x20)
+		{
+			//usb insert
+			printf("\r\n usb insert ---- charging -----  \r\n");
+			Lcd_SetRegion(0, 0, 127, 127);
+			//Lcd_Clear(YELLOW);
+			
+			HW_SPI_Tx_DMA_8bit(HAL_SPI_0, (uint16*)gImage_charging, 32768);
+			//dma_sram_delay(1000);
+		}
+		else if(wr_data==0x0)
+		{
+      //idle UI
+			Lcd_SetRegion(0, 0, 127, 127);
+			//Lcd_Clear(RED);
+			//HW_SPI_Tx_DMA(HAL_SPI_0, (uint16*)gImage_128x128_cake, 32768);
+			HW_SPI_Tx_DMA_8bit(HAL_SPI_0, (uint16*)gImage_128x128_battery, 32768);
+			//dma_sram_delay(1000);		
+		}
+		
+		get_ipxs_state();
+		get_chg_vbus_voltage();
+		get_voltage_battery();
+		get_voltage_vsys();		
+		
+    #endif
+/************************usb insert charging detect***************************************/
+
+
+		
+	
+}
+

@@ -111,7 +111,6 @@ int main (void)
 	//gecko_efuse_read();
 	
 	
-	
 	//LDO33_AUX enable, power supply for LCD module
 	LDO33_AUX_Enable();
 	
@@ -176,8 +175,8 @@ int main (void)
 	delay_1us(8000);
 	
 
-	//Lcd_SetRegion(20, 39, 109, 87);
-	//HW_SPI_Tx_DMA(HAL_SPI_0, (uint16*)gImage_bat_90x49, 8820);
+	Lcd_SetRegion(20, 39, 109, 87);
+	HW_SPI_Tx_DMA(HAL_SPI_0, (uint16*)gImage_bat_90x49, 8820);
 
 	
 	Lcd_SetRegion(10, 10, 109, 109);
@@ -185,7 +184,9 @@ int main (void)
 	HW_SPI_Tx_DMA_8bit(HAL_SPI_0, (uint16*)gImage_circle_100x100, 20000);	
 	delay_1us(8000);
  
-
+	ui_paint_color_circle();
+	
+	
 
 
 /*
@@ -210,9 +211,9 @@ int main (void)
 
 
 
-	/***************************************************************/
-	//config ADC port
-	//Channel 5 DO NOT NEEDED TO CONFIG
+/***************************************************************/
+//  config ADC port
+//  Channel 5 DO NOT NEEDED TO CONFIG
 //	gecko_pinmux_config(PAD20,GPIO_A_2);
 //	gecko_pinmux_config(PAD21,GPIO_A_3);
 //	bsr1901_adc_8_9_analog_port();
@@ -223,7 +224,7 @@ int main (void)
 	//gpio_set_output(GPIOA, 5);
 	//gpio_set_value(GPIOA, 1, 5);//default ouptut HIGH
 
-	/***************************************************************/
+/***************************************************************/
 
 	#if  0//CHRG_INSET_DET_EN //charger insert detect
 		//config PAD19(GPIOB7) as GPIO input
@@ -277,7 +278,7 @@ int main (void)
 
 	//gpio_i2c_initialize();
 	
-    bFlag_init_ipxs = 1;
+  //bFlag_init_ipxs = 1;
 
 	
 /************************i2c configure***************************************/
@@ -302,11 +303,8 @@ int main (void)
 	SysTick_Config(20000);//SysTick Test === 1ms tick for KEY detect
 /************************SysTick configure***************************************/
 
-
   //iWatchDog for FSM Control
   //iWDT_Timer_Init();
-
-
 
 /************************Buck-Boost Control***************************************/
   charger_manager_t my_charger;
@@ -319,243 +317,30 @@ int main (void)
 	while(1)
 	{
 	
-		//sc_task_loop(NULL);
+		sc_task_loop(NULL);
 		
-		//system_tick++;
-		//TimeTick++;
-		//system_tick=TimeTick;
+		system_tick=TimeTick;//1ms tick
+	
+		uint32_t current_tick = Get_SysTick();
 		
-		Get_Vbat_Voltage();
+		if (current_tick % 50 == 0) Task_KeyScan();
 		
+		if (current_tick % 100 == 0) Get_Vbat_Voltage();
+
+		if (current_tick % 200 == 0) Task_UI_Refresh();		
+		
+    //if (current_tick % 50 == 0) Task_Charger_Control();			
 		//bulk_func();
 		//charger_process(&my_charger);
-		
-		//printf("\r\n  Charger Bank Solution Software, Copyright (c) 2020-2022 BraveStarr Inc.\r\n");
-
-		
-		//ipxs_writeByte(DEVICE_ADDR_IP, 0x05, 0x75);//write value 0x75 to register 0x05
-		//wr_data=ipxs_readByte(DEVICE_ADDR_IP,0x05);//read register 0x05
-		//printf("\r\n!!!!!!!!!!!ipxs_readByte ~~~~5678~~~######### = 0x%x \r\n",wr_data);		
-
-		
-		
-/************************usb insert charging detect***************************************/
-		//read 0x31 register(STATE_CTL0)
-		//wr_data = ipxs_readByte(DEVICE_ADDR_IP, REG_STATE_CTL0);
-	
-	  //printf("\r\n !!!!!!!!get_ip2366_state!!!!!  reg_ipxs = %x \r\n",wr_data);		
-		//wr_data=wr_data & 0x20;//(bit5,CHG_EN-------1,charging;0, not charging)
-	 	//printf("\r\n !!!!22222!!!!get_ip2366_state!!22222!!!  reg_ipxs = %x \r\n",wr_data);	
-
-
-
-		#if 0
-		
-		if(wr_data==0x20)
-		{
-			//usb insert
-			printf("\r\n usb insert ---- charging -----  \r\n");
-			Lcd_SetRegion(0, 0, 127, 127);
-			//Lcd_Clear(YELLOW);
-			
-			HW_SPI_Tx_DMA_8bit(HAL_SPI_0, (uint16*)gImage_charging, 32768);
-			//dma_sram_delay(1000);
-		}
-		else if(wr_data==0x0)
-		{
-      //idle UI
-			Lcd_SetRegion(0, 0, 127, 127);
-			//Lcd_Clear(RED);
-			//HW_SPI_Tx_DMA(HAL_SPI_0, (uint16*)gImage_128x128_cake, 32768);
-			HW_SPI_Tx_DMA_8bit(HAL_SPI_0, (uint16*)gImage_128x128_battery, 32768);
-			//dma_sram_delay(1000);		
-		}
-		
-		get_ipxs_state();
-		get_chg_vbus_voltage();
-		get_voltage_battery();
-		get_voltage_vsys();		
-		
-    #endif
-/************************usb insert charging detect***************************************/
-
-
-		
-		
-
-/************************key process debug***************************************/
-		//KEY1
-		#if 0	
-		//PAD11(GPIOA7)
-		gpio_status=K27_KEY_Detect();//default gpio_status=0x80 
-		key_status=gpio_status & 0x80;
-
-		if(key_status==0x0)
-		{
-			Lcd_SetRegion(0, 0, 127, 127);
-			if(flag_key1==0)
-			{
-				//UATR1_PRINT_LOG((unsigned char *)("K27 KEY Press Down"));
-        printf("\r\n K27 KEY Press Down \r\n ");
-				HW_SPI_Tx_DMA_8bit(HAL_SPI_0, (uint16*)gImage_128x128_star, 32768);			
-				
-				flag_key1=1;
-			}
-			else
-			{
-				printf("\r\n K27 KEY Press Down Again \r\n ");				
-				HW_SPI_Tx_DMA_8bit(HAL_SPI_0, (uint16*)gImage_128x128_cake, 32768);
-					
-				flag_key1=0;								
-			}
-		}
-		#endif
-
-
-
-
-
-		//KEY2
-		#if 0	
-		//PAD18(GPIOB6)		
-		gpio_status=KP85_KEY2_Detect();//default gpio_status=0x40 
-		key_status=gpio_status & 0x40;
-
-		if(key_status==0x0)
-		{
-			  #if 0
-				//LCD_BL_CLR;
-				//bsr1901_pullup_pulldown_config(PAD_14,PAD_PULLDOWN);	
-        #endif
-
-				//LDO33_AUX disable, power down LCD module			
-				LDO33_AUX_Disable();
-			
-//				wr_data = 0x608e7885;
-//				reg_write(0x40020000+0x020, wr_data);
-//				
-//				//reg_aon_sel_aon_clk16k(bit10)
-//				wr_data=reg_read(0x40020000+0x000);
-//				wr_data |= 0x200;//(set bit10=1)
-//				reg_write(0x40020000+0x000, wr_data);
-			
-        bsr1901_prepare_sleep_for_pin_wakeup();
-			  //sleep-wakeup setting
-				BSR1901_GPIO_WakeUp_From_DeepSleep();//
-				tc_gecko_cm0_aon_sleep();//deep sleep test for low power design
-
-		}
-		#endif		
-		
-/************************key process debug***************************************/	
-		
-		
-		
-//		if(count%10 == 1){
-//			if(count <= 10)
-//				HW_SPI_Tx_DMA(HAL_SPI_0, (uint16*)gImage_charge_10, 20000);
-//			if(count <= 20)
-//				HW_SPI_Tx_DMA(HAL_SPI_0, (uint16*)gImage_charge_20, 20000);
-//			if(count <= 30)
-//				HW_SPI_Tx_DMA(HAL_SPI_0, (uint16*)gImage_charge_30, 20000);
-//		}
-		
-
-		
-//		GuiShowNumString_16(50, 18, count, 2);
-//		GuiShowNumString_48(32, 35, count, 2);
-//		GuiShowPersent(45+40, 45);
-//		GuiShowNumString_16(50, 85, count, 2);
-
-
-
-
-
-		#if 0
-		adc_datavalue=GeckoGpadcGetRawData(GPADC_CHAN_5);//get VBAT voltage
-		/**********************************************************************/	  
-		gpio_set_value(GPIOA, 0, 5);//Check_ON ouptut LOW
-
-		//ADC_VOUT1
-		adc_datavalue=GeckoGpadcGetRawData(GPADC_CHAN_8);//ADC_VOUT1 (VOUT1)
-
-		//Check_ADC(PNP_OUT)
-		adc_datavalue=GeckoGpadcGetRawData(GPADC_CHAN_9);//Check_ADC (PNP_OUT)
-
-		gpio_set_value(GPIOA, 1, 5);//Check_ON ouptut HIGH
-		/**********************************************************************/		
-		#endif
-
-		#if 0
-		//////////////////mi tou/////////////////////////////////////	
-		//PAD10(GPIOA6)
-		//PAD10 pulldown
-
-		//bsr1901_pullup_pulldown_config(PAD_10,PAD_PULLUP);
-		//bsr1901_pullup_pulldown_config(PAD_10,PAD_PULLDOWN);	
-
-		gpio_status=mi_tou_detect();
-		if(gpio_status==0x40)
-		{
-			mi_tou_flag=1;//smoking in progress
-			printf("\r\n !!!!mi_tou_detect---gpio_a6 HIGH !!! gpio_status = %x",gpio_status);
-		}
-		////////////////////////////////////////////////////////////////			
-		#endif		
-
-
-
-		#if 0
-		//LDO33_AUX disable, power down LCD module
-		wr_data = reg_read(0x40020000+0x28);
-		//wr_data &= (~0x340);
-		wr_data=0x0;
-		reg_write(0x40020000+0x28,wr_data);
-
-		#if 0
-		delay_1us(1000);
-
-		//LDO33_AUX enable, power on LCD module
-		wr_data |= 0x340;
-		reg_write(0x40020000+0x28,wr_data);
-
-		delay_1us(5000);
-		#endif			
-		#endif
-		
-
 
 	}
 	
+
 	
 }
 
 
 
-
-
-
-
-
-#if 0
-
-  while(1) {
-      uint32_t current_tick = Get_SysTick();
-      
-      // 20ms 任务：按键扫描与消抖
-      if (current_tick % 20 == 0) Task_KeyScan();
-      
-      // 50ms 任务：充电管理与 PID 计算 (高优先级安全任务)
-      if (current_tick % 50 == 0) Task_Charger_Control();
-      
-      // 100ms 任务：BMS 状态采样 (电压、电流、SOC)
-      if (current_tick % 100 == 0) Task_BMS_Update();
-      
-      // 200ms 任务：UI 界面刷新 (低优先级显示任务)
-      if (current_tick % 200 == 0) Task_UI_Refresh();
-  }
-	
-#endif
 
 
 

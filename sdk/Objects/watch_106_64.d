@@ -1,0 +1,14 @@
+.\objects\watch_106_64.o: SCGUI\bmp\watch_106_64.c
+.\objects\watch_106_64.o: .\SCGUI\sc_gui.h
+.\objects\watch_106_64.o: .\SCGUI\sc_common.h
+.\objects\watch_106_64.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\objects\watch_106_64.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\watch_106_64.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\watch_106_64.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
+.\objects\watch_106_64.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\objects\watch_106_64.o: .\SCGUI\lvgl.h
+.\objects\watch_106_64.o: .\SCGUI\sc_lvgl_font.h
+.\objects\watch_106_64.o: .\SCGUI\sc_event_task.h
+.\objects\watch_106_64.o: .\SCGUI\sc_arc.h
+.\objects\watch_106_64.o: .\SCGUI\sc_transform.h
+.\objects\watch_106_64.o: .\SCGUI\sc_compose.h

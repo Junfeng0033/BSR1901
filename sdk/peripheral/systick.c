@@ -53,8 +53,7 @@ uint32_t SysTick_Config(uint32_t ticks)
 
 
 
-//uint32_t get_value(void)
-uint32_t Get_SysTick(void)
+uint32_t Get_SysTick_VALUE(void)
 {
 	return SysTick->VAL;
 }

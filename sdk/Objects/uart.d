@@ -1,0 +1,9 @@
+.\objects\uart.o: peripheral\uart.c
+.\objects\uart.o: .\include\platform_config.h
+.\objects\uart.o: .\include\hci.h
+.\objects\uart.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdarg.h
+.\objects\uart.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\uart.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\objects\uart.o: .\include\bsr1901.h
+.\objects\uart.o: .\include\uart.h
+.\objects\uart.o: .\include\dma.h

@@ -115,4 +115,6 @@ void pwm_init(u8 index);
 
 void bulk_func(void);
 
+void Task_Charger_Control(void);
+
 

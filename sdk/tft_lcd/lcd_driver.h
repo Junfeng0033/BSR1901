@@ -158,18 +158,17 @@ void Lcd_Reset(void);
 void Lcd_Init(void);
 void Lcd_Clear(uint16_t Color);
 
-//void RefreshColorBlockDynamic(uint32_t Color);
+
 	
-void Lcd_SetXY(uint16_t x,uint16_t y);
+
 void Gui_DrawPoint(uint16_t x,uint16_t y,uint16_t Data);
-unsigned int Lcd_ReadPoint(uint16_t x,uint16_t y);
+
 void Lcd_SetRegion(uint16_t x_start,uint16_t y_start,uint16_t x_end,uint16_t y_end);
+
+
 void LCD_WriteData_16Bit(uint16_t Data);
 void Lcd_Fill(uint16_t x,uint16_t y,uint16_t xend,uint16_t yend,uint16_t Color);
 
-// DMA-based optimized functions
-void Lcd_DrawImageDMA(uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint16_t *pData);
-void Lcd_FillDMA(uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint16_t color);
 
 
 #endif

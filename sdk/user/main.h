@@ -120,6 +120,8 @@ extern const unsigned char gImage_charging[32768];
 
 extern uint16 Get_Vbat_Voltage(void);
 
+extern void Task_KeyScan(void);
+
 extern void sc_demo_text(void);
 
 extern uint8 gpio_i2c_initialize(VOID);

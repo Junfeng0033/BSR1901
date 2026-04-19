@@ -727,3 +727,41 @@ void set_charge_circle(uint8_t percent)
 
 
 
+
+
+void Task_UI_Refresh(void)
+{
+	
+		uint16_t uicount = 90;
+	
+		ui_paint_bat_percent(uicount);
+
+		if(uicount >= 100)
+			uicount = 0;
+		else 
+			uicount ++;
+
+		
+		
+//		if(count%10 == 1){
+//			if(count <= 10)
+//				HW_SPI_Tx_DMA(HAL_SPI_0, (uint16*)gImage_charge_10, 20000);
+//			if(count <= 20)
+//				HW_SPI_Tx_DMA(HAL_SPI_0, (uint16*)gImage_charge_20, 20000);
+//			if(count <= 30)
+//				HW_SPI_Tx_DMA(HAL_SPI_0, (uint16*)gImage_charge_30, 20000);
+//		}
+		
+
+		
+//		GuiShowNumString_16(50, 18, count, 2);
+//		GuiShowNumString_48(32, 35, count, 2);
+//		GuiShowPersent(45+40, 45);
+//		GuiShowNumString_16(50, 85, count, 2);
+
+	
+}
+
+
+
+
