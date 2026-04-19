@@ -10,15 +10,8 @@
 
 
 
-
-
 //uint8 chg_insert_flag;
 uint8 pwm_init_flag=0;
-
-
-
-
-
 
 
 
@@ -111,8 +104,6 @@ void hal_set_pwm_duty(uint16_t duty) {
     // 实际项目中此处应写入 PWM 比较寄存器
     // printf("PWM Duty Set to: %d\n", duty);
 }
-
-
 
 
 
@@ -236,19 +227,6 @@ void charger_process(charger_manager_t *charger) {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 void pwm_io_init(void)
 {
 #if 0	
@@ -294,6 +272,8 @@ void pwm_init(u8 index)
 #endif
    gecko_pwm_init();
 }
+
+
 
 void pwm_dutyset(u8 index)
 {

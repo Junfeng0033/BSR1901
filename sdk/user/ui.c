@@ -120,42 +120,42 @@ void ui_paint_bat_percent(uint8_t percent)
 	if(percent >= 100){
 		Lcd_SetRegion(22, 35, 22+23, 35+47);
 		ShowNum_48(ui_buf, 1);
-		//Lcd_Write_data_dma(ui_buf, 48*48);
+		Lcd_Write_data_dma(ui_buf, 48*48);
 
 
 		Lcd_SetRegion(46, 35, 46+23, 35+47);
 		ShowNum_48(ui_buf, 0);
-		//Lcd_Write_data_dma(ui_buf, 48*48);
+		Lcd_Write_data_dma(ui_buf, 48*48);
 
 		
 		Lcd_SetRegion(70, 35, 70+23, 35+47);
 		ShowNum_48(ui_buf, 0);
-		//Lcd_Write_data_dma(ui_buf, 48*48);	
+		Lcd_Write_data_dma(ui_buf, 48*48);	
 
 	}
 	else{
 		if(history == 100){
 			Lcd_SetRegion(22, 35, 70+23, 35+47);
-			//Lcd_Write_data_dma((uint8_t*)gImage_black_128x128, 72*47*2);
+			Lcd_Write_data_dma((uint8_t*)gImage_black_128x128, 72*47*2);
 
 		}
 		
 		if(percent%10 == 0){
 			Lcd_SetRegion(32, 35, 32+23, 35+47);
 			ShowNum_48(ui_buf, percent/10);
-			//Lcd_Write_data_dma(ui_buf, 48*48);
+			Lcd_Write_data_dma(ui_buf, 48*48);
 
 			
 			Lcd_SetRegion(80, 40, 80+7, 40+31);
 			ShowPersent(ui_buf);
-			//Lcd_Write_data_dma(ui_buf, 8*32*2);
+			Lcd_Write_data_dma(ui_buf, 8*32*2);
 
 		}
 		
 		Lcd_SetRegion(56, 35, 56+23, 35+47);
 		ShowNum_48(ui_buf, percent%10);
-		//Lcd_Write_data_dma(ui_buf, 48*48);
-		//wait_dma();
+		Lcd_Write_data_dma(ui_buf, 48*48);
+
 	}
 	
 	history = percent;

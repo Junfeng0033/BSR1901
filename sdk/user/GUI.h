@@ -54,7 +54,7 @@ extern void sc_draw_Num(sc_pfb_t *dest, int tx, int ty, int w, int h, lv_font_t 
 
 									 
 extern void ui_paint_bat_percent(uint8_t percent);
-
+extern void ui_paint_color_circle(void);
 	
 #endif
 

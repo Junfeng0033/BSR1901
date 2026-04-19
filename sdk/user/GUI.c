@@ -734,6 +734,9 @@ void Task_UI_Refresh(void)
 	
 		uint16_t uicount = 90;
 	
+	
+		//ui_paint_color_circle();
+	
 		ui_paint_bat_percent(uicount);
 
 		if(uicount >= 100)

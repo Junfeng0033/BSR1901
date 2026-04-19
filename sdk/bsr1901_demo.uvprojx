@@ -720,6 +720,11 @@
               <FileType>1</FileType>
               <FilePath>.\user\bat_90x49.c</FilePath>
             </File>
+            <File>
+              <FileName>black_128x128.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\user\black_128x128.c</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>
