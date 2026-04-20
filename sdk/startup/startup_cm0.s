@@ -85,8 +85,9 @@ __Vectors       DCD     __initial_sp              ; Top of Stack
                 DCD     APB_SPI1_IRQnHandler      ; IRQ 14;
 ;               DCD     QI_IRQnHandler            ; IRQ 15;
                 DCD     GPIO_A3_IRQHandler        ; IRQ 15; changed it to GPIO_A_3(PAD21)
-                DCD     QSPI_CTRL_IRQHandler      ; IRQ 16; QSPI controller interrupt 					
-                DCD     RTC_IRQHandler            ; IRQ 17; 
+                DCD     QSPI_CTRL_IRQHandler      ; IRQ 16; QSPI controller interrupt 
+									
+                DCD     iWDT_IRQHandler           ; IRQ 17; IWDT_IRQ	=	17, 
                 DCD     GPIO_A4_IRQHandler        ; IRQ 18; 
                 DCD     GPIO_A5_IRQHandler        ; IRQ 19; 
                 DCD     GPIO_A6_IRQHandler        ; IRQ 20; Reserved for GPIO[6] MISC
@@ -176,7 +177,7 @@ Default_Handler PROC
                 EXPORT  APB_SPI1_IRQnHandler      [WEAK]
 ;               EXPORT  QI_IRQnHandler      	  [WEAK]
                 EXPORT  GPIO_A3_IRQHandler        [WEAK]					
-                EXPORT  RTC_IRQHandler      	  [WEAK]
+                EXPORT  iWDT_IRQHandler      	  [WEAK]
 
 ;               EXPORT  Lightning_IRQHandler      [WEAK]
                 EXPORT  GPIO_A2_IRQHandler        [WEAK]
@@ -218,7 +219,7 @@ APB_SPI0_IRQnHandler
 APB_SPI1_IRQnHandler
 ;QI_IRQnHandler
 GPIO_A3_IRQHandler
-RTC_IRQHandler
+iWDT_IRQHandler
 QSPI_CTRL_IRQHandler
 AON_WKUP_IRQHandler
 APB_SPI_IRQnHandler

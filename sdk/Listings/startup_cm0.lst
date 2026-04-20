@@ -144,185 +144,185 @@ ARM Macro Assembler    Page 3
                                                             3(PAD21)
    88 00000080 00000000        DCD              QSPI_CTRL_IRQHandler ; IRQ 16; 
                                                             QSPI controller int
-                                                            errupt      
-   89 00000084 00000000        DCD              RTC_IRQHandler ; IRQ 17; 
-   90 00000088 00000000        DCD              GPIO_A4_IRQHandler ; IRQ 18; 
-   91 0000008C 00000000        DCD              GPIO_A5_IRQHandler ; IRQ 19; 
-   92 00000090 00000000        DCD              GPIO_A6_IRQHandler ; IRQ 20; Re
+                                                            errupt 
+   89 00000084         
+   90 00000084 00000000        DCD              iWDT_IRQHandler ; IRQ 17; IWDT_
+                                                            IRQ = 17, 
+   91 00000088 00000000        DCD              GPIO_A4_IRQHandler ; IRQ 18; 
+   92 0000008C 00000000        DCD              GPIO_A5_IRQHandler ; IRQ 19; 
+   93 00000090 00000000        DCD              GPIO_A6_IRQHandler ; IRQ 20; Re
                                                             served for GPIO[6] 
                                                             MISC
-   93 00000094 00000000        DCD              GPIO_A7_IRQHandler ; IRQ 21; Re
+   94 00000094 00000000        DCD              GPIO_A7_IRQHandler ; IRQ 21; Re
                                                             served for GPIO[7] 
                                                             MISC
-   94 00000098 00000000        DCD              GPIO_B0_IRQHandler ; IRQ 22; Re
+   95 00000098 00000000        DCD              GPIO_B0_IRQHandler ; IRQ 22; Re
                                                             served for GPIO[8] 
                                                             MISC
-   95 0000009C 00000000        DCD              GPIO_B1_IRQHandler ; IRQ 23; Re
+   96 0000009C 00000000        DCD              GPIO_B1_IRQHandler ; IRQ 23; Re
                                                             served for GPIO[9] 
                                                             MISC
-   96 000000A0 00000000        DCD              GPIO_B2_IRQHandler ; IRQ 24; Re
+   97 000000A0 00000000        DCD              GPIO_B2_IRQHandler ; IRQ 24; Re
                                                             served for GPIO[10]
                                                              MISC
-   97 000000A4 00000000        DCD              GPIO_B3_IRQHandler ; IRQ 25; Re
+   98 000000A4 00000000        DCD              GPIO_B3_IRQHandler ; IRQ 25; Re
                                                             served for GPIO[11]
                                                              MISC
-   98 000000A8 00000000        DCD              GPIO_B4_IRQHandler ; IRQ 26; Re
+   99 000000A8 00000000        DCD              GPIO_B4_IRQHandler ; IRQ 26; Re
                                                             served for GPIO[12]
                                                              MISC
-   99 000000AC 00000000        DCD              GPIO_B5_IRQHandler ; IRQ 27; Re
+  100 000000AC 00000000        DCD              GPIO_B5_IRQHandler ; IRQ 27; Re
                                                             served for GPIO[13]
                                                              MISC
-  100 000000B0 00000000        DCD              GPIO_B6_IRQHandler ; IRQ 28; Re
+  101 000000B0 00000000        DCD              GPIO_B6_IRQHandler ; IRQ 28; Re
                                                             served for GPIO[14]
                                                              MISC
-  101 000000B4 00000000        DCD              GPIO_B7_IRQHandler ; IRQ 29; Re
+  102 000000B4 00000000        DCD              GPIO_B7_IRQHandler ; IRQ 29; Re
                                                             served for GPIO[15]
                                                              MISC
-  102 000000B8 00000000        DCD              AON_WKUP_IRQHandler ; IRQ 30; 
-  103 000000BC 00000000        DCD              CMU2AHB_IRQHandler ; IRQ 31; 
-  104 000000C0         
+  103 000000B8 00000000        DCD              AON_WKUP_IRQHandler ; IRQ 30; 
+  104 000000BC 00000000        DCD              CMU2AHB_IRQHandler ; IRQ 31; 
   105 000000C0         
-  106 000000C0                 AREA             |.text|, CODE, READONLY
-  107 00000000         ; Reset Handler
-  108 00000000         Reset_Handler
+  106 000000C0         
+  107 000000C0                 AREA             |.text|, CODE, READONLY
+  108 00000000         ; Reset Handler
+  109 00000000         Reset_Handler
                                PROC
-  109 00000000                 EXPORT           Reset_Handler             [WEAK
+  110 00000000                 EXPORT           Reset_Handler             [WEAK
 ]
-  110 00000000                 IMPORT           __main
-  111 00000000 4805            LDR              R0, =__main
-  112 00000002 4700            BX               R0
-  113 00000004                 ENDP
-  114 00000004         
+  111 00000000                 IMPORT           __main
+  112 00000000 4805            LDR              R0, =__main
+  113 00000002 4700            BX               R0
 
 
 
 ARM Macro Assembler    Page 4 
 
 
+  114 00000004                 ENDP
   115 00000004         
-  116 00000004         ; Dummy Exception Handlers (infinite loops which can be 
+  116 00000004         
+  117 00000004         ; Dummy Exception Handlers (infinite loops which can be 
                        modified)                
-  117 00000004         
-  118 00000004         NMI_Handler
+  118 00000004         
+  119 00000004         NMI_Handler
                                PROC
-  119 00000004                 EXPORT           NMI_Handler               [WEAK
+  120 00000004                 EXPORT           NMI_Handler               [WEAK
 ]
-  120 00000004 E7FE            B                .
-  121 00000006                 ENDP
-  123 00000006         HardFault_Handler
+  121 00000004 E7FE            B                .
+  122 00000006                 ENDP
+  124 00000006         HardFault_Handler
                                PROC
-  124 00000006                 EXPORT           HardFault_Handler         [WEAK
+  125 00000006                 EXPORT           HardFault_Handler         [WEAK
 ]
-  125 00000006 E7FE            B                .
-  126 00000008                 ENDP
-  128 00000008         MemManage_Handler
+  126 00000006 E7FE            B                .
+  127 00000008                 ENDP
+  129 00000008         MemManage_Handler
                                PROC
-  129 00000008                 EXPORT           MemManage_Handler         [WEAK
+  130 00000008                 EXPORT           MemManage_Handler         [WEAK
 ]
-  130 00000008 E7FE            B                .
-  131 0000000A                 ENDP
-  133 0000000A         BusFault_Handler
+  131 00000008 E7FE            B                .
+  132 0000000A                 ENDP
+  134 0000000A         BusFault_Handler
                                PROC
-  134 0000000A                 EXPORT           BusFault_Handler          [WEAK
+  135 0000000A                 EXPORT           BusFault_Handler          [WEAK
 ]
-  135 0000000A E7FE            B                .
-  136 0000000C                 ENDP
-  138 0000000C         UsageFault_Handler
+  136 0000000A E7FE            B                .
+  137 0000000C                 ENDP
+  139 0000000C         UsageFault_Handler
                                PROC
-  139 0000000C                 EXPORT           UsageFault_Handler        [WEAK
+  140 0000000C                 EXPORT           UsageFault_Handler        [WEAK
 ]
-  140 0000000C E7FE            B                .
-  141 0000000E                 ENDP
-  142 0000000E         SVC_Handler
+  141 0000000C E7FE            B                .
+  142 0000000E                 ENDP
+  143 0000000E         SVC_Handler
                                PROC
-  143 0000000E                 EXPORT           SVC_Handler               [WEAK
+  144 0000000E                 EXPORT           SVC_Handler               [WEAK
 ]
-  144 0000000E E7FE            B                .
-  145 00000010                 ENDP
-  147 00000010         DebugMon_Handler
+  145 0000000E E7FE            B                .
+  146 00000010                 ENDP
+  148 00000010         DebugMon_Handler
                                PROC
-  148 00000010                 EXPORT           DebugMon_Handler          [WEAK
+  149 00000010                 EXPORT           DebugMon_Handler          [WEAK
 ]
-  149 00000010 E7FE            B                .
-  150 00000012                 ENDP
-  151 00000012         PendSV_Handler
+  150 00000010 E7FE            B                .
+  151 00000012                 ENDP
+  152 00000012         PendSV_Handler
                                PROC
-  152 00000012                 EXPORT           PendSV_Handler            [WEAK
+  153 00000012                 EXPORT           PendSV_Handler            [WEAK
 ]
-  153 00000012 E7FE            B                .
-  154 00000014                 ENDP
-  155 00000014         SysTick_Handler
+  154 00000012 E7FE            B                .
+  155 00000014                 ENDP
+  156 00000014         SysTick_Handler
                                PROC
-  156 00000014                 EXPORT           SysTick_Handler           [WEAK
+  157 00000014                 EXPORT           SysTick_Handler           [WEAK
 ]
-  157 00000014 E7FE            B                .
-  158 00000016                 ENDP
-  159 00000016         
+  158 00000014 E7FE            B                .
 
 
 
 ARM Macro Assembler    Page 5 
 
 
-  160 00000016         Default_Handler
+  159 00000016                 ENDP
+  160 00000016         
+  161 00000016         Default_Handler
                                PROC
-  161 00000016         
-  162 00000016                 EXPORT           CMP1_IRQn              [WEAK]
-  163 00000016                 EXPORT           CMP2_IRQn                 [WEAK
+  162 00000016         
+  163 00000016                 EXPORT           CMP1_IRQn              [WEAK]
+  164 00000016                 EXPORT           CMP2_IRQn                 [WEAK
 ]
-  164 00000016                 EXPORT           UART0_IRQHandler          [WEAK
+  165 00000016                 EXPORT           UART0_IRQHandler          [WEAK
 ]
-  165 00000016                 EXPORT           UART1_IRQHandler          [WEAK
+  166 00000016                 EXPORT           UART1_IRQHandler          [WEAK
 ]
-  166 00000016                 EXPORT           UART2_IRQHandler          [WEAK
+  167 00000016                 EXPORT           UART2_IRQHandler          [WEAK
 ]
-  167 00000016                 EXPORT           TIMER0_IRQHandler         [WEAK
+  168 00000016                 EXPORT           TIMER0_IRQHandler         [WEAK
 ]
-  168 00000016                 EXPORT           TIMER1_IRQHandler         [WEAK
+  169 00000016                 EXPORT           TIMER1_IRQHandler         [WEAK
 ]
-  169 00000016                 EXPORT           GPADC_IRQHandler          [WEAK
+  170 00000016                 EXPORT           GPADC_IRQHandler          [WEAK
 ]
-  170 00000016                 EXPORT           SYS_GPIO_0_IRQHandler     [WEAK
+  171 00000016                 EXPORT           SYS_GPIO_0_IRQHandler     [WEAK
 ]
-  171 00000016                 EXPORT           SYS_GPIO_1_IRQHandler     [WEAK
+  172 00000016                 EXPORT           SYS_GPIO_1_IRQHandler     [WEAK
 ]
-  172 00000016                 EXPORT           WDT_IRQHandler            [WEAK
+  173 00000016                 EXPORT           WDT_IRQHandler            [WEAK
 ]
-  173 00000016         
-  174 00000016                 EXPORT           DMA_IRQHandler            [WEAK
+  174 00000016         
+  175 00000016                 EXPORT           DMA_IRQHandler            [WEAK
 ]
-  175 00000016                 EXPORT           APB_SPI0_IRQnHandler      [WEAK
+  176 00000016                 EXPORT           APB_SPI0_IRQnHandler      [WEAK
 ]
-  176 00000016                 EXPORT           APB_SPI1_IRQnHandler      [WEAK
+  177 00000016                 EXPORT           APB_SPI1_IRQnHandler      [WEAK
 ]
-  177 00000016         ;               EXPORT  QI_IRQnHandler         [WEAK]
-  178 00000016                 EXPORT           GPIO_A3_IRQHandler        [WEAK
+  178 00000016         ;               EXPORT  QI_IRQnHandler         [WEAK]
+  179 00000016                 EXPORT           GPIO_A3_IRQHandler        [WEAK
 ]
-  179 00000016                 EXPORT           RTC_IRQHandler         [WEAK]
-  180 00000016         
-  181 00000016         ;               EXPORT  Lightning_IRQHandler      [WEAK]
+  180 00000016                 EXPORT           iWDT_IRQHandler         [WEAK]
+  181 00000016         
+  182 00000016         ;               EXPORT  Lightning_IRQHandler      [WEAK]
                        
-  182 00000016                 EXPORT           GPIO_A2_IRQHandler        [WEAK
+  183 00000016                 EXPORT           GPIO_A2_IRQHandler        [WEAK
 ]
-  183 00000016         
-  184 00000016                 EXPORT           QSPI_CTRL_IRQHandler      [WEAK
+  184 00000016         
+  185 00000016                 EXPORT           QSPI_CTRL_IRQHandler      [WEAK
 ]
-  185 00000016                 EXPORT           AON_WKUP_IRQHandler       [WEAK
+  186 00000016                 EXPORT           AON_WKUP_IRQHandler       [WEAK
 ]
-  186 00000016                 EXPORT           CMU2AHB_IRQHandler        [WEAK
+  187 00000016                 EXPORT           CMU2AHB_IRQHandler        [WEAK
 ]
-  187 00000016         
-  188 00000016                 EXPORT           GPIO_A4_IRQHandler        [WEAK
+  188 00000016         
+  189 00000016                 EXPORT           GPIO_A4_IRQHandler        [WEAK
 ]
-  189 00000016                 EXPORT           GPIO_A5_IRQHandler        [WEAK
+  190 00000016                 EXPORT           GPIO_A5_IRQHandler        [WEAK
 ]
-  190 00000016                 EXPORT           GPIO_A6_IRQHandler        [WEAK
+  191 00000016                 EXPORT           GPIO_A6_IRQHandler        [WEAK
 ]
-  191 00000016                 EXPORT           GPIO_A7_IRQHandler        [WEAK
+  192 00000016                 EXPORT           GPIO_A7_IRQHandler        [WEAK
 ]
-  192 00000016                 EXPORT           GPIO_B0_IRQHandler        [WEAK
-]
-  193 00000016                 EXPORT           GPIO_B1_IRQHandler        [WEAK
+  193 00000016                 EXPORT           GPIO_B0_IRQHandler        [WEAK
 
 
 
@@ -330,88 +330,90 @@ ARM Macro Assembler    Page 6
 
 
 ]
-  194 00000016         
-  195 00000016                 EXPORT           GPIO_B0_IRQHandler        [WEAK
+  194 00000016                 EXPORT           GPIO_B1_IRQHandler        [WEAK
 ]
-  196 00000016                 EXPORT           GPIO_B1_IRQHandler        [WEAK
+  195 00000016         
+  196 00000016                 EXPORT           GPIO_B0_IRQHandler        [WEAK
 ]
-  197 00000016                 EXPORT           GPIO_B2_IRQHandler        [WEAK
+  197 00000016                 EXPORT           GPIO_B1_IRQHandler        [WEAK
 ]
-  198 00000016                 EXPORT           GPIO_B3_IRQHandler        [WEAK
+  198 00000016                 EXPORT           GPIO_B2_IRQHandler        [WEAK
 ]
-  199 00000016                 EXPORT           GPIO_B4_IRQHandler        [WEAK
+  199 00000016                 EXPORT           GPIO_B3_IRQHandler        [WEAK
 ]
-  200 00000016                 EXPORT           GPIO_B5_IRQHandler        [WEAK
+  200 00000016                 EXPORT           GPIO_B4_IRQHandler        [WEAK
 ]
-  201 00000016                 EXPORT           GPIO_B6_IRQHandler        [WEAK
+  201 00000016                 EXPORT           GPIO_B5_IRQHandler        [WEAK
 ]
-  202 00000016                 EXPORT           GPIO_B7_IRQHandler        [WEAK
+  202 00000016                 EXPORT           GPIO_B6_IRQHandler        [WEAK
 ]
-  203 00000016         CMP1_IRQn
-  204 00000016         CMP2_IRQn
-  205 00000016         UART0_IRQHandler
-  206 00000016         UART1_IRQHandler
-  207 00000016         UART2_IRQHandler
-  208 00000016         TIMER0_IRQHandler
-  209 00000016         TIMER1_IRQHandler
-  210 00000016         GPADC_IRQHandler
-  211 00000016         SYS_GPIO_0_IRQHandler
-  212 00000016         SYS_GPIO_1_IRQHandler
-  213 00000016         WDT_IRQHandler
-  214 00000016         ;Lightning_IRQHandler
-  215 00000016         GPIO_A2_IRQHandler
-  216 00000016         DMA_IRQHandler
-  217 00000016         APB_SPI0_IRQnHandler
-  218 00000016         APB_SPI1_IRQnHandler
-  219 00000016         ;QI_IRQnHandler
-  220 00000016         GPIO_A3_IRQHandler
-  221 00000016         RTC_IRQHandler
-  222 00000016         QSPI_CTRL_IRQHandler
-  223 00000016         AON_WKUP_IRQHandler
-  224 00000016         APB_SPI_IRQnHandler
-  225 00000016         CMU2AHB_IRQHandler
-  226 00000016         GPIO_A0_IRQHandler
-  227 00000016         GPIO_A4_IRQHandler
-  228 00000016         GPIO_A5_IRQHandler
-  229 00000016         GPIO_A6_IRQHandler
-  230 00000016         GPIO_A7_IRQHandler
-  231 00000016         GPIO_B0_IRQHandler
-  232 00000016         GPIO_B1_IRQHandler
-  233 00000016         GPIO_B2_IRQHandler
-  234 00000016         GPIO_B3_IRQHandler
-  235 00000016         GPIO_B4_IRQHandler
-  236 00000016         GPIO_B5_IRQHandler
-  237 00000016         GPIO_B6_IRQHandler
-  238 00000016         GPIO_B7_IRQHandler
-  239 00000016         
+  203 00000016                 EXPORT           GPIO_B7_IRQHandler        [WEAK
+]
+  204 00000016         CMP1_IRQn
+  205 00000016         CMP2_IRQn
+  206 00000016         UART0_IRQHandler
+  207 00000016         UART1_IRQHandler
+  208 00000016         UART2_IRQHandler
+  209 00000016         TIMER0_IRQHandler
+  210 00000016         TIMER1_IRQHandler
+  211 00000016         GPADC_IRQHandler
+  212 00000016         SYS_GPIO_0_IRQHandler
+  213 00000016         SYS_GPIO_1_IRQHandler
+  214 00000016         WDT_IRQHandler
+  215 00000016         ;Lightning_IRQHandler
+  216 00000016         GPIO_A2_IRQHandler
+  217 00000016         DMA_IRQHandler
+  218 00000016         APB_SPI0_IRQnHandler
+  219 00000016         APB_SPI1_IRQnHandler
+  220 00000016         ;QI_IRQnHandler
+  221 00000016         GPIO_A3_IRQHandler
+  222 00000016         iWDT_IRQHandler
+  223 00000016         QSPI_CTRL_IRQHandler
+  224 00000016         AON_WKUP_IRQHandler
+  225 00000016         APB_SPI_IRQnHandler
+  226 00000016         CMU2AHB_IRQHandler
+  227 00000016         GPIO_A0_IRQHandler
+  228 00000016         GPIO_A4_IRQHandler
+  229 00000016         GPIO_A5_IRQHandler
+  230 00000016         GPIO_A6_IRQHandler
+  231 00000016         GPIO_A7_IRQHandler
+  232 00000016         GPIO_B0_IRQHandler
+  233 00000016         GPIO_B1_IRQHandler
+  234 00000016         GPIO_B2_IRQHandler
+  235 00000016         GPIO_B3_IRQHandler
+  236 00000016         GPIO_B4_IRQHandler
+  237 00000016         GPIO_B5_IRQHandler
+  238 00000016         GPIO_B6_IRQHandler
+  239 00000016         GPIO_B7_IRQHandler
   240 00000016         
-  241 00000016 E7FE            B                .
-  242 00000018         
-  243 00000018                 ENDP
+  241 00000016         
+  242 00000016 E7FE            B                .
 
 
 
 ARM Macro Assembler    Page 7 
 
 
-  244 00000018         
+  243 00000018         
+  244 00000018                 ENDP
   245 00000018         
-  246 00000018                 ALIGN
-  247 00000018         
+  246 00000018         
+  247 00000018                 ALIGN
   248 00000018         
-  249 00000018         ; User Initial Stack & Heap
-  250 00000018         
-  251 00000018                 IF               :DEF:__MICROLIB
-  252 00000018         
-  253 00000018                 EXPORT           __initial_sp
-  254 00000018                 EXPORT           __heap_base
-  255 00000018                 EXPORT           __heap_limit
-  256 00000018         
-  257 00000018                 ELSE
-  271                          ENDIF
-  272 00000018         
+  249 00000018         
+  250 00000018         ; User Initial Stack & Heap
+  251 00000018         
+  252 00000018                 IF               :DEF:__MICROLIB
+  253 00000018         
+  254 00000018                 EXPORT           __initial_sp
+  255 00000018                 EXPORT           __heap_base
+  256 00000018                 EXPORT           __heap_limit
+  257 00000018         
+  258 00000018                 ELSE
+  272                          ENDIF
   273 00000018         
-  274 00000018                 END
+  274 00000018         
+  275 00000018                 END
               00000000 
 Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M0 --apcs=interw
 ork --depend=.\objects\startup_cm0.d -o.\objects\startup_cm0.o -ID:\Keil_v5\ARM
@@ -446,7 +448,7 @@ Symbol: __heap_base
    Definitions
       At line 35 in file startup\startup_cm0.s
    Uses
-      At line 254 in file startup\startup_cm0.s
+      At line 255 in file startup\startup_cm0.s
 Comment: __heap_base used once
 __heap_limit 00000000
 
@@ -454,7 +456,7 @@ Symbol: __heap_limit
    Definitions
       At line 37 in file startup\startup_cm0.s
    Uses
-      At line 255 in file startup\startup_cm0.s
+      At line 256 in file startup\startup_cm0.s
 Comment: __heap_limit used once
 4 symbols
 
@@ -490,7 +492,7 @@ Relocatable symbols
 
 Symbol: .text
    Definitions
-      At line 106 in file startup\startup_cm0.s
+      At line 107 in file startup\startup_cm0.s
    Uses
       None
 Comment: .text unused
@@ -498,34 +500,34 @@ AON_WKUP_IRQHandler 00000016
 
 Symbol: AON_WKUP_IRQHandler
    Definitions
-      At line 223 in file startup\startup_cm0.s
+      At line 224 in file startup\startup_cm0.s
    Uses
-      At line 102 in file startup\startup_cm0.s
-      At line 185 in file startup\startup_cm0.s
+      At line 103 in file startup\startup_cm0.s
+      At line 186 in file startup\startup_cm0.s
 
 APB_SPI0_IRQnHandler 00000016
 
 Symbol: APB_SPI0_IRQnHandler
    Definitions
-      At line 217 in file startup\startup_cm0.s
+      At line 218 in file startup\startup_cm0.s
    Uses
       At line 84 in file startup\startup_cm0.s
-      At line 175 in file startup\startup_cm0.s
+      At line 176 in file startup\startup_cm0.s
 
 APB_SPI1_IRQnHandler 00000016
 
 Symbol: APB_SPI1_IRQnHandler
    Definitions
-      At line 218 in file startup\startup_cm0.s
+      At line 219 in file startup\startup_cm0.s
    Uses
       At line 85 in file startup\startup_cm0.s
-      At line 176 in file startup\startup_cm0.s
+      At line 177 in file startup\startup_cm0.s
 
 APB_SPI_IRQnHandler 00000016
 
 Symbol: APB_SPI_IRQnHandler
    Definitions
-      At line 224 in file startup\startup_cm0.s
+      At line 225 in file startup\startup_cm0.s
    Uses
       None
 Comment: APB_SPI_IRQnHandler unused
@@ -533,16 +535,16 @@ BusFault_Handler 0000000A
 
 Symbol: BusFault_Handler
    Definitions
-      At line 133 in file startup\startup_cm0.s
+      At line 134 in file startup\startup_cm0.s
    Uses
       At line 54 in file startup\startup_cm0.s
-      At line 134 in file startup\startup_cm0.s
+      At line 135 in file startup\startup_cm0.s
 
 CMP1_IRQn 00000016
 
 Symbol: CMP1_IRQn
    Definitions
-      At line 203 in file startup\startup_cm0.s
+      At line 204 in file startup\startup_cm0.s
    Uses
       At line 67 in file startup\startup_cm0.s
 
@@ -551,49 +553,49 @@ Symbol: CMP1_IRQn
 ARM Macro Assembler    Page 2 Alphabetic symbol ordering
 Relocatable symbols
 
-      At line 162 in file startup\startup_cm0.s
+      At line 163 in file startup\startup_cm0.s
 
 CMP2_IRQn 00000016
 
 Symbol: CMP2_IRQn
    Definitions
-      At line 204 in file startup\startup_cm0.s
+      At line 205 in file startup\startup_cm0.s
    Uses
       At line 68 in file startup\startup_cm0.s
-      At line 163 in file startup\startup_cm0.s
+      At line 164 in file startup\startup_cm0.s
 
 CMU2AHB_IRQHandler 00000016
 
 Symbol: CMU2AHB_IRQHandler
    Definitions
-      At line 225 in file startup\startup_cm0.s
+      At line 226 in file startup\startup_cm0.s
    Uses
-      At line 103 in file startup\startup_cm0.s
-      At line 186 in file startup\startup_cm0.s
+      At line 104 in file startup\startup_cm0.s
+      At line 187 in file startup\startup_cm0.s
 
 DMA_IRQHandler 00000016
 
 Symbol: DMA_IRQHandler
    Definitions
-      At line 216 in file startup\startup_cm0.s
+      At line 217 in file startup\startup_cm0.s
    Uses
       At line 71 in file startup\startup_cm0.s
-      At line 174 in file startup\startup_cm0.s
+      At line 175 in file startup\startup_cm0.s
 
 DebugMon_Handler 00000010
 
 Symbol: DebugMon_Handler
    Definitions
-      At line 147 in file startup\startup_cm0.s
+      At line 148 in file startup\startup_cm0.s
    Uses
       At line 61 in file startup\startup_cm0.s
-      At line 148 in file startup\startup_cm0.s
+      At line 149 in file startup\startup_cm0.s
 
 Default_Handler 00000016
 
 Symbol: Default_Handler
    Definitions
-      At line 160 in file startup\startup_cm0.s
+      At line 161 in file startup\startup_cm0.s
    Uses
       None
 Comment: Default_Handler unused
@@ -601,10 +603,10 @@ GPADC_IRQHandler 00000016
 
 Symbol: GPADC_IRQHandler
    Definitions
-      At line 210 in file startup\startup_cm0.s
+      At line 211 in file startup\startup_cm0.s
    Uses
       At line 75 in file startup\startup_cm0.s
-      At line 169 in file startup\startup_cm0.s
+      At line 170 in file startup\startup_cm0.s
 
 GPIO_A0_IRQHandler 00000016
 
@@ -616,7 +618,7 @@ Symbol: GPIO_A0_IRQHandler
 ARM Macro Assembler    Page 3 Alphabetic symbol ordering
 Relocatable symbols
 
-      At line 226 in file startup\startup_cm0.s
+      At line 227 in file startup\startup_cm0.s
    Uses
       At line 83 in file startup\startup_cm0.s
 Comment: GPIO_A0_IRQHandler used once
@@ -624,55 +626,55 @@ GPIO_A2_IRQHandler 00000016
 
 Symbol: GPIO_A2_IRQHandler
    Definitions
-      At line 215 in file startup\startup_cm0.s
+      At line 216 in file startup\startup_cm0.s
    Uses
       At line 81 in file startup\startup_cm0.s
-      At line 182 in file startup\startup_cm0.s
+      At line 183 in file startup\startup_cm0.s
 
 GPIO_A3_IRQHandler 00000016
 
 Symbol: GPIO_A3_IRQHandler
    Definitions
-      At line 220 in file startup\startup_cm0.s
+      At line 221 in file startup\startup_cm0.s
    Uses
       At line 87 in file startup\startup_cm0.s
-      At line 178 in file startup\startup_cm0.s
+      At line 179 in file startup\startup_cm0.s
 
 GPIO_A4_IRQHandler 00000016
 
 Symbol: GPIO_A4_IRQHandler
-   Definitions
-      At line 227 in file startup\startup_cm0.s
-   Uses
-      At line 90 in file startup\startup_cm0.s
-      At line 188 in file startup\startup_cm0.s
-
-GPIO_A5_IRQHandler 00000016
-
-Symbol: GPIO_A5_IRQHandler
    Definitions
       At line 228 in file startup\startup_cm0.s
    Uses
       At line 91 in file startup\startup_cm0.s
       At line 189 in file startup\startup_cm0.s
 
-GPIO_A6_IRQHandler 00000016
+GPIO_A5_IRQHandler 00000016
 
-Symbol: GPIO_A6_IRQHandler
+Symbol: GPIO_A5_IRQHandler
    Definitions
       At line 229 in file startup\startup_cm0.s
    Uses
       At line 92 in file startup\startup_cm0.s
       At line 190 in file startup\startup_cm0.s
 
-GPIO_A7_IRQHandler 00000016
+GPIO_A6_IRQHandler 00000016
 
-Symbol: GPIO_A7_IRQHandler
+Symbol: GPIO_A6_IRQHandler
    Definitions
       At line 230 in file startup\startup_cm0.s
    Uses
       At line 93 in file startup\startup_cm0.s
       At line 191 in file startup\startup_cm0.s
+
+GPIO_A7_IRQHandler 00000016
+
+Symbol: GPIO_A7_IRQHandler
+   Definitions
+      At line 231 in file startup\startup_cm0.s
+   Uses
+      At line 94 in file startup\startup_cm0.s
+      At line 192 in file startup\startup_cm0.s
 
 GPIO_B0_IRQHandler 00000016
 
@@ -684,57 +686,57 @@ Relocatable symbols
 
 Symbol: GPIO_B0_IRQHandler
    Definitions
-      At line 231 in file startup\startup_cm0.s
-   Uses
-      At line 94 in file startup\startup_cm0.s
-      At line 192 in file startup\startup_cm0.s
-      At line 195 in file startup\startup_cm0.s
-
-GPIO_B1_IRQHandler 00000016
-
-Symbol: GPIO_B1_IRQHandler
-   Definitions
       At line 232 in file startup\startup_cm0.s
    Uses
       At line 95 in file startup\startup_cm0.s
       At line 193 in file startup\startup_cm0.s
       At line 196 in file startup\startup_cm0.s
 
-GPIO_B2_IRQHandler 00000016
+GPIO_B1_IRQHandler 00000016
 
-Symbol: GPIO_B2_IRQHandler
+Symbol: GPIO_B1_IRQHandler
    Definitions
       At line 233 in file startup\startup_cm0.s
    Uses
       At line 96 in file startup\startup_cm0.s
+      At line 194 in file startup\startup_cm0.s
       At line 197 in file startup\startup_cm0.s
 
-GPIO_B3_IRQHandler 00000016
+GPIO_B2_IRQHandler 00000016
 
-Symbol: GPIO_B3_IRQHandler
+Symbol: GPIO_B2_IRQHandler
    Definitions
       At line 234 in file startup\startup_cm0.s
    Uses
       At line 97 in file startup\startup_cm0.s
       At line 198 in file startup\startup_cm0.s
 
-GPIO_B4_IRQHandler 00000016
+GPIO_B3_IRQHandler 00000016
 
-Symbol: GPIO_B4_IRQHandler
+Symbol: GPIO_B3_IRQHandler
    Definitions
       At line 235 in file startup\startup_cm0.s
    Uses
       At line 98 in file startup\startup_cm0.s
       At line 199 in file startup\startup_cm0.s
 
-GPIO_B5_IRQHandler 00000016
+GPIO_B4_IRQHandler 00000016
 
-Symbol: GPIO_B5_IRQHandler
+Symbol: GPIO_B4_IRQHandler
    Definitions
       At line 236 in file startup\startup_cm0.s
    Uses
       At line 99 in file startup\startup_cm0.s
       At line 200 in file startup\startup_cm0.s
+
+GPIO_B5_IRQHandler 00000016
+
+Symbol: GPIO_B5_IRQHandler
+   Definitions
+      At line 237 in file startup\startup_cm0.s
+   Uses
+      At line 100 in file startup\startup_cm0.s
+      At line 201 in file startup\startup_cm0.s
 
 GPIO_B6_IRQHandler 00000016
 
@@ -746,64 +748,64 @@ Symbol: GPIO_B6_IRQHandler
 ARM Macro Assembler    Page 5 Alphabetic symbol ordering
 Relocatable symbols
 
-      At line 237 in file startup\startup_cm0.s
-   Uses
-      At line 100 in file startup\startup_cm0.s
-      At line 201 in file startup\startup_cm0.s
-
-GPIO_B7_IRQHandler 00000016
-
-Symbol: GPIO_B7_IRQHandler
-   Definitions
       At line 238 in file startup\startup_cm0.s
    Uses
       At line 101 in file startup\startup_cm0.s
       At line 202 in file startup\startup_cm0.s
 
+GPIO_B7_IRQHandler 00000016
+
+Symbol: GPIO_B7_IRQHandler
+   Definitions
+      At line 239 in file startup\startup_cm0.s
+   Uses
+      At line 102 in file startup\startup_cm0.s
+      At line 203 in file startup\startup_cm0.s
+
 HardFault_Handler 00000006
 
 Symbol: HardFault_Handler
    Definitions
-      At line 123 in file startup\startup_cm0.s
+      At line 124 in file startup\startup_cm0.s
    Uses
       At line 52 in file startup\startup_cm0.s
-      At line 124 in file startup\startup_cm0.s
+      At line 125 in file startup\startup_cm0.s
 
 MemManage_Handler 00000008
 
 Symbol: MemManage_Handler
    Definitions
-      At line 128 in file startup\startup_cm0.s
+      At line 129 in file startup\startup_cm0.s
    Uses
       At line 53 in file startup\startup_cm0.s
-      At line 129 in file startup\startup_cm0.s
+      At line 130 in file startup\startup_cm0.s
 
 NMI_Handler 00000004
 
 Symbol: NMI_Handler
    Definitions
-      At line 118 in file startup\startup_cm0.s
+      At line 119 in file startup\startup_cm0.s
    Uses
       At line 51 in file startup\startup_cm0.s
-      At line 119 in file startup\startup_cm0.s
+      At line 120 in file startup\startup_cm0.s
 
 PendSV_Handler 00000012
 
 Symbol: PendSV_Handler
    Definitions
-      At line 151 in file startup\startup_cm0.s
+      At line 152 in file startup\startup_cm0.s
    Uses
       At line 63 in file startup\startup_cm0.s
-      At line 152 in file startup\startup_cm0.s
+      At line 153 in file startup\startup_cm0.s
 
 QSPI_CTRL_IRQHandler 00000016
 
 Symbol: QSPI_CTRL_IRQHandler
    Definitions
-      At line 222 in file startup\startup_cm0.s
+      At line 223 in file startup\startup_cm0.s
    Uses
       At line 88 in file startup\startup_cm0.s
-      At line 184 in file startup\startup_cm0.s
+      At line 185 in file startup\startup_cm0.s
 
 
 
@@ -811,65 +813,65 @@ Symbol: QSPI_CTRL_IRQHandler
 ARM Macro Assembler    Page 6 Alphabetic symbol ordering
 Relocatable symbols
 
-RTC_IRQHandler 00000016
-
-Symbol: RTC_IRQHandler
-   Definitions
-      At line 221 in file startup\startup_cm0.s
-   Uses
-      At line 89 in file startup\startup_cm0.s
-      At line 179 in file startup\startup_cm0.s
-
 Reset_Handler 00000000
 
 Symbol: Reset_Handler
    Definitions
-      At line 108 in file startup\startup_cm0.s
+      At line 109 in file startup\startup_cm0.s
    Uses
       At line 50 in file startup\startup_cm0.s
-      At line 109 in file startup\startup_cm0.s
+      At line 110 in file startup\startup_cm0.s
 
 SVC_Handler 0000000E
 
 Symbol: SVC_Handler
    Definitions
-      At line 142 in file startup\startup_cm0.s
+      At line 143 in file startup\startup_cm0.s
    Uses
       At line 60 in file startup\startup_cm0.s
-      At line 143 in file startup\startup_cm0.s
+      At line 144 in file startup\startup_cm0.s
 
 SYS_GPIO_0_IRQHandler 00000016
 
 Symbol: SYS_GPIO_0_IRQHandler
    Definitions
-      At line 211 in file startup\startup_cm0.s
+      At line 212 in file startup\startup_cm0.s
    Uses
       At line 77 in file startup\startup_cm0.s
-      At line 170 in file startup\startup_cm0.s
+      At line 171 in file startup\startup_cm0.s
 
 SYS_GPIO_1_IRQHandler 00000016
 
 Symbol: SYS_GPIO_1_IRQHandler
    Definitions
-      At line 212 in file startup\startup_cm0.s
+      At line 213 in file startup\startup_cm0.s
    Uses
       At line 78 in file startup\startup_cm0.s
-      At line 171 in file startup\startup_cm0.s
+      At line 172 in file startup\startup_cm0.s
 
 SysTick_Handler 00000014
 
 Symbol: SysTick_Handler
    Definitions
-      At line 155 in file startup\startup_cm0.s
+      At line 156 in file startup\startup_cm0.s
    Uses
       At line 64 in file startup\startup_cm0.s
-      At line 156 in file startup\startup_cm0.s
+      At line 157 in file startup\startup_cm0.s
 
 TIMER0_IRQHandler 00000016
 
 Symbol: TIMER0_IRQHandler
    Definitions
-      At line 208 in file startup\startup_cm0.s
+      At line 209 in file startup\startup_cm0.s
+   Uses
+      At line 73 in file startup\startup_cm0.s
+      At line 168 in file startup\startup_cm0.s
+
+TIMER1_IRQHandler 00000016
+
+Symbol: TIMER1_IRQHandler
+   Definitions
+      At line 210 in file startup\startup_cm0.s
 
 
 
@@ -877,61 +879,61 @@ ARM Macro Assembler    Page 7 Alphabetic symbol ordering
 Relocatable symbols
 
    Uses
-      At line 73 in file startup\startup_cm0.s
-      At line 167 in file startup\startup_cm0.s
-
-TIMER1_IRQHandler 00000016
-
-Symbol: TIMER1_IRQHandler
-   Definitions
-      At line 209 in file startup\startup_cm0.s
-   Uses
       At line 74 in file startup\startup_cm0.s
-      At line 168 in file startup\startup_cm0.s
+      At line 169 in file startup\startup_cm0.s
 
 UART0_IRQHandler 00000016
 
 Symbol: UART0_IRQHandler
    Definitions
-      At line 205 in file startup\startup_cm0.s
+      At line 206 in file startup\startup_cm0.s
    Uses
       At line 69 in file startup\startup_cm0.s
-      At line 164 in file startup\startup_cm0.s
+      At line 165 in file startup\startup_cm0.s
 
 UART1_IRQHandler 00000016
 
 Symbol: UART1_IRQHandler
    Definitions
-      At line 206 in file startup\startup_cm0.s
+      At line 207 in file startup\startup_cm0.s
    Uses
       At line 70 in file startup\startup_cm0.s
-      At line 165 in file startup\startup_cm0.s
+      At line 166 in file startup\startup_cm0.s
 
 UART2_IRQHandler 00000016
 
 Symbol: UART2_IRQHandler
    Definitions
-      At line 207 in file startup\startup_cm0.s
+      At line 208 in file startup\startup_cm0.s
    Uses
-      At line 166 in file startup\startup_cm0.s
+      At line 167 in file startup\startup_cm0.s
 Comment: UART2_IRQHandler used once
 UsageFault_Handler 0000000C
 
 Symbol: UsageFault_Handler
    Definitions
-      At line 138 in file startup\startup_cm0.s
+      At line 139 in file startup\startup_cm0.s
    Uses
       At line 55 in file startup\startup_cm0.s
-      At line 139 in file startup\startup_cm0.s
+      At line 140 in file startup\startup_cm0.s
 
 WDT_IRQHandler 00000016
 
 Symbol: WDT_IRQHandler
    Definitions
-      At line 213 in file startup\startup_cm0.s
+      At line 214 in file startup\startup_cm0.s
    Uses
       At line 79 in file startup\startup_cm0.s
-      At line 172 in file startup\startup_cm0.s
+      At line 173 in file startup\startup_cm0.s
+
+iWDT_IRQHandler 00000016
+
+Symbol: iWDT_IRQHandler
+   Definitions
+      At line 222 in file startup\startup_cm0.s
+   Uses
+      At line 90 in file startup\startup_cm0.s
+      At line 180 in file startup\startup_cm0.s
 
 46 symbols
 
@@ -955,7 +957,7 @@ Symbol: __initial_sp
       At line 23 in file startup\startup_cm0.s
    Uses
       At line 49 in file startup\startup_cm0.s
-      At line 253 in file startup\startup_cm0.s
+      At line 254 in file startup\startup_cm0.s
 
 2 symbols
 
@@ -968,9 +970,9 @@ __main 00000000
 
 Symbol: __main
    Definitions
-      At line 110 in file startup\startup_cm0.s
-   Uses
       At line 111 in file startup\startup_cm0.s
+   Uses
+      At line 112 in file startup\startup_cm0.s
 Comment: __main used once
 1 symbol
 390 symbols in table

@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\bsr1901_demo.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\bsr1901_demo.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Mon Apr 20 11:18:52 2026
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Mon Apr 20 13:44:56 2026
 <BR><P>
 <H3>Maximum Stack Usage =        160 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -52,7 +52,6 @@ Function Pointers
  <LI><a href="#[1]">NMI_Handler</a> from isr.o(i.NMI_Handler) referenced from startup_cm0.o(RESET)
  <LI><a href="#[8]">PendSV_Handler</a> from isr.o(i.PendSV_Handler) referenced from startup_cm0.o(RESET)
  <LI><a href="#[1a]">QSPI_CTRL_IRQHandler</a> from isr.o(i.QSPI_CTRL_IRQHandler) referenced from startup_cm0.o(RESET)
- <LI><a href="#[1b]">RTC_IRQHandler</a> from startup_cm0.o(.text) referenced from startup_cm0.o(RESET)
  <LI><a href="#[0]">Reset_Handler</a> from startup_cm0.o(.text) referenced from startup_cm0.o(RESET)
  <LI><a href="#[6]">SVC_Handler</a> from isr.o(i.SVC_Handler) referenced from startup_cm0.o(RESET)
  <LI><a href="#[12]">SYS_GPIO_0_IRQHandler</a> from startup_cm0.o(.text) referenced from startup_cm0.o(RESET)
@@ -67,6 +66,7 @@ Function Pointers
  <LI><a href="#[2b]">__main</a> from entry.o(.ARM.Collect$$$$00000000) referenced from startup_cm0.o(.text)
  <LI><a href="#[2e]">__user_font_get_bitmap</a> from lv_font_16.o(i.__user_font_get_bitmap) referenced from lv_font_16.o(.data)
  <LI><a href="#[2d]">__user_font_get_glyph_dsc</a> from lv_font_16.o(i.__user_font_get_glyph_dsc) referenced from lv_font_16.o(.data)
+ <LI><a href="#[1b]">iWDT_IRQHandler</a> from isr.o(i.iWDT_IRQHandler) referenced from startup_cm0.o(RESET)
  <LI><a href="#[2c]">lcd_dma_8bit_refresh</a> from spi.o(i.lcd_dma_8bit_refresh) referenced from main.o(i.main)
  <LI><a href="#[2a]">main</a> from main.o(i.main) referenced from entry9a.o(.ARM.Collect$$$$0000000B)
 </UL>
@@ -77,7 +77,7 @@ Global Symbols
 <P><STRONG><a name="[2b]"></a>__main</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry.o(.ARM.Collect$$$$00000000))
 <BR>[Address Reference Count : 1]<UL><LI> startup_cm0.o(.text)
 </UL>
-<P><STRONG><a name="[8a]"></a>_main_stk</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry2.o(.ARM.Collect$$$$00000001))
+<P><STRONG><a name="[8c]"></a>_main_stk</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry2.o(.ARM.Collect$$$$00000001))
 
 <P><STRONG><a name="[2f]"></a>_main_scatterload</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry5.o(.ARM.Collect$$$$00000004))
 <BR><BR>[Calls]<UL><LI><a href="#[30]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__scatterload
@@ -87,15 +87,15 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[30]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__scatterload
 </UL>
 
-<P><STRONG><a name="[8b]"></a>_main_clock</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry7b.o(.ARM.Collect$$$$00000008))
+<P><STRONG><a name="[8d]"></a>_main_clock</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry7b.o(.ARM.Collect$$$$00000008))
 
-<P><STRONG><a name="[8c]"></a>_main_cpp_init</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry8b.o(.ARM.Collect$$$$0000000A))
+<P><STRONG><a name="[8e]"></a>_main_cpp_init</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry8b.o(.ARM.Collect$$$$0000000A))
 
-<P><STRONG><a name="[8d]"></a>_main_init</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry9a.o(.ARM.Collect$$$$0000000B))
+<P><STRONG><a name="[8f]"></a>_main_init</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry9a.o(.ARM.Collect$$$$0000000B))
 
-<P><STRONG><a name="[8e]"></a>__rt_final_cpp</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry10a.o(.ARM.Collect$$$$0000000D))
+<P><STRONG><a name="[90]"></a>__rt_final_cpp</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry10a.o(.ARM.Collect$$$$0000000D))
 
-<P><STRONG><a name="[8f]"></a>__rt_final_exit</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry11a.o(.ARM.Collect$$$$0000000F))
+<P><STRONG><a name="[91]"></a>__rt_final_exit</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry11a.o(.ARM.Collect$$$$0000000F))
 
 <P><STRONG><a name="[0]"></a>Reset_Handler</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, startup_cm0.o(.text))
 <BR>[Address Reference Count : 1]<UL><LI> startup_cm0.o(RESET)
@@ -177,18 +177,15 @@ Global Symbols
 <P><STRONG><a name="[27]"></a>GPIO_B7_IRQHandler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup_cm0.o(.text))
 <BR>[Address Reference Count : 1]<UL><LI> startup_cm0.o(RESET)
 </UL>
-<P><STRONG><a name="[1b]"></a>RTC_IRQHandler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup_cm0.o(.text))
-<BR>[Address Reference Count : 1]<UL><LI> startup_cm0.o(RESET)
-</UL>
 <P><STRONG><a name="[12]"></a>SYS_GPIO_0_IRQHandler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup_cm0.o(.text))
 <BR>[Address Reference Count : 1]<UL><LI> startup_cm0.o(RESET)
 </UL>
 <P><STRONG><a name="[13]"></a>SYS_GPIO_1_IRQHandler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup_cm0.o(.text))
 <BR>[Address Reference Count : 1]<UL><LI> startup_cm0.o(RESET)
 </UL>
-<P><STRONG><a name="[90]"></a>UART2_IRQHandler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup_cm0.o(.text), UNUSED)
+<P><STRONG><a name="[92]"></a>UART2_IRQHandler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup_cm0.o(.text), UNUSED)
 
-<P><STRONG><a name="[91]"></a>__aeabi_uidiv</STRONG> (Thumb, 0 bytes, Stack size 12 bytes, uidiv.o(.text), UNUSED)
+<P><STRONG><a name="[93]"></a>__aeabi_uidiv</STRONG> (Thumb, 0 bytes, Stack size 12 bytes, uidiv.o(.text), UNUSED)
 
 <P><STRONG><a name="[48]"></a>__aeabi_uidivmod</STRONG> (Thumb, 44 bytes, Stack size 12 bytes, uidiv.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 12<LI>Call Chain = __aeabi_uidivmod
@@ -198,13 +195,13 @@ Global Symbols
 <LI><a href="#[2a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[88]"></a>__aeabi_uread4</STRONG> (Thumb, 20 bytes, Stack size 0 bytes, uread4.o(.text), UNUSED)
-<BR><BR>[Called By]<UL><LI><a href="#[87]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ProgramPage (via Veneer)
+<P><STRONG><a name="[8a]"></a>__aeabi_uread4</STRONG> (Thumb, 20 bytes, Stack size 0 bytes, uread4.o(.text), UNUSED)
+<BR><BR>[Called By]<UL><LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ProgramPage (via Veneer)
 </UL>
 
-<P><STRONG><a name="[92]"></a>__rt_uread4</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, uread4.o(.text), UNUSED)
+<P><STRONG><a name="[94]"></a>__rt_uread4</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, uread4.o(.text), UNUSED)
 
-<P><STRONG><a name="[93]"></a>_uread4</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, uread4.o(.text), UNUSED)
+<P><STRONG><a name="[95]"></a>_uread4</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, uread4.o(.text), UNUSED)
 
 <P><STRONG><a name="[31]"></a>__aeabi_fadd</STRONG> (Thumb, 162 bytes, Stack size 24 bytes, fadd.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 36<LI>Call Chain = __aeabi_fadd &rArr; _float_epilogue
@@ -230,7 +227,7 @@ Global Symbols
 <BR><BR>[Calls]<UL><LI><a href="#[31]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_fadd
 </UL>
 
-<P><STRONG><a name="[80]"></a>__aeabi_fmul</STRONG> (Thumb, 122 bytes, Stack size 16 bytes, fmul.o(.text))
+<P><STRONG><a name="[82]"></a>__aeabi_fmul</STRONG> (Thumb, 122 bytes, Stack size 16 bytes, fmul.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = __aeabi_fmul
 </UL>
 <BR>[Called By]<UL><LI><a href="#[71]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pid_update
@@ -264,13 +261,13 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[49]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Get_Vbat_Voltage
 </UL>
 
-<P><STRONG><a name="[94]"></a>__aeabi_cfcmpeq</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, cfcmple.o(.text), UNUSED)
+<P><STRONG><a name="[96]"></a>__aeabi_cfcmpeq</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, cfcmple.o(.text), UNUSED)
 
-<P><STRONG><a name="[7f]"></a>__aeabi_cfcmple</STRONG> (Thumb, 20 bytes, Stack size 0 bytes, cfcmple.o(.text))
+<P><STRONG><a name="[81]"></a>__aeabi_cfcmple</STRONG> (Thumb, 20 bytes, Stack size 0 bytes, cfcmple.o(.text))
 <BR><BR>[Called By]<UL><LI><a href="#[71]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pid_update
 </UL>
 
-<P><STRONG><a name="[7e]"></a>__aeabi_cfrcmple</STRONG> (Thumb, 20 bytes, Stack size 0 bytes, cfrcmple.o(.text))
+<P><STRONG><a name="[80]"></a>__aeabi_cfrcmple</STRONG> (Thumb, 20 bytes, Stack size 0 bytes, cfrcmple.o(.text))
 <BR><BR>[Called By]<UL><LI><a href="#[71]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pid_update
 </UL>
 
@@ -280,7 +277,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[37]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_double_epilogue
 </UL>
 
-<P><STRONG><a name="[95]"></a>_ll_shift_l</STRONG> (Thumb, 0 bytes, Stack size 8 bytes, llshl.o(.text), UNUSED)
+<P><STRONG><a name="[97]"></a>_ll_shift_l</STRONG> (Thumb, 0 bytes, Stack size 8 bytes, llshl.o(.text), UNUSED)
 
 <P><STRONG><a name="[3a]"></a>__aeabi_llsr</STRONG> (Thumb, 34 bytes, Stack size 8 bytes, llushr.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = __aeabi_llsr
@@ -289,9 +286,9 @@ Global Symbols
 <LI><a href="#[37]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_double_epilogue
 </UL>
 
-<P><STRONG><a name="[96]"></a>_ll_ushift_r</STRONG> (Thumb, 0 bytes, Stack size 8 bytes, llushr.o(.text), UNUSED)
+<P><STRONG><a name="[98]"></a>_ll_ushift_r</STRONG> (Thumb, 0 bytes, Stack size 8 bytes, llushr.o(.text), UNUSED)
 
-<P><STRONG><a name="[97]"></a>__I$use$fp</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, iusefp.o(.text), UNUSED)
+<P><STRONG><a name="[99]"></a>__I$use$fp</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, iusefp.o(.text), UNUSED)
 
 <P><STRONG><a name="[33]"></a>_float_round</STRONG> (Thumb, 16 bytes, Stack size 0 bytes, fepilogue.o(.text))
 <BR><BR>[Called By]<UL><LI><a href="#[31]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_fadd
@@ -327,7 +324,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[2f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_main_scatterload
 </UL>
 
-<P><STRONG><a name="[98]"></a>__scatterload_rt2</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, init.o(.text), UNUSED)
+<P><STRONG><a name="[9a]"></a>__scatterload_rt2</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, init.o(.text), UNUSED)
 
 <P><STRONG><a name="[28]"></a>AON_WKUP_IRQHandler</STRONG> (Thumb, 8 bytes, Stack size 8 bytes, isr.o(i.AON_WKUP_IRQHandler))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = AON_WKUP_IRQHandler &rArr; gecko_aon_wakeup_irq_handler
@@ -355,10 +352,10 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[2a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[81]"></a>EventQueue_Pop</STRONG> (Thumb, 48 bytes, Stack size 8 bytes, sc_event_task.o(i.EventQueue_Pop))
+<P><STRONG><a name="[83]"></a>EventQueue_Pop</STRONG> (Thumb, 48 bytes, Stack size 8 bytes, sc_event_task.o(i.EventQueue_Pop))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = EventQueue_Pop
 </UL>
-<BR>[Called By]<UL><LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sc_task_loop
+<BR>[Called By]<UL><LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sc_task_loop
 </UL>
 
 <P><STRONG><a name="[1d]"></a>GPIO_A5_IRQHandler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, isr.o(i.GPIO_A5_IRQHandler))
@@ -388,6 +385,10 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Uart_16550_Initialise
 </UL>
 
+<P><STRONG><a name="[75]"></a>Get_SysTick_VALUE</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, systick.o(i.Get_SysTick_VALUE))
+<BR><BR>[Called By]<UL><LI><a href="#[1b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;iWDT_IRQHandler
+</UL>
+
 <P><STRONG><a name="[49]"></a>Get_Vbat_Voltage</STRONG> (Thumb, 96 bytes, Stack size 16 bytes, adc.o(i.Get_Vbat_Voltage))
 <BR><BR>[Stack]<UL><LI>Max Depth = 144<LI>Call Chain = Get_Vbat_Voltage &rArr; __aeabi_dmul &rArr; _double_epilogue &rArr; __aeabi_llsr
 </UL>
@@ -400,7 +401,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[2a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[77]"></a>HW_SPI_Initialise</STRONG> (Thumb, 64 bytes, Stack size 8 bytes, spi.o(i.HW_SPI_Initialise))
+<P><STRONG><a name="[79]"></a>HW_SPI_Initialise</STRONG> (Thumb, 64 bytes, Stack size 8 bytes, spi.o(i.HW_SPI_Initialise))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = HW_SPI_Initialise
 </UL>
 <BR>[Called By]<UL><LI><a href="#[2a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
@@ -423,7 +424,7 @@ Global Symbols
 <LI><a href="#[44]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Gecko_DMA_Transport
 <LI><a href="#[4c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_set_value
 </UL>
-<BR>[Called By]<UL><LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lcd_dma_refresh_colorblock
+<BR>[Called By]<UL><LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lcd_dma_refresh_colorblock
 </UL>
 
 <P><STRONG><a name="[4f]"></a>HW_SPI_Tx_DMA_32bit</STRONG> (Thumb, 46 bytes, Stack size 16 bytes, spi.o(i.HW_SPI_Tx_DMA_32bit))
@@ -507,9 +508,9 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[5b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Lcd_WriteIndex
 <LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_WriteData_16Bit
 </UL>
-<BR>[Called By]<UL><LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lcd_dma_refresh_colorblock
+<BR>[Called By]<UL><LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lcd_dma_refresh_colorblock
 <LI><a href="#[2c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lcd_dma_8bit_refresh
-<LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ui_paint_color_circle
+<LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ui_paint_color_circle
 <LI><a href="#[2a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
@@ -536,7 +537,7 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[44]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Gecko_DMA_Transport
 <LI><a href="#[4c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_set_value
 </UL>
-<BR>[Called By]<UL><LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ui_paint_color_circle
+<BR>[Called By]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ui_paint_color_circle
 </UL>
 
 <P><STRONG><a name="[1]"></a>NMI_Handler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, isr.o(i.NMI_Handler))
@@ -621,7 +622,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[2a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[7d]"></a>Task_KeyScan</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, key_process.o(i.Task_KeyScan))
+<P><STRONG><a name="[7f]"></a>Task_KeyScan</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, key_process.o(i.Task_KeyScan))
 <BR><BR>[Called By]<UL><LI><a href="#[2a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
@@ -679,11 +680,11 @@ Global Symbols
 <LI><a href="#[6a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;charger_process
 </UL>
 
-<P><STRONG><a name="[99]"></a>__scatterload_copy</STRONG> (Thumb, 14 bytes, Stack size unknown bytes, handlers.o(i.__scatterload_copy), UNUSED)
+<P><STRONG><a name="[9b]"></a>__scatterload_copy</STRONG> (Thumb, 14 bytes, Stack size unknown bytes, handlers.o(i.__scatterload_copy), UNUSED)
 
-<P><STRONG><a name="[9a]"></a>__scatterload_null</STRONG> (Thumb, 2 bytes, Stack size unknown bytes, handlers.o(i.__scatterload_null), UNUSED)
+<P><STRONG><a name="[9c]"></a>__scatterload_null</STRONG> (Thumb, 2 bytes, Stack size unknown bytes, handlers.o(i.__scatterload_null), UNUSED)
 
-<P><STRONG><a name="[9b]"></a>__scatterload_zeroinit</STRONG> (Thumb, 14 bytes, Stack size unknown bytes, handlers.o(i.__scatterload_zeroinit), UNUSED)
+<P><STRONG><a name="[9d]"></a>__scatterload_zeroinit</STRONG> (Thumb, 14 bytes, Stack size unknown bytes, handlers.o(i.__scatterload_zeroinit), UNUSED)
 
 <P><STRONG><a name="[4a]"></a>adc_delay_us</STRONG> (Thumb, 36 bytes, Stack size 24 bytes, adc.o(i.adc_delay_us))
 <BR><BR>[Stack]<UL><LI>Max Depth = 60<LI>Call Chain = adc_delay_us &rArr; __aeabi_fsub &rArr; __aeabi_fadd &rArr; _float_epilogue
@@ -703,7 +704,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[2a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[7b]"></a>charger_init</STRONG> (Thumb, 40 bytes, Stack size 0 bytes, charger.o(i.charger_init))
+<P><STRONG><a name="[7d]"></a>charger_init</STRONG> (Thumb, 40 bytes, Stack size 0 bytes, charger.o(i.charger_init))
 <BR><BR>[Called By]<UL><LI><a href="#[2a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
@@ -721,10 +722,10 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[5a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_ms
 </UL>
 
-<P><STRONG><a name="[78]"></a>delay_1us</STRONG> (Thumb, 16 bytes, Stack size 0 bytes, dpi_common.o(i.delay_1us))
-<BR><BR>[Called By]<UL><LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;QSPI_NorFlash_ReadWord (via Veneer)
-<LI><a href="#[87]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ProgramPage (via Veneer)
-<LI><a href="#[85]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EraseSector (via Veneer)
+<P><STRONG><a name="[7a]"></a>delay_1us</STRONG> (Thumb, 16 bytes, Stack size 0 bytes, dpi_common.o(i.delay_1us))
+<BR><BR>[Called By]<UL><LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;QSPI_NorFlash_ReadWord (via Veneer)
+<LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ProgramPage (via Veneer)
+<LI><a href="#[87]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EraseSector (via Veneer)
 <LI><a href="#[2a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
@@ -769,7 +770,7 @@ Global Symbols
 <LI><a href="#[2a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[76]"></a>gecko_pinmux_default_config</STRONG> (Thumb, 12 bytes, Stack size 0 bytes, iomux.o(i.gecko_pinmux_default_config))
+<P><STRONG><a name="[78]"></a>gecko_pinmux_default_config</STRONG> (Thumb, 12 bytes, Stack size 0 bytes, iomux.o(i.gecko_pinmux_default_config))
 <BR><BR>[Called By]<UL><LI><a href="#[2a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
@@ -791,7 +792,7 @@ Global Symbols
 <LI><a href="#[4f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HW_SPI_Tx_DMA_32bit
 <LI><a href="#[4e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HW_SPI_Tx_DMA_16bit_ColorBlock
 <LI><a href="#[4b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HW_SPI_Tx_DMA
-<LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA_ISR_Routine (via Veneer)
+<LI><a href="#[85]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA_ISR_Routine (via Veneer)
 <LI><a href="#[5b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Lcd_WriteIndex
 <LI><a href="#[5c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Lcd_WriteData
 <LI><a href="#[59]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Lcd_Reset
@@ -827,6 +828,18 @@ Global Symbols
 <LI><a href="#[63]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemInit
 </UL>
 
+<P><STRONG><a name="[1b]"></a>iWDT_IRQHandler</STRONG> (Thumb, 16 bytes, Stack size 8 bytes, isr.o(i.iWDT_IRQHandler))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = iWDT_IRQHandler
+</UL>
+<BR>[Calls]<UL><LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;iWDT_Timer_Disable
+<LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Get_SysTick_VALUE
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> startup_cm0.o(RESET)
+</UL>
+<P><STRONG><a name="[76]"></a>iWDT_Timer_Disable</STRONG> (Thumb, 20 bytes, Stack size 0 bytes, watchdog.o(i.iWDT_Timer_Disable))
+<BR><BR>[Called By]<UL><LI><a href="#[1b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;iWDT_IRQHandler
+</UL>
+
 <P><STRONG><a name="[2c]"></a>lcd_dma_8bit_refresh</STRONG> (Thumb, 36 bytes, Stack size 16 bytes, spi.o(i.lcd_dma_8bit_refresh))
 <BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = lcd_dma_8bit_refresh &rArr; HW_SPI_Tx_DMA_8bit &rArr; Gecko_DMA_Transport
 </UL>
@@ -835,7 +848,7 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> main.o(i.main)
 </UL>
-<P><STRONG><a name="[75]"></a>lcd_dma_refresh_colorblock</STRONG> (Thumb, 36 bytes, Stack size 16 bytes, spi.o(i.lcd_dma_refresh_colorblock))
+<P><STRONG><a name="[77]"></a>lcd_dma_refresh_colorblock</STRONG> (Thumb, 36 bytes, Stack size 16 bytes, spi.o(i.lcd_dma_refresh_colorblock))
 <BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = lcd_dma_refresh_colorblock &rArr; HW_SPI_Tx_DMA_16bit_ColorBlock &rArr; Gecko_DMA_Transport
 </UL>
 <BR>[Calls]<UL><LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Lcd_SetRegion
@@ -848,27 +861,27 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 160<LI>Call Chain = main &rArr; Get_Vbat_Voltage &rArr; __aeabi_dmul &rArr; _double_epilogue &rArr; __aeabi_llsr
 </UL>
 <BR>[Calls]<UL><LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Uart_16550_Initialise
-<LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gecko_pinmux_default_config
+<LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gecko_pinmux_default_config
 <LI><a href="#[52]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gecko_pinmux_config
-<LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_1us
+<LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_1us
 <LI><a href="#[6f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;aon_wakeup_irq_cfg
 <LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LDO33_AUX_Enable
 <LI><a href="#[61]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysTick_Config
 <LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Lcd_SetRegion
-<LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lcd_dma_refresh_colorblock
+<LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lcd_dma_refresh_colorblock
 <LI><a href="#[50]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HW_SPI_Tx_DMA_8bit
 <LI><a href="#[4f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HW_SPI_Tx_DMA_32bit
 <LI><a href="#[4b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HW_SPI_Tx_DMA
-<LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HW_SPI_Initialise
+<LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HW_SPI_Initialise
 <LI><a href="#[49]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Get_Vbat_Voltage
-<LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;charger_init
+<LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;charger_init
 <LI><a href="#[69]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Task_Charger_Control
 <LI><a href="#[40]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA_Configuration
-<LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sc_gui_init
-<LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sc_task_loop
+<LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sc_gui_init
+<LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sc_task_loop
 <LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Lcd_Init
-<LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ui_paint_color_circle
-<LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Task_KeyScan
+<LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ui_paint_color_circle
+<LI><a href="#[7f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Task_KeyScan
 <LI><a href="#[63]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemInit
 <LI><a href="#[48]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_uidivmod
 </UL>
@@ -886,29 +899,29 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 60<LI>Call Chain = pid_update &rArr; __aeabi_fsub &rArr; __aeabi_fadd &rArr; _float_epilogue
 </UL>
 <BR>[Calls]<UL><LI><a href="#[34]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_fsub
-<LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_fmul
+<LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_fmul
 <LI><a href="#[31]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_fadd
-<LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_cfrcmple
-<LI><a href="#[7f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_cfcmple
+<LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_cfrcmple
+<LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_cfcmple
 </UL>
 <BR>[Called By]<UL><LI><a href="#[6a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;charger_process
 </UL>
 
-<P><STRONG><a name="[7a]"></a>sc_gui_init</STRONG> (Thumb, 40 bytes, Stack size 20 bytes, sc_gui.o(i.sc_gui_init))
+<P><STRONG><a name="[7c]"></a>sc_gui_init</STRONG> (Thumb, 40 bytes, Stack size 20 bytes, sc_gui.o(i.sc_gui_init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 20<LI>Call Chain = sc_gui_init
 </UL>
 <BR>[Called By]<UL><LI><a href="#[2a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[7c]"></a>sc_task_loop</STRONG> (Thumb, 192 bytes, Stack size 32 bytes, sc_event_task.o(i.sc_task_loop))
+<P><STRONG><a name="[7e]"></a>sc_task_loop</STRONG> (Thumb, 192 bytes, Stack size 32 bytes, sc_event_task.o(i.sc_task_loop))
 <BR><BR>[Stack]<UL><LI>Max Depth = 40<LI>Call Chain = sc_task_loop &rArr; EventQueue_Pop
 </UL>
-<BR>[Calls]<UL><LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EventQueue_Pop
+<BR>[Calls]<UL><LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EventQueue_Pop
 </UL>
 <BR>[Called By]<UL><LI><a href="#[2a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[79]"></a>ui_paint_color_circle</STRONG> (Thumb, 24 bytes, Stack size 8 bytes, ui.o(i.ui_paint_color_circle))
+<P><STRONG><a name="[7b]"></a>ui_paint_color_circle</STRONG> (Thumb, 24 bytes, Stack size 8 bytes, ui.o(i.ui_paint_color_circle))
 <BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = ui_paint_color_circle &rArr; Lcd_Write_data_dma &rArr; Gecko_DMA_Transport
 </UL>
 <BR>[Calls]<UL><LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Lcd_SetRegion
@@ -923,7 +936,7 @@ Global Symbols
 <P><STRONG><a name="[e]"></a>DMA_IRQHandler</STRONG> (Thumb, 14 bytes, Stack size 8 bytes, isr.o(ram_code))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = DMA_IRQHandler &rArr; Clear_DMA_Interrupt
 </UL>
-<BR>[Calls]<UL><LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Clear_DMA_Interrupt
+<BR>[Calls]<UL><LI><a href="#[84]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Clear_DMA_Interrupt
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> startup_cm0.o(RESET)
 </UL>
@@ -934,13 +947,13 @@ Global Symbols
 <LI><a href="#[4b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HW_SPI_Tx_DMA (via Veneer)
 </UL>
 
-<P><STRONG><a name="[82]"></a>Clear_DMA_Interrupt</STRONG> (Thumb, 22 bytes, Stack size 8 bytes, dma.o(ram_code))
+<P><STRONG><a name="[84]"></a>Clear_DMA_Interrupt</STRONG> (Thumb, 22 bytes, Stack size 8 bytes, dma.o(ram_code))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = Clear_DMA_Interrupt
 </UL>
 <BR>[Called By]<UL><LI><a href="#[e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA_IRQHandler
 </UL>
 
-<P><STRONG><a name="[83]"></a>DMA_ISR_Routine</STRONG> (Thumb, 32 bytes, Stack size 8 bytes, dma.o(ram_code), UNUSED)
+<P><STRONG><a name="[85]"></a>DMA_ISR_Routine</STRONG> (Thumb, 32 bytes, Stack size 8 bytes, dma.o(ram_code), UNUSED)
 <BR><BR>[Calls]<UL><LI><a href="#[4c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_set_value (via Veneer)
 </UL>
 
@@ -948,10 +961,10 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[60]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gecko_ahb2qspi_ctrl_irq_handler (via Veneer)
 <LI><a href="#[5f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Osc32M_Freq_Trimming (via Veneer)
 <LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LDO33_AUX_Enable (via Veneer)
-<LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;QSPI_NorFlash_ReadWord
-<LI><a href="#[87]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ProgramPage
-<LI><a href="#[85]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EraseSector
-<LI><a href="#[84]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nor_write_en
+<LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;QSPI_NorFlash_ReadWord
+<LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ProgramPage
+<LI><a href="#[87]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EraseSector
+<LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nor_write_en
 </UL>
 
 <P><STRONG><a name="[57]"></a>reg_write</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, dpi_common.o(ram_code))
@@ -959,16 +972,16 @@ Global Symbols
 <LI><a href="#[60]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gecko_ahb2qspi_ctrl_irq_handler (via Veneer)
 <LI><a href="#[5f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Osc32M_Freq_Trimming (via Veneer)
 <LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LDO33_AUX_Enable (via Veneer)
-<LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;QSPI_NorFlash_ReadWord
-<LI><a href="#[87]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ProgramPage
-<LI><a href="#[85]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EraseSector
-<LI><a href="#[84]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nor_write_en
+<LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;QSPI_NorFlash_ReadWord
+<LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ProgramPage
+<LI><a href="#[87]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EraseSector
+<LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nor_write_en
 <LI><a href="#[66]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gecko_task_cm0_sw_flash
 </UL>
 
-<P><STRONG><a name="[86]"></a>sram_run_delay</STRONG> (Thumb, 20 bytes, Stack size 0 bytes, dpi_common.o(ram_code), UNUSED)
-<BR><BR>[Called By]<UL><LI><a href="#[87]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ProgramPage
-<LI><a href="#[85]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EraseSector
+<P><STRONG><a name="[88]"></a>sram_run_delay</STRONG> (Thumb, 20 bytes, Stack size 0 bytes, dpi_common.o(ram_code), UNUSED)
+<BR><BR>[Called By]<UL><LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ProgramPage
+<LI><a href="#[87]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EraseSector
 </UL>
 
 <P><STRONG><a name="[66]"></a>gecko_task_cm0_sw_flash</STRONG> (Thumb, 66 bytes, Stack size 16 bytes, xt25f32.o(ram_code))
@@ -979,35 +992,35 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[63]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemInit (via Veneer)
 </UL>
 
-<P><STRONG><a name="[84]"></a>spi_nor_write_en</STRONG> (Thumb, 62 bytes, Stack size 16 bytes, xt25f32.o(ram_code), UNUSED)
+<P><STRONG><a name="[86]"></a>spi_nor_write_en</STRONG> (Thumb, 62 bytes, Stack size 16 bytes, xt25f32.o(ram_code), UNUSED)
 <BR><BR>[Calls]<UL><LI><a href="#[57]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;reg_write
 <LI><a href="#[56]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;reg_read
 </UL>
-<BR>[Called By]<UL><LI><a href="#[87]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ProgramPage
-<LI><a href="#[85]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EraseSector
-</UL>
-
-<P><STRONG><a name="[85]"></a>EraseSector</STRONG> (Thumb, 136 bytes, Stack size 24 bytes, xt25f32.o(ram_code), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[57]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;reg_write
-<LI><a href="#[56]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;reg_read
-<LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_1us (via Veneer)
-<LI><a href="#[84]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nor_write_en
-<LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sram_run_delay
+<BR>[Called By]<UL><LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ProgramPage
+<LI><a href="#[87]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EraseSector
 </UL>
 
-<P><STRONG><a name="[87]"></a>ProgramPage</STRONG> (Thumb, 194 bytes, Stack size 24 bytes, xt25f32.o(ram_code), UNUSED)
+<P><STRONG><a name="[87]"></a>EraseSector</STRONG> (Thumb, 136 bytes, Stack size 24 bytes, xt25f32.o(ram_code), UNUSED)
 <BR><BR>[Calls]<UL><LI><a href="#[57]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;reg_write
 <LI><a href="#[56]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;reg_read
-<LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_1us (via Veneer)
-<LI><a href="#[84]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nor_write_en
-<LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sram_run_delay
-<LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_uread4 (via Veneer)
+<LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_1us (via Veneer)
+<LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nor_write_en
+<LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sram_run_delay
 </UL>
 
-<P><STRONG><a name="[89]"></a>QSPI_NorFlash_ReadWord</STRONG> (Thumb, 50 bytes, Stack size 8 bytes, xt25f32.o(ram_code), UNUSED)
+<P><STRONG><a name="[89]"></a>ProgramPage</STRONG> (Thumb, 194 bytes, Stack size 24 bytes, xt25f32.o(ram_code), UNUSED)
 <BR><BR>[Calls]<UL><LI><a href="#[57]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;reg_write
 <LI><a href="#[56]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;reg_read
-<LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_1us (via Veneer)
+<LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_1us (via Veneer)
+<LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_nor_write_en
+<LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sram_run_delay
+<LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_uread4 (via Veneer)
+</UL>
+
+<P><STRONG><a name="[8b]"></a>QSPI_NorFlash_ReadWord</STRONG> (Thumb, 50 bytes, Stack size 8 bytes, xt25f32.o(ram_code), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[57]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;reg_write
+<LI><a href="#[56]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;reg_read
+<LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_1us (via Veneer)
 </UL>
 <P>
 <H3>
