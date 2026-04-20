@@ -55,6 +55,8 @@ uint8 flag_key2=0;
 
 extern int gecko_efuse_read(void);
 
+extern charger_manager_t my_charger;
+
 extern uint32_t TimeTick;
 
 extern void gecko_branchnode_pclkout_cfg(void);

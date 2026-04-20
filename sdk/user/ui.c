@@ -7,7 +7,7 @@
 
 
 
-static uint8_t ui_buf[512];
+static uint8_t ui_buf[2560];
 
 
 //static img_source_t bat_persent_img = {(uint8_t*)gImage_bat_90x49, 90, 49};
@@ -28,7 +28,7 @@ __RAM_CODE__ void ui_dma_busy_release(void)
 
 
 
-
+#if 0
 //通过大的区域截取小区域
 void img_cut_out(img_source_t *source, uint16_t x, uint16_t y, uint16_t width, uint16_t high)
 {
@@ -50,6 +50,10 @@ void img_cut_out(img_source_t *source, uint16_t x, uint16_t y, uint16_t width, u
 		}
 	}
 }
+#endif
+
+
+
 
 //显示字符
 void ShowNum_48(uint8_t *buf, uint8_t n)
@@ -67,6 +71,44 @@ void ShowNum_48(uint8_t *buf, uint8_t n)
 		}
 	}
 }
+
+
+
+#if 0
+
+原方案（全局 buffer） SRAM 占用	2.5 KB	
+新方案（直接写屏）    0 字节（除了局部变量）
+
+
+// 在指定位置 (start_x, start_y) 显示数字 n（0-9）
+void ShowNum_48(uint8_t n, uint16_t start_x, uint16_t start_y)
+{
+    unsigned char i, j;
+    uint16_t color = GREEN;   // RGB565 绿色
+
+    for (i = 0; i < 48; i++) {          // 行（高度）
+        for (j = 0; j < 24; j++) {      // 列（宽度）
+            // 计算字体点阵中的位索引
+            // 字体数据：每个数字占用 48行 × 24bit = 144 字节 (48*3)
+            uint8_t byte_index = n * 144 + i * 3 + j / 8;
+            uint8_t bit_mask = 0x80 >> (j % 8);
+            
+            if (Font48_dital_Table[byte_index] & bit_mask) {
+                // 直接画点，不需要 buffer
+                LCD_SetCursor(start_x + j, start_y + i);
+                LCD_WriteData(color);
+            }
+            // 背景不需要处理（除非你需要擦除，否则保持原样）
+        }
+    }
+}
+#endif
+
+
+
+
+
+
 
 //显示百分比符号
 void ShowPersent(uint8_t *buf)

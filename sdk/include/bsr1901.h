@@ -240,7 +240,7 @@ assign irq_raw = {
 #endif
 
 #ifndef __NVIC_PRIO_BITS
-//	#define __NVIC_PRIO_BITS          2
+
 	#define __NVIC_PRIO_BITS          4	
 	//#warning "__NVIC_PRIO_BITS not defined in device header file; using default!"
 #endif

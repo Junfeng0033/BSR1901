@@ -575,14 +575,11 @@ int main() {
 
 
 
-
+charger_manager_t my_charger; 
 
 void Task_Charger_Control(void)
 {
 	
-	  charger_manager_t my_charger;    
-    charger_init(&my_charger);
- 
     charger_process(&my_charger);
 		//bulk_func();
 

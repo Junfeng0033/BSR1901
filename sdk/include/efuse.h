@@ -17,6 +17,8 @@ L      Un-programmed(default)
 
 
 
+
+
 #define  			GECKO_APB_EFFUSE_ADDR								0X40015000
 
 
@@ -73,4 +75,6 @@ st_EFUSE_config 		g_efuse_cfg;
 extern int reg_read(int addr);	
 extern void reg_write(int addr, int data);
 
+
+extern uint32_t Get_SysTick_VALUE(void);
 

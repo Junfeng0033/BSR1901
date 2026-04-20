@@ -29,7 +29,7 @@ extern void Clear_DMA_Interrupt(void);
 extern void SPI_DMA_Simulation(void);
 extern void DMA_ISR_Routine(void);
 
-
+extern uint32_t Get_SysTick_VALUE(void);
 
 
 
@@ -39,7 +39,7 @@ extern void DMA_ISR_Routine(void);
   * @param  None
   * @retval None
   */
-void nmi_handler(void)
+void NMI_Handler(void)
 {
 }
 
@@ -48,7 +48,7 @@ void nmi_handler(void)
   * @param  None
   * @retval None
   */
-void hardfault_handler(void)
+void HardFault_Handler(void)
 {
     while (1)
     {
@@ -60,7 +60,7 @@ void hardfault_handler(void)
   * @param  None
   * @retval None
   */
-void svc_handler(void)
+void SVC_Handler(void)
 {
 }
 
@@ -69,7 +69,7 @@ void svc_handler(void)
   * @param  None
   * @retval None
   */
-void pendsv_handler(void)
+void PendSV_Handler(void)
 {
 }
 
@@ -116,28 +116,11 @@ __RAM_CODE__ void SysTick_Handler(void)  //interrupt routine
 
 uint32_t Get_SysTick(void)
 {
-	return TimeTick;
+	return TimeTick;//1ms tick
 }
 
 	
 
-
-
-/******************************************************************************/
-/*                 Gecko1108 Peripherals Interrupt Handlers                   */
-/*  Add here the Interrupt Handler for the used peripheral(s) (PERIPHERAL), for the  */
-/*  available peripheral interrupt handler's name please refer to the startup */
-/*  file (startup_cm0.s).                                               */
-/******************************************************************************/
-/**
-  * @brief  This function handles external lines 4 to 15 interrupt request.
-  * @param  None
-  * @retval None
-  */
-void external_irq_handler(void)
-{
-
-}
 
 
 
@@ -209,13 +192,6 @@ void UART1_IRQHandler(void)
 }
 
 
-
-
-
-void GPADC_IRQHandler(void)
-{
-	
-}
 
 
 
@@ -305,6 +281,72 @@ void WDT_IRQHandler(void)
 	GECKO1108_WATCHDOG->LOCK = 0;	
 //*************************************************************	
 }
+
+
+
+
+
+
+
+uint32 RC_Unique_ID=0;
+
+void iWDT_IRQHandler(void)
+{
+	
+	  RC_Unique_ID=Get_SysTick_VALUE();
+	  iWDT_Timer_Disable();
+	
+}
+
+
+
+
+#if 0
+
+void iWDT_IRQHandler(void)
+{
+    // 1. 立即读取 SysTick 值
+    RC_Unique_ID = SysTick->VAL;
+    
+    // 2. 禁用 iWDT 并清除中断标志
+    iWATCHDOG->WREN = WDT200_WP_NUM;      // 解锁
+    iWATCHDOG->CTRL &= ~IWDT_EN;          // 只清除使能位
+    iWATCHDOG->ST = WDT_ST_INTEXPIRED_CLR; // 清中断标志
+    iWATCHDOG->WREN = 0;                  // 重新锁定（可选）
+}
+
+// 初始化测量函数
+uint32_t Get_RC_Unique_ID(void)
+{
+    // 配置 SysTick
+    SysTick->LOAD = 0xFFFFFF;
+    SysTick->VAL  = 0;
+    SysTick->CTRL = 0x5;   // 使能，使用系统时钟，无中断
+    
+    // 配置 iWDT：1ms 定时（假设 32kHz 时钟，32 个周期 = 1ms）
+    iWATCHDOG->WREN = WDT200_WP_NUM;
+    iWATCHDOG->CTRL = 0;                     // 先完全禁用
+    iWATCHDOG->ST = WDT_ST_INTEXPIRED_CLR;   // 清残留标志
+    iWATCHDOG->LOAD = 32;                    // 重装载值
+    iWATCHDOG->CTRL = (IWDT_EN | IWDT_IRQ_EN); // 使能定时器和中断
+    iWATCHDOG->WREN = 0;
+    
+    // 等待中断完成（RC_Unique_ID 是 volatile 全局变量）
+    while (RC_Unique_ID == 0);
+    
+    return RC_Unique_ID;
+}
+
+
+//RC 频率的漂移可能导致同一芯片在不同温度下读出的 ID 变化超过 ±5%。此时可以：
+
+//在生产时记录每个芯片在室温下的“黄金 ID”并写入 Flash。
+
+//运行时读取当前 ID，与黄金 ID 比较，允许 ±5% 的误差窗口。
+
+#endif
+
+
 
 
 

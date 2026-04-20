@@ -216,7 +216,7 @@ extern void dma_sram_delay(unsigned long delay);
 void HW_SPI_Initialise(HAL_SPI_ID_T id);
 
 
-void HW_SPI_Tx_Block(HAL_SPI_ID_T id,uint16 *pData, uint16 DataLen);
+//void HW_SPI_Tx_Block(HAL_SPI_ID_T id,uint16 *pData, uint16 DataLen);
 void HW_SPI_Write_Data(uint16 address, uint16 data);
 void HW_SPI_Tx_DMA(HAL_SPI_ID_T id,uint16 *pData, uint16 DataLen);
 

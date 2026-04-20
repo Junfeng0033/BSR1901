@@ -135,7 +135,7 @@ typedef struct
 #define IWDT_INT_TIME(n)    (((n)&0xF)<<4)//IntTime[7:4]////The timer interval of the interrupt stage
 #define IWDT_RST_TIME(n)    (((n)&0x7)<<8)//RstTime[10:8]
 
-#if 0
+#if 1
 /*----- WDT Time Period -----*/
 #define NDS_WDT_TIME_POW_2_6              (0x0UL)                           ///< WDT timer interval    64 clock periods.
 #define NDS_WDT_TIME_POW_2_8              (0x1UL)                           ///< WDT timer interval   256 clock periods.
@@ -147,7 +147,7 @@ typedef struct
 #define NDS_WDT_TIME_POW_2_15             (0x7UL)                           ///< WDT timer interval 32768 clock periods.
 #endif
 
-#if 0
+#if 1
 /* 0x10 Control Register */
 
 #define WDT_CTRL_RSTTIME_POW_2_7        0x000

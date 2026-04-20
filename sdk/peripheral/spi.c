@@ -32,9 +32,9 @@ uint16  HW_SPI_Read_Data(uint16 address)
 	uint16 temp_data;
 	while(SPI_READ_CTLREG(GECKO_APB_SPI_STATUS_REG) & GECKO_BIT(GECKO_APB_SPI_BUSBUSY_BIT));
 	temp_data = SPI_READ_DATAREG(GECKO_APB_SPI_DATAACCESS_REG + address);
-	while(SPI_READ_CTLREG(GECKO_APB_SPI_STATUS_REG) & GECKO_BIT(GECKO_APB_SPI_BUSBUSY_BIT));
-	while(SPI_READ_CTLREG(GECKO_APB_SPI_STATUS_REG) & GECKO_BIT(GECKO_APB_SPI_BUSBUSY_BIT));
-	temp_data = SPI_READ_DATAREG(GECKO_APB_SPI_DATAACCESS_REG);
+	
+	//while(SPI_READ_CTLREG(GECKO_APB_SPI_STATUS_REG) & GECKO_BIT(GECKO_APB_SPI_BUSBUSY_BIT));
+	//temp_data = SPI_READ_DATAREG(GECKO_APB_SPI_DATAACCESS_REG);
 	
 	return temp_data;
 }
@@ -46,6 +46,8 @@ void HW_SPI_Write_Data(uint16 address, uint16 data)
 	SPI_WRITE_DATAREG(address, data);
 	//return 0;
 }
+
+
 
 void SPI_32bit_Transfer(void)
 {
@@ -116,7 +118,7 @@ void HW_SPI_Initialise(HAL_SPI_ID_T id)
 
 	if(id==HAL_SPI_0)
 	{
-#if 1
+#if 0
 		//register write test
 		//HW_SPI_SET_REG(0x00,0x1234);
 		//hwp_spi0->FIFODATA=0x1234;			
@@ -165,9 +167,9 @@ void HW_SPI_Initialise(HAL_SPI_ID_T id)
 	
 	else if(id==HAL_SPI_1)
 	{
-#if 1
+#if 0
 		//register write test
-		//        hwp_spi1->FIFODATA=0x1234;
+		//hwp_spi1->FIFODATA=0x1234;
 		hwp_spi1->CTROL=0x5678;	
 		hwp_spi1->STATS=0x5678;
 		hwp_spi1->RCVINT=0x3579;			
@@ -437,6 +439,8 @@ void lcd_dma_8bit_refresh(uint16_t xs, uint16_t ys, uint16_t w, uint16_t h, colo
  * size     in bytes 
 //void Gecko_DMA_Transport(volatile void *dest,volatile const void *src, uint16 size,uint8 type, uint8 direct)
  *****************************************************************************/
+
+#if 0
 void HW_SPI_Tx_Block(HAL_SPI_ID_T id,uint16 *pData, uint16 DataLen)
 {
 	int tmp=0;
@@ -554,6 +558,10 @@ void HW_SPI_Tx_Block(HAL_SPI_ID_T id,uint16 *pData, uint16 DataLen)
 		}
 	}			
 }
+#endif
+
+
+
 
 void HW_SPI_Interrupt_Handler(void)
 {
@@ -564,7 +572,7 @@ void HW_SPI_Interrupt_Handler(void)
 		hw_spi_rx_buffer++;
 		length ++;
 	}
-	//TRAhcit_UART_Rx_Data(length);
+
 }
 
 void HW_SPI_Setup(volatile uint8 *rx_buffer, uint16 rx_length, uint8 flag)

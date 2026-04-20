@@ -307,7 +307,6 @@ int main (void)
   //iWDT_Timer_Init();
 
 /************************Buck-Boost Control***************************************/
-  charger_manager_t my_charger;
     
   charger_init(&my_charger);
 	
@@ -321,18 +320,15 @@ int main (void)
 		
 		system_tick=TimeTick;//1ms tick
 	
-		uint32_t current_tick = Get_SysTick();
+		uint32_t current_tick = TimeTick;
 		
 		if (current_tick % 50 == 0) Task_KeyScan();
 		
 		if (current_tick % 100 == 0) Get_Vbat_Voltage();
+		if (current_tick % 100 == 0) Task_Charger_Control();	
 
-		if (current_tick % 200 == 0) Task_UI_Refresh();		
+		//if (current_tick % 200 == 0) Task_UI_Refresh();		
 		
-    //if (current_tick % 50 == 0) Task_Charger_Control();			
-		//bulk_func();
-		//charger_process(&my_charger);
-
 	}
 	
 

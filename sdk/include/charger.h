@@ -81,6 +81,9 @@ typedef struct {
     pid_controller_t pid;       // PID 控制器实例
 } charger_manager_t;
 
+
+
+
 // --- 常量定义 ---
 #define V_PRE_THRESHOLD_MV    3000   // 预充阈值 3.0V
 #define V_CV_THRESHOLD_MV     4200   // 恒压阈值 4.2V

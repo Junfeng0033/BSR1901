@@ -57,6 +57,7 @@
 ".\objects\font_0_9_digital_32b.o"
 ".\objects\font_a_z_32b.o"
 ".\objects\bat_90x49.o"
+".\objects\black_128x128.o"
 --library_type=microlib --strict --scatter ".\scatter_bsr1901_demo.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers
