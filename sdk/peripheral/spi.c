@@ -15,7 +15,11 @@
 #include "gpio.h"
 #include "lcd_driver.h"
 
+#include <stdarg.h>
+#include <stdio.h>
 
+
+#include "iomux.h"
 
 
 volatile uint8 *hw_spi_rx_buffer;
@@ -33,8 +37,6 @@ uint16  HW_SPI_Read_Data(uint16 address)
 	while(SPI_READ_CTLREG(GECKO_APB_SPI_STATUS_REG) & GECKO_BIT(GECKO_APB_SPI_BUSBUSY_BIT));
 	temp_data = SPI_READ_DATAREG(GECKO_APB_SPI_DATAACCESS_REG + address);
 	
-	//while(SPI_READ_CTLREG(GECKO_APB_SPI_STATUS_REG) & GECKO_BIT(GECKO_APB_SPI_BUSBUSY_BIT));
-	//temp_data = SPI_READ_DATAREG(GECKO_APB_SPI_DATAACCESS_REG);
 	
 	return temp_data;
 }
@@ -142,27 +144,15 @@ void HW_SPI_Initialise(HAL_SPI_ID_T id)
 		hwp_spi0->RCVINT=XR7_SPI_RECV_TRIG_1;				
 		/* set initial recv trigger value */
 
-		HW_SPI_SET_REG(XR7_SPI_CTL, (XR7_SPI_CTL_LSB_ENABLE |XR7_SPI_CTL_MISO_ENABLE | XR7_SPI_CTL_SPI_ENABLE | XR7_SPI_CTL_FLUSH));
-		hwp_spi0->CTROL=(XR7_SPI_CTL_LSB_ENABLE |XR7_SPI_CTL_MISO_ENABLE | XR7_SPI_CTL_SPI_ENABLE | XR7_SPI_CTL_FLUSH);
+		//HW_SPI_SET_REG(XR7_SPI_CTL, (XR7_SPI_CTL_LSB_ENABLE |XR7_SPI_CTL_MISO_ENABLE | XR7_SPI_CTL_SPI_ENABLE | XR7_SPI_CTL_FLUSH));
+		//hwp_spi0->CTROL=(XR7_SPI_CTL_LSB_ENABLE |XR7_SPI_CTL_MISO_ENABLE | XR7_SPI_CTL_SPI_ENABLE | XR7_SPI_CTL_FLUSH);
 		//0x04=0x1_0fbb;
-		HW_SPI_SET_REG(XR7_SPI_CTL,0x10fab);				
-		SPI_WRITE_CTLREG(GECKO_APB_SPI_CONTROL_REG,0x10fbb);
 		HW_SPI_SET_REG(XR7_SPI_CTL,0x10fab);
-
 		hwp_spi0->CTROL = 0x10f8b;	//8bit spi data
 		hwp_spi0->RCVINT = 0x0;		//mask all interrupt
-
-#if 0//DEBUG_UATR0_PRINT_LOG
-
-		rd_data=HW_SPI_GET_REG(XR7_SPI_CTL);
-		rd_data=hwp_spi0->CTROL;				
-		UATR0_PRINT_LOG((unsigned char *)("\r\n"));						
-		UATR0_PRINT_LOG((unsigned char *)("HW_SPI_0_Initialise XR7_SPI_CTL --- = 0x"));
-		string=my_itoa(rd_data);
-		UATR0_PRINT_LOG((unsigned char *)(string));
-		UATR0_PRINT_LOG((unsigned char *)("\r\n"));	
-
-#endif		
+		
+		printf("HW_SPI_0_Initialise XR7_SPI_CTL hwp_spi0->CTROL= %x",hwp_spi0->CTROL);
+		
 	}		
 	
 	else if(id==HAL_SPI_1)
@@ -185,17 +175,14 @@ void HW_SPI_Initialise(HAL_SPI_ID_T id)
 		hwp_spi1->CTROL=(XR7_SPI_CTL_LSB_ENABLE |XR7_SPI_CTL_MISO_ENABLE | XR7_SPI_CTL_SPI_ENABLE | XR7_SPI_CTL_FLUSH);
 		//0x04=0x1_0fbb;
 		hwp_spi1->CTROL=0x10fbb;
+		
+		printf("HW_SPI_1_Initialise XR7_SPI_CTL hwp_spi1->CTROL= %x",hwp_spi1->CTROL);
 
-#if 0//DEBUG_UATR0_PRINT_LOG
-		rd_data=hwp_spi1->CTROL;				
-		UATR0_PRINT_LOG((unsigned char *)("\r\n"));						
-		UATR0_PRINT_LOG((unsigned char *)("HW_SPI_1_Initialise XR7_SPI_CTL --- = 0x"));
-		string=my_itoa(rd_data);
-		UATR0_PRINT_LOG((unsigned char *)(string));
-		UATR0_PRINT_LOG((unsigned char *)("\r\n"));
-#endif
+
 	}
 }
+
+
 
 void HW_SPI_Tx_Char_Polled(volatile uint8 **buf, volatile uint32 *length, uint8 flag)
 {
@@ -500,7 +487,7 @@ void HW_SPI_Tx_Block(HAL_SPI_ID_T id,uint16 *pData, uint16 DataLen)
 		rd_data = hwp_spi0->STATS;
 		rd_data = rd_data &	XR7_SPI_STATUS_RX_FIFO_INT_FLAG;
 		
-		while(rd_data) /* Read all characters out of the fifo */
+		while(hwp_spi0->STATS &	XR7_SPI_STATUS_RX_FIFO_INT_FLAG) /* Read all characters out of the fifo */
 		{
 			;
 		}
@@ -552,7 +539,7 @@ void HW_SPI_Tx_Block(HAL_SPI_ID_T id,uint16 *pData, uint16 DataLen)
 		rd_data = hwp_spi1->STATS;
 		rd_data = rd_data &	XR7_SPI_STATUS_RX_FIFO_INT_FLAG;
 		
-		while(rd_data) /* Read all characters out of the fifo */
+		while(hwp_spi1->STATS &	XR7_SPI_STATUS_RX_FIFO_INT_FLAG) /* Read all characters out of the fifo */
 		{
 			;
 		}
@@ -592,13 +579,107 @@ void HW_SPI_Empty_FIFO(void)
 }
 
 
-//====================================================================================================
-//
-// SPI Slave Write/Read command format
-//
-//====================================================================================================
 
 
+
+
+
+
+//Two SPI CS PAD design for left and right eye displays
+/***********************************************************************
+always @(*) begin
+     case(sysreg_pad_func1[29:28])
+        2'b01:
+           begin 
+            spi0_mst_scsn_1_iout <= spi0_mst_scsn_iout;
+            spi0_mst_scsn_2_iout <= 1'b1;
+           end
+        2'b10:
+          begin 
+            spi0_mst_scsn_1_iout <= 1'b1;
+            spi0_mst_scsn_2_iout <= spi0_mst_scsn_iout;
+         end
+         2'b00:
+          begin 
+            spi0_mst_scsn_1_iout <= spi0_mst_scsn_iout;
+            spi0_mst_scsn_2_iout <= spi0_mst_scsn_iout;
+         end
+         2'b11:
+          begin 
+            spi0_mst_scsn_1_iout <= 1'b1;
+            spi0_mst_scsn_2_iout <= 1'b1;
+         end                        
+     endcase
+end
+***********************************************************************/
+//assign reg_pad_func1            = reg_0x304[29:0];
+
+//define the mask: [29:28] corresponds to 0x3 << 28
+
+#define REG_CSN_VALID_MASK           (0x3UL << 28) 
+
+#define reg_csn_valid_cfg(n)         (((n) & 0x3) << 28) //2-bit [29:28]//default value n=0
+
+
+
+void Config_CSN_1_Valid_Only(void)
+{
+	uint32 TempC;	
+	
+	TempC=SYS_HW32_REG_RD(0x304);	
+	
+	TempC &= ~REG_CSN_VALID_MASK;//~REG_CSN_VALID_MASK will set bits 29 and 28 to 0, and all other bits to 1
+	
+	TempC|=reg_csn_valid_cfg(1);
+	
+	SYS_HW32_REG_WR(0x304,TempC);
+	
+}
+
+
+void Config_CSN_2_Valid_Only(void)
+{
+	uint32 TempC;	
+	
+	TempC=SYS_HW32_REG_RD(0x304);	
+	
+	TempC &= ~REG_CSN_VALID_MASK;//~REG_CSN_VALID_MASK will set bits 29 and 28 to 0, and all other bits to 1
+	
+	TempC|=reg_csn_valid_cfg(2);
+	
+	SYS_HW32_REG_WR(0x304,TempC);	
+}
+
+
+
+//default value n=0,both valid
+void Config_CSN1_and_CSN2_Valid_Both(void)
+{
+	uint32 TempC;	
+	
+	TempC=SYS_HW32_REG_RD(0x304);	
+	
+	TempC &= ~REG_CSN_VALID_MASK;//~REG_CSN_VALID_MASK will set bits 29 and 28 to 0, and all other bits to 1
+	
+	TempC|=reg_csn_valid_cfg(0);
+	
+	SYS_HW32_REG_WR(0x304,TempC);	
+}
+
+
+
+void Config_CSN1_and_CSN2_Both_Invalid(void)
+{
+	uint32 TempC;	
+	
+	TempC=SYS_HW32_REG_RD(0x304);	
+	
+	TempC &= ~REG_CSN_VALID_MASK;//~REG_CSN_VALID_MASK will set bits 29 and 28 to 0, and all other bits to 1
+	
+	TempC|=reg_csn_valid_cfg(3);
+	
+	SYS_HW32_REG_WR(0x304,TempC);	
+}
 
 
 
@@ -642,105 +723,105 @@ void BSR1901_FireEye_Demo(void)
   Lcd_SetRegion(0, 30, 159, 159);		
 	SPI_32bit_Transfer();
 	HW_SPI_Tx_DMA_32bit(HAL_SPI_0, (uint16*)fire_eye_1, 12800);	
-	dma_sram_delay(1000);
+
 	delay_1us(9500);
 
 	SPI_8bit_Transfer();
   Lcd_SetRegion(0, 30, 159, 159);		
 	SPI_32bit_Transfer();
 	HW_SPI_Tx_DMA_32bit(HAL_SPI_0, (uint16*)fire_eye_2, 12800);	
-	dma_sram_delay(1000);
+
 	delay_1us(9500);
 
 	SPI_8bit_Transfer();
   Lcd_SetRegion(0, 30, 159, 159);		
 	SPI_32bit_Transfer();
 	HW_SPI_Tx_DMA_32bit(HAL_SPI_0, (uint16*)fire_eye_3, 12800);	
-	dma_sram_delay(1000);
+
 	delay_1us(9500);
 
 	SPI_8bit_Transfer();
   Lcd_SetRegion(0, 30, 159, 159);		
 	SPI_32bit_Transfer();
 	HW_SPI_Tx_DMA_32bit(HAL_SPI_0, (uint16*)fire_eye_4, 12800);	
-	dma_sram_delay(1000);
+
 	delay_1us(9500);
 
 	SPI_8bit_Transfer();
   Lcd_SetRegion(0, 30, 159, 159);		
 	SPI_32bit_Transfer();
 	HW_SPI_Tx_DMA_32bit(HAL_SPI_0, (uint16*)fire_eye_5, 12800);	
-	dma_sram_delay(1000);
+
 	delay_1us(9500);
 
 	SPI_8bit_Transfer();
   Lcd_SetRegion(0, 30, 159, 159);		
 	SPI_32bit_Transfer();
 	HW_SPI_Tx_DMA_32bit(HAL_SPI_0, (uint16*)fire_eye_6, 12800);	
-	dma_sram_delay(1000);
+
 	delay_1us(9500);
 
 	SPI_8bit_Transfer();
   Lcd_SetRegion(0, 30, 159, 159);		
 	SPI_32bit_Transfer();
 	HW_SPI_Tx_DMA_32bit(HAL_SPI_0, (uint16*)fire_eye_7, 12800);	
-	dma_sram_delay(1000);
+
 	delay_1us(9500);
 
 	SPI_8bit_Transfer();
   Lcd_SetRegion(0, 30, 159, 159);		
 	SPI_32bit_Transfer();
 	HW_SPI_Tx_DMA_32bit(HAL_SPI_0, (uint16*)fire_eye_8, 12800);	
-	dma_sram_delay(1000);
+
 	delay_1us(9500);
 
 	SPI_8bit_Transfer();
   Lcd_SetRegion(0, 30, 159, 159);		
 	SPI_32bit_Transfer();
 	HW_SPI_Tx_DMA_32bit(HAL_SPI_0, (uint16*)fire_eye_7, 12800);	
-	dma_sram_delay(1000);
+
 	delay_1us(9500);
 
 	SPI_8bit_Transfer();
   Lcd_SetRegion(0, 30, 159, 159);		
 	SPI_32bit_Transfer();
 	HW_SPI_Tx_DMA_32bit(HAL_SPI_0, (uint16*)fire_eye_6, 12800);	
-	dma_sram_delay(1000);
+
 	delay_1us(9500);
 
 	SPI_8bit_Transfer();
   Lcd_SetRegion(0, 30, 159, 159);		
 	SPI_32bit_Transfer();
 	HW_SPI_Tx_DMA_32bit(HAL_SPI_0, (uint16*)fire_eye_5, 12800);	
-	dma_sram_delay(1000);
+
 	delay_1us(9500);
 
 	SPI_8bit_Transfer();
   Lcd_SetRegion(0, 30, 159, 159);		
 	SPI_32bit_Transfer();
 	HW_SPI_Tx_DMA_32bit(HAL_SPI_0, (uint16*)fire_eye_4, 12800);	
-	dma_sram_delay(1000);
+
 	delay_1us(9500);
 
 	SPI_8bit_Transfer();
   Lcd_SetRegion(0, 30, 159, 159);		
 	SPI_32bit_Transfer();
 	HW_SPI_Tx_DMA_32bit(HAL_SPI_0, (uint16*)fire_eye_3, 12800);	
-	dma_sram_delay(1000);
+
 	delay_1us(9500);
 
 	SPI_8bit_Transfer();
   Lcd_SetRegion(0, 30, 159, 159);		
 	SPI_32bit_Transfer();
 	HW_SPI_Tx_DMA_32bit(HAL_SPI_0, (uint16*)fire_eye_2, 12800);	
-	dma_sram_delay(1000);
+
 	delay_1us(9500);
 
 	SPI_8bit_Transfer();
   Lcd_SetRegion(0, 30, 159, 159);		
 	SPI_32bit_Transfer();
 	HW_SPI_Tx_DMA_32bit(HAL_SPI_0, (uint16*)fire_eye_1, 12800);	
-	dma_sram_delay(1000);
+
 	delay_1us(9500);
 
 

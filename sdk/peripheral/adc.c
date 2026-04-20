@@ -39,7 +39,7 @@ AdcTypedef adcstruct;
 
 
 
-void adc_delay_us(float dly1us)
+void adc_delay_us(uint32 dly1us)
 {
 	volatile uint32 jj=0;
 	while(dly1us--)

@@ -2,6 +2,29 @@
 #include "key_handle.h"
 
 
+#include "bsr1901.h"
+
+#include <stdarg.h>
+#include <stdio.h>
+
+#include "gpio.h"
+#include "watchdog.h"
+#include "adc.h"
+#include "cmu.h"
+#include "iomux.h"
+#include "dma.h"
+
+#include "uart.h"
+#include "hci.h"
+#include "norflash.h"
+#include "aon.h"
+#include "spi.h"
+#include "pwm.h"
+#include "i2c.h"
+#include "timer.h"
+
+#include "GUI.h"
+
 
 // Initialize key handle structure
 KeyHandle keyHandle = {
@@ -101,20 +124,23 @@ void Key_Process(void)
 
 
 
+extern uint8 flag_key1;
 
 
 
 void Task_KeyScan(void)
 {
 	
+		uint8_t gpio_status;
 	
-	
+	  uint8_t key_status;
+
 	
 /************************key process debug***************************************/
 		
 	
 		//KEY1
-		#if 0	
+		#if 1
 		//PAD11(GPIOA7)
 		gpio_status=K27_KEY_Detect();//default gpio_status=0x80 
 		key_status=gpio_status & 0x80;
@@ -145,7 +171,7 @@ void Task_KeyScan(void)
 
 
 		//KEY2
-		#if 0	
+		#if 1	
 		//PAD18(GPIOB6)		
 		gpio_status=KP85_KEY2_Detect();//default gpio_status=0x40 
 		key_status=gpio_status & 0x40;
@@ -163,7 +189,6 @@ void Task_KeyScan(void)
 //				wr_data = 0x608e7885;
 //				reg_write(0x40020000+0x020, wr_data);
 //				
-//				//reg_aon_sel_aon_clk16k(bit10)
 //				wr_data=reg_read(0x40020000+0x000);
 //				wr_data |= 0x200;//(set bit10=1)
 //				reg_write(0x40020000+0x000, wr_data);
@@ -181,7 +206,7 @@ void Task_KeyScan(void)
 
 
 
-		#if 0
+		#if 1
 		//////////////////mi tou/////////////////////////////////////	
 		//PAD10(GPIOA6)
 		//PAD10 pulldown
@@ -192,7 +217,7 @@ void Task_KeyScan(void)
 		gpio_status=mi_tou_detect();
 		if(gpio_status==0x40)
 		{
-			mi_tou_flag=1;//smoking in progress
+			//mi_tou_flag=1;//smoking in progress
 			printf("\r\n !!!!mi_tou_detect---gpio_a6 HIGH !!! gpio_status = %x",gpio_status);
 		}
 		////////////////////////////////////////////////////////////////			

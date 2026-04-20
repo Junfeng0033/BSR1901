@@ -142,26 +142,6 @@ void gecko_efuse_write(int dat) {
 
 
 
-//for 32M_Freq<7:0>
-void gecko_read_efuse_rcosc32m_FREQ(void)
-{
-		
-
-}
-
-
-
-//for 32M_TC<3:0>
-void gecko_read_efuse_rcosc32m_TC(void)
-{
-		//uint8 i;
-		volatile uint8 osc_tc_field;
-	
-		osc_tc_field=(uint8)efuse_data_buf;			
-		//set_osc_tc_calibration();//i2c timming
-}
-
-
 
 
 
@@ -234,11 +214,10 @@ void duet_efuse_word_write(uint16_t addr, uint32_t data)
 
 
 
-//void Boot_Efuse_Read(uint8 *efuse_cfg)
+
+#if 0
 void Boot_Efuse_Read(st_EFUSE_config *efuse_cfg)
 {
-	
-// boot_efuse_read((UINT8*)&g_boot_efuse_cfg, BOOT_EFUSE_START_ADDR, sizeof(g_boot_efuse_cfg)) == 0
 
 }
 
@@ -256,6 +235,7 @@ void ROM_SystemInit(void)
     g_efuse_cfg.product_id = 0x58;			////(dbgCtrl>>16)&0xff;	
   
 }
+#endif
 
 
 

@@ -704,8 +704,9 @@ uint8 K27_KEY_Detect(void)
 	//gecko_pinmux_config(PAD6,GPIOA_7);//config PAD06 as gpio	
 	gecko_pinmux_config(PAD11,GPIO_A_7);//config PAD11 as gpio
 
-	GPIODIR_0 &=0x7F;//set GPIOA7 direction to input (config it to "0")
-
+	//GPIODIR_0 &=0x7F;//set GPIOA7 direction to input (config it to "0")
+  GPIODIR_0 &=~BIT(7);
+	
 	pin=7;
 	
 	return (*((volatile unsigned long *)(GPIO_GROUP0_BASE+(1 << (pin + 2)))));
@@ -719,13 +720,13 @@ uint8 K27_KEY_Detect(void)
 uint8 KP85_KEY2_Detect(void)
 {
 	//uint8 gpio_status;
-	uint8 pin=6;//GPIOB6
+	uint8 pin=6;//GPIOA6
 
 	//gecko_pinmux_config(PAD6,GPIOA_7);//config PAD06 as gpio	
 	gecko_pinmux_config(PAD18,GPIO_B_6);//config PAD11 as gpio
 
-	GPIODIR_1 &=0xBF;//set GPIOA7 direction to input (config it to "0")
-
+	//GPIODIR_1 &=0xBF;//set GPIOA6 direction to input (config it to "0")
+  GPIODIR_0 &=~BIT(6);
 	pin=6;
 	
 	return (*((volatile unsigned long *)(GPIO_GROUP1_BASE+(1 << (pin + 2)))));
@@ -743,7 +744,8 @@ uint8 mi_tou_detect(void)
 	
 	//GEK1109_PAD10_pulldown_Config();
 
-	GPIODIR_0 &=0xBF;//set GPIOA6 direction to input (config it to "0")
+	//GPIODIR_0 &=0xBF;//set GPIOA6 direction to input (config it to "0")	
+	GPIODIR_0 &=~BIT(6);
 
 	pin=6;
 	

@@ -33,14 +33,9 @@ reg_pclk_out_div=3: 64·ÖÆµ
 
 
 
-
+#define REG_PCLK_OUT_MASK             (0x3UL << 0) 
 
 #define reg_pclk_out_div(n)           (((n) & 0x3) << 0) //2-bit [1:0]//default value n=0
-
-
-
-
-
 
 
 void gecko_branchnode_pclkout_cfg(void)
@@ -48,13 +43,19 @@ void gecko_branchnode_pclkout_cfg(void)
 	uint32 TempV;
 	
 	TempV=SYS_HW32_REG_RD(0x30C);
+	
+	TempV &= ~REG_PCLK_OUT_MASK;
+	
 	TempV|=reg_pclk_out_div(1);
 	SYS_HW32_REG_WR(0x30C,TempV);
 	
 
 	
 	TempV=SYS_HW32_REG_RD(0x30C);	
-	TempV&=(~reg_pclk_out_div(1));
+	
+	TempV &= ~REG_PCLK_OUT_MASK;
+	//TempV&=(~reg_pclk_out_div(1));
+	
 	SYS_HW32_REG_WR(0x30C,TempV);	
 
 }
@@ -82,25 +83,6 @@ void gecko_pinmux_config(Pad_Num_Type pad_num, Pad_Func_Type pad_func)
 	uint32 iomux_val;
 	//char *string;	
 
-	
-//	iomux_val=SYS_HW32_REG_RD(0x0);
-//	iomux_val=SYS_HW32_REG_RD(0x80);	
-//	iomux_val=SYS_HW32_REG_RD(0x84);
-//	iomux_val=SYS_HW32_REG_RD(0x88);	
-//	iomux_val=SYS_HW32_REG_RD(0x90);
-//	iomux_val=SYS_HW32_REG_RD(0x94);
-//	iomux_val=SYS_HW32_REG_RD(0x98);
-//	iomux_val=SYS_HW32_REG_RD(0xA0);
-//	iomux_val=SYS_HW32_REG_RD(0xA4);	
-//	iomux_val=SYS_HW32_REG_RD(0xA8);
-//	iomux_val=SYS_HW32_REG_RD(0xB0);
-//	iomux_val=SYS_HW32_REG_RD(0xB4);	
-//	iomux_val=SYS_HW32_REG_RD(0x300);
-//	iomux_val=SYS_HW32_REG_RD(0x304);
-//	iomux_val=SYS_HW32_REG_RD(0x308);	
-	
-	
-	//char *string;	
 	pad=pad_num;
 		
 	switch (pad)

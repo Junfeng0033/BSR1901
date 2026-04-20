@@ -6,3 +6,6 @@
 .\objects\spi.o: .\include\gpio.h
 .\objects\spi.o: .\tft_lcd\lcd_driver.h
 .\objects\spi.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\spi.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdarg.h
+.\objects\spi.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\spi.o: .\include\iomux.h

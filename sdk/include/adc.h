@@ -86,6 +86,8 @@ end
 */
 
 
+//#define BIT(n)            ((unsigned int) 1 << (n))
+
 //ctrl
 //0x00 register
 #define GPADC_CH0_EN                (1<<0)

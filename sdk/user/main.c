@@ -23,20 +23,16 @@ const uint8 gSysTime[16] = __TIME__;
 
 void SystemInit(void)
 {
-
 	//bsr1901_sram_test();
 
-	
 	//2024-11-16
 	Osc32M_Freq_Trimming();//trimming 32MHz	
 	
 //	gecko_rootnode_osc32mclk_cfg();
 //	gecko_rootnode_clk32k_cfg();
 
-
 	//2024-11-16
 	gecko_cmu_init();	
-
 
 	
 #if 1	
@@ -60,7 +56,6 @@ void SystemInit(void)
     //----------------------------------
 #endif
 #endif
-
 }
 
 
@@ -80,7 +75,6 @@ void EnterDeepSleepMode(void)
 //				wr_data = 0x608e7885;
 //				reg_write(0x40020000+0x020, wr_data);
 //				
-//				reg_aon_sel_aon_clk16k(bit10)
 //				wr_data=reg_read(0x40020000+0x000);
 //				wr_data |= 0x200;//(set bit10=1)
 //				reg_write(0x40020000+0x000, wr_data);
@@ -101,9 +95,8 @@ void EnterDeepSleepMode(void)
 int main (void) 
 {
 	//int wr_data;
-	//uint8_t gpio_status;
-	//uint8_t key_status;
-	//uint16_t count = 90;
+
+	uint32_t current_tick;
 
 	SystemInit();
 
@@ -311,8 +304,7 @@ int main (void)
   charger_init(&my_charger);
 	
 /************************Buck-Boost Control***************************************/	
-	
-	
+
 	while(1)
 	{
 	
@@ -320,7 +312,7 @@ int main (void)
 		
 		system_tick=TimeTick;//1ms tick
 	
-		uint32_t current_tick = TimeTick;
+		current_tick = TimeTick;
 		
 		if (current_tick % 50 == 0) Task_KeyScan();
 		

@@ -15,9 +15,6 @@
 
 
 
-
-
-
 /* ----------------------------------------------------------------- */
 /* Unlock watchdog access */
 void watchdog_unlock(void)
@@ -105,7 +102,7 @@ void iWDT_REG_RW(void)
 //void iWDT_Timer_Init(unsigned int cycle, int type)
 void iWDT_Timer_Init(void)
 {
-	volatile int ID,Val;
+	volatile int ID=0,Val=0;
   ID=iWATCHDOG->IDREV;
 	
 	iWATCHDOG->WREN=WDT200_WP_NUM;//Write the magic number,0x5aa5
@@ -115,16 +112,16 @@ void iWDT_Timer_Init(void)
 	
 	Val|=IWDT_CLK_SEL;//Clock source of timer:[0:EXTCLK;1:PCLK]
 	Val|=IWDT_INT_EN;
-	Val|=IWDT_RST_EN;
+	//Val|=IWDT_RST_EN;
 	Val|=IWDT_EN;	
 
 	iWATCHDOG->CTRL=Val;	
 	
 	
 	
-//	hal_nvic_clear_pending_irq(IWDT_IRQ);
-//	hal_nvic_set_priority(IWDT_IRQ, 0);
-//	hal_nvic_enable_irq(IWDT_IRQ);		
+	hal_nvic_clear_pending_irq(IWDT_IRQ);
+	hal_nvic_set_priority(IWDT_IRQ, 0);
+	hal_nvic_enable_irq(IWDT_IRQ);		
 	
 }
 
@@ -187,7 +184,7 @@ void feed_dog(unsigned int cycle)
 	
 	read_data = GECKO1108_WATCHDOG->WdogValue;//CountRead, current value
 	
-	if (read_data<100)
+	if (read_data<2000)
   watchdog_set(cycle);
 	
 }
