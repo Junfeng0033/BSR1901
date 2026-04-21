@@ -31,6 +31,7 @@ extern void DMA_ISR_Routine(void);
 
 extern uint32_t Get_SysTick_VALUE(void);
 
+extern void HW_SPI_Interrupt_Handler(void);
 
 
 /* Cortex-M0 Processor Exception Handlers -----------------------------------*/
@@ -380,7 +381,7 @@ void AON_WKUP_IRQHandler(void)
 
 void APB_SPI0_IRQnHandler(void)
 {
-	
+	HW_SPI_Interrupt_Handler();
 }
 
 void APB_SPI1_IRQnHandler(void)

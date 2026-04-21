@@ -7,6 +7,7 @@
 #include <stdio.h>
 
 
+
 AdcTypedef adcstruct;
 
 
@@ -28,11 +29,84 @@ AdcTypedef adcstruct;
 
 /*
 *ADC_REF_SEL			RSVD<3>					ADC_VREF
-*
 *    1              X                3.3V
 *    0              1               0.5VBAT
 *    0              0                1.2V
 ****************************************************************************/
+
+typedef enum {
+    ADC_REF_3P3 			= 0x00000000,
+    ADC_REF_HALF_VBAT = 0x00000001,
+    ADC_REF_1P2				= 0x00000002,
+	  ADC_REF_QTY
+} ADC_REF_VOL_T;   
+
+
+
+
+/*
+
+//assign reg_aon_reserved_bit_ctrl   = reg_0x090[31:24];//reserved bits for analog metal fix control
+
+
+//------------------------------------------------------------------
+//RESERVED SIGNAL for Future Metal Fix
+//ZJF @20240321
+assign D2A_AON_RSVD_0       = reg_aon_reserved_bit_ctrl[0]      ;
+assign D2A_AON_RSVD_1       = reg_aon_reserved_bit_ctrl[1]      ;
+assign D2A_AON_RSVD_2       = reg_aon_reserved_bit_ctrl[2]      ;
+assign D2A_AON_RSVD_3       = reg_aon_reserved_bit_ctrl[3]      ;
+
+assign D2A_AON_RSVD_4       = reg_aon_reserved_bit_ctrl[4]      ;
+assign D2A_AON_RSVD_5       = reg_aon_reserved_bit_ctrl[5]      ;
+assign D2A_AON_RSVD_6       = reg_aon_reserved_bit_ctrl[6]      ;
+assign D2A_AON_RSVD_7       = reg_aon_reserved_bit_ctrl[7]      ;
+
+*/
+
+
+//assign reg_aon_reserved_bit_ctrl   = reg_0x090[31:24];
+
+
+#define ADC_REF_HALF_VBAT_ENABLE				  (1<<27) //RSVD<3>	
+
+void BSR1901_SetADC_Ref_Voltage(ADC_REF_VOL_T id)
+{
+		unsigned int wr_data;
+		switch(id)
+		{
+			case ADC_REF_3P3:
+				hw_gpadc->ctrl |= GPADC_REF_SEL;//0:1.2V reference;1:3.3V reference
+				break;
+			case ADC_REF_HALF_VBAT:
+				hw_gpadc->ctrl &= ~GPADC_REF_SEL;//set bit to "0"
+
+				wr_data = reg_read(0x40020000+0x90);
+				wr_data |= ADC_REF_HALF_VBAT_ENABLE;
+				reg_write(0x40020000+0x90,wr_data);
+			
+				break;
+			case ADC_REF_1P2:
+				hw_gpadc->ctrl &= ~GPADC_REF_SEL;//0:1.2V reference;1:3.3V reference
+			
+				wr_data =  reg_read(0x40020000+0x90);
+				wr_data &= ~ADC_REF_HALF_VBAT_ENABLE;
+				reg_write(0x40020000+0x90,wr_data);
+			
+				break;
+			default:
+				break;
+		 }			
+	
+}
+
+/***************************************************************************
+*ADC_REF_SEL			RSVD<3>					ADC_VREF
+*    1              X                3.3V
+*    0              1               0.5VBAT
+*    0              0                1.2V
+****************************************************************************/
+
 
 
 
@@ -149,6 +223,9 @@ void ADC_Init(void)
 	hw_gpadc->ctrl |= ADC_IN_BUFF_EN;//ADC in buffer enable
 		
 	hw_gpadc->ctrl &= ~GPADC_REF_SEL;//0:1.2V reference;1:3.3V reference
+	
+	BSR1901_SetADC_Ref_Voltage(ADC_REF_3P3);
+	
 }
 
 
@@ -476,7 +553,7 @@ uint16 Get_Vbat_Voltage(void)
 		adc_convert=(datavalue*1000)/4095;//Expand 1000 times
 		//printf("\r\nnGet_Vbat_Voltage adc_convert___1 = %d",adc_convert);		
 		adc_convert=adc_convert*(3.3*2);//3.3V x 2 = 6.6V
-		//printf("\r\nnGet_Vbat_Voltage adc_convert___2 = %d",adc_convert);			
+		printf("\r\nnGet_Vbat_Voltage adc_convert___2 = %d",adc_convert);			
 		
 		return adc_convert;
 }

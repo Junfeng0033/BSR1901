@@ -80,20 +80,27 @@ float pid_update(pid_controller_t *pid, float current_val) {
 
 
 
-/**
- * 硬件抽象层：读取电池电压 (ADC7)
- */
+
 uint16_t hal_get_vbat_mv(void) {
     // 实际项目中此处应读取 ADC 寄存器并转换
-    return 3500; // 模拟返回 3.5V
+	  
+    //return 3500; // 模拟返回 3.5V
+	  return Get_Vbat_Voltage();
 }
 
 /**
  * 硬件抽象层：读取充电电流 (OPA + ADC)
  */
+/**
+ * 硬件抽象层：读取电池电压 (ADC7)
+ */
+//adc_buck_curr_read
 uint16_t hal_get_icharge_ma(void) {
+	
     // 实际项目中此处应读取 OPA 放大后的电流采样 ADC 值
-    return 400; // 模拟返回 400mA
+    //return 400; // 模拟返回 400mA
+	   //adc_buck_curr_read();
+	   return GeckoGpadcGetRawData(GPADC_CHAN_7);
 }
 
 /**

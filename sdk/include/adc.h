@@ -223,12 +223,15 @@ typedef struct{
 
 
 
+extern int reg_read(int);
+extern void reg_write(int, int);
 
 
 void ADC_Init(void);
 
 //uint16 GeckoGpadcGetRawData(uint8 channel);
 
+uint16 Get_Vbat_Voltage(void);
 
 uint16 GeckoGpadcGetRawData(GPADC_CHAN_T channel);
 
