@@ -555,6 +555,12 @@ uint16 Get_Vbat_Voltage(void)
 		adc_convert=adc_convert*(3.3*2);//3.3V x 2 = 6.6V
 		printf("\r\nnGet_Vbat_Voltage adc_convert___2 = %d",adc_convert);			
 		
+		if(adc_convert> 3821) 
+			printf("Battery Pack Voltage > 3.8V");	
+		
+		if(adc_convert> 4500) 
+			dc5v_online_flag=1;//USB DC 5V insert
+		
 		return adc_convert;
 }
 

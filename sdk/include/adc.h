@@ -222,6 +222,8 @@ typedef struct{
 
 
 
+extern uint8 dc5v_online_flag;
+
 
 extern int reg_read(int);
 extern void reg_write(int, int);

@@ -415,6 +415,167 @@ void Gui_DrawSector_M0(uint16_t X0, uint16_t Y0, uint16_t R,
 
 
 
+// 实心填充矩形
+// x0, y0 : 左上角坐标
+// w      : 矩形宽度
+// h      : 矩形高度
+// color  : 填充颜色
+void Gui_DrawFillRect(uint16_t x0, uint16_t y0, uint16_t w, uint16_t h, uint16_t color)
+{
+    // 防止宽度/高度为0，避免死循环
+    if(w == 0 || h == 0) return;
+
+    // 计算右下角坐标
+    uint16_t x1 = x0 + w;
+    uint16_t y1 = y0 + h;
+
+    // 逐行画线填充（最稳定、最通用、M0无压力）
+    for(uint16_t y = y0; y <= y1; y++)
+    {
+        Gui_DrawLine(x0, y, x1, y, color);
+    }
+}
+
+
+
+
+
+// 水平进度条（带边框 + 内部填充）
+// x0,y0    左上角坐标
+// w,h      总宽高
+// percent  进度 0~100
+// frameCol 边框颜色
+// barCol   进度条颜色
+// bgCol    背景颜色
+void Gui_ProgressBar(uint16_t x0, uint16_t y0, uint16_t w, uint16_t h,
+                    uint8_t percent, uint16_t frameCol, uint16_t barCol, uint16_t bgCol)
+{
+    // 限制进度 0~100
+    if(percent > 100) percent = 100;
+
+    // 画背景
+    Gui_DrawFillRect(x0, y0, w-1, h-1, bgCol);
+
+    // 画进度
+    uint16_t bar_w = (percent * (w-4)) / 100;
+    if(bar_w > 0)
+    {
+        Gui_DrawFillRect(x0+2, y0+2, bar_w, h-5, barCol);
+    }
+
+    // 画边框
+    Gui_DrawRect(x0, y0, w-1, h-1, frameCol);
+}
+
+
+
+// 坐标(50,100)，宽150，高20
+// 进度 60%
+// 边框：黑色
+// 进度条：绿色
+// 背景：灰色
+//Gui_ProgressBar(50, 100, 150, 20, 60, BLACK, GREEN, GRAY);
+
+
+
+
+
+
+
+
+
+
+
+// 内部辅助：判断角度并画点（纯整数，超快）
+static void DrawArcPoint(uint16_t cx, uint16_t cy, int x, int y,
+                         int sa, int ea, uint16_t color)
+{
+    int angle;
+
+    if(x == 0 && y == 0) return;
+    if(x >= 0 && y > 0)  angle = (x*45)/y;
+    else if(x < 0 && y >= 0) angle = 90 - ((-x)*45)/y;
+    else if(x <= 0 && y < 0) angle = 180 + ((-x)*45)/(-y);
+    else angle = 270 - ((x)*45)/(-y);
+
+    if( (angle >= sa && angle <= ea) ||
+        (sa > ea && (angle >= sa || angle <= ea)) )
+    {
+        Gui_DrawPoint(cx + x, cy + y, color);
+    }
+}
+
+
+
+
+
+
+/*
+Gui_DrawArc 函数参数说明：
+x0      圆心的X轴坐标
+y0      圆心的Y轴坐标
+r       圆弧的半径，必须大于等于1
+sa      圆弧的起始角度，范围0~360
+ea      圆弧的结束角度，范围0~360
+color   绘制圆弧使用的颜色
+*/
+
+// 纯整数 Bresenham 圆弧函数（Cortex-M0 专用）
+void Gui_DrawArc(uint16_t x0, uint16_t y0, uint16_t r,
+                 int16_t sa, int16_t ea, uint16_t color)
+{
+    int x = 0, y = r;
+    int d = 3 - 2 * r;
+
+    while (x <= y)
+    {
+        // 8 对称点绘制（已做角度判断）
+        DrawArcPoint(x0, y0, x, y, sa, ea, color);
+        DrawArcPoint(x0, y0,-x, y, sa, ea, color);
+        DrawArcPoint(x0, y0, x,-y, sa, ea, color);
+        DrawArcPoint(x0, y0,-x,-y, sa, ea, color);
+        DrawArcPoint(x0, y0, y, x, sa, ea, color);
+        DrawArcPoint(x0, y0,-y, x, sa, ea, color);
+        DrawArcPoint(x0, y0, y,-x, sa, ea, color);
+        DrawArcPoint(x0, y0,-y,-x, sa, ea, color);
+
+        if (d < 0)
+            d += 4 * x + 6;
+        else
+        {
+            d += 4 * (x - y) + 10;
+            y--;
+        }
+        x++;
+    }
+}
+
+
+
+//画右半圆 0° → 180°
+
+//Gui_DrawArc(120, 120, 50, 0, 180, RED);
+
+//画上半圆 270° → 90°
+//Gui_DrawArc(120, 120, 50, 270, 90, BLUE);
+
+
+//画 1/4 圆弧（右下角）0° → 90°
+//Gui_DrawArc(120, 120, 50, 0, 90, GREEN);
+
+//画一个完整圆环
+//Gui_DrawArc(120, 120, 50, 0, 360, YELLOW);
+
+
+//画进度条常用圆弧：135°~405°（270° 大圆弧）
+//Gui_DrawArc(120, 120, 50, 135, 405, 0xFFFF);
+
+
+//Gui_DrawArc(圆心X, 圆心Y, 半径, 起始角度, 结束角度, 颜色);
+//从起始角度 顺时针 画到 结束角度。
+
+
+
 
 
 void GuiShowString(uint16_t x, uint16_t y, uint16_t fc, uint16_t bc, uint8_t *s)
@@ -743,6 +904,10 @@ void Task_UI_Refresh(void)
 			uicount = 0;
 		else 
 			uicount ++;
+		
+		
+		
+		Gui_DrawArc(120, 120, 50, 135, 405, 0xFFFF);
 
 		
 		
