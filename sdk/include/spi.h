@@ -227,7 +227,8 @@ void SPI_16bit_Transfer(void);
 void SPI_24bit_Transfer(void);
 void SPI_32bit_Transfer(void);
 
-void lcd_dma_8bit_refresh(uint16_t xs, uint16_t ys, uint16_t w, uint16_t h, color_t *color);
+
+void lcd_dma_16bit_refresh(uint16_t xs, uint16_t ys, uint16_t w, uint16_t h, color_t *color);
 
 
 

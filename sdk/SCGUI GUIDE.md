@@ -52,7 +52,7 @@ Simplified Chinese(GB 2312) Encoding
 
 #define SC_SCREEN_WIDTH (240)
 #define SC_SCREEN_HEIGHT (240)
-#define SC_PFB_BUF_SIZE (SC_SCREEN_WIDTH * 2) // 示例：2行高度，帧缓冲仅缓存2行数据，降低SRAM占用
+#define SC_PFB_BUF_SIZE (SC_SCREEN_WIDTH * 5) // 示例：5行高度，帧缓冲仅缓存5行数据，降低SRAM占用
 #define SC_LCD_DMA_2BUF (0)                   // 是否启用DMA双buf传输
 #define SC_LCD_DMA_WAP (0)                    // 是否DMA传输时高低位WAP
 
@@ -78,20 +78,21 @@ Simplified Chinese(GB 2312) Encoding
 在sc_gui_init函数里的第一个参数就是DMA刷新LCD的回调函数，这里需要平台自行适配
 
 
-sc_gui_init(lcd_dma_8bit_refresh, 0, C_ROYAL_BLUE,C_BLUE, &lv_font_16);
+sc_gui_init(lcd_dma_16bit_refresh, 0, C_ROYAL_BLUE,C_BLUE, &lv_font_16);
 
 
 
 在BSR1901上是这样写的:
-void lcd_dma_8bit_refresh(uint16_t xs, uint16_t ys, uint16_t w, uint16_t h, color_t *color)
+void lcd_dma_16bit_refresh(uint16_t xs, uint16_t ys, uint16_t w, uint16_t h, color_t *color)
 {
 	uint32_t len = w*h;
 	
 	Lcd_SetRegion(xs, ys, xs+w-1, ys+h-1);	
 	
-	HW_SPI_Tx_DMA_8bit(HAL_SPI_0,color,len);
+	HW_SPI_Tx_DMA_16bit(HAL_SPI_0,color,len);
 	
 }
+
 
 
 
@@ -393,6 +394,10 @@ sc_draw_Frame(NULL, 50, 50, 100, 80, 2, C_BLUE, 255);
 void Gui_Circle(uint16_t X, uint16_t Y, uint16_t R, uint16_t fc)
 
 void ui_paint_bat_percent(uint8_t percent)
+
+
+void Gui_ProgressBar(uint16_t x0, uint16_t y0, uint16_t w, uint16_t h,uint8_t percent, uint16_t frameCol, uint16_t barCol, uint16_t bgCol)
+
 
 
 

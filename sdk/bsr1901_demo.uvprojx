@@ -628,6 +628,16 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>scgui/example</GroupName>
+          <Files>
+            <File>
+              <FileName>sc_demo_test.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>D:\SVN\projects\BSR1901\software\sdk\SCGUI\example\sc_demo_test.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>user</GroupName>
           <Files>
             <File>
@@ -689,11 +699,6 @@
               <FileName>ui_circle_100x100.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\user\ui_circle_100x100.c</FilePath>
-            </File>
-            <File>
-              <FileName>sc_demo_test.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\SCGUI\example\sc_demo_test.c</FilePath>
             </File>
             <File>
               <FileName>ui.c</FileName>

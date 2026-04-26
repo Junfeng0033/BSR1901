@@ -11,7 +11,7 @@ I (.\include\timer.h)(0x63B4CFC2)
 I (.\include\pwm.h)(0x69DEF58A)
 I (D:\Keil_v5\ARM\ARMCC\include\stdarg.h)(0x599ECD2A)
 I (D:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
-F (.\peripheral\aon.c)(0x69E43CD5)(--c99 --gnu -c --cpu Cortex-M0 -D__MICROLIB --li -g -O3 --apcs=interwork --split_sections -I .\include -I .\bms\ip2366 -I .\tft_lcd -I .\user -I .\SCGUI -I .\SCGUI\example -I .\SCGUI\touch_lib --locale=english-ID:\Keil_v5\ARM\PACK\ARM\CMSIS\5.9.0\Device\ARM\ARMCM0\Include-ID:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="538" -DARMCM0-o .\objects\aon.o --omf_browse .\objects\aon.crf --depend .\objects\aon.d)
+F (.\peripheral\aon.c)(0x69EDE409)(--c99 --gnu -c --cpu Cortex-M0 -D__MICROLIB --li -g -O3 --apcs=interwork --split_sections -I .\include -I .\bms\ip2366 -I .\tft_lcd -I .\user -I .\SCGUI -I .\SCGUI\example -I .\SCGUI\touch_lib --locale=english-ID:\Keil_v5\ARM\PACK\ARM\CMSIS\5.9.0\Device\ARM\ARMCM0\Include-ID:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="538" -DARMCM0-o .\objects\aon.o --omf_browse .\objects\aon.crf --depend .\objects\aon.d)
 I (.\include\platform_config.h)(0x69DEF473)
 I (.\include\bsr1901.h)(0x69E4C6DC)
 I (.\include\aon.h)(0x69E60976)
@@ -37,8 +37,8 @@ I (.\include\watchdog.h)(0x69E60793)
 I (.\include\pwm.h)(0x69DEF58A)
 I (D:\Keil_v5\ARM\ARMCC\include\stdarg.h)(0x599ECD2A)
 I (D:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
-I (.\include\spi.h)(0x69E4C683)
-I (.\tft_lcd\lcd_driver.h)(0x69E43267)
+I (.\include\spi.h)(0x69E9D254)
+I (.\tft_lcd\lcd_driver.h)(0x69E9FC13)
 I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
 F (.\peripheral\uart.c)(0x69DF866B)(--c99 --gnu -c --cpu Cortex-M0 -D__MICROLIB --li -g -O3 --apcs=interwork --split_sections -I .\include -I .\bms\ip2366 -I .\tft_lcd -I .\user -I .\SCGUI -I .\SCGUI\example -I .\SCGUI\touch_lib --locale=english-ID:\Keil_v5\ARM\PACK\ARM\CMSIS\5.9.0\Device\ARM\ARMCM0\Include-ID:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="538" -DARMCM0-o .\objects\uart.o --omf_browse .\objects\uart.crf --depend .\objects\uart.d)
 I (.\include\platform_config.h)(0x69DEF473)
@@ -60,24 +60,24 @@ F (.\peripheral\gpio_i2c.c)(0x69E03400)(--c99 --gnu -c --cpu Cortex-M0 -D__MICRO
 I (.\include\platform_config.h)(0x69DEF473)
 I (.\include\bsr1901.h)(0x69E4C6DC)
 I (.\include\gpio.h)(0x69DEDF70)
-I (.\tft_lcd\lcd_driver.h)(0x69E43267)
+I (.\tft_lcd\lcd_driver.h)(0x69E9FC13)
 I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
 I (D:\Keil_v5\ARM\ARMCC\include\stdarg.h)(0x599ECD2A)
 I (D:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
-F (.\peripheral\adc.c)(0x69E6EB18)(--c99 --gnu -c --cpu Cortex-M0 -D__MICROLIB --li -g -O3 --apcs=interwork --split_sections -I .\include -I .\bms\ip2366 -I .\tft_lcd -I .\user -I .\SCGUI -I .\SCGUI\example -I .\SCGUI\touch_lib --locale=english-ID:\Keil_v5\ARM\PACK\ARM\CMSIS\5.9.0\Device\ARM\ARMCM0\Include-ID:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="538" -DARMCM0-o .\objects\adc.o --omf_browse .\objects\adc.crf --depend .\objects\adc.d)
+F (.\peripheral\adc.c)(0x69EDF39A)(--c99 --gnu -c --cpu Cortex-M0 -D__MICROLIB --li -g -O3 --apcs=interwork --split_sections -I .\include -I .\bms\ip2366 -I .\tft_lcd -I .\user -I .\SCGUI -I .\SCGUI\example -I .\SCGUI\touch_lib --locale=english-ID:\Keil_v5\ARM\PACK\ARM\CMSIS\5.9.0\Device\ARM\ARMCM0\Include-ID:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="538" -DARMCM0-o .\objects\adc.o --omf_browse .\objects\adc.crf --depend .\objects\adc.d)
 I (.\include\platform_config.h)(0x69DEF473)
 I (.\include\bsr1901.h)(0x69E4C6DC)
 I (.\include\adc.h)(0x69E6EA09)
 I (.\include\uart.h)(0x69DF866B)
 I (D:\Keil_v5\ARM\ARMCC\include\stdarg.h)(0x599ECD2A)
 I (D:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
-F (.\peripheral\spi.c)(0x69E605FC)(--c99 --gnu -c --cpu Cortex-M0 -D__MICROLIB --li -g -O3 --apcs=interwork --split_sections -I .\include -I .\bms\ip2366 -I .\tft_lcd -I .\user -I .\SCGUI -I .\SCGUI\example -I .\SCGUI\touch_lib --locale=english-ID:\Keil_v5\ARM\PACK\ARM\CMSIS\5.9.0\Device\ARM\ARMCM0\Include-ID:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="538" -DARMCM0-o .\objects\spi.o --omf_browse .\objects\spi.crf --depend .\objects\spi.d)
-I (.\include\spi.h)(0x69E4C683)
+F (.\peripheral\spi.c)(0x69EDE20F)(--c99 --gnu -c --cpu Cortex-M0 -D__MICROLIB --li -g -O3 --apcs=interwork --split_sections -I .\include -I .\bms\ip2366 -I .\tft_lcd -I .\user -I .\SCGUI -I .\SCGUI\example -I .\SCGUI\touch_lib --locale=english-ID:\Keil_v5\ARM\PACK\ARM\CMSIS\5.9.0\Device\ARM\ARMCM0\Include-ID:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="538" -DARMCM0-o .\objects\spi.o --omf_browse .\objects\spi.crf --depend .\objects\spi.d)
+I (.\include\spi.h)(0x69E9D254)
 I (.\include\platform_config.h)(0x69DEF473)
 I (.\include\uart.h)(0x69DF866B)
 I (.\include\dma.h)(0x69DEF057)
 I (.\include\gpio.h)(0x69DEDF70)
-I (.\tft_lcd\lcd_driver.h)(0x69E43267)
+I (.\tft_lcd\lcd_driver.h)(0x69E9FC13)
 I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
 I (D:\Keil_v5\ARM\ARMCC\include\stdarg.h)(0x599ECD2A)
 I (D:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
@@ -110,11 +110,11 @@ F (.\peripheral\dma.c)(0x69DEF04B)(--c99 --gnu -c --cpu Cortex-M0 -D__MICROLIB -
 I (.\include\dma.h)(0x69DEF057)
 I (.\include\platform_config.h)(0x69DEF473)
 I (.\include\bsr1901.h)(0x69E4C6DC)
-I (.\tft_lcd\lcd_driver.h)(0x69E43267)
+I (.\tft_lcd\lcd_driver.h)(0x69E9FC13)
 I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
 I (.\include\gpio.h)(0x69DEDF70)
 I (.\user\ui.h)(0x69E42C51)
-I (.\include\spi.h)(0x69E4C683)
+I (.\include\spi.h)(0x69E9D254)
 F (.\peripheral\efuse.c)(0x69E5DE1F)(--c99 --gnu -c --cpu Cortex-M0 -D__MICROLIB --li -g -O3 --apcs=interwork --split_sections -I .\include -I .\bms\ip2366 -I .\tft_lcd -I .\user -I .\SCGUI -I .\SCGUI\example -I .\SCGUI\touch_lib --locale=english-ID:\Keil_v5\ARM\PACK\ARM\CMSIS\5.9.0\Device\ARM\ARMCM0\Include-ID:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="538" -DARMCM0-o .\objects\efuse.o --omf_browse .\objects\efuse.crf --depend .\objects\efuse.d)
 I (.\include\efuse.h)(0x69E6061C)
 I (.\include\platform_config.h)(0x69DEF473)
@@ -124,7 +124,7 @@ F (.\peripheral\opa.c)(0x6960904A)(--c99 --gnu -c --cpu Cortex-M0 -D__MICROLIB -
 I (.\include\platform_config.h)(0x69DEF473)
 I (.\include\bsr1901.h)(0x69E4C6DC)
 I (.\include\aon.h)(0x69E60976)
-F (.\peripheral\mos.c)(0x6961B169)(--c99 --gnu -c --cpu Cortex-M0 -D__MICROLIB --li -g -O3 --apcs=interwork --split_sections -I .\include -I .\bms\ip2366 -I .\tft_lcd -I .\user -I .\SCGUI -I .\SCGUI\example -I .\SCGUI\touch_lib --locale=english-ID:\Keil_v5\ARM\PACK\ARM\CMSIS\5.9.0\Device\ARM\ARMCM0\Include-ID:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="538" -DARMCM0-o .\objects\mos.o --omf_browse .\objects\mos.crf --depend .\objects\mos.d)
+F (.\peripheral\mos.c)(0x69EDF46B)(--c99 --gnu -c --cpu Cortex-M0 -D__MICROLIB --li -g -O3 --apcs=interwork --split_sections -I .\include -I .\bms\ip2366 -I .\tft_lcd -I .\user -I .\SCGUI -I .\SCGUI\example -I .\SCGUI\touch_lib --locale=english-ID:\Keil_v5\ARM\PACK\ARM\CMSIS\5.9.0\Device\ARM\ARMCM0\Include-ID:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="538" -DARMCM0-o .\objects\mos.o --omf_browse .\objects\mos.crf --depend .\objects\mos.d)
 I (.\include\platform_config.h)(0x69DEF473)
 I (.\include\aon.h)(0x69E60976)
 F (.\peripheral\charger.c)(0x69E6D2E2)(--c99 --gnu -c --cpu Cortex-M0 -D__MICROLIB --li -g -O3 --apcs=interwork --split_sections -I .\include -I .\bms\ip2366 -I .\tft_lcd -I .\user -I .\SCGUI -I .\SCGUI\example -I .\SCGUI\touch_lib --locale=english-ID:\Keil_v5\ARM\PACK\ARM\CMSIS\5.9.0\Device\ARM\ARMCM0\Include-ID:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="538" -DARMCM0-o .\objects\charger.o --omf_browse .\objects\charger.crf --depend .\objects\charger.d)
@@ -141,7 +141,7 @@ I (.\include\platform_config.h)(0x69DEF473)
 I (.\include\gpio.h)(0x69DEDF70)
 I (bms\ip2366\bms_ip2366.h)(0x69DDD028)
 I (bms\ip2366\bms_global.h)(0x67612F72)
-I (.\tft_lcd\lcd_driver.h)(0x69E43267)
+I (.\tft_lcd\lcd_driver.h)(0x69E9FC13)
 I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
 I (.\include\iomux.h)(0x69E0367A)
 I (D:\Keil_v5\ARM\ARMCC\include\stdarg.h)(0x599ECD2A)
@@ -157,18 +157,18 @@ I (.\include\timer.h)(0x63B4CFC2)
 I (.\include\uart.h)(0x69DF866B)
 I (.\include\norflash.h)(0x622047F8)
 I (.\include\aon.h)(0x69E60976)
-F (.\tft_lcd\lcd_driver.c)(0x69E5D363)(--c99 --gnu -c --cpu Cortex-M0 -D__MICROLIB --li -g -O3 --apcs=interwork --split_sections -I .\include -I .\bms\ip2366 -I .\tft_lcd -I .\user -I .\SCGUI -I .\SCGUI\example -I .\SCGUI\touch_lib --locale=english-ID:\Keil_v5\ARM\PACK\ARM\CMSIS\5.9.0\Device\ARM\ARMCM0\Include-ID:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="538" -DARMCM0-o .\objects\lcd_driver.o --omf_browse .\objects\lcd_driver.crf --depend .\objects\lcd_driver.d)
-I (tft_lcd\lcd_driver.h)(0x69E43267)
+F (.\tft_lcd\lcd_driver.c)(0x69E9FC31)(--c99 --gnu -c --cpu Cortex-M0 -D__MICROLIB --li -g -O3 --apcs=interwork --split_sections -I .\include -I .\bms\ip2366 -I .\tft_lcd -I .\user -I .\SCGUI -I .\SCGUI\example -I .\SCGUI\touch_lib --locale=english-ID:\Keil_v5\ARM\PACK\ARM\CMSIS\5.9.0\Device\ARM\ARMCM0\Include-ID:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="538" -DARMCM0-o .\objects\lcd_driver.o --omf_browse .\objects\lcd_driver.crf --depend .\objects\lcd_driver.d)
+I (tft_lcd\lcd_driver.h)(0x69E9FC13)
 I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
 I (.\include\gpio.h)(0x69DEDF70)
 I (.\include\platform_config.h)(0x69DEF473)
-I (.\include\spi.h)(0x69E4C683)
+I (.\include\spi.h)(0x69E9D254)
 I (.\include\iomux.h)(0x69E0367A)
 I (.\include\dma.h)(0x69DEF057)
-F (.\SCGUI GUIDE.md)(0x69E0DEB4)()
+F (.\SCGUI GUIDE.md)(0x69EDA882)()
 F (.\SCGUI\sc_arc.c)(0x69CB71F0)(--c99 --gnu -c --cpu Cortex-M0 -D__MICROLIB --li -g -O3 --apcs=interwork --split_sections -I .\include -I .\bms\ip2366 -I .\tft_lcd -I .\user -I .\SCGUI -I .\SCGUI\example -I .\SCGUI\touch_lib --locale=english-ID:\Keil_v5\ARM\PACK\ARM\CMSIS\5.9.0\Device\ARM\ARMCM0\Include-ID:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="538" -DARMCM0-o .\objects\sc_arc.o --omf_browse .\objects\sc_arc.crf --depend .\objects\sc_arc.d)
 I (SCGUI\sc_gui.h)(0x69CB88D1)
-I (SCGUI\sc_common.h)(0x69CB79CA)
+I (SCGUI\sc_common.h)(0x69EA126B)
 I (D:\Keil_v5\ARM\ARMCC\include\string.h)(0x599ECD2C)
 I (D:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
 I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
@@ -182,7 +182,7 @@ I (SCGUI\sc_transform.h)(0x69623F4D)
 I (SCGUI\sc_compose.h)(0x69623F4D)
 F (.\SCGUI\sc_common.c)(0x69623F4D)(--c99 --gnu -c --cpu Cortex-M0 -D__MICROLIB --li -g -O3 --apcs=interwork --split_sections -I .\include -I .\bms\ip2366 -I .\tft_lcd -I .\user -I .\SCGUI -I .\SCGUI\example -I .\SCGUI\touch_lib --locale=english-ID:\Keil_v5\ARM\PACK\ARM\CMSIS\5.9.0\Device\ARM\ARMCM0\Include-ID:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="538" -DARMCM0-o .\objects\sc_common.o --omf_browse .\objects\sc_common.crf --depend .\objects\sc_common.d)
 I (SCGUI\sc_gui.h)(0x69CB88D1)
-I (SCGUI\sc_common.h)(0x69CB79CA)
+I (SCGUI\sc_common.h)(0x69EA126B)
 I (D:\Keil_v5\ARM\ARMCC\include\string.h)(0x599ECD2C)
 I (D:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
 I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
@@ -196,7 +196,7 @@ I (SCGUI\sc_transform.h)(0x69623F4D)
 I (SCGUI\sc_compose.h)(0x69623F4D)
 F (.\SCGUI\sc_compose.c)(0x69623F4D)(--c99 --gnu -c --cpu Cortex-M0 -D__MICROLIB --li -g -O3 --apcs=interwork --split_sections -I .\include -I .\bms\ip2366 -I .\tft_lcd -I .\user -I .\SCGUI -I .\SCGUI\example -I .\SCGUI\touch_lib --locale=english-ID:\Keil_v5\ARM\PACK\ARM\CMSIS\5.9.0\Device\ARM\ARMCM0\Include-ID:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="538" -DARMCM0-o .\objects\sc_compose.o --omf_browse .\objects\sc_compose.crf --depend .\objects\sc_compose.d)
 I (SCGUI\sc_gui.h)(0x69CB88D1)
-I (SCGUI\sc_common.h)(0x69CB79CA)
+I (SCGUI\sc_common.h)(0x69EA126B)
 I (D:\Keil_v5\ARM\ARMCC\include\string.h)(0x599ECD2C)
 I (D:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
 I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
@@ -210,7 +210,7 @@ I (SCGUI\sc_transform.h)(0x69623F4D)
 I (SCGUI\sc_compose.h)(0x69623F4D)
 F (.\SCGUI\sc_event_task.c)(0x69623F4D)(--c99 --gnu -c --cpu Cortex-M0 -D__MICROLIB --li -g -O3 --apcs=interwork --split_sections -I .\include -I .\bms\ip2366 -I .\tft_lcd -I .\user -I .\SCGUI -I .\SCGUI\example -I .\SCGUI\touch_lib --locale=english-ID:\Keil_v5\ARM\PACK\ARM\CMSIS\5.9.0\Device\ARM\ARMCM0\Include-ID:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="538" -DARMCM0-o .\objects\sc_event_task.o --omf_browse .\objects\sc_event_task.crf --depend .\objects\sc_event_task.d)
 I (SCGUI\sc_event_task.h)(0x69623F4D)
-I (SCGUI\sc_common.h)(0x69CB79CA)
+I (SCGUI\sc_common.h)(0x69EA126B)
 I (D:\Keil_v5\ARM\ARMCC\include\string.h)(0x599ECD2C)
 I (D:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
 I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
@@ -224,7 +224,7 @@ I (SCGUI\sc_transform.h)(0x69623F4D)
 I (SCGUI\sc_compose.h)(0x69623F4D)
 F (.\SCGUI\sc_gui.c)(0x69CB72C3)(--c99 --gnu -c --cpu Cortex-M0 -D__MICROLIB --li -g -O3 --apcs=interwork --split_sections -I .\include -I .\bms\ip2366 -I .\tft_lcd -I .\user -I .\SCGUI -I .\SCGUI\example -I .\SCGUI\touch_lib --locale=english-ID:\Keil_v5\ARM\PACK\ARM\CMSIS\5.9.0\Device\ARM\ARMCM0\Include-ID:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="538" -DARMCM0-o .\objects\sc_gui.o --omf_browse .\objects\sc_gui.crf --depend .\objects\sc_gui.d)
 I (SCGUI\sc_gui.h)(0x69CB88D1)
-I (SCGUI\sc_common.h)(0x69CB79CA)
+I (SCGUI\sc_common.h)(0x69EA126B)
 I (D:\Keil_v5\ARM\ARMCC\include\string.h)(0x599ECD2C)
 I (D:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
 I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
@@ -240,7 +240,7 @@ F (.\SCGUI\sc_keyboard.c)(0x69CB77E5)(--c99 --gnu -c --cpu Cortex-M0 -D__MICROLI
 I (.\SCGUI\touch_lib\sc_obj.h)(0x69623F4D)
 I (.\SCGUI\touch_lib\sc_obj_list.h)(0x69623F4D)
 I (.\SCGUI\sc_gui.h)(0x69CB88D1)
-I (.\SCGUI\sc_common.h)(0x69CB79CA)
+I (.\SCGUI\sc_common.h)(0x69EA126B)
 I (D:\Keil_v5\ARM\ARMCC\include\string.h)(0x599ECD2C)
 I (D:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
 I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
@@ -255,7 +255,7 @@ I (.\SCGUI\sc_compose.h)(0x69623F4D)
 I (.\SCGUI\sc_keyboard.h)(0x69CB726B)
 F (.\SCGUI\sc_lvgl_font.c)(0x69623F4D)(--c99 --gnu -c --cpu Cortex-M0 -D__MICROLIB --li -g -O3 --apcs=interwork --split_sections -I .\include -I .\bms\ip2366 -I .\tft_lcd -I .\user -I .\SCGUI -I .\SCGUI\example -I .\SCGUI\touch_lib --locale=english-ID:\Keil_v5\ARM\PACK\ARM\CMSIS\5.9.0\Device\ARM\ARMCM0\Include-ID:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="538" -DARMCM0-o .\objects\sc_lvgl_font.o --omf_browse .\objects\sc_lvgl_font.crf --depend .\objects\sc_lvgl_font.d)
 I (SCGUI\sc_gui.h)(0x69CB88D1)
-I (SCGUI\sc_common.h)(0x69CB79CA)
+I (SCGUI\sc_common.h)(0x69EA126B)
 I (D:\Keil_v5\ARM\ARMCC\include\string.h)(0x599ECD2C)
 I (D:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
 I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
@@ -269,7 +269,7 @@ I (SCGUI\sc_transform.h)(0x69623F4D)
 I (SCGUI\sc_compose.h)(0x69623F4D)
 F (.\SCGUI\sc_menu.c)(0x69623F4D)(--c99 --gnu -c --cpu Cortex-M0 -D__MICROLIB --li -g -O3 --apcs=interwork --split_sections -I .\include -I .\bms\ip2366 -I .\tft_lcd -I .\user -I .\SCGUI -I .\SCGUI\example -I .\SCGUI\touch_lib --locale=english-ID:\Keil_v5\ARM\PACK\ARM\CMSIS\5.9.0\Device\ARM\ARMCM0\Include-ID:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="538" -DARMCM0-o .\objects\sc_menu.o --omf_browse .\objects\sc_menu.crf --depend .\objects\sc_menu.d)
 I (SCGUI\sc_menu.h)(0x69623F4D)
-I (SCGUI\sc_common.h)(0x69CB79CA)
+I (SCGUI\sc_common.h)(0x69EA126B)
 I (D:\Keil_v5\ARM\ARMCC\include\string.h)(0x599ECD2C)
 I (D:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
 I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
@@ -284,7 +284,7 @@ I (SCGUI\sc_transform.h)(0x69623F4D)
 I (SCGUI\sc_compose.h)(0x69623F4D)
 F (.\SCGUI\sc_transform.c)(0x69623F4D)(--c99 --gnu -c --cpu Cortex-M0 -D__MICROLIB --li -g -O3 --apcs=interwork --split_sections -I .\include -I .\bms\ip2366 -I .\tft_lcd -I .\user -I .\SCGUI -I .\SCGUI\example -I .\SCGUI\touch_lib --locale=english-ID:\Keil_v5\ARM\PACK\ARM\CMSIS\5.9.0\Device\ARM\ARMCM0\Include-ID:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="538" -DARMCM0-o .\objects\sc_transform.o --omf_browse .\objects\sc_transform.crf --depend .\objects\sc_transform.d)
 I (SCGUI\sc_gui.h)(0x69CB88D1)
-I (SCGUI\sc_common.h)(0x69CB79CA)
+I (SCGUI\sc_common.h)(0x69EA126B)
 I (D:\Keil_v5\ARM\ARMCC\include\string.h)(0x599ECD2C)
 I (D:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
 I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
@@ -304,7 +304,7 @@ F (.\SCGUI\font\lv_font_20.c)(0x69623F4D)(--c99 --gnu -c --cpu Cortex-M0 -D__MIC
 I (.\SCGUI\lvgl.h)(0x69623F4D)
 F (.\SCGUI\bmp\bashen.c)(0x69623F4D)(--c99 --gnu -c --cpu Cortex-M0 -D__MICROLIB --li -g -O3 --apcs=interwork --split_sections -I .\include -I .\bms\ip2366 -I .\tft_lcd -I .\user -I .\SCGUI -I .\SCGUI\example -I .\SCGUI\touch_lib --locale=english-ID:\Keil_v5\ARM\PACK\ARM\CMSIS\5.9.0\Device\ARM\ARMCM0\Include-ID:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="538" -DARMCM0-o .\objects\bashen.o --omf_browse .\objects\bashen.crf --depend .\objects\bashen.d)
 I (.\SCGUI\sc_gui.h)(0x69CB88D1)
-I (.\SCGUI\sc_common.h)(0x69CB79CA)
+I (.\SCGUI\sc_common.h)(0x69EA126B)
 I (D:\Keil_v5\ARM\ARMCC\include\string.h)(0x599ECD2C)
 I (D:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
 I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
@@ -318,7 +318,7 @@ I (.\SCGUI\sc_transform.h)(0x69623F4D)
 I (.\SCGUI\sc_compose.h)(0x69623F4D)
 F (.\SCGUI\bmp\test_img.c)(0x69623F4D)(--c99 --gnu -c --cpu Cortex-M0 -D__MICROLIB --li -g -O3 --apcs=interwork --split_sections -I .\include -I .\bms\ip2366 -I .\tft_lcd -I .\user -I .\SCGUI -I .\SCGUI\example -I .\SCGUI\touch_lib --locale=english-ID:\Keil_v5\ARM\PACK\ARM\CMSIS\5.9.0\Device\ARM\ARMCM0\Include-ID:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="538" -DARMCM0-o .\objects\test_img.o --omf_browse .\objects\test_img.crf --depend .\objects\test_img.d)
 I (.\SCGUI\sc_gui.h)(0x69CB88D1)
-I (.\SCGUI\sc_common.h)(0x69CB79CA)
+I (.\SCGUI\sc_common.h)(0x69EA126B)
 I (D:\Keil_v5\ARM\ARMCC\include\string.h)(0x599ECD2C)
 I (D:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
 I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
@@ -332,7 +332,7 @@ I (.\SCGUI\sc_transform.h)(0x69623F4D)
 I (.\SCGUI\sc_compose.h)(0x69623F4D)
 F (.\SCGUI\bmp\watch_106_64.c)(0x69623F4D)(--c99 --gnu -c --cpu Cortex-M0 -D__MICROLIB --li -g -O3 --apcs=interwork --split_sections -I .\include -I .\bms\ip2366 -I .\tft_lcd -I .\user -I .\SCGUI -I .\SCGUI\example -I .\SCGUI\touch_lib --locale=english-ID:\Keil_v5\ARM\PACK\ARM\CMSIS\5.9.0\Device\ARM\ARMCM0\Include-ID:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="538" -DARMCM0-o .\objects\watch_106_64.o --omf_browse .\objects\watch_106_64.crf --depend .\objects\watch_106_64.d)
 I (.\SCGUI\sc_gui.h)(0x69CB88D1)
-I (.\SCGUI\sc_common.h)(0x69CB79CA)
+I (.\SCGUI\sc_common.h)(0x69EA126B)
 I (D:\Keil_v5\ARM\ARMCC\include\string.h)(0x599ECD2C)
 I (D:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
 I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
@@ -344,8 +344,24 @@ I (.\SCGUI\sc_event_task.h)(0x69623F4D)
 I (.\SCGUI\sc_arc.h)(0x69623F4D)
 I (.\SCGUI\sc_transform.h)(0x69623F4D)
 I (.\SCGUI\sc_compose.h)(0x69623F4D)
-F (.\user\main.c)(0x69E6C981)(--c99 --gnu -c --cpu Cortex-M0 -D__MICROLIB --li -g -O3 --apcs=interwork --split_sections -I .\include -I .\bms\ip2366 -I .\tft_lcd -I .\user -I .\SCGUI -I .\SCGUI\example -I .\SCGUI\touch_lib --locale=english-ID:\Keil_v5\ARM\PACK\ARM\CMSIS\5.9.0\Device\ARM\ARMCM0\Include-ID:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="538" -DARMCM0-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
-I (user\main.h)(0x69E4C4B8)
+F (D:\SVN\projects\BSR1901\software\sdk\SCGUI\example\sc_demo_test.c)(0x69EA016E)(--c99 --gnu -c --cpu Cortex-M0 -D__MICROLIB --li -g -O3 --apcs=interwork --split_sections -I .\include -I .\bms\ip2366 -I .\tft_lcd -I .\user -I .\SCGUI -I .\SCGUI\example -I .\SCGUI\touch_lib --locale=english-ID:\Keil_v5\ARM\PACK\ARM\CMSIS\5.9.0\Device\ARM\ARMCM0\Include-ID:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="538" -DARMCM0-o .\objects\sc_demo_test.o --omf_browse .\objects\sc_demo_test.crf --depend .\objects\sc_demo_test.d)
+I (D:\SVN\projects\BSR1901\software\sdk\SCGUI\example\sc_demo_test.h)(0x69EDF4B7)
+I (.\SCGUI\sc_gui.h)(0x69CB88D1)
+I (.\SCGUI\sc_common.h)(0x69EA126B)
+I (D:\Keil_v5\ARM\ARMCC\include\string.h)(0x599ECD2C)
+I (D:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
+I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
+I (D:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x599ECD2E)
+I (D:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x599ECD2C)
+I (.\SCGUI\lvgl.h)(0x69623F4D)
+I (.\SCGUI\sc_lvgl_font.h)(0x69623F4D)
+I (.\SCGUI\sc_event_task.h)(0x69623F4D)
+I (.\SCGUI\sc_arc.h)(0x69623F4D)
+I (.\SCGUI\sc_transform.h)(0x69623F4D)
+I (.\SCGUI\sc_compose.h)(0x69623F4D)
+I (.\SCGUI\sc_menu.h)(0x69623F4D)
+F (.\user\main.c)(0x69EDA8E7)(--c99 --gnu -c --cpu Cortex-M0 -D__MICROLIB --li -g -O3 --apcs=interwork --split_sections -I .\include -I .\bms\ip2366 -I .\tft_lcd -I .\user -I .\SCGUI -I .\SCGUI\example -I .\SCGUI\touch_lib --locale=english-ID:\Keil_v5\ARM\PACK\ARM\CMSIS\5.9.0\Device\ARM\ARMCM0\Include-ID:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="538" -DARMCM0-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
+I (user\main.h)(0x69E9D17B)
 I (.\include\platform_config.h)(0x69DEF473)
 I (.\include\bsr1901.h)(0x69E4C6DC)
 I (D:\Keil_v5\ARM\ARMCC\include\stdarg.h)(0x599ECD2A)
@@ -360,16 +376,16 @@ I (.\include\uart.h)(0x69DF866B)
 I (.\include\hci.h)(0x69DC613D)
 I (.\include\norflash.h)(0x622047F8)
 I (.\include\aon.h)(0x69E60976)
-I (.\include\spi.h)(0x69E4C683)
+I (.\include\spi.h)(0x69E9D254)
 I (.\include\pwm.h)(0x69DEF58A)
 I (.\include\i2c.h)(0x69CCB231)
 I (.\include\timer.h)(0x63B4CFC2)
 I (.\bms\ip2366\bms_ip2366.h)(0x69DDD028)
-I (.\tft_lcd\lcd_driver.h)(0x69E43267)
+I (.\tft_lcd\lcd_driver.h)(0x69E9FC13)
 I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
-I (user\gui.h)(0x69E45039)
+I (user\gui.h)(0x69EA0374)
 I (.\SCGUI\sc_gui.h)(0x69CB88D1)
-I (.\SCGUI\sc_common.h)(0x69CB79CA)
+I (.\SCGUI\sc_common.h)(0x69EA126B)
 I (D:\Keil_v5\ARM\ARMCC\include\string.h)(0x599ECD2C)
 I (D:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x599ECD2E)
 I (D:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x599ECD2C)
@@ -380,7 +396,7 @@ I (.\SCGUI\sc_arc.h)(0x69623F4D)
 I (.\SCGUI\sc_transform.h)(0x69623F4D)
 I (.\SCGUI\sc_compose.h)(0x69623F4D)
 I (user\ui.h)(0x69E42C51)
-I (.\SCGUI\example\sc_demo_test.h)(0x69623F4D)
+I (.\SCGUI\example\sc_demo_test.h)(0x69E9D1A3)
 I (.\SCGUI\sc_menu.h)(0x69623F4D)
 I (.\include\charger.h)(0x69E4C493)
 I (.\include\key_handle.h)(0x69E5D2C2)
@@ -403,14 +419,14 @@ I (.\include\uart.h)(0x69DF866B)
 I (.\include\hci.h)(0x69DC613D)
 I (.\include\norflash.h)(0x622047F8)
 I (.\include\aon.h)(0x69E60976)
-I (.\include\spi.h)(0x69E4C683)
+I (.\include\spi.h)(0x69E9D254)
 I (.\include\pwm.h)(0x69DEF58A)
 I (.\include\i2c.h)(0x69CCB231)
 I (.\include\timer.h)(0x63B4CFC2)
-I (user\GUI.h)(0x69E45039)
+I (user\GUI.h)(0x69EA0374)
 I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
 I (.\SCGUI\sc_gui.h)(0x69CB88D1)
-I (.\SCGUI\sc_common.h)(0x69CB79CA)
+I (.\SCGUI\sc_common.h)(0x69EA126B)
 I (D:\Keil_v5\ARM\ARMCC\include\string.h)(0x599ECD2C)
 I (D:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x599ECD2C)
 I (.\SCGUI\lvgl.h)(0x69623F4D)
@@ -427,37 +443,21 @@ F (.\user\img_battery.c)(0x685A6F90)(--c99 --gnu -c --cpu Cortex-M0 -D__MICROLIB
 F (.\user\img_battery_32b.c)(0x685B655F)(--c99 --gnu -c --cpu Cortex-M0 -D__MICROLIB --li -g -O3 --apcs=interwork --split_sections -I .\include -I .\bms\ip2366 -I .\tft_lcd -I .\user -I .\SCGUI -I .\SCGUI\example -I .\SCGUI\touch_lib --locale=english-ID:\Keil_v5\ARM\PACK\ARM\CMSIS\5.9.0\Device\ARM\ARMCM0\Include-ID:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="538" -DARMCM0-o .\objects\img_battery_32b.o --omf_browse .\objects\img_battery_32b.crf --depend .\objects\img_battery_32b.d)
 F (.\user\fire_eye_img.c)(0x6960D7A9)(--c99 --gnu -c --cpu Cortex-M0 -D__MICROLIB --li -g -O3 --apcs=interwork --split_sections -I .\include -I .\bms\ip2366 -I .\tft_lcd -I .\user -I .\SCGUI -I .\SCGUI\example -I .\SCGUI\touch_lib --locale=english-ID:\Keil_v5\ARM\PACK\ARM\CMSIS\5.9.0\Device\ARM\ARMCM0\Include-ID:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="538" -DARMCM0-o .\objects\fire_eye_img.o --omf_browse .\objects\fire_eye_img.crf --depend .\objects\fire_eye_img.d)
 F (.\user\ui_circle_100x100.c)(0x68FC791D)(--c99 --gnu -c --cpu Cortex-M0 -D__MICROLIB --li -g -O3 --apcs=interwork --split_sections -I .\include -I .\bms\ip2366 -I .\tft_lcd -I .\user -I .\SCGUI -I .\SCGUI\example -I .\SCGUI\touch_lib --locale=english-ID:\Keil_v5\ARM\PACK\ARM\CMSIS\5.9.0\Device\ARM\ARMCM0\Include-ID:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="538" -DARMCM0-o .\objects\ui_circle_100x100.o --omf_browse .\objects\ui_circle_100x100.crf --depend .\objects\ui_circle_100x100.d)
-F (.\SCGUI\example\sc_demo_test.c)(0x69CB78ED)(--c99 --gnu -c --cpu Cortex-M0 -D__MICROLIB --li -g -O3 --apcs=interwork --split_sections -I .\include -I .\bms\ip2366 -I .\tft_lcd -I .\user -I .\SCGUI -I .\SCGUI\example -I .\SCGUI\touch_lib --locale=english-ID:\Keil_v5\ARM\PACK\ARM\CMSIS\5.9.0\Device\ARM\ARMCM0\Include-ID:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="538" -DARMCM0-o .\objects\sc_demo_test.o --omf_browse .\objects\sc_demo_test.crf --depend .\objects\sc_demo_test.d)
-I (SCGUI\example\sc_demo_test.h)(0x69623F4D)
-I (.\SCGUI\sc_gui.h)(0x69CB88D1)
-I (.\SCGUI\sc_common.h)(0x69CB79CA)
-I (D:\Keil_v5\ARM\ARMCC\include\string.h)(0x599ECD2C)
-I (D:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
-I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
-I (D:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x599ECD2E)
-I (D:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x599ECD2C)
-I (.\SCGUI\lvgl.h)(0x69623F4D)
-I (.\SCGUI\sc_lvgl_font.h)(0x69623F4D)
-I (.\SCGUI\sc_event_task.h)(0x69623F4D)
-I (.\SCGUI\sc_arc.h)(0x69623F4D)
-I (.\SCGUI\sc_transform.h)(0x69623F4D)
-I (.\SCGUI\sc_compose.h)(0x69623F4D)
-I (.\SCGUI\sc_menu.h)(0x69623F4D)
 F (.\user\ui.c)(0x69E59789)(--c99 --gnu -c --cpu Cortex-M0 -D__MICROLIB --li -g -O3 --apcs=interwork --split_sections -I .\include -I .\bms\ip2366 -I .\tft_lcd -I .\user -I .\SCGUI -I .\SCGUI\example -I .\SCGUI\touch_lib --locale=english-ID:\Keil_v5\ARM\PACK\ARM\CMSIS\5.9.0\Device\ARM\ARMCM0\Include-ID:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="538" -DARMCM0-o .\objects\ui.o --omf_browse .\objects\ui.crf --depend .\objects\ui.d)
-I (.\tft_lcd\lcd_driver.h)(0x69E43267)
+I (.\tft_lcd\lcd_driver.h)(0x69E9FC13)
 I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
 I (.\include\dma.h)(0x69DEF057)
 I (.\include\platform_config.h)(0x69DEF473)
 I (D:\Keil_v5\ARM\ARMCC\include\string.h)(0x599ECD2C)
 I (D:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x599ECD2E)
 I (user\ui.h)(0x69E42C51)
-F (.\user\GUI.c)(0x69E709C0)(--c99 --gnu -c --cpu Cortex-M0 -D__MICROLIB --li -g -O3 --apcs=interwork --split_sections -I .\include -I .\bms\ip2366 -I .\tft_lcd -I .\user -I .\SCGUI -I .\SCGUI\example -I .\SCGUI\touch_lib --locale=english-ID:\Keil_v5\ARM\PACK\ARM\CMSIS\5.9.0\Device\ARM\ARMCM0\Include-ID:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="538" -DARMCM0-o .\objects\gui.o --omf_browse .\objects\gui.crf --depend .\objects\gui.d)
+F (.\user\GUI.c)(0x69EDF514)(--c99 --gnu -c --cpu Cortex-M0 -D__MICROLIB --li -g -O3 --apcs=interwork --split_sections -I .\include -I .\bms\ip2366 -I .\tft_lcd -I .\user -I .\SCGUI -I .\SCGUI\example -I .\SCGUI\touch_lib --locale=english-ID:\Keil_v5\ARM\PACK\ARM\CMSIS\5.9.0\Device\ARM\ARMCM0\Include-ID:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="538" -DARMCM0-o .\objects\gui.o --omf_browse .\objects\gui.crf --depend .\objects\gui.d)
 I (.\include\platform_config.h)(0x69DEF473)
-I (.\tft_lcd\lcd_driver.h)(0x69E43267)
+I (.\tft_lcd\lcd_driver.h)(0x69E9FC13)
 I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
-I (user\GUI.h)(0x69E45039)
+I (user\GUI.h)(0x69EA0374)
 I (.\SCGUI\sc_gui.h)(0x69CB88D1)
-I (.\SCGUI\sc_common.h)(0x69CB79CA)
+I (.\SCGUI\sc_common.h)(0x69EA126B)
 I (D:\Keil_v5\ARM\ARMCC\include\string.h)(0x599ECD2C)
 I (D:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
 I (D:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x599ECD2E)

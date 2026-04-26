@@ -25,6 +25,9 @@ void Gui_DrawLine(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1, uint16_t C
 void Gui_DrawRect(uint16_t x0, uint16_t y0, uint16_t w, uint16_t h, uint16_t Color);
 
 
+void Gui_FillCircle(uint16_t X, uint16_t Y, uint16_t R, uint16_t fc);
+
+
 
 
 // ===================== ºËÐÄº¯Êý =====================
@@ -40,7 +43,10 @@ void Gui_DrawSector_M0(uint16_t X0, uint16_t Y0, uint16_t R,
 											 
 											 
 
-											 
+void Gui_ProgressBar(uint16_t x0, uint16_t y0, uint16_t w, uint16_t h,
+                    uint8_t percent, uint16_t frameCol, uint16_t barCol, uint16_t bgCol);
+
+
 										 
 extern void Lcd_SetRegion(uint16_t x_start,uint16_t y_start,uint16_t x_end,uint16_t y_end);
 

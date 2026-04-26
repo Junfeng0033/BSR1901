@@ -401,19 +401,16 @@ void lcd_dma_refresh_colorblock(uint16_t xs, uint16_t ys, uint16_t w, uint16_t h
 
 
 
-void lcd_dma_8bit_refresh(uint16_t xs, uint16_t ys, uint16_t w, uint16_t h, color_t *color)
+
+void lcd_dma_16bit_refresh(uint16_t xs, uint16_t ys, uint16_t w, uint16_t h, color_t *color)
 {
 	uint32_t len = w*h;
 	
 	Lcd_SetRegion(xs, ys, xs+w-1, ys+h-1);	
 	
-	HW_SPI_Tx_DMA_8bit(HAL_SPI_0,color,len);
+	HW_SPI_Tx_DMA_16bit(HAL_SPI_0,color,len);
 	
 }
-
-
-
-
 
 
 

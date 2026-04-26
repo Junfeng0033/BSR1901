@@ -720,13 +720,44 @@ void gecko_rootnode_osc32mclk_cfg(void)
 
 
 
+//可以为用户提供1.8V /2.8V/3.0V/3.3V 四种电压。
+/*
+VSET<1:0>         Vout
+
+00                1.8V
+01                2.8V
+10                3.0V
+11                3.3V
+
+//assign reg_aon_ldo_aux_vset = reg_0x28[9:8]
+//assign reg_aon_ldo_aux_en = reg_0x28[6]
+//=============================================	
+	wr_data=reg_read(0x40020000+0x28);	
+	wr_data |= 0x340;	
+	reg_write(0x40020000+0x28, wr_data);
+//=============================================	
+*/
+
+
+
+#define REG_LDO33_OUT_MASK              (0x3UL << 8) 
+
+#define reg_ldo33_out_vset(n)           (((n) & 0x3) << 8) //2-bit [9:8]//default value n=0
+
+#define reg_ldo33_aux_out_en            (1<<6)
+
+
 
 
 void LDO33_AUX_Enable(void)
 {
 	unsigned int wr_data;
 	wr_data = reg_read(0x40020000+0x28);
-	wr_data |= 0x340;
+	
+	wr_data &= ~REG_LDO33_OUT_MASK;
+	wr_data|=reg_ldo33_out_vset(2);
+	wr_data|=reg_ldo33_aux_out_en;	
+	//wr_data |= 0x340;
 	reg_write(0x40020000+0x28,wr_data);
 
 	
@@ -743,6 +774,9 @@ void LDO33_AUX_Disable(void)
 {
 		unsigned int wr_data;
 		wr_data = reg_read(0x40020000+0x28);
+	
+	  wr_data &= ~REG_LDO33_OUT_MASK;
+	
 		//wr_data &= (~0x340);
 		wr_data=0x0;
 		reg_write(0x40020000+0x28,wr_data);	
@@ -815,7 +849,7 @@ PAD_11		vbat			spi2ahb_csn	　							i2c0_scl			gpio_a_7						pwm_ch6				CK32_OUT
 PAD_12		vbat			pwm_cap_1										pwm_ch5				gpio_b_0						spi0_mst_csn	ADC7
 PAD_13		vbat			pwm_ch0											uart1_in			gpio_b_1						led_io1				OPA0_VIN
 PAD_14		vbat			pwm_ch1											uart1_out			gpio_b_2						led_io2				OPA0_VIP
-PAD_15		vbat			clk_ref(OSC校正参考时钟)		pwm_ch4				gpio_b_3						led_io3				OPA0_VO
+PAD_15		vbat			clk_ref(OSC校正参考时钟)		  pwm_ch4				gpio_b_3						led_io3				OPA0_VO
 PAD_16		vbat			pwm_ch3										  spi1_mst_di		gpio_b_4						led_io4				OPA1_VIN
 PAD_17		vbat			pwm_ch6											spi1_mst_do		gpio_b_5						led_io5				OPA1_VIP
 PAD_18		vbat			pwm_ch7											spi1_mst_clk	gpio_b_6						led_io6				OPA1_VO

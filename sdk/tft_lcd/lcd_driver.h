@@ -142,10 +142,29 @@ LCD_WR_SET;\
 #define 	LCD_NV3023_Parameter					Lcd_WriteData
 
 
+enum
+{
+  LCD_DIRECTION_NORMAL,
+  LCD_DIRECTION_90,
+  LCD_DIRECTION_180,
+  LCD_DIRECTION_270,
+};
+
+typedef uint8_t app_lcd_direction_t;
 
 
 
+typedef struct
+{
+  uint16_t x_max;
+  uint16_t y_max;
+  uint16_t x_offset;
+  uint16_t y_offset;
+  app_lcd_direction_t dir;
+}app_lcd_t;
 
+
+extern app_lcd_t lcd;
 
 
 

@@ -15,9 +15,10 @@ void sc_demo_rect_pfs(int spi_clk);
 
 void sc_demo_Image_zip(void);
 
-
+void sc_demo_arc(sc_event_t *event);
+	
 ///演示代码,文本显示
-void sc_demo_text(void);
+void sc_demo_text(sc_event_t *event);
 
 //演示代码,组合控件显示
 void sc_demo_commpose(void);

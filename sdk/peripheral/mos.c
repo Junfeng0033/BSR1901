@@ -39,7 +39,7 @@ ADDR_REG_0X028 : rdata_comb={17'h0,reg_aon_pwrmos_g,2h'0,reg_aon_ldo_aux_vset,1'
 #define GEK1109_LDO_AUX_VSET(n)  (((n)&0x3)<<8)  //2 bits
 //bit10 reserved 
 //bit11 reserved 
-#define GEK1109_MOS_GATE(n)      (((n)&0x7)<<12)  //GEK1109 3-bit MOS Gate [14:12]
+//#define GEK1109_MOS_GATE(n)      (((n)&0x7)<<12)  //GEK1109 3-bit MOS Gate [14:12]
 
 
 
@@ -69,7 +69,8 @@ assign D2A_AON_RSVD_7       = reg_aon_reserved_bit_ctrl[7]      ;
 
 
 //assign reg_aon_reserved_bit_ctrl   = reg_0x090[31:24];
-#define MOS_EN				  (1<<24)      //bit24 assign to MOS gate controll
+//bit24 assign to MOS gate controll
+#define MOS_EN				  (1<<24)      //RSVD<0>
 
 
 void BSR1901_MOS_Enable(void)
@@ -187,7 +188,7 @@ void PWR_MOS_Gate_CTRL(uint8 gate)
 
 
 
-
+#if 0
 volatile uint8 ctrl_flag=0;
 
 void BSR1901_MOS_Gate_CTRL(void)
@@ -246,8 +247,7 @@ void BSR1901_MOS_Gate_CTRL(void)
 	  reg_write(GECKO_AON_BASE_ADDR+0x08C, wr_data_0x08c);
 	  reg_write(GECKO_AON_BASE_ADDR+0x090, wr_data_0x090);			
 }
-
-
+#endif
 
 
 

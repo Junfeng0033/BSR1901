@@ -906,11 +906,11 @@ void Task_UI_Refresh(void)
 			uicount ++;
 		
 		
+		//Gui_ProgressBar(50, 100, 150, 20, 60, BLACK, GREEN, GRAY1);
 		
 		Gui_DrawArc(120, 120, 50, 135, 405, 0xFFFF);
 
-		
-		
+
 //		if(count%10 == 1){
 //			if(count <= 10)
 //				HW_SPI_Tx_DMA(HAL_SPI_0, (uint16*)gImage_charge_10, 20000);
@@ -932,4 +932,41 @@ void Task_UI_Refresh(void)
 
 
 
+
+// 实心圆填充函数
+// X, Y : 圆心坐标
+// R    : 半径
+// fc   : 填充颜色
+void Gui_FillCircle(uint16_t X, uint16_t Y, uint16_t R, uint16_t fc)
+{
+    unsigned short a, b;
+    int c;
+    a = 0;
+    b = R;
+    c = 3 - 2 * R;
+    while (a < b)
+    {
+        // 填充水平线
+        Gui_DrawLine(X - a, Y + b, X + a, Y + b, fc);
+        Gui_DrawLine(X - a, Y - b, X + a, Y - b, fc);
+        Gui_DrawLine(X - b, Y + a, X + b, Y + a, fc);
+        Gui_DrawLine(X - b, Y - a, X + b, Y - a, fc);
+
+        if (c < 0)
+            c = c + 4 * a + 6;
+        else
+        {
+            c = c + 4 * (a - b) + 10;
+            b -= 1;
+        }
+        a += 1;
+    }
+    if (a == b)
+    {
+        Gui_DrawLine(X - a, Y + b, X + a, Y + b, fc);
+        Gui_DrawLine(X - a, Y - b, X + a, Y - b, fc);
+        Gui_DrawLine(X - b, Y + a, X + b, Y + a, fc);
+        Gui_DrawLine(X - b, Y - a, X + b, Y - a, fc);
+    }
+}
 

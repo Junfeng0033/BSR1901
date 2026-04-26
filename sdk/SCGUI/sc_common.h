@@ -17,7 +17,7 @@
 
 #define SC_SCREEN_WIDTH (240)
 #define SC_SCREEN_HEIGHT (240)
-#define SC_PFB_BUF_SIZE (SC_SCREEN_WIDTH * 2) // 示例：2行高度
+#define SC_PFB_BUF_SIZE (SC_SCREEN_WIDTH * 5) // 示例：5行高度
 #define SC_LCD_DMA_2BUF (0)                   // 是否启用DMA双buf传输
 #define SC_LCD_DMA_WAP (0)                    // 是否DMA传输时高低位WAP
 

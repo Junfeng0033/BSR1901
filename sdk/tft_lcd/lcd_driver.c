@@ -23,7 +23,7 @@
 
 
 
-
+app_lcd_t lcd;
 
 
 
@@ -233,6 +233,53 @@ void Lcd_Init(void)
 #endif
 
 }
+
+
+
+
+void app_lcd_set_direction(app_lcd_direction_t dir)
+{
+  lcd.dir = dir;
+#ifdef CFG_LCD_ST7735_096_80X160
+  uint8_t data;
+  switch(dir)
+  {
+    case LCD_DIRECTION_NORMAL:
+      lcd.x_max = 80;
+      lcd.y_max = 160;
+      lcd.x_offset = 24;
+      lcd.y_offset = 0;
+      data = 0x00;            //正常刷新
+      break;
+    case LCD_DIRECTION_90:
+      lcd.x_max = 160;
+      lcd.y_max = 80;
+      lcd.x_offset = 1;
+      lcd.y_offset = 26;
+      data = 0x70;            //顺时针旋转90°
+      break;
+    case LCD_DIRECTION_180:
+      lcd.x_max = 80;
+      lcd.y_max = 160;
+      lcd.x_offset = 24;
+      lcd.y_offset = 0;
+      data = 0xC0;            //顺时针旋转180°
+      break;
+    case LCD_DIRECTION_270:
+      lcd.x_max = 160;
+      lcd.y_max = 80;
+      lcd.x_offset = 0;
+      lcd.y_offset = 24;
+      data = 0xA0;            //顺时针旋转270°
+      break;
+  }
+  data |= 0x08;               //此款屏幕采用了 BGR 的硬件形式，需要设置0x36 的BIT4为 1
+  app_lcd_write_cmd(0x36);    //内存访问控制 带1个参数
+  app_lcd_write_data8(data);
+#endif
+}
+
+
 
 /*************************************************
 函数名：LCD_Set_Region

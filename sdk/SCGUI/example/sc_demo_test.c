@@ -69,8 +69,20 @@ void sc_demo_Image_zip(void)
     sc_draw_Image(NULL, 80, 10, &EDA_img_32, 0);
 }
 
+
+//@brief 演示代码圆弧显示
+void sc_demo_arc(sc_event_t *event)
+{
+    int16_t cx = SC_SCREEN_WIDTH / 2;
+    int16_t cy = SC_SCREEN_HEIGHT / 2;
+    sc_arc_t arc1 = {cx, cy, 50, 40, 1};
+    sc_draw_Arc(NULL, &arc1, 50, 310, C_GREEN, C_YELLOW, 120);
+    sc_draw_Led(NULL, cx, cy, 20, C_RED, 128);
+}
+
+
 //@brief 演示代码,文本显示
-void sc_demo_text(void)
+void sc_demo_text(sc_event_t *event)
 {
     sc_rect_t rect = {10, 60, 80, 60};                                       // 对齐区域
     sc_draw_Text(NULL, 10, 10, gui->font, "Hello World", C_RED, gui->bkc);   // 简单文本
@@ -278,8 +290,8 @@ void sc_demo_menu_task(sc_event_t *event)
 
 void sc_demo_DrawEye_task(sc_event_t *event)
 {
-    sc_rect_t rect1 = (sc_rect_t){10, 10, 120, 120};
-    //sc_rect_t rect2 = (sc_rect_t){160, 10, 120, 120};
+    sc_rect_t rect1 = (sc_rect_t){10, 10, 50, 50};
+    sc_rect_t rect2 = (sc_rect_t){10, 70, 50, 50};
     static int Eye = 0;
     static int stup = 2;
 
@@ -294,10 +306,12 @@ void sc_demo_DrawEye_task(sc_event_t *event)
         {
             stup = -stup;
         }
-        DrawEye_Blink_test(NULL, rect1.x, rect1.y, rect1.w, rect1.h, Eye, Eye, C_WHITE);
-        //  DrawEye_Blink_test(NULL, rect2.x, rect2.y, rect2.w, rect2.h, Eye, Eye, C_WHITE);
+        DrawEye_Blink_test(NULL, rect1.x, rect1.y, rect1.w, rect1.h, Eye, Eye, C_GREEN);
+        DrawEye_Blink_test(NULL, rect2.x, rect2.y, rect2.w, rect2.h, Eye, Eye, C_WHITE);
     }
 }
+
+
 
 static const uint16_t km_prt_tab[] = { // 指针
     0xffff, 0xffff, 0xffff, 0xffff, 0xffff, 0xffff, 0xffff, 0xffff, 0xffff, 0xffff,

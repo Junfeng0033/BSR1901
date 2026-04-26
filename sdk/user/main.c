@@ -102,11 +102,7 @@ int main (void)
 
 	aon_wakeup_irq_cfg();	
 	//gecko_efuse_read();
-	
-	
-	//LDO33_AUX enable, power supply for LCD module
-	LDO33_AUX_Enable();
-	
+
 	
 	gecko_pinmux_default_config();
 	
@@ -119,24 +115,26 @@ int main (void)
 //              SDA   接SPI_MOSI-------(PAD23)
 
 //              RES   接PB7------------(PAD07)
-//              DC    接PA3------------(PAD21)
+//              DC    接PA3(MISO)------(PAD21)
 
 //              CS    接SPI_CSN_1------(PAD20)//有些显示屏可以直接接地
 
-//              BLK   接PB4(PWM4)------(PAD24)
+//              BLK   接PB4(PWM4/CSN2)-(PAD24)
 
 
-
-	gecko_pinmux_config(PAD20,SPI_CSN_1);
 	gecko_pinmux_config(PAD22,SPICLK);
-	gecko_pinmux_config(PAD23,SPIMOSI);
+	gecko_pinmux_config(PAD23,SPIMOSI);	
+	gecko_pinmux_config(PAD20,SPI_CSN_1);	
+
 
 	//gecko_pinmux_config(PAD24,GPIO_B_4);//default function,do not needed to config
-	gecko_pinmux_config(PAD21,GPIO_A_3);
+	gecko_pinmux_config(PAD21,GPIO_A_3);//DC control	
+	gecko_pinmux_config(PAD7,GPIOB_7);//RES(reset) control
 	
-	gecko_pinmux_config(PAD7,GPIOB_7);//BL control(BSR1901 use MOS to control backlight)
+	//LDO33_AUX enable, power supply for LCD module
+	LDO33_AUX_Enable();//BL control(BSR1901 use MOS to control backlight)
 	
-
+	
 	HW_SPI_Initialise(HAL_SPI_0);
 
 
@@ -148,9 +146,17 @@ int main (void)
 	
 	
 	DMA_Configuration();	
+
+
+
+	Lcd_Clear(WHITE);
 	
+	Gui_FillCircle(64, 64, 20, C_RED);
 	
-	
+	delay_1us(8000);	
+
+
+
 	HW_SPI_Tx_DMA_32bit(HAL_SPI_0, (uint16*)gImage_128x128_star_32bit, 8192);	
 
 	delay_1us(10000);	
@@ -287,8 +293,35 @@ int main (void)
 	printf("Chip Local Name:    %s\n",   CHIP_LOCAL_NAME);
 	#endif
 	
-	sc_gui_init(lcd_dma_8bit_refresh, 0, C_ROYAL_BLUE,C_BLUE, &lv_font_16);	
-	//sc_demo_text();
+
+
+
+
+/************************SCGUI******SCGUI*****SCGUI****************************/
+
+#if 0
+	sc_gui_init(lcd_dma_16bit_refresh, 0, C_ROYAL_BLUE, C_BLUE, &lv_font_16);
+	sc_clear(0, 0, SC_SCREEN_WIDTH,SC_SCREEN_HEIGHT,gui->bkc);
+	
+	
+	sc_draw_Fill(NULL, 50, 50, 30, 30, C_RED, 255);	
+
+
+	sc_create_task(0, sc_demo_arc, 2);
+	//sc_create_task(0, sc_demo_text, 5);
+	
+	//sc_create_task(0, sc_demo_DrawEye_tesk, 2);
+	//sc_create_task(0, sc_demo_drity_tesk, 2);	
+#endif
+
+	Gui_DrawRect(10, 10, 100, 60, RED);
+	
+	Gui_ProgressBar(20, 20, 100, 20, 60, BLACK, GREEN, GRAY1);
+	
+/************************SCGUI******SCGUI*****SCGUI****************************/
+	
+
+
 
 
 /************************SysTick configure***************************************/
@@ -308,9 +341,9 @@ int main (void)
 	while(1)
 	{
 	
-		sc_task_loop(NULL);
+		//sc_task_loop(NULL);
 		
-		system_tick=TimeTick;//1ms tick
+		//system_tick=TimeTick;//1ms tick
 	
 		current_tick = TimeTick;
 		

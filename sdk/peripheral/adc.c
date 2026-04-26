@@ -38,7 +38,7 @@ typedef enum {
     ADC_REF_3P3 			= 0x00000000,
     ADC_REF_HALF_VBAT = 0x00000001,
     ADC_REF_1P2				= 0x00000002,
-	  ADC_REF_QTY
+    ADC_REF_QTY
 } ADC_REF_VOL_T;   
 
 
@@ -541,7 +541,7 @@ uint16 Get_Vbat_Voltage(void)
 		}
 		
 		
-    tmp=0;
+		tmp=0;
 		
 		adc_delay_us(20);
 
@@ -558,8 +558,11 @@ uint16 Get_Vbat_Voltage(void)
 		if(adc_convert> 3821) 
 			printf("Battery Pack Voltage > 3.8V");	
 		
-		if(adc_convert> 4500) 
+		if(adc_convert> 4500)
+		{			
 			dc5v_online_flag=1;//USB DC 5V insert
+			printf("USB 5V has been plugged in");	
+		}
 		
 		return adc_convert;
 }
