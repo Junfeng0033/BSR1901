@@ -191,7 +191,8 @@ void GPIO_Hall_IRQ_Init(void);
 void GPIO_Hall_LowLevel_Interrupt_Init(void);
 void GPIO_Hall_HighLevel_Interrupt_Init(void);
 
-
+uint8 BSR1901_KEY1_Detect(void);
+uint8 BSR1901_KEY2_Detect(void);
 
 uint8 KP85_KEY2_Detect(void);
 void Set_GPIO_B7_Input(void);

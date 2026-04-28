@@ -688,6 +688,30 @@ uint8 GpiopinRead(uint8 pin)
 
 
 
+
+//#define LED_PIN  (PB3)
+//GPIO_Toggle(LED_PIN);
+
+__RAM_CODE__ void GPIO_Toggle(uint8 pin) 
+{
+			if((pin>=8) &&  (pin<=15))		
+			pin=pin-8;	
+//		GpiopinMode(LED_PIN,OUTPUT);	
+//		GpiopinWrite(LED_PIN,HIGH);
+//		GpiopinWrite(LED_PIN,LOW);	
+			while(1)
+			{
+				(*(volatile uint32*)(0x40019000 + (1 << (pin + 2)) ) ) = (uint32)(1 << pin);	
+				(*(volatile uint32*)(0x40019000 + (1 << (pin + 2)) ) ) = (uint32)(0 << pin);	
+			}	
+			
+}
+
+
+
+
+
+
 /******************************************************************************
 **                            End Of File
 ******************************************************************************/
@@ -726,12 +750,51 @@ uint8 KP85_KEY2_Detect(void)
 	gecko_pinmux_config(PAD18,GPIO_B_6);//config PAD11 as gpio
 
 	//GPIODIR_1 &=0xBF;//set GPIOA6 direction to input (config it to "0")
-  GPIODIR_0 &=~BIT(6);
+  GPIODIR_1 &=~BIT(6);
 	pin=6;
 	
 	return (*((volatile unsigned long *)(GPIO_GROUP1_BASE+(1 << (pin + 2)))));
 
 }
+
+
+
+
+
+//GPIOB4
+uint8 BSR1901_KEY1_Detect(void)
+{
+	//uint8 gpio_status;
+	uint8 pin=4;
+
+	gecko_pinmux_config(PAD16,GPIO_B_4);//config PAD16 as gpio
+
+  GPIODIR_1 &=~BIT(4);//set GPIOB4 direction to input (config it to "0")
+
+	return (*((volatile unsigned long *)(GPIO_GROUP1_BASE+(1 << (pin + 2)))));
+}
+
+
+
+
+//GPIOB5
+uint8 BSR1901_KEY2_Detect(void)
+{
+	//uint8 gpio_status;
+	uint8 pin=5;
+
+	gecko_pinmux_config(PAD17,GPIO_B_5);//config PAD16 as gpio
+
+  GPIODIR_1 &=~BIT(5);//set GPIOB5 direction to input (config it to "0")
+
+	return (*((volatile unsigned long *)(GPIO_GROUP1_BASE+(1 << (pin + 2)))));
+}
+
+
+
+
+
+
 
 //GPIO_A_6,air flow sensor (mi tou ßäÍ·)
 uint8 mi_tou_detect(void)

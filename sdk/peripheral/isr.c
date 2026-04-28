@@ -248,7 +248,7 @@ __RAM_CODE__ void dma_sram_delay(unsigned long delay)
 
 volatile uint8_t flag_250us=0;
 
-//__RAM_CODE__ void WDT_IRQHandler(void)
+//void WDT_IRQHandler(void)
 void WDT_IRQHandler(void)
 {
 #if 0	
@@ -288,6 +288,13 @@ void WDT_IRQHandler(void)
 
 
 
+
+
+//RC 频率的漂移可能导致同一芯片在不同温度下读出的 ID 变化超过 ±5%。此时可以：
+
+//在生产时记录每个芯片在室温下的“黄金 ID”并写入 Flash。
+
+//运行时读取当前 ID，与黄金 ID 比较，允许 ±5% 的误差窗口。
 
 uint32 RC_Unique_ID=0;
 

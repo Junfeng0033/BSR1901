@@ -585,7 +585,7 @@ wr_data= wr_data| ahb_rd_data;
 //0xA0,4.065MHz
 //0x90,3.7736MHz(uart ok)	
 //	wr_data = 0xcc86789D;	//2024-09-14 @shanghai change bit19=0 24.2MH2@3.3V
-
+//#define RCO32M_EN_16M            (1<<19)
 
   wr_data = 0x9D86789D;//20MHZ
   //wr_data = 0x6F86789D;//16MHZ

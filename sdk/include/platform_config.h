@@ -13,8 +13,6 @@
 /* Boot Option */
 
 
-#define  BSR1901_SYS_8MHZ_MODE				1
-
 
 #define  DEBUG_UATR0_PRINT_LOG            1
 

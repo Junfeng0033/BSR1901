@@ -158,7 +158,7 @@ void Gecko_DMA_Transport(volatile void *dest,volatile const void *src, uint16 si
 
 
 
-__RAM_CODE__ void DMA_ISR_Routine(void)
+void DMA_ISR_Routine(void)
 {
 	volatile uint32 dma_ctrl_tmp1=0;
 	

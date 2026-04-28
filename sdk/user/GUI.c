@@ -309,7 +309,7 @@ void Gui_DrawRect(uint16_t x0, uint16_t y0, uint16_t w, uint16_t h, uint16_t Col
 // 辅助函数：判断点 (x,y) 是否在 [angle_s, angle_e] 角度范围内
 // 纯整数运算，超快
 //static uint8_t Gui_PointInAngle(int x, int y, int angle_s, int angle_e)
-__RAM_CODE__  static uint8_t Gui_PointInAngle(int x, int y, int angle_s, int angle_e)
+static uint8_t Gui_PointInAngle(int x, int y, int angle_s, int angle_e)
 {
     int quad = 0;
     int degrees;

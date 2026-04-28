@@ -18,9 +18,6 @@ const uint8 gSysTime[16] = __TIME__;
 
 
 
-
-
-
 void SystemInit(void)
 {
 	//bsr1901_sram_test();
@@ -341,9 +338,8 @@ int main (void)
 	while(1)
 	{
 	
-		//sc_task_loop(NULL);
-		
-		//system_tick=TimeTick;//1ms tick
+//		sc_task_loop(NULL);		
+//		system_tick=TimeTick;//1ms tick
 	
 		current_tick = TimeTick;
 		

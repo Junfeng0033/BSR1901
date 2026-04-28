@@ -141,9 +141,13 @@ void Task_KeyScan(void)
 	
 		//KEY1
 		#if 1
-		//PAD11(GPIOA7)
-		gpio_status=K27_KEY_Detect();//default gpio_status=0x80 
-		key_status=gpio_status & 0x80;
+//		//PAD11(GPIOA7)
+//		gpio_status=K27_KEY_Detect();//default gpio_status=0x80 
+//		key_status=gpio_status & 0x80;
+	
+	  //PAD16(GPIOB4)
+		gpio_status=BSR1901_KEY1_Detect();
+		key_status=gpio_status & 0x10;	
 
 		if(key_status==0x0)
 		{
@@ -172,10 +176,15 @@ void Task_KeyScan(void)
 
 		//KEY2
 		#if 1	
-		//PAD18(GPIOB6)		
-		gpio_status=KP85_KEY2_Detect();//default gpio_status=0x40 
-		key_status=gpio_status & 0x40;
+//		//PAD18(GPIOB6)		
+//		gpio_status=KP85_KEY2_Detect();//default gpio_status=0x40 
+//		key_status=gpio_status & 0x40;
 
+	  //PAD17(GPIOB5)
+		gpio_status=BSR1901_KEY2_Detect();
+		key_status=gpio_status & 0x20;			
+	
+		
 		if(key_status==0x0)
 		{
 			  #if 0

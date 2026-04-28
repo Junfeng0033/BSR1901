@@ -153,7 +153,7 @@ void reg_write_32bit(int addr, int data)
     return;
 }
 
-//__RAM_CODE__ void delay_1us(unsigned int delay_val)
+
 void delay_1us(unsigned int delay_val)
 {
 
@@ -179,7 +179,7 @@ void delay_1us(unsigned int delay_val)
 		
 }
 
-//__RAM_CODE__ void delay_1us(unsigned int delay_val)
+
 __RAM_CODE__ void sram_run_delay(unsigned long delay)
 {
     unsigned int i;

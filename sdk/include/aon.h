@@ -226,6 +226,54 @@ assign reg_aon_wait_pu_cntto				=reg_0x000[1:0];
 //#define SW_FORCE_CALI32M_TUNE     (((n)&0xF)<<4)  //4 bits  SW force select 32Mhz calibration tune value
 
 
+
+
+/*
+
+							
+LDO1(LDO33_OUT) //给数字Coretx-M0供电
+
+D2A_AON_LDO1_EN												LDO1_EN
+D2A_AON_LDO1_VSET[1:0]								LDO1_VSET[1:0]
+D2A_AON_LDO1_VSET_EXTRA_BIT						LDO1_VSET[2]
+							
+LDO2(LDO33_ANA)//给模拟模块使用
+
+D2A_AON_LDO2_EN												LDO2_EN
+D2A_AON_LDO2_VSET[1:0]								LDO2_VSET[1:0]
+D2A_AON_LDO2_VSET_EXTRA_BIT						LDO2_VSET[2]
+
+
+LDO18	(1.8V IO ring)
+
+D2A_AON_LDO18_EN											LDO18_EN
+D2A_AON_LDO18_VSET[1:0]								LDO18_VSET[1:0]
+D2A_AON_LDO18_VSET_EXTRA_BIT					LDO18_VSET[2]
+
+
+LDO_FLASH	
+
+D2A_AON_LDO_FLS_EN										LDO_FLASH_EN
+D2A_AON_LDO_FLASH_VSET[1:0]						LDO_FLASH_VSET[1:0]
+D2A_AON_LDO_FLASH_VSET_EXTRA_BIT			LDO_FLASH_VSET[2]
+
+
+
+							
+LDO_AWO//给数字Always On供电
+
+D2A_AON_LDO_AWO_VSET_EXTRA_BIT				LDO_AWO_VSET[2]
+							
+							
+LDO_AUX	
+
+D2A_AON_LDO_AUX_EN										LDO_AUX_EN
+D2A_AON_LOD_AUX_VSET[1:0]							LDO_AUX_VSET[1:0]
+
+
+*/
+
+
 //RSV_ANA_CTRL 
 //register 0x28
 

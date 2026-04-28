@@ -18,7 +18,7 @@ static volatile bool dma_busy = 0;
 #if 0
 
 //dma发送结束后会调用此函数通知
-__RAM_CODE__ void ui_dma_busy_release(void)
+void ui_dma_busy_release(void)
 {
 	dma_busy = 0;
 }
@@ -145,7 +145,7 @@ void ui_paint_bat_remain(uint8_t percent)
 
 
 #if 0
-__RAM_CODE__ static void wait_dma(void)
+static void wait_dma(void)
 {
 	dma_busy = 1;
 	while(dma_busy);	
