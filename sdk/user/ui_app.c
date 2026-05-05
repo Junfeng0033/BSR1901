@@ -6,18 +6,17 @@
 #include "ui_app.h"
 
 
-
-static uint8_t ui_buf[2560];
-
+//void ShowNum_48(uint8_t n);
 
 //static img_source_t bat_persent_img = {(uint8_t*)gImage_bat_90x49, 90, 49};
 static volatile bool dma_busy = 0;
 
 
 
+
 #if 0
 
-//dma·¢ËÍ½áÊøºó»áµ÷ÓÃ´Ëº¯ÊıÍ¨Öª
+//dmaå‘é€ç»“æŸåä¼šè°ƒç”¨æ­¤å‡½æ•°é€šçŸ¥
 void ui_dma_busy_release(void)
 {
 	dma_busy = 0;
@@ -28,151 +27,93 @@ void ui_dma_busy_release(void)
 
 
 
-#if 0
-//Í¨¹ı´óµÄÇøÓò½ØÈ¡Ğ¡ÇøÓò
-void img_cut_out(img_source_t *source, uint16_t x, uint16_t y, uint16_t width, uint16_t high)
-{
-	uint16_t i, j;
-	
-	if(source == NULL)
-		return ;
 
-	for(i=0; i<high; i++){
-		if((y+i) >= source->high)
-			break;
-		
-		for(j=0; j<width; j++){
-			if((x+j) >= source->width)
-				break;
-			
-			ui_buf[(i * width + j)*2] = source->p_img[((y+j)*source->width+(x+j))*2];
-			ui_buf[(i * width + j)*2 + 1] = source->p_img[((y+j)*source->width+(x+j))*2 + 1];		
-		}
-	}
-}
-#endif
+//æ˜¾ç¤ºå­—ç¬¦
 
+//`n` å°±æ˜¯ä½ è¦åœ¨å±å¹•ä¸Šç”»å‡ºæ¥çš„é‚£ä¸ª 0-9 ä¹‹é—´çš„å…·ä½“æ•°å­—
 
-
-
-//ÏÔÊ¾×Ö·û
-void ShowNum_48(uint8_t *buf, uint8_t n)
+void ShowNum_48(uint8_t n)
 {
 	unsigned char i, j;
+	uint8_t row_buf[48];
 	
-	//memset(ui_buf, 0, 48*48);
-
 	for (i = 0; i < 48; i++){
 		for (j = 0; j < 24; j++){
 			if (Font48_dital_Table[n * 144 + i*3 + j/8] & (0x80 >> (j%8))){
-				buf[i*48+j*2] = (GREEN>>8)&0xFF;
-				buf[i*48+j*2+1] = GREEN&0xFF;
+				row_buf[j*2] = (GREEN>>8)&0xFF;
+				row_buf[j*2+1] = GREEN&0xFF;
+			} else {
+				row_buf[j*2] = 0;
+				row_buf[j*2+1] = 0;
 			}
 		}
+		Lcd_Write_data_dma(row_buf, 48);
 	}
 }
 
 
 
-#if 0
-
-Ô­·½°¸£¨È«¾Ö buffer£© SRAM Õ¼ÓÃ	2.5 KB	
-ĞÂ·½°¸£¨Ö±½ÓĞ´ÆÁ£©    0 ×Ö½Ú£¨³ıÁË¾Ö²¿±äÁ¿£©
-
-
-// ÔÚÖ¸¶¨Î»ÖÃ (start_x, start_y) ÏÔÊ¾Êı×Ö n£¨0-9£©
-void ShowNum_48(uint8_t n, uint16_t start_x, uint16_t start_y)
-{
-    unsigned char i, j;
-    uint16_t color = GREEN;   // RGB565 ÂÌÉ«
-
-    for (i = 0; i < 48; i++) {          // ĞĞ£¨¸ß¶È£©
-        for (j = 0; j < 24; j++) {      // ÁĞ£¨¿í¶È£©
-            // ¼ÆËã×ÖÌåµãÕóÖĞµÄÎ»Ë÷Òı
-            // ×ÖÌåÊı¾İ£ºÃ¿¸öÊı×ÖÕ¼ÓÃ 48ĞĞ ¡Á 24bit = 144 ×Ö½Ú (48*3)
-            uint8_t byte_index = n * 144 + i * 3 + j / 8;
-            uint8_t bit_mask = 0x80 >> (j % 8);
-            
-            if (Font48_dital_Table[byte_index] & bit_mask) {
-                // Ö±½Ó»­µã£¬²»ĞèÒª buffer
-                LCD_SetCursor(start_x + j, start_y + i);
-                LCD_WriteData(color);
-            }
-            // ±³¾°²»ĞèÒª´¦Àí£¨³ı·ÇÄãĞèÒª²Á³ı£¬·ñÔò±£³ÖÔ­Ñù£©
-        }
-    }
-}
-#endif
 
 
 
-
-
-
-
-//ÏÔÊ¾°Ù·Ö±È·ûºÅ
-void ShowPersent(uint8_t *buf)
+//æ˜¾ç¤ºç™¾åˆ†æ¯”ç¬¦å·
+void ShowPersent(void)
 {
 	unsigned char i, j;
+	uint8_t row_buf[16];
 
-	//memset(ui_buf, 0, 48*48);
-	
 	for (i = 0; i < 32; i++){
 		for (j = 0; j < 8; j++){
 			if (Font_8x32_percent[i] & (0x80 >> j)){
-				buf[i*16+j*2] = (GREEN>>8)&0xFF;
-				buf[i*16+j*2+1] = GREEN&0xFF;
+				row_buf[j*2] = (GREEN>>8)&0xFF;
+				row_buf[j*2+1] = GREEN&0xFF;
+			} else {
+				row_buf[j*2] = 0;
+				row_buf[j*2+1] = 0;
 			}
 		}
+		Lcd_Write_data_dma(row_buf, 16);
 	}
 }
 
-//»æÖÆ¿Õµç³Ø
+
+
+
+
+//ç»˜åˆ¶ç©ºç”µæ± 
 void ui_paint_bat(void)
 {
-	Lcd_SetRegion(20, 39, 109, 87);						//×ø±êÉèÖÃ
+	Lcd_SetRegion(20, 39, 109, 87);						//
 	//Lcd_Write_data_dma((uint8_t*)gImage_bat_90x49, 8820);
 }
 
-//»æÖÆµç³ØÈİÁ¿
+//ç»˜åˆ¶ç”µæ± å®¹é‡
 void ui_paint_bat_remain(uint8_t percent)
 {
 	//img_cut_out(&bat_persent_img, 0, 0, 81, 43);
-	Lcd_SetRegion(32, 39, 109, 87);						//×ø±êÉèÖÃ
+	Lcd_SetRegion(32, 39, 109, 87);						//
 	//Lcd_Write_data_dma(ui_buf, 81*43*2);
 }
 
 
 
-#if 0
-static void wait_dma(void)
-{
-	dma_busy = 1;
-	while(dma_busy);	
-}
-#endif
 
 
 
-//µç³Ø°Ù·Ö±È
+//ç”µæ± ç™¾åˆ†æ¯”
 void ui_paint_bat_percent(uint8_t percent)
 {
 	static uint8_t history = 0;
 	
 	if(percent >= 100){
 		Lcd_SetRegion(22, 35, 22+23, 35+47);
-		ShowNum_48(ui_buf, 1);
-		Lcd_Write_data_dma(ui_buf, 48*48);
-
+		ShowNum_48(1);
 
 		Lcd_SetRegion(46, 35, 46+23, 35+47);
-		ShowNum_48(ui_buf, 0);
-		Lcd_Write_data_dma(ui_buf, 48*48);
+		ShowNum_48(0);
 
-		
 		Lcd_SetRegion(70, 35, 70+23, 35+47);
-		ShowNum_48(ui_buf, 0);
-		Lcd_Write_data_dma(ui_buf, 48*48);	
+		ShowNum_48(0);	
 
 	}
 	else{
@@ -184,19 +125,15 @@ void ui_paint_bat_percent(uint8_t percent)
 		
 		if(percent%10 == 0){
 			Lcd_SetRegion(32, 35, 32+23, 35+47);
-			ShowNum_48(ui_buf, percent/10);
-			Lcd_Write_data_dma(ui_buf, 48*48);
+			ShowNum_48(percent/10);
 
-			
 			Lcd_SetRegion(80, 40, 80+7, 40+31);
-			ShowPersent(ui_buf);
-			Lcd_Write_data_dma(ui_buf, 8*32*2);
+			ShowPersent();
 
 		}
 		
 		Lcd_SetRegion(56, 35, 56+23, 35+47);
-		ShowNum_48(ui_buf, percent%10);
-		Lcd_Write_data_dma(ui_buf, 48*48);
+		ShowNum_48(percent%10);
 
 	}
 	
@@ -206,22 +143,21 @@ void ui_paint_bat_percent(uint8_t percent)
 
 
 
-//»æÖÆ²ÊÉ«Ô²ĞÎ
+//ç»˜åˆ¶å½©è‰²åœ†å½¢
 void ui_paint_color_circle(void)
 {
-	Lcd_SetRegion(10, 10, 109, 109);						//×ø±êÉèÖÃ
+	Lcd_SetRegion(10, 10, 109, 109);						//åæ ‡è®¾ç½®
 	Lcd_Write_data_dma((uint8_t*)gImage_circle_100x100, 20000);
 }
 
-//»æÖÆÔ²È¦°Ù·Ö±È
+//ç»˜åˆ¶åœ†åœˆç™¾åˆ†æ¯”
 
-//»æÖÆ³äµç¹¦ÂÊ
+//ç»˜åˆ¶å……ç”µåŠŸç‡
 
-//»æÖÆÊ£ÓàÊ±¼ä
+//ç»˜åˆ¶å‰©ä½™æ—¶é—´
 
-//»æÖÆ¿ÕÉ³Â©
+//ç»˜åˆ¶ç©ºæ²™æ¼
 
-//»æÖÆÉ³Â©Ê£ÓàµçÁ¿°Ù·Ö±È
+//ç»˜åˆ¶æ²™æ¼å‰©ä½™ç”µé‡ç™¾åˆ†æ¯”
 
-//»æÖÆ³äµç¹¦ÂÊ
-
+//ç»˜åˆ¶å……ç”µåŠŸç‡

@@ -2,9 +2,6 @@
 #include "main.h"
 
 
-
-
-
 //#define __RAM_CODE__ 		__attribute__((section("ram_code")))
 //int Trim[] __attribute__ ((section(".ARM.__at_0x0001F000"))) = {0x12345678,0x22334455};
 //volatile int *myVariable = (volatile int *)0x0001F000;
@@ -69,12 +66,12 @@ void EnterDeepSleepMode(void)
 		//LDO33_AUX disable, power down LCD module			
 		LDO33_AUX_Disable();
 
-//				wr_data = 0x608e7885;
-//				reg_write(0x40020000+0x020, wr_data);
+//	wr_data = 0x608e7885;
+//	reg_write(0x40020000+0x020, wr_data);
 //				
-//				wr_data=reg_read(0x40020000+0x000);
-//				wr_data |= 0x200;//(set bit10=1)
-//				reg_write(0x40020000+0x000, wr_data);
+//	wr_data=reg_read(0x40020000+0x000);
+//	wr_data |= 0x200;//(set bit10=1)
+//	reg_write(0x40020000+0x000, wr_data);
 
 		bsr1901_prepare_sleep_for_pin_wakeup();
 		//sleep-wakeup setting
@@ -168,8 +165,8 @@ int main (void)
 	HW_SPI_Tx_DMA_32bit(HAL_SPI_0, (uint16*)gImage_128x128_battery_32b, 8192);
 	delay_1us(8000);
 
-  	uint16_t blue_color = BLACK;//C_TOMATO;//C_BLACK;//C_BLUE;
-  	lcd_dma_refresh_colorblock(0, 0, X_MAX_PIXEL, Y_MAX_PIXEL,&blue_color);
+  uint16_t blue_color = BLACK;//C_TOMATO;//C_BLACK;//C_BLUE;
+  lcd_dma_refresh_colorblock(0, 0, X_MAX_PIXEL, Y_MAX_PIXEL,&blue_color);
 	delay_1us(8000);
 	
 
@@ -183,7 +180,7 @@ int main (void)
 	delay_1us(8000);
  
 	ui_paint_color_circle();
-	
+	delay_1us(8000);	
 	
 
 
@@ -350,7 +347,7 @@ int main (void)
 		if (current_tick % 100 == 0) Get_Vbat_Voltage();
 		if (current_tick % 100 == 0) Task_Charger_Control();	
 
-		//if (current_tick % 200 == 0) Task_UI_Refresh();		
+		if (current_tick % 200 == 0) Task_UI_Refresh();		
 		
 	}
 	

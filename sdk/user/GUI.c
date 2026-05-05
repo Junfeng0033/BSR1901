@@ -270,6 +270,58 @@ void Gui_DrawLine(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1, uint16_t C
 
 
 
+// 专为低主频CPU优化：只画 水平线 + 垂直线，速度极致
+void Gui_DrawLine_Fast(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1, uint16_t Color)
+{
+    uint16_t tmp;
+
+    // ==================== 水平线（y 相等）====================
+    if(y0 == y1)
+    {
+        // 保证 x 从小到大，仅一次判断
+        if(x0 > x1)
+        {
+            tmp = x0;
+            x0 = x1;
+            x1 = tmp;
+        }
+        // 纯连续画点，无任何复杂运算
+        for(; x0 <= x1; x0++)
+        {
+            Gui_DrawPoint(x0, y0, Color);
+        }
+    }
+
+    // ==================== 垂直线（x 相等）====================
+    else if(x0 == x1)
+    {
+        // 保证 y 从小到大，仅一次判断
+        if(y0 > y1)
+        {
+            tmp = y0;
+            y0 = y1;
+            y1 = tmp;
+        }
+        // 纯连续画点，无任何复杂运算
+        for(; y0 <= y1; y0++)
+        {
+            Gui_DrawPoint(x0, y0, Color);
+        }
+    }
+
+    // 不支持斜线（你要求只画水平/垂直，这里可以空着）
+    else
+    {
+        // 斜线直接不处理
+    }
+}
+
+
+
+
+
+
+
 #if 0
 
 // 专为实心圆优化：极快水平线
@@ -286,6 +338,51 @@ static inline void Fast_HLine(uint16_t x1, uint16_t x2, uint16_t y, uint16_t col
     }
 }
 
+
+
+
+// 极快 水平线（仅水平方向，速度最大化）
+static inline void Fast_HLine(uint16_t x1, uint16_t x2, uint16_t y, uint16_t color)
+{
+    // 确保左 <= 右
+    if (x1 > x2) {
+        uint16_t tmp = x1;
+        x1 = x2;
+        x2 = tmp;
+    }
+
+    // 无分支、无判断、纯连续画点，速度极限
+    for (uint16_t x = x1; x <= x2; ++x) {
+        Gui_DrawPoint(x, y, color);
+    }
+}
+
+// 极快 垂直线（仅垂直方向，速度最大化）
+static inline void Fast_VLine(uint16_t x, uint16_t y1, uint16_t y2, uint16_t color)
+{
+    // 确保上 <= 下
+    if (y1 > y2) {
+        uint16_t tmp = y1;
+        y1 = y2;
+        y2 = tmp;
+    }
+
+    // 无分支、无判断、纯连续画点，速度极限
+    for (uint16_t y = y1; y <= y2; ++y) {
+        Gui_DrawPoint(x, y, color);
+    }
+}
+
+
+
+// 画一条从 (10, 50) 到 (100, 50) 的水平线
+//Fast_HLine(10, 100, 50, RED);
+
+// 画一条从 (50, 10) 到 (50, 100) 的垂直线
+//Fast_VLine(50, 10, 100, BLUE);
+
+
+
 #endif
 
 
@@ -301,13 +398,17 @@ void Gui_DrawRect(uint16_t x0, uint16_t y0, uint16_t w, uint16_t h, uint16_t Col
     uint16_t y1 = y0 + h;
 
     // 上边框
-    Gui_DrawLine(x0, y0, x1, y0, Color);
+    //Gui_DrawLine(x0, y0, x1, y0, Color);
+	  Gui_DrawLine_Fast(x0, y0, x1, y0, Color);
     // 下边框
-    Gui_DrawLine(x0, y1, x1, y1, Color);
+    //Gui_DrawLine(x0, y1, x1, y1, Color);
+		Gui_DrawLine_Fast(x0, y1, x1, y1, Color);
     // 左边框
-    Gui_DrawLine(x0, y0, x0, y1, Color);
+    //Gui_DrawLine(x0, y0, x0, y1, Color);
+	  Gui_DrawLine_Fast(x0, y0, x0, y1, Color);
     // 右边框
-    Gui_DrawLine(x1, y0, x1, y1, Color);
+    //Gui_DrawLine(x1, y0, x1, y1, Color);
+	  Gui_DrawLine_Fast(x1, y0, x1, y1, Color);
 }
 
 
@@ -451,7 +552,8 @@ void Gui_DrawFillRect(uint16_t x0, uint16_t y0, uint16_t w, uint16_t h, uint16_t
     // 逐行画线填充（最稳定、最通用、M0无压力）
     for(uint16_t y = y0; y <= y1; y++)
     {
-        Gui_DrawLine(x0, y, x1, y, color);
+        //Gui_DrawLine(x0, y, x1, y, color);
+			  Gui_DrawLine_Fast(x0, y, x1, y, color);
     }
 }
 
@@ -951,7 +1053,7 @@ void Task_UI_Refresh(void)
 
 
 
-
+#if 0
 // 实心圆填充函数
 // X, Y : 圆心坐标
 // R    : 半径
@@ -988,4 +1090,51 @@ void Gui_FillCircle(uint16_t X, uint16_t Y, uint16_t R, uint16_t fc)
         Gui_DrawLine(X - b, Y - a, X + b, Y - a, fc);
     }
 }
+
+#endif
+
+
+
+
+// 【极致优化】实心圆填充函数（低主频CPU专用，无冗余运算）
+// X, Y : 圆心坐标
+// R    : 半径
+// fc   : 填充颜色
+void Gui_FillCircle(uint16_t X, uint16_t Y, uint16_t R, uint16_t fc)
+{
+    uint16_t a = 0;
+    uint16_t b = R;
+    int32_t c = 3 - 2 * R;  // 用32位避免溢出，运算更快
+
+    // 合并判断，去掉最后冗余的 a==b 重复代码
+    while (a <= b)
+    {
+        // 直接调用你优化后的超快直线，4行对称水平线
+			
+//        Gui_DrawLine(X - a, Y + b, X + a, Y + b, fc);  // 上
+//        Gui_DrawLine(X - a, Y - b, X + a, Y - b, fc);  // 下
+//        Gui_DrawLine(X - b, Y + a, X + b, Y + a, fc);  // 中
+//        Gui_DrawLine(X - b, Y - a, X + b, Y - a, fc);  // 中
+
+        Gui_DrawLine_Fast(X - a, Y + b, X + a, Y + b, fc);  // 上
+        Gui_DrawLine_Fast(X - a, Y - b, X + a, Y - b, fc);  // 下
+        Gui_DrawLine_Fast(X - b, Y + a, X + b, Y + a, fc);  // 中
+        Gui_DrawLine_Fast(X - b, Y - a, X + b, Y - a, fc);  // 中			
+			
+
+        // Bresenham 核心算法：简化运算、减少计算量
+        if (c < 0)
+        {
+            c += (a << 2) + 6;  // 4*a → 左移2位，CPU 1个周期完成
+        }
+        else
+        {
+            c += ((a - b) << 2) + 10;  // 4*(a-b) → 位移运算
+            b--;
+        }
+        a++;
+    }
+}
+
+
 

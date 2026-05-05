@@ -352,6 +352,7 @@ uint32_t Get_RC_Unique_ID(void)
 
 //运行时读取当前 ID，与黄金 ID 比较，允许 ±5% 的误差窗口。
 
+//RC_Unique_ID
 #endif
 
 

@@ -22,6 +22,10 @@ void Gui_DrawPoint(uint16_t x,uint16_t y,uint16_t Data);
 
 void Gui_Circle(uint16_t X, uint16_t Y, uint16_t R, uint16_t fc);
 void Gui_DrawLine(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1, uint16_t Color);
+
+void Gui_DrawLine_Fast(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1, uint16_t Color);
+	
+
 void Gui_DrawRect(uint16_t x0, uint16_t y0, uint16_t w, uint16_t h, uint16_t Color);
 
 
