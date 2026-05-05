@@ -148,6 +148,8 @@ int main (void)
 
 	Lcd_Clear(WHITE);
 	
+	//Lcd_Fill(0,0,X_MAX_PIXEL,Y_MAX_PIXEL,RED);
+	
 	Gui_FillCircle(64, 64, 20, C_RED);
 	
 	delay_1us(8000);	
@@ -166,8 +168,8 @@ int main (void)
 	HW_SPI_Tx_DMA_32bit(HAL_SPI_0, (uint16*)gImage_128x128_battery_32b, 8192);
 	delay_1us(8000);
 
-  uint16_t blue_color = BLACK;//C_TOMATO;//C_BLACK;//C_BLUE;
-  lcd_dma_refresh_colorblock(0, 0, X_MAX_PIXEL, Y_MAX_PIXEL,&blue_color);
+  	uint16_t blue_color = BLACK;//C_TOMATO;//C_BLACK;//C_BLUE;
+  	lcd_dma_refresh_colorblock(0, 0, X_MAX_PIXEL, Y_MAX_PIXEL,&blue_color);
 	delay_1us(8000);
 	
 
@@ -323,7 +325,7 @@ int main (void)
 
 /************************SysTick configure***************************************/
 	//----SysTick Init-----
-	SysTick_Config(20000);//SysTick Test === 1ms tick for KEY detect
+	SysTick_Config(20000);//SysTick === 1ms tick for KEY detect
 /************************SysTick configure***************************************/
 
   //iWatchDog for FSM Control

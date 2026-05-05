@@ -1,1 +1,1 @@
-.\objects\charging.o: user\ui_img\charging.c
+.\objects\charging.o: img_res\charging.c

@@ -17,7 +17,7 @@ uint32 AON_CFG_GPIO_WAKEUP_CTRL_0x10_Default=0;
 
 
 
-//There is a bug in AON register reading	
+
 void Analog_Ctrl_1_Init(void)
 {
 	unsigned int wr_data;
@@ -26,7 +26,7 @@ void Analog_Ctrl_1_Init(void)
 	//wr_data = reg_read(ADDR_AON_CFG_ANA_CTRL_1);
 	wr_data = ANA_READ_CTLREG(ADDR_AON_CFG_ANA_CTRL_1);//0x4001A000+0x20
 	wr_data =(*(volatile unsigned int*)(0x4001A020));
-	wr_data = AON_CFG_ANA_CTRL_1_0x20_Default;////There is a bug in AON register reading	
+	wr_data = AON_CFG_ANA_CTRL_1_0x20_Default;	
 	
 	//enable ldo
 	//wr_data |= (LDO18_EN |EN_OSC32M |LDO1_VSET(3)| LDO1_EN | BG_EN);
@@ -42,18 +42,18 @@ void Analog_Ctrl_1_Init(void)
 
 
 
-//There is a bug in AON register reading
+
 void Analog_Ctrl_2_Init(void)
 {
 	unsigned int wr_data;
-	char *string;	
+	//char *string;	
 
   //wr_data=reg_read(ADDR_AON_CFG_ANA_CTRL_2);	
 	wr_data = ANA_READ_CTLREG(ADDR_AON_CFG_ANA_CTRL_2);
 	wr_data =(*(volatile unsigned int*)(0x4001A024));
-	wr_data=AON_CFG_ANA_CTRL_2_0x24_Default;////There is a bug in AON register reading	
+	wr_data=AON_CFG_ANA_CTRL_2_0x24_Default;	
 
-	#if DEBUG_UATR0_PRINT_LOG		
+	#if 0//DEBUG_UATR0_PRINT_LOG		
 	UATR0_PRINT_LOG((unsigned char *)("\r\n"));						
 	UATR0_PRINT_LOG((unsigned char *)("ADDR_AON_CFG_ANA_CTRL_2 --- = 0x"));
 	string=my_itoa(wr_data);
@@ -68,7 +68,7 @@ void Analog_Ctrl_2_Init(void)
 
 
 
-//There is a bug in AON register reading
+
 void LDO18_Ctrl(void)
 {
 	unsigned int wr_data;
@@ -76,7 +76,7 @@ void LDO18_Ctrl(void)
 
 	
 	wr_data=reg_read(ADDR_AON_CFG_ANA_CTRL_2);
-  wr_data = AON_CFG_ANA_CTRL_2_0x24_Default;////There is a bug in AON register reading
+  wr_data = AON_CFG_ANA_CTRL_2_0x24_Default;
 	
 	//Force bit[1]
 	wr_data |= SW_FORCE_LDO18_EN;
@@ -89,7 +89,7 @@ void LDO18_Ctrl(void)
 	//wr_data = reg_read(ADDR_AON_CFG_ANA_CTRL_1);
 	wr_data = ANA_READ_CTLREG(ADDR_AON_CFG_ANA_CTRL_1);//0x4001A000+0x20
 	wr_data =(*(volatile unsigned int*)(0x4001A020));
-	wr_data = AON_CFG_ANA_CTRL_1_0x20_Default;////There is a bug in AON register reading	
+	wr_data = AON_CFG_ANA_CTRL_1_0x20_Default;	
 	
 	//enable ldo
 	//wr_data |= (LDO18_EN |EN_OSC32M |LDO1_VSET(3)| LDO1_EN | BG_EN);
@@ -111,7 +111,7 @@ void LDO33_OUT_Ctrl(void)
 
 	
 	wr_data=reg_read(ADDR_AON_CFG_ANA_CTRL_2);
-  wr_data = AON_CFG_ANA_CTRL_2_0x24_Default;////There is a bug in AON register reading
+  wr_data = AON_CFG_ANA_CTRL_2_0x24_Default;
 	
 	//Force bit[1]
 	wr_data |= SW_FORCE_LDO18_EN;
@@ -124,7 +124,7 @@ void LDO33_OUT_Ctrl(void)
 	//wr_data = reg_read(ADDR_AON_CFG_ANA_CTRL_1);
 	wr_data = ANA_READ_CTLREG(ADDR_AON_CFG_ANA_CTRL_1);//0x4001A000+0x20
 	wr_data =(*(volatile unsigned int*)(0x4001A020));
-	wr_data = AON_CFG_ANA_CTRL_1_0x20_Default;////There is a bug in AON register reading	
+	wr_data = AON_CFG_ANA_CTRL_1_0x20_Default;
 	
 	//enable ldo
 	//wr_data |= (LDO18_EN |EN_OSC32M |LDO1_VSET(3)| LDO1_EN | BG_EN);
@@ -140,80 +140,6 @@ void LDO33_OUT_Ctrl(void)
 
 
 //wr_data = 0x848E7885;//0x808E7885
-
-//There is a bug in AON register reading
-//#define PWRMOS_G(n)              (((n)&0x3)<<13)  //2 bits Power PMOS Gate
-void PWR_MOS_Gate_CTRL(uint8 gate)
-{
-	unsigned int wr_data,wr_data_tmp;
-	wr_data=reg_read(ADDR_AON_CFG_ANA_CTRL_1);
-  wr_data = AON_CFG_ANA_CTRL_1_0x20_Default;////There is a bug in AON register reading
-
-	#if DEBUG_UATR0_PRINT_LOG	
-  char *string;		
-
-	UATR0_PRINT_LOG((unsigned char *)("\r\n"));						
-	UATR0_PRINT_LOG((unsigned char *)("111-PWR_MOS_Gate_CTRL"));
-	
-  wr_data_tmp=wr_data>>16;
-	UATR0_PRINT_LOG((unsigned char *)("\r\n"));						
-	UATR0_PRINT_LOG((unsigned char *)("AON_CFG_ANA_CTRL_1_0x20_Default High 16bit --- = 0x"));
-	string=my_itoa(wr_data_tmp);
-	UATR0_PRINT_LOG((unsigned char *)(string));
-	UATR0_PRINT_LOG((unsigned char *)("\r\n"));
-
-
-  wr_data_tmp=wr_data & 0x0000ffff;
-	UATR0_PRINT_LOG((unsigned char *)("\r\n"));						
-	UATR0_PRINT_LOG((unsigned char *)("AON_CFG_ANA_CTRL_1_0x20_Default Low 16bit --- = 0x"));
-	string=my_itoa(wr_data_tmp);
-	UATR0_PRINT_LOG((unsigned char *)(string));
-	UATR0_PRINT_LOG((unsigned char *)("\r\n"));
-	
-  #endif
-	
-	//bit13,bit14
-	wr_data |= PWRMOS_G(gate);
-	//3:GATE0 and GATE1 equal to "1" at the same time
-	//2:GATE0 equal to "1" and GATE1 equal to "0"
-	//1:GATE0 equal to "0" and GATE1 equal to "1"
-	//0:GATE0 and GATE1 equal to "0" at the same time
-	if(gate==3)//MOS-S0 connected to MOS -D0
-	{
-		wr_data |= 0x00006000;//bit13,bit14 =1
-		UATR0_PRINT_LOG((unsigned char *)("(gate==3)-PWR_MOS_Gate_CTRL"));
-	}
-	else if(gate==0)//MOS-S0 disconnected to MOS -D0
-	{
-		wr_data &= 0xffff9fff;//bit13,bit14 =0
-    UATR0_PRINT_LOG((unsigned char *)("(gate==0)-PWR_MOS_Gate_CTRL"));		
-	}
-	
-  reg_write(ADDR_AON_CFG_ANA_CTRL_1, wr_data);	
-	AON_CFG_ANA_CTRL_1_0x20_Default=wr_data;
-	
-	#if DEBUG_UATR0_PRINT_LOG	
-	UATR0_PRINT_LOG((unsigned char *)("\r\n"));						
-	UATR0_PRINT_LOG((unsigned char *)("222-PWR_MOS_Gate_CTRL"));
-	
-  wr_data_tmp=wr_data>>16;
-	UATR0_PRINT_LOG((unsigned char *)("\r\n"));						
-	UATR0_PRINT_LOG((unsigned char *)("AON_CFG_ANA_CTRL_1_0x20_Default High 16bit --- = 0x"));
-	string=my_itoa(wr_data_tmp);
-	UATR0_PRINT_LOG((unsigned char *)(string));
-	UATR0_PRINT_LOG((unsigned char *)("\r\n"));
-
-
-  wr_data_tmp=wr_data & 0x0000ffff;
-	UATR0_PRINT_LOG((unsigned char *)("\r\n"));						
-	UATR0_PRINT_LOG((unsigned char *)("AON_CFG_ANA_CTRL_1_0x20_Default Low 16bit --- = 0x"));
-	string=my_itoa(wr_data_tmp);
-	UATR0_PRINT_LOG((unsigned char *)(string));
-	UATR0_PRINT_LOG((unsigned char *)("\r\n"));		
-  #endif
-	
-}
-
 
 
 
@@ -539,7 +465,7 @@ void Osc32M_Freq_Trimming(void)
 //	pExitCriticalSection(status);	
 	
 	wr_data=reg_read(ADDR_AON_CFG_ANA_CTRL_2);
-  wr_data = AON_CFG_ANA_CTRL_2_0x24_Default;////There is a bug in AON register reading
+  wr_data = AON_CFG_ANA_CTRL_2_0x24_Default;
 	
 	//Force bit[4] to use SW config OSC frequency
 //	wr_data |= SW_FORCE_CALI32M_TUNE | SW_FORCE_LDO1_EN;//change LDO33_OUT and LDO33_FLASH_OUT to 3.5V//2022-08-19 ZJF
@@ -552,7 +478,7 @@ void Osc32M_Freq_Trimming(void)
 /////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	wr_data=reg_read(ADDR_AON_CFG_ANA_CTRL_1);
-  wr_data = AON_CFG_ANA_CTRL_1_0x20_Default;////There is a bug in AON register reading
+  wr_data = AON_CFG_ANA_CTRL_1_0x20_Default;
 	
 	//wr_data |= RCO32M_FREQ(0xff);//max
 //1@1 board

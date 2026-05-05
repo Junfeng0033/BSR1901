@@ -5,5 +5,5 @@
 .\objects\dma.o: .\tft_lcd\lcd_driver.h
 .\objects\dma.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 .\objects\dma.o: .\include\gpio.h
-.\objects\dma.o: .\user\ui.h
+.\objects\dma.o: .\user\ui_app.h
 .\objects\dma.o: .\include\spi.h

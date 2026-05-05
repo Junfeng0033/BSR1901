@@ -28,7 +28,7 @@
 #include "bms_ip2366.h"
 #include "lcd_driver.h"
 #include "gui.h"
-#include "ui.h"
+#include "ui_app.h"
 
 #include "sc_demo_test.h"
 #include "sc_common.h"

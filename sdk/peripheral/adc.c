@@ -146,7 +146,7 @@ uint16 adc_sampling_vin(void)
 *boost always 5V output 
 *convert to current,we can know only one earbud in holder or two earbuds in holder 
 *
-*detect erabuds in compartment or not
+*detect earbuds in compartment or not
 *****************************************************************************/
 //monitor the loading
 uint16 adc_sampling_boost_vout(void) 
@@ -420,31 +420,36 @@ uint16 GeckoGpadcGetRawData(GPADC_CHAN_T channel)
 		{
 				case GPADC_CHAN_0:
 
-						datavalue = hw_gpadc->data_ch0;				
+						//datavalue = hw_gpadc->data_ch0;
+						datavalue = hw_gpadc->data;				
 				    printf("\r\n ADC GPADC_CHAN_0 --- data_ch0 data = %d",datavalue);						
 						break;
 				
 				case GPADC_CHAN_1:
 
-						datavalue = hw_gpadc->data_ch1;				    
+						//datavalue = hw_gpadc->data_ch1;	
+						datavalue = hw_gpadc->data;						
 				    printf("\r\n ADC GPADC_CHAN_1 --- data_ch1 data = %d",datavalue);						
 						break;
 				
 				case GPADC_CHAN_2:
 
-						datavalue = hw_gpadc->data_ch2;				
+						//datavalue = hw_gpadc->data_ch2;
+						datavalue = hw_gpadc->data;						
 				    printf("\r\n ADC GPADC_CHAN_2 --- data_ch2 data = %d",datavalue);						
 						break;
 				
 				case GPADC_CHAN_3:
 
-						datavalue = hw_gpadc->data_ch3;
+						//datavalue = hw_gpadc->data_ch3;
+						datavalue = hw_gpadc->data;						
 				    printf("\r\n ADC GPADC_CHAN_3 --- data_ch3 data = %d",datavalue);	
 						break;
 				
 				case GPADC_CHAN_4:
 
-						datavalue = hw_gpadc->data_ch4;
+						//datavalue = hw_gpadc->data_ch4;
+						datavalue = hw_gpadc->data;						
 				    printf("\r\n ADC GPADC_CHAN_4 --- data_ch4 data = %d",datavalue);	
 						break;
 				
@@ -452,19 +457,22 @@ uint16 GeckoGpadcGetRawData(GPADC_CHAN_T channel)
 
 						hw_gpadc->ctrl |= GPADC_REF_SEL;//0:1.2V reference;1:3.3V reference
 						adc_delay_us(20);
-						datavalue = hw_gpadc->data_ch5;
+						//datavalue = hw_gpadc->data_ch5;
+						datavalue = hw_gpadc->data;				
 				    printf("\r\n ADC GPADC_CHAN_5 --- data_ch5 data = %d",datavalue);						
 						break;
 				
 				case GPADC_CHAN_6:
 
-						datavalue = hw_gpadc->data_ch6;
+						//datavalue = hw_gpadc->data_ch6;
+						datavalue = hw_gpadc->data;						
 				    printf("\r\n ADC GPADC_CHAN_6 --- data_ch6 data = %d",datavalue);						
 						break;
 				
 				case GPADC_CHAN_7:
 
-						datavalue = hw_gpadc->data_ch7;
+						//datavalue = hw_gpadc->data_ch7;
+						datavalue = hw_gpadc->data;						
 				    printf("\r\n ADC GPADC_CHAN_7 --- data_ch7 = %d",datavalue);
 						break;
 				
@@ -472,7 +480,8 @@ uint16 GeckoGpadcGetRawData(GPADC_CHAN_T channel)
 				case GPADC_CHAN_8:
 
 						hw_gpadc->ctrl |= GPADC_REF_SEL;//0:1.2V reference;1:3.3V reference
-						datavalue = hw_gpadc->data_ch8;
+						//datavalue = hw_gpadc->data_ch8;
+						datavalue = hw_gpadc->data;						
 				    printf("\r\n ADC GPADC_CHAN_8 --- data_ch8 data = %d",datavalue);				
 						break;
 				
@@ -480,7 +489,8 @@ uint16 GeckoGpadcGetRawData(GPADC_CHAN_T channel)
 				case GPADC_CHAN_9:
 
 						hw_gpadc->ctrl |= GPADC_REF_SEL;//0:1.2V reference;1:3.3V reference
-						datavalue = hw_gpadc->data_ch9;
+						//datavalue = hw_gpadc->data_ch9;
+						datavalue = hw_gpadc->data;						
 				    printf("\r\n ADC GPADC_CHAN_9 --- data_ch9 data = %d",datavalue);
 						break;				
 				default:
@@ -530,7 +540,7 @@ uint16 Get_Vbat_Voltage(void)
 	
 		hw_gpadc->ctrl |= GPADC_REF_SEL;//0:1.2V reference;1:3.3V reference	
 
-		adc_delay_us(10);	
+		//adc_delay_us(10);	
 	
 	  while(!(hw_gpadc->status & GPADC_EOC))
 		{
@@ -543,9 +553,10 @@ uint16 Get_Vbat_Voltage(void)
 		
 		tmp=0;
 		
-		adc_delay_us(20);
+		//adc_delay_us(20);
 
-		datavalue = hw_gpadc->data_ch5;
+		//datavalue = hw_gpadc->data_ch5;
+		datavalue = hw_gpadc->data;
 		
 		hw_gpadc->ctrl =0;//disable all channels	
 

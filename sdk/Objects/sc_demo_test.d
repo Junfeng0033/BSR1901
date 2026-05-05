@@ -1,5 +1,5 @@
-.\objects\sc_demo_test.o: D:\SVN\projects\BSR1901\software\sdk\SCGUI\example\sc_demo_test.c
-.\objects\sc_demo_test.o: D:\SVN\projects\BSR1901\software\sdk\SCGUI\example\sc_demo_test.h
+.\objects\sc_demo_test.o: SCGUI\example\sc_demo_test.c
+.\objects\sc_demo_test.o: SCGUI\example\sc_demo_test.h
 .\objects\sc_demo_test.o: .\SCGUI\sc_gui.h
 .\objects\sc_demo_test.o: .\SCGUI\sc_common.h
 .\objects\sc_demo_test.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h

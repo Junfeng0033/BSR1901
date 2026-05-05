@@ -1,1 +1,1 @@
-.\objects\img_cake.o: user\img_cake.c
+.\objects\img_cake.o: img_res\img_cake.c

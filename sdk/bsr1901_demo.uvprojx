@@ -533,6 +533,116 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>img_res</GroupName>
+          <Files>
+            <File>
+              <FileName>120x240.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\img_res\120x240.c</FilePath>
+            </File>
+            <File>
+              <FileName>120x240_1.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\img_res\120x240_1.c</FilePath>
+            </File>
+            <File>
+              <FileName>120x240_1_32bit.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\img_res\120x240_1_32bit.c</FilePath>
+            </File>
+            <File>
+              <FileName>120x240_32bit.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\img_res\120x240_32bit.c</FilePath>
+            </File>
+            <File>
+              <FileName>bat_64x35.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\img_res\bat_64x35.c</FilePath>
+            </File>
+            <File>
+              <FileName>bat_percent_162x43.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\img_res\bat_percent_162x43.c</FilePath>
+            </File>
+            <File>
+              <FileName>img.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\img_res\img.c</FilePath>
+            </File>
+            <File>
+              <FileName>bat_90x49.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\img_res\bat_90x49.c</FilePath>
+            </File>
+            <File>
+              <FileName>black_128x128.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\img_res\black_128x128.c</FilePath>
+            </File>
+            <File>
+              <FileName>charging.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\img_res\charging.c</FilePath>
+            </File>
+            <File>
+              <FileName>charging_32bit.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\img_res\charging_32bit.c</FilePath>
+            </File>
+            <File>
+              <FileName>fire_eye_img.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\img_res\fire_eye_img.c</FilePath>
+            </File>
+            <File>
+              <FileName>font_0_9_digital_32b.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\img_res\font_0_9_digital_32b.c</FilePath>
+            </File>
+            <File>
+              <FileName>font_A_z_32b.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\img_res\font_A_z_32b.c</FilePath>
+            </File>
+            <File>
+              <FileName>img_battery.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\img_res\img_battery.c</FilePath>
+            </File>
+            <File>
+              <FileName>img_battery_32b.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\img_res\img_battery_32b.c</FilePath>
+            </File>
+            <File>
+              <FileName>img_cake.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\img_res\img_cake.c</FilePath>
+            </File>
+            <File>
+              <FileName>img_cake_32b.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\img_res\img_cake_32b.c</FilePath>
+            </File>
+            <File>
+              <FileName>img_star.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\img_res\img_star.c</FilePath>
+            </File>
+            <File>
+              <FileName>img_star_32b.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\img_res\img_star_32b.c</FilePath>
+            </File>
+            <File>
+              <FileName>ui_circle_100x100.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\img_res\ui_circle_100x100.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>scgui</GroupName>
           <Files>
             <File>
@@ -628,16 +738,6 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>scgui/example</GroupName>
-          <Files>
-            <File>
-              <FileName>sc_demo_test.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>D:\SVN\projects\BSR1901\software\sdk\SCGUI\example\sc_demo_test.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
           <GroupName>user</GroupName>
           <Files>
             <File>
@@ -646,64 +746,14 @@
               <FilePath>.\user\main.c</FilePath>
             </File>
             <File>
-              <FileName>img_cake_32b.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\user\img_cake_32b.c</FilePath>
-            </File>
-            <File>
-              <FileName>img_star_32b.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\user\img_star_32b.c</FilePath>
-            </File>
-            <File>
               <FileName>key_process.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\user\key_process.c</FilePath>
             </File>
             <File>
-              <FileName>img_cake.c</FileName>
+              <FileName>sc_demo_test.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\user\img_cake.c</FilePath>
-            </File>
-            <File>
-              <FileName>img_star.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\user\img_star.c</FilePath>
-            </File>
-            <File>
-              <FileName>charging.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\user\ui_img\charging.c</FilePath>
-            </File>
-            <File>
-              <FileName>charging_32bit.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\user\ui_img\charging_32bit.c</FilePath>
-            </File>
-            <File>
-              <FileName>img_battery.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\user\img_battery.c</FilePath>
-            </File>
-            <File>
-              <FileName>img_battery_32b.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\user\img_battery_32b.c</FilePath>
-            </File>
-            <File>
-              <FileName>fire_eye_img.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\user\fire_eye_img.c</FilePath>
-            </File>
-            <File>
-              <FileName>ui_circle_100x100.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\user\ui_circle_100x100.c</FilePath>
-            </File>
-            <File>
-              <FileName>ui.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\user\ui.c</FilePath>
+              <FilePath>.\SCGUI\example\sc_demo_test.c</FilePath>
             </File>
             <File>
               <FileName>GUI.c</FileName>
@@ -711,24 +761,9 @@
               <FilePath>.\user\GUI.c</FilePath>
             </File>
             <File>
-              <FileName>font_0_9_digital_32b.c</FileName>
+              <FileName>ui_app.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\user\font_0_9_digital_32b.c</FilePath>
-            </File>
-            <File>
-              <FileName>font_A_z_32b.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\user\font_A_z_32b.c</FilePath>
-            </File>
-            <File>
-              <FileName>bat_90x49.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\user\bat_90x49.c</FilePath>
-            </File>
-            <File>
-              <FileName>black_128x128.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\user\black_128x128.c</FilePath>
+              <FilePath>.\user\ui_app.c</FilePath>
             </File>
           </Files>
         </Group>

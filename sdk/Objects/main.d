@@ -33,7 +33,7 @@
 .\objects\main.o: .\SCGUI\sc_arc.h
 .\objects\main.o: .\SCGUI\sc_transform.h
 .\objects\main.o: .\SCGUI\sc_compose.h
-.\objects\main.o: user\ui.h
+.\objects\main.o: user\ui_app.h
 .\objects\main.o: .\SCGUI\example\sc_demo_test.h
 .\objects\main.o: .\SCGUI\sc_menu.h
 .\objects\main.o: .\include\charger.h

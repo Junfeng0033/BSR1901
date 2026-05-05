@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\bsr1901_demo.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\bsr1901_demo.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Tue Apr 28 09:24:11 2026
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Tue May 05 16:02:03 2026
 <BR><P>
 <H3>Maximum Stack Usage =        208 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -191,8 +191,8 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[5b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Gecko_Set_BaudRate
 <LI><a href="#[5c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Get_Vbat_Voltage
 <LI><a href="#[2a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
-<LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_core
 <LI><a href="#[2f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_idivmod
+<LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_core
 </UL>
 
 <P><STRONG><a name="[b1]"></a>__aeabi_idiv</STRONG> (Thumb, 0 bytes, Stack size 16 bytes, idiv.o(.text), UNUSED)
@@ -248,9 +248,9 @@ Global Symbols
 <LI><a href="#[3a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_double_round
 <LI><a href="#[39]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_double_epilogue
 </UL>
-<BR>[Called By]<UL><LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_fp_digits
-<LI><a href="#[3c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_drsub
+<BR>[Called By]<UL><LI><a href="#[3c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_drsub
 <LI><a href="#[3b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dsub
+<LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_fp_digits
 </UL>
 
 <P><STRONG><a name="[3b]"></a>__aeabi_dsub</STRONG> (Thumb, 12 bytes, Stack size 8 bytes, dadd.o(.text), UNUSED)
@@ -465,7 +465,7 @@ Global Symbols
 <P><STRONG><a name="[26]"></a>GPIO_B6_IRQHandler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, isr.o(i.GPIO_B6_IRQHandler))
 <BR>[Address Reference Count : 1]<UL><LI> startup_cm0.o(RESET)
 </UL>
-<P><STRONG><a name="[54]"></a>GeckoGpadcGetRawData</STRONG> (Thumb, 280 bytes, Stack size 24 bytes, adc.o(i.GeckoGpadcGetRawData))
+<P><STRONG><a name="[54]"></a>GeckoGpadcGetRawData</STRONG> (Thumb, 276 bytes, Stack size 24 bytes, adc.o(i.GeckoGpadcGetRawData))
 <BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = GeckoGpadcGetRawData &rArr; __2printf
 </UL>
 <BR>[Calls]<UL><LI><a href="#[57]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__ARM_common_switch8
@@ -504,15 +504,14 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[1b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;iWDT_IRQHandler
 </UL>
 
-<P><STRONG><a name="[5c]"></a>Get_Vbat_Voltage</STRONG> (Thumb, 136 bytes, Stack size 16 bytes, adc.o(i.Get_Vbat_Voltage))
+<P><STRONG><a name="[5c]"></a>Get_Vbat_Voltage</STRONG> (Thumb, 124 bytes, Stack size 16 bytes, adc.o(i.Get_Vbat_Voltage))
 <BR><BR>[Stack]<UL><LI>Max Depth = 144<LI>Call Chain = Get_Vbat_Voltage &rArr; __aeabi_dmul &rArr; _double_epilogue &rArr; __aeabi_llsr
 </UL>
 <BR>[Calls]<UL><LI><a href="#[40]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_i2d
 <LI><a href="#[3d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dmul
 <LI><a href="#[41]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_d2iz
-<LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;adc_delay_us
-<LI><a href="#[56]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 <LI><a href="#[30]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_uidivmod
+<LI><a href="#[56]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 </UL>
 <BR>[Called By]<UL><LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;charger_process
 <LI><a href="#[2a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
@@ -596,11 +595,10 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[2a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[68]"></a>HW_SPI_Tx_DMA_16bit_ColorBlock</STRONG> (Thumb, 46 bytes, Stack size 16 bytes, spi.o(i.HW_SPI_Tx_DMA_16bit_ColorBlock))
+<P><STRONG><a name="[68]"></a>HW_SPI_Tx_DMA_16bit_ColorBlock</STRONG> (Thumb, 38 bytes, Stack size 16 bytes, spi.o(i.HW_SPI_Tx_DMA_16bit_ColorBlock))
 <BR><BR>[Stack]<UL><LI>Max Depth = 40<LI>Call Chain = HW_SPI_Tx_DMA_16bit_ColorBlock &rArr; Gecko_DMA_Transport
 </UL>
-<BR>[Calls]<UL><LI><a href="#[67]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dma_sram_delay (via Veneer)
-<LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Gecko_DMA_Transport
+<BR>[Calls]<UL><LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Gecko_DMA_Transport
 <LI><a href="#[61]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_set_value
 </UL>
 <BR>[Called By]<UL><LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lcd_dma_refresh_colorblock
@@ -922,8 +920,7 @@ Global Symbols
 <P><STRONG><a name="[55]"></a>adc_delay_us</STRONG> (Thumb, 22 bytes, Stack size 8 bytes, adc.o(i.adc_delay_us))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = adc_delay_us
 </UL>
-<BR>[Called By]<UL><LI><a href="#[5c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Get_Vbat_Voltage
-<LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GeckoGpadcGetRawData
+<BR>[Called By]<UL><LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GeckoGpadcGetRawData
 </UL>
 
 <P><STRONG><a name="[90]"></a>aon_wakeup_irq_cfg</STRONG> (Thumb, 24 bytes, Stack size 8 bytes, aon.o(i.aon_wakeup_irq_cfg))
@@ -1194,7 +1191,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Task_KeyScan
 </UL>
 
-<P><STRONG><a name="[9c]"></a>ui_paint_color_circle</STRONG> (Thumb, 24 bytes, Stack size 8 bytes, ui.o(i.ui_paint_color_circle))
+<P><STRONG><a name="[9c]"></a>ui_paint_color_circle</STRONG> (Thumb, 24 bytes, Stack size 8 bytes, ui_app.o(i.ui_paint_color_circle))
 <BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = ui_paint_color_circle &rArr; Lcd_Write_data_dma &rArr; Gecko_DMA_Transport
 </UL>
 <BR>[Calls]<UL><LI><a href="#[60]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Lcd_SetRegion
@@ -1216,7 +1213,6 @@ Global Symbols
 <P><STRONG><a name="[67]"></a>dma_sram_delay</STRONG> (Thumb, 34 bytes, Stack size 0 bytes, isr.o(ram_code))
 <BR><BR>[Called By]<UL><LI><a href="#[6a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HW_SPI_Tx_DMA_8bit (via Veneer)
 <LI><a href="#[69]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HW_SPI_Tx_DMA_32bit (via Veneer)
-<LI><a href="#[68]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HW_SPI_Tx_DMA_16bit_ColorBlock (via Veneer)
 <LI><a href="#[66]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HW_SPI_Tx_DMA (via Veneer)
 </UL>
 
@@ -1318,11 +1314,11 @@ Local Symbols
 </UL>
 
 <P><STRONG><a name="[8b]"></a>_printf_core</STRONG> (Thumb, 1754 bytes, Stack size 128 bytes, printfa.o(i._printf_core), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_pre_padding
+<BR><BR>[Calls]<UL><LI><a href="#[30]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_uidivmod
+<LI><a href="#[43]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_uldivmod
+<LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_pre_padding
 <LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_post_padding
 <LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_fp_digits
-<LI><a href="#[30]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_uidivmod
-<LI><a href="#[43]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_uldivmod
 </UL>
 <BR>[Called By]<UL><LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__0printf
 </UL>

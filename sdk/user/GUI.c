@@ -270,6 +270,25 @@ void Gui_DrawLine(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1, uint16_t C
 
 
 
+#if 0
+
+// 专为实心圆优化：极快水平线
+static inline void Fast_HLine(uint16_t x1, uint16_t x2, uint16_t y, uint16_t color)
+{
+    if (x1 > x2) {  // 保证 x1 <= x2
+        uint16_t tmp = x1;
+        x1 = x2;
+        x2 = tmp;
+    }
+    // 纯 x 递增，无任何多余计算
+    for (uint16_t x = x1; x <= x2; x++) {
+        Gui_DrawPoint(x, y, color);  // 你底层的画点函数
+    }
+}
+
+#endif
+
+
 
 // 画空心矩形
 // x0,y0 = 左上角坐标

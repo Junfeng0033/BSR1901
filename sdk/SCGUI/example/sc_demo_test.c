@@ -1,5 +1,3 @@
-
-
 #include "sc_demo_test.h"
 
 /// 演示代码性能测试

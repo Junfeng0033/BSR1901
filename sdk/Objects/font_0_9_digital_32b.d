@@ -1,2 +1,1 @@
-.\objects\font_0_9_digital_32b.o: user\font_0_9_digital_32b.c
-.\objects\font_0_9_digital_32b.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\font_0_9_digital_32b.o: img_res\font_0_9_digital_32b.c

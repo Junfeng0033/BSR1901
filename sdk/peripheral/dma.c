@@ -11,7 +11,7 @@
 #include "bsr1901.h"
 #include "lcd_driver.h"
 #include "gpio.h"
-#include "ui.h"
+#include "ui_app.h"
 #include "spi.h"
 
 
