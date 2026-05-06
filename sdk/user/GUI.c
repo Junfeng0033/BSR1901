@@ -28,52 +28,6 @@ fc	uint16_t	前景颜色 color
 
 */
 
-#if 0
-// Bresenham算法
-void Gui_Circle(uint16_t X, uint16_t Y, uint16_t R, uint16_t fc)
-{
-	unsigned short a, b;
-	int c;
-	a = 0;
-	b = R;
-	c = 3 - 2 * R;
-	while (a < b)
-	{
-		Gui_DrawPoint(X + a, Y + b, fc); //        7
-		Gui_DrawPoint(X - a, Y + b, fc); //        6
-		Gui_DrawPoint(X + a, Y - b, fc); //        2
-		Gui_DrawPoint(X - a, Y - b, fc); //        3
-		Gui_DrawPoint(X + b, Y + a, fc); //        8
-		Gui_DrawPoint(X - b, Y + a, fc); //        5
-		Gui_DrawPoint(X + b, Y - a, fc); //        1
-		Gui_DrawPoint(X - b, Y - a, fc); //        4
-
-		if (c < 0)
-			c = c + 4 * a + 6;
-		else
-		{
-			c = c + 4 * (a - b) + 10;
-			b -= 1;
-		}
-		a += 1;
-	}
-	if (a == b)
-	{
-		Gui_DrawPoint(X + a, Y + b, fc);
-		Gui_DrawPoint(X + a, Y + b, fc);
-		Gui_DrawPoint(X + a, Y - b, fc);
-		Gui_DrawPoint(X - a, Y - b, fc);
-		Gui_DrawPoint(X + b, Y + a, fc);
-		Gui_DrawPoint(X - b, Y + a, fc);
-		Gui_DrawPoint(X + b, Y - a, fc);
-		Gui_DrawPoint(X - b, Y - a, fc);
-	}
-}
-
-#endif
-
-
-
 
 void Gui_Circle(uint16_t X, uint16_t Y, uint16_t R, uint16_t fc)
 {
@@ -82,7 +36,8 @@ void Gui_Circle(uint16_t X, uint16_t Y, uint16_t R, uint16_t fc)
 
     a = 0;
     b = R;
-    p = 3 - 2 * R;  // 初始判别式
+    //p = 3 - 2 * R;  // 初始判别式
+	  p = 3 - (R<<1);
 
     // 正确循环：a <= b，覆盖到45°最后一个点
     while (a <= b)
@@ -101,11 +56,13 @@ void Gui_Circle(uint16_t X, uint16_t Y, uint16_t R, uint16_t fc)
         // 中点算法判别式更新
         if (p < 0)
         {
-            p += 4 * a + 6;
+            //p += 4 * a + 6;
+					  p += (a<<2) + 6;
         }
         else
         {
-            p += 4 * (a - b) + 10;
+            //p += 4 * (a - b) + 10;
+					  p += ((a - b)<<2) + 10;
             b--;
         }
         a++;
@@ -426,44 +383,39 @@ void Gui_DrawRect(uint16_t x0, uint16_t y0, uint16_t w, uint16_t h, uint16_t Col
 
 
 
-// 辅助函数：判断点 (x,y) 是否在 [angle_s, angle_e] 角度范围内
-// 纯整数运算，超快
-//static uint8_t Gui_PointInAngle(int x, int y, int angle_s, int angle_e)
+// 【弱CPU终极优化】无乘法、无除法、超快角度判断
 static uint8_t Gui_PointInAngle(int x, int y, int angle_s, int angle_e)
 {
-    int quad = 0;
-    int degrees;
-
+    // 1. 原点直接返回
     if (x == 0 && y == 0) return 0;
 
-    if (x >= 0 && y > 0)  quad = 0;   // 0~90
-    else if (x < 0 && y >= 0) quad = 90;  // 90~180
-    else if (x <= 0 && y < 0) quad = 180; // 180~270
-    else if (x > 0 && y <= 0) quad = 270; // 270~360
+    // 2. 取绝对值（仅符号判断）
+    int ax = (x < 0) ? -x : x;
+    int ay = (y < 0) ? -y : y;
 
-    int ax = (x >= 0) ? x : -x;
-    int ay = (y >= 0) ? y : -y;
+    // 3. 快速象限判断（无运算）
+    int quad;
+    if (x >= 0 && y > 0)  quad = 0;    // 0~90°
+    else if (x < 0 && y >= 0) quad = 90;  // 90~180°
+    else if (x <= 0 && y < 0) quad = 180; // 180~270°
+    else quad = 270;                     // 270~360°
 
-    if (ax == 0) degrees = 90;
-    else if (ay == 0) degrees = 0;
-    else
-    {
-        if (ay > ax) degrees = 90 - (ax * 45) / ay;
-        else         degrees = (ay * 45) / ax;
-    }
+    // 4. 核心：无乘除！只判断 0° / 45° / 90°
+    int degrees;
+    if (ax == 0)        degrees = 90;  // 垂直向上
+    else if (ay == 0)   degrees = 0;   // 水平向右
+    else if (ay > ax)   degrees = 45;  // 0~45°区间
+    else                degrees = 45;  // 45~90°区间
 
     degrees += quad;
 
-    if (angle_s < angle_e)
-    {
+    // 5. 角度范围判断
+    if (angle_s < angle_e) {
         return (degrees >= angle_s && degrees <= angle_e);
-    }
-    else
-    {
+    } else {
         return (degrees >= angle_s || degrees <= angle_e);
     }
 }
-
 
 
 
@@ -476,14 +428,15 @@ static uint8_t Gui_PointInAngle(int x, int y, int angle_s, int angle_e)
 // angleStart, angleEnd：0~360
 // color：颜色
 // isSector：0=圆弧  1=扇形
+// 【弱CPU优化】圆弧/扇形绘制（无慢运算）
 void Gui_DrawSector_M0(uint16_t X0, uint16_t Y0, uint16_t R,
                        int angleStart, int angleEnd,
                        uint16_t color, uint8_t isSector)
 {
     int x = 0, y = R;
-    int d = 3 - 2 * R;
+    int d = 3 - (R << 1);  // 2*R → 位移，无乘法
 
-    // 画8对称点，但只画在角度范围内的
+    // 8对称点画弧（仅判断角度）
     while (x <= y)
     {
         if (Gui_PointInAngle( x,  y, angleStart, angleEnd)) Gui_DrawPoint(X0 + x, Y0 - y, color);
@@ -495,32 +448,30 @@ void Gui_DrawSector_M0(uint16_t X0, uint16_t Y0, uint16_t R,
         if (Gui_PointInAngle( y, -x, angleStart, angleEnd)) Gui_DrawPoint(X0 + y, Y0 + x, color);
         if (Gui_PointInAngle(-y, -x, angleStart, angleEnd)) Gui_DrawPoint(X0 - y, Y0 + x, color);
 
-        if (d < 0)
-        {
-            d += 4 * x + 6;
-        }
-        else
-        {
-            d += 4 * (x - y) + 10;
+        // Bresenham 核心：无乘法，全部位移
+        if (d < 0) {
+            d += (x << 2) + 6;    // 4*x → 位移
+        } else {
+            d += ((x - y) << 2) + 10; // 4*(x-y) → 位移
             y--;
         }
         x++;
     }
 
-    // 如果是扇形，画两条边线
+    // 扇形边线（使用你优化后的超快直线）
     if (isSector)
     {
-        int x1 = X0 + R;
-        int y1 = Y0;
-        int x2 = X0;
-        int y2 = Y0 - R;
+        // 起始角度边线
+        int sx = X0 + R;
+        int sy = Y0;
+        Gui_DrawLine(X0, Y0, sx, sy, color);
 
-        Gui_DrawLine(X0, Y0, x1, y1, color);
-        Gui_DrawLine(X0, Y0, x2, y2, color);
+        // 结束角度边线
+        int ex = X0;
+        int ey = Y0 - R;
+        Gui_DrawLine(X0, Y0, ex, ey, color);
     }
 }
-
-
 
 
 
@@ -606,7 +557,7 @@ void Gui_ProgressBar(uint16_t x0, uint16_t y0, uint16_t w, uint16_t h,
 
 
 
-
+#if 0
 // 内部辅助：判断角度并画点（纯整数，超快）
 static void DrawArcPoint(uint16_t cx, uint16_t cy, int x, int y,
                          int sa, int ea, uint16_t color)
@@ -619,6 +570,50 @@ static void DrawArcPoint(uint16_t cx, uint16_t cy, int x, int y,
     else if(x <= 0 && y < 0) angle = 180 + ((-x)*45)/(-y);
     else angle = 270 - ((x)*45)/(-y);
 
+    if( (angle >= sa && angle <= ea) ||
+        (sa > ea && (angle >= sa || angle <= ea)) )
+    {
+        Gui_DrawPoint(cx + x, cy + y, color);
+    }
+}
+#endif
+
+
+// 【弱CPU终极优化】圆弧画点：无除法、无乘法、极快
+static void DrawArcPoint(uint16_t cx, uint16_t cy, int x, int y,
+                         int sa, int ea, uint16_t color)
+{
+    uint8_t quad;  // 象限：1~4
+    int ax, ay;
+
+    // 1. 原点直接返回（极快判断）
+    if(x == 0 && y == 0) return;
+
+    // 2. 取绝对值（无运算，仅符号处理）
+    ax = (x < 0) ? -x : x;
+    ay = (y < 0) ? -y : y;
+
+    // 3. 快速判断象限（无运算）
+    if(x >= 0 && y > 0)  quad = 1;    // 第一象限 0~90°
+    else if(x < 0 && y >= 0) quad = 2; // 第二象限 90~180°
+    else if(x <= 0 && y < 0) quad = 3; // 第三象限 180~270°
+    else quad = 4;                     // 第四象限 270~360°
+
+    // 4. 核心优化：用 ax/ay 大小判断角度区间，**无除法！无乘法！**
+    //  Bresenham 圆弧 x<=y 区间，只需要判断 0°、45°、90° 三个点
+    uint8_t ang_part;
+    if(ax == 0) ang_part = 0;        // 0°
+    else if(ay > ax) ang_part = 45; // 0~45°
+    else ang_part = 90;             // 45~90°
+
+    // 5. 直接计算角度（纯加法，极快）
+    int angle;
+    if(quad == 1) angle = ang_part;
+    else if(quad == 2) angle = 180 - ang_part;
+    else if(quad == 3) angle = 180 + ang_part;
+    else angle = 360 - ang_part;
+
+    // 6. 角度区间判断（不变）
     if( (angle >= sa && angle <= ea) ||
         (sa > ea && (angle >= sa || angle <= ea)) )
     {
@@ -646,7 +641,8 @@ void Gui_DrawArc(uint16_t x0, uint16_t y0, uint16_t r,
                  int16_t sa, int16_t ea, uint16_t color)
 {
     int x = 0, y = r;
-    int d = 3 - 2 * r;
+    //int d = 3 - 2 * r;
+	  int d = 3 - (r << 1);  // 2*r → 位移，无乘法
 
     while (x <= y)
     {
@@ -661,10 +657,12 @@ void Gui_DrawArc(uint16_t x0, uint16_t y0, uint16_t r,
         DrawArcPoint(x0, y0,-y,-x, sa, ea, color);
 
         if (d < 0)
-            d += 4 * x + 6;
+            //d += 4 * x + 6;
+				    d += (x << 2) + 6;  // 4*x → 位移
         else
         {
-            d += 4 * (x - y) + 10;
+            //d += 4 * (x - y) + 10;
+					  d += ((x - y) << 2) + 10;  // 4*(x-y) → 位移
             y--;
         }
         x++;
@@ -725,7 +723,8 @@ void GuiShowString(uint16_t x, uint16_t y, uint16_t fc, uint16_t bc, uint8_t *s)
 				for (i = 0; i < 16; i++){
 					for (j = 0; j < 8; j++)
 					{
-						if (asc16[k * 16 + i] & (0x80 >> j))
+					  //if (asc16[k * 16 + i] & (0x80 >> j))
+						if (asc16[(k<<4)+ i] & (0x80 >> j))
 							Gui_DrawPoint(x + j, y + i, fc);
 						else
 						{

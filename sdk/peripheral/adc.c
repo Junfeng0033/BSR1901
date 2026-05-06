@@ -589,7 +589,7 @@ uint16 adc_buck_curr_read(void)
 	//char *string;
 	uint16 rawdata=GeckoGpadcGetRawData(GPADC_CHAN_7);
 	
-	uint16 mv=(rawdata*1.2)/1023;
+	uint16 mv=(rawdata*1.2)/4095;
 	
 	printf("\r\n adc_buck_curr_read  mv = %d",mv);	
 
@@ -610,7 +610,7 @@ uint16 adc_vbatvalue_read(void)
 	//char *string;
 	uint16 rawdata=GeckoGpadcGetRawData(GPADC_CHAN_4);
 	//uint16 mv = GeckoGpadcRawData2Volt(rawdata);
-	uint16 mv=(rawdata*1.2)/1023;
+	uint16 mv=(rawdata*1.2)/4095;
 	
 	return mv;	
 	//return 0x0;

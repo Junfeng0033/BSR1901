@@ -7,16 +7,7 @@
 
 
 
-
-
-
-/* Boot Option */
-
-
-
 #define  DEBUG_UATR0_PRINT_LOG            1
-
-
 
 
 /* Debug option */
@@ -27,6 +18,11 @@
 #endif
 
 
+
+
+
+
+/* Boot Option */
 
 #ifdef ROM_BOOT  
 {  
@@ -39,6 +35,9 @@
 #define  GEK1108_FLASH_BOOT				1  
 }  
 #endif
+
+
+
 
 
 typedef unsigned char   	uint8;
@@ -128,10 +127,6 @@ typedef volatile unsigned int       REG32;
 #define SET_BITFIELD(reg, field, value)     (((reg) & ~field ## _MASK) | field(value))
 #define GET_BITFIELD(reg, field)            (((reg) & field ## _MASK) >> field ## _SHIFT)
 
-
-
-//#define SET_BITFIELD(reg, field, value)     (((reg) & ~field ## _MASK) | field(value))
-//#define GET_BITFIELD(reg, field)            (((reg) & field ## _MASK) >> field ## _SHIFT)
 
 
 

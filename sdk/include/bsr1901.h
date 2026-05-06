@@ -12,6 +12,19 @@
 #define BIT(n)            ((unsigned int) 1 << (n))
 //#define BIT(x)          (1<<(x))
 
+
+
+
+#define GECKO_READ_REGISTER(_register_)                      		(*(volatile uint32*)(_register_))
+#define HWreg_Get_Register(_register_)                      		(*(volatile uint32*)(_register_))
+	
+#define GECKO_WRITE_REGISTER(_register_,_value_)                (*(volatile uint32*)(_register_)) = (uint32)(_value_)
+#define HWreg_Assign_Register(_register_,_value_)               (*(volatile uint32*)(_register_)) = (uint32)(_value_)
+
+
+
+
+
 /*
 //AON Default Value
 //uint32 AON_BASE_ADDR_0x2C_Default=0;
@@ -45,7 +58,6 @@
 #define  MOS_TEST_EN			1
 
 
-
 //#define  CHRG_INSET_DET_EN	1
 
 #define  MIC_DET_EN		1
@@ -60,57 +72,6 @@
 #define    BSR1901_SPI_MASTER_TEST      0
 
 
-
-
-
-
-#if 0
-
-
-#define     __I     volatile                  /*!< defines 'read only' permissions      */
-#define     __O     volatile                  /*!< defines 'write only' permissions     */
-#define     __IO    volatile                  /*!< defines 'read / write' permissions   */
-
-
-
-
-
-
-#define BIT0  0x0001
-#define BIT1  0x0002
-#define BIT2  0x0004
-#define BIT3  0x0008
-#define BIT4  0x0010
-#define BIT5  0x0020
-#define BIT6  0x0040
-#define BIT7  0x0080
-#define BIT8  0x0100
-#define BIT9  0x0200
-#define BIT10 0x0400
-#define BIT11 0x0800
-#define BIT12 0x1000
-#define BIT13 0x2000
-#define BIT14 0x4000
-#define BIT15 0x8000
-
-#define BIT16 0x00010000
-#define BIT17 0x00020000
-#define BIT18 0x00040000
-#define BIT19 0x00080000
-#define BIT20 0x00100000
-#define BIT21 0x00200000
-#define BIT22 0x00400000
-#define BIT23 0x00800000L
-#define BIT24 0x01000000L
-#define BIT25 0x02000000L
-#define BIT26 0x04000000L
-#define BIT27 0x08000000L
-#define BIT28 0x10000000L
-#define BIT29 0x20000000L
-#define BIT30 0x40000000L
-#define BIT31 0x80000000UL
-
-#endif
 
 
 
@@ -252,20 +213,8 @@ assign irq_raw = {
 
 
 
-
-
 #endif
 
-
-
-
-
-
-#define GECKO_READ_REGISTER(_register_)                      		(*(volatile uint32*)(_register_))
-#define HWreg_Get_Register(_register_)                      		(*(volatile uint32*)(_register_))
-	
-#define GECKO_WRITE_REGISTER(_register_,_value_)                (*(volatile uint32*)(_register_)) = (uint32)(_value_)
-#define HWreg_Assign_Register(_register_,_value_)               (*(volatile uint32*)(_register_)) = (uint32)(_value_)
 
 
 
@@ -277,12 +226,6 @@ assign irq_raw = {
 /******************************************************************************/
 /*                         Peripheral declaration                             */
 /******************************************************************************/
-
-
-
-
-
-
 
 
 
@@ -453,36 +396,13 @@ typedef struct
   */
 
 
-#if 0
-/* Memory mapping of Cortex-M0 Hardware */
-#define SCS_BASE            (0xE000E000UL)                            /*!< System Control Space Base Address */
-#define NVIC_BASE           (SCS_BASE +  0x0100UL)                    /*!< NVIC Base Address */
-#define SCB_BASE            (SCS_BASE +  0x0D00UL)   
-
-#define SCB                 ((SCB_Type       *)     SCB_BASE      )   /*!< SCB configuration struct */
-#define NVIC                ((NVIC_Type      *)     NVIC_BASE     )   /*!< NVIC configuration struct */
-#endif
-
-
-
-
 /** \ingroup  CMSIS_core_register
     \defgroup CMSIS_SysTick     System Tick Timer (SysTick)
     \brief      Type definitions for the System Timer Registers.
   @{
  */
 
-#if 0
-/** \brief  Structure type to access the System Timer (SysTick).
- */
-typedef struct
-{
-  __IO uint32_t CTRL;                    /*!< Offset: 0x000 (R/W)  SysTick Control and Status Register */
-  __IO uint32_t LOAD;                    /*!< Offset: 0x004 (R/W)  SysTick Reload Value Register       */
-  __IO uint32_t VAL;                     /*!< Offset: 0x008 (R/W)  SysTick Current Value Register      */
-  __I  uint32_t CALIB;                   /*!< Offset: 0x00C (R/ )  SysTick Calibration Register        */
-} SysTick_Type;
-#endif
+
 
 /* SysTick Control / Status Register Definitions */
 #define SysTick_CTRL_COUNTFLAG_Pos         16                                             /*!< SysTick CTRL: COUNTFLAG Position */
@@ -516,6 +436,9 @@ typedef struct
 #define SysTick_CALIB_TENMS_Msk            (0xFFFFFFUL /*<< SysTick_CALIB_TENMS_Pos*/)    /*!< SysTick CALIB: TENMS Mask */
 
 /*@} end of group CMSIS_SysTick */
+
+
+
 
 
 

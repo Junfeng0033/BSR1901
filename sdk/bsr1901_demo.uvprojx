@@ -533,6 +533,16 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>rle_dec</GroupName>
+          <Files>
+            <File>
+              <FileName>rle_dec.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\RLE_decompression\rle_dec.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>img_res</GroupName>
           <Files>
             <File>

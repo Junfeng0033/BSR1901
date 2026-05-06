@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\bsr1901_demo.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\bsr1901_demo.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Tue May 05 20:05:28 2026
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Wed May 06 11:15:08 2026
 <BR><P>
 <H3>Maximum Stack Usage =        200 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -203,8 +203,7 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[30]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_uidivmod
 </UL>
-<BR>[Called By]<UL><LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DrawArcPoint
-<LI><a href="#[66]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Gui_ProgressBar
+<BR>[Called By]<UL><LI><a href="#[66]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Gui_ProgressBar
 </UL>
 
 <P><STRONG><a name="[ad]"></a>__aeabi_uread4</STRONG> (Thumb, 20 bytes, Stack size 0 bytes, uread4.o(.text), UNUSED)
@@ -520,7 +519,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[5f]"></a>Gui_DrawArc</STRONG> (Thumb, 222 bytes, Stack size 72 bytes, gui.o(i.Gui_DrawArc))
-<BR><BR>[Stack]<UL><LI>Max Depth = 152<LI>Call Chain = Gui_DrawArc &rArr; DrawArcPoint &rArr; Gui_DrawPoint &rArr; Lcd_SetRegion &rArr; Lcd_WriteIndex
+<BR><BR>[Stack]<UL><LI>Max Depth = 136<LI>Call Chain = Gui_DrawArc &rArr; DrawArcPoint &rArr; Gui_DrawPoint &rArr; Lcd_SetRegion &rArr; Lcd_WriteIndex
 </UL>
 <BR>[Calls]<UL><LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DrawArcPoint
 </UL>
@@ -869,7 +868,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[8b]"></a>Task_UI_Refresh</STRONG> (Thumb, 32 bytes, Stack size 16 bytes, gui.o(i.Task_UI_Refresh))
-<BR><BR>[Stack]<UL><LI>Max Depth = 168<LI>Call Chain = Task_UI_Refresh &rArr; Gui_DrawArc &rArr; DrawArcPoint &rArr; Gui_DrawPoint &rArr; Lcd_SetRegion &rArr; Lcd_WriteIndex
+<BR><BR>[Stack]<UL><LI>Max Depth = 152<LI>Call Chain = Task_UI_Refresh &rArr; ui_paint_bat_percent &rArr; ShowNum_48 &rArr; Lcd_Write_data_dma &rArr; Gecko_DMA_Transport
 </UL>
 <BR>[Calls]<UL><LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ui_paint_bat_percent
 <LI><a href="#[5f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Gui_DrawArc
@@ -1355,11 +1354,10 @@ Local Symbols
 <P><STRONG><a name="[16]"></a>GPIO_A0_IRQHandler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup_cm0.o(.text))
 <BR>[Address Reference Count : 1]<UL><LI> startup_cm0.o(RESET)
 </UL>
-<P><STRONG><a name="[54]"></a>DrawArcPoint</STRONG> (Thumb, 134 bytes, Stack size 40 bytes, gui.o(i.DrawArcPoint))
-<BR><BR>[Stack]<UL><LI>Max Depth = 80<LI>Call Chain = DrawArcPoint &rArr; Gui_DrawPoint &rArr; Lcd_SetRegion &rArr; Lcd_WriteIndex
+<P><STRONG><a name="[54]"></a>DrawArcPoint</STRONG> (Thumb, 150 bytes, Stack size 24 bytes, gui.o(i.DrawArcPoint))
+<BR><BR>[Stack]<UL><LI>Max Depth = 64<LI>Call Chain = DrawArcPoint &rArr; Gui_DrawPoint &rArr; Lcd_SetRegion &rArr; Lcd_WriteIndex
 </UL>
 <BR>[Calls]<UL><LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Gui_DrawPoint
-<LI><a href="#[2f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_idivmod
 </UL>
 <BR>[Called By]<UL><LI><a href="#[5f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Gui_DrawArc
 </UL>
