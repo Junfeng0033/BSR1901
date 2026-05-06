@@ -72,6 +72,8 @@ extern void get_chg_vbus_voltage(void);
 extern void get_voltage_battery(void);
 extern void get_voltage_vsys(void);
 
+extern void Task_BMS_Update(void);
+
 extern uint8 K27_KEY_Detect(void);
 	
 extern void ui_paint_color_circle(void);
@@ -109,7 +111,8 @@ extern unsigned int gImage_128x128_star_32bit[8192];
 extern unsigned int gImage_128x128_cake_32bit[8192];
 extern  unsigned char gImage_128x128_cake[32768];
 extern  unsigned char gImage_128x128_star[32768];
-extern  unsigned char gImage_128x128_battery[32768];
+
+extern  const unsigned char gImage_128x128_battery[32768];
 
 //extern unsigned char gImage_bat_90x49[8820];
 extern const unsigned char gImage_circle_100x100[20000];

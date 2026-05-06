@@ -243,7 +243,7 @@ void HW_SPI_Tx(HAL_SPI_ID_T id,uint8 *pData, uint16 DataLen)
 
 
 
-void HW_SPI_Tx_DMA_32bit(HAL_SPI_ID_T id,uint16 *pData, uint16 DataLen)
+void HW_SPI_Tx_DMA_32bit(uint16 *pData, uint16 DataLen)
 {
 	LCD_RS_SET;	
   SPI_32bit_Transfer();
@@ -277,7 +277,7 @@ When testing LCD color blocks, call "HW_SPI_Tx_DMA_16bit_ColorBlock" function
 
 *************************************************************************************/
 
-void HW_SPI_Tx_DMA_16bit_ColorBlock(HAL_SPI_ID_T id,uint16 *pData, uint16 DataLen)
+void HW_SPI_Tx_DMA_16bit_ColorBlock(uint16 *pData, uint16 DataLen)
 {
 	LCD_RS_SET;	
   SPI_16bit_Transfer();
@@ -295,7 +295,7 @@ void HW_SPI_Tx_DMA_16bit_ColorBlock(HAL_SPI_ID_T id,uint16 *pData, uint16 DataLe
 
 
 
-void HW_SPI_Tx_DMA(HAL_SPI_ID_T id,uint16 *pData, uint16 DataLen)
+void HW_SPI_Tx_DMA(uint16 *pData, uint16 DataLen)
 {
 	LCD_RS_SET;
   SPI_8bit_Transfer();
@@ -310,7 +310,7 @@ void HW_SPI_Tx_DMA(HAL_SPI_ID_T id,uint16 *pData, uint16 DataLen)
 
 
 
-void HW_SPI_Tx_DMA_8bit(HAL_SPI_ID_T id,uint16 *pData, uint16 DataLen)
+void HW_SPI_Tx_DMA_8bit(uint16 *pData, uint16 DataLen)
 {
 	LCD_RS_SET;
   SPI_8bit_Transfer();
@@ -355,7 +355,7 @@ void Lcd_Write_data_dma(uint8_t *p_data, uint16_t len)
 
 #if 0
 
-__RAM_CODE__ void HW_SPI_Tx_DMA(HAL_SPI_ID_T id,uint16 *pData, uint16 DataLen)
+__RAM_CODE__ void HW_SPI_Tx_DMA(uint16 *pData, uint16 DataLen)
 {
 	LCD_RS_SET;
   SPI_8bit_Transfer();
@@ -394,7 +394,7 @@ void lcd_dma_refresh_colorblock(uint16_t xs, uint16_t ys, uint16_t w, uint16_t h
 	
 	Lcd_SetRegion(xs, ys, xs+w-1, ys+h-1);	
 	
-	HW_SPI_Tx_DMA_16bit_ColorBlock(HAL_SPI_0,color,len);
+	HW_SPI_Tx_DMA_16bit_ColorBlock(color,len);
 	
 }
 
@@ -719,105 +719,105 @@ void BSR1901_FireEye_Demo(void)
 	SPI_8bit_Transfer();
   Lcd_SetRegion(0, 30, 159, 159);		
 	SPI_32bit_Transfer();
-	HW_SPI_Tx_DMA_32bit(HAL_SPI_0, (uint16*)fire_eye_1, 12800);	
+	HW_SPI_Tx_DMA_32bit((uint16*)fire_eye_1, 12800);	
 
 	delay_1us(9500);
 
 	SPI_8bit_Transfer();
   Lcd_SetRegion(0, 30, 159, 159);		
 	SPI_32bit_Transfer();
-	HW_SPI_Tx_DMA_32bit(HAL_SPI_0, (uint16*)fire_eye_2, 12800);	
+	HW_SPI_Tx_DMA_32bit((uint16*)fire_eye_2, 12800);	
 
 	delay_1us(9500);
 
 	SPI_8bit_Transfer();
   Lcd_SetRegion(0, 30, 159, 159);		
 	SPI_32bit_Transfer();
-	HW_SPI_Tx_DMA_32bit(HAL_SPI_0, (uint16*)fire_eye_3, 12800);	
+	HW_SPI_Tx_DMA_32bit((uint16*)fire_eye_3, 12800);	
 
 	delay_1us(9500);
 
 	SPI_8bit_Transfer();
   Lcd_SetRegion(0, 30, 159, 159);		
 	SPI_32bit_Transfer();
-	HW_SPI_Tx_DMA_32bit(HAL_SPI_0, (uint16*)fire_eye_4, 12800);	
+	HW_SPI_Tx_DMA_32bit((uint16*)fire_eye_4, 12800);	
 
 	delay_1us(9500);
 
 	SPI_8bit_Transfer();
   Lcd_SetRegion(0, 30, 159, 159);		
 	SPI_32bit_Transfer();
-	HW_SPI_Tx_DMA_32bit(HAL_SPI_0, (uint16*)fire_eye_5, 12800);	
+	HW_SPI_Tx_DMA_32bit((uint16*)fire_eye_5, 12800);	
 
 	delay_1us(9500);
 
 	SPI_8bit_Transfer();
   Lcd_SetRegion(0, 30, 159, 159);		
 	SPI_32bit_Transfer();
-	HW_SPI_Tx_DMA_32bit(HAL_SPI_0, (uint16*)fire_eye_6, 12800);	
+	HW_SPI_Tx_DMA_32bit((uint16*)fire_eye_6, 12800);	
 
 	delay_1us(9500);
 
 	SPI_8bit_Transfer();
   Lcd_SetRegion(0, 30, 159, 159);		
 	SPI_32bit_Transfer();
-	HW_SPI_Tx_DMA_32bit(HAL_SPI_0, (uint16*)fire_eye_7, 12800);	
+	HW_SPI_Tx_DMA_32bit((uint16*)fire_eye_7, 12800);	
 
 	delay_1us(9500);
 
 	SPI_8bit_Transfer();
   Lcd_SetRegion(0, 30, 159, 159);		
 	SPI_32bit_Transfer();
-	HW_SPI_Tx_DMA_32bit(HAL_SPI_0, (uint16*)fire_eye_8, 12800);	
+	HW_SPI_Tx_DMA_32bit((uint16*)fire_eye_8, 12800);	
 
 	delay_1us(9500);
 
 	SPI_8bit_Transfer();
   Lcd_SetRegion(0, 30, 159, 159);		
 	SPI_32bit_Transfer();
-	HW_SPI_Tx_DMA_32bit(HAL_SPI_0, (uint16*)fire_eye_7, 12800);	
+	HW_SPI_Tx_DMA_32bit((uint16*)fire_eye_7, 12800);	
 
 	delay_1us(9500);
 
 	SPI_8bit_Transfer();
   Lcd_SetRegion(0, 30, 159, 159);		
 	SPI_32bit_Transfer();
-	HW_SPI_Tx_DMA_32bit(HAL_SPI_0, (uint16*)fire_eye_6, 12800);	
+	HW_SPI_Tx_DMA_32bit((uint16*)fire_eye_6, 12800);	
 
 	delay_1us(9500);
 
 	SPI_8bit_Transfer();
   Lcd_SetRegion(0, 30, 159, 159);		
 	SPI_32bit_Transfer();
-	HW_SPI_Tx_DMA_32bit(HAL_SPI_0, (uint16*)fire_eye_5, 12800);	
+	HW_SPI_Tx_DMA_32bit((uint16*)fire_eye_5, 12800);	
 
 	delay_1us(9500);
 
 	SPI_8bit_Transfer();
   Lcd_SetRegion(0, 30, 159, 159);		
 	SPI_32bit_Transfer();
-	HW_SPI_Tx_DMA_32bit(HAL_SPI_0, (uint16*)fire_eye_4, 12800);	
+	HW_SPI_Tx_DMA_32bit((uint16*)fire_eye_4, 12800);	
 
 	delay_1us(9500);
 
 	SPI_8bit_Transfer();
   Lcd_SetRegion(0, 30, 159, 159);		
 	SPI_32bit_Transfer();
-	HW_SPI_Tx_DMA_32bit(HAL_SPI_0, (uint16*)fire_eye_3, 12800);	
+	HW_SPI_Tx_DMA_32bit((uint16*)fire_eye_3, 12800);	
 
 	delay_1us(9500);
 
 	SPI_8bit_Transfer();
   Lcd_SetRegion(0, 30, 159, 159);		
 	SPI_32bit_Transfer();
-	HW_SPI_Tx_DMA_32bit(HAL_SPI_0, (uint16*)fire_eye_2, 12800);	
+	HW_SPI_Tx_DMA_32bit((uint16*)fire_eye_2, 12800);	
 
 	delay_1us(9500);
 
 	SPI_8bit_Transfer();
   Lcd_SetRegion(0, 30, 159, 159);		
 	SPI_32bit_Transfer();
-	HW_SPI_Tx_DMA_32bit(HAL_SPI_0, (uint16*)fire_eye_1, 12800);	
+	HW_SPI_Tx_DMA_32bit((uint16*)fire_eye_1, 12800);	
 
 	delay_1us(9500);
 

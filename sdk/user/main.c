@@ -153,16 +153,16 @@ int main (void)
 
 
 
-	HW_SPI_Tx_DMA_32bit(HAL_SPI_0, (uint16*)gImage_128x128_star_32bit, 8192);	
+	HW_SPI_Tx_DMA_32bit((uint16*)gImage_128x128_star_32bit, 8192);	
 
 	delay_1us(10000);	
-  //HW_SPI_Tx_DMA_32bit(HAL_SPI_0, (uint16*)gImage_128x128_cake_32bit, 8192);	
+  //HW_SPI_Tx_DMA_32bit((uint16*)gImage_128x128_cake_32bit, 8192);	
 
 	
-	HW_SPI_Tx_DMA_32bit(HAL_SPI_0, (uint16*)gImage_128x128_charging_32bit, 8192);
+	HW_SPI_Tx_DMA_32bit((uint16*)gImage_128x128_charging_32bit, 8192);
 	delay_1us(8000);
 	
-	HW_SPI_Tx_DMA_32bit(HAL_SPI_0, (uint16*)gImage_128x128_battery_32b, 8192);
+	HW_SPI_Tx_DMA_32bit((uint16*)gImage_128x128_battery_32b, 8192);
 	delay_1us(8000);
 
   uint16_t blue_color = BLACK;//C_TOMATO;//C_BLACK;//C_BLUE;
@@ -171,12 +171,12 @@ int main (void)
 	
 
 	Lcd_SetRegion(20, 39, 109, 87);
-	HW_SPI_Tx_DMA(HAL_SPI_0, (uint16*)gImage_bat_90x49, 8820);
+	HW_SPI_Tx_DMA((uint16*)gImage_bat_90x49, 8820);
 
 	
 	Lcd_SetRegion(10, 10, 109, 109);
-	//HW_SPI_Tx_DMA(HAL_SPI_0, (uint16*)gImage_circle_100x100, 20000);
-	HW_SPI_Tx_DMA_8bit(HAL_SPI_0, (uint16*)gImage_circle_100x100, 20000);	
+	//HW_SPI_Tx_DMA((uint16*)gImage_circle_100x100, 20000);
+	HW_SPI_Tx_DMA_8bit((uint16*)gImage_circle_100x100, 20000);	
 	delay_1us(8000);
  
 	ui_paint_color_circle();
@@ -347,7 +347,10 @@ int main (void)
 		if (current_tick % 100 == 0) Get_Vbat_Voltage();
 		if (current_tick % 100 == 0) Task_Charger_Control();	
 
-		if (current_tick % 200 == 0) Task_UI_Refresh();		
+		if (current_tick % 200 == 0) Task_UI_Refresh();	
+
+		if (current_tick % 200 == 0) Task_BMS_Update();	
+		
 		
 	}
 	

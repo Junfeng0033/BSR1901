@@ -2,12 +2,23 @@
 
 RLE_decompression
 
-RLE压缩基本不占CPU的
+RLE解压缩
 
 *****************************************************************************************************/
 /******************************************************************************************************
 
 //游程编码（Run-Length Encoding, RLE）压缩算法
+
+
+例:在"RGB565原始RLE压缩"数据储存格式 =
+{
+  dat0的数量,dat0h,dat0l,
+  dat1的数量,dat1h,dat1l,
+  ...,
+  datn的数量,datnh,datnl,
+  0x00,//0x00表示结束
+};
+
 
 ******************************************************************************************************/
 
@@ -25,6 +36,12 @@ RLE压缩基本不占CPU的
 
 //hwp_spi0->CTROL=0x10f9b;							//16bit spi data
 #define 	SPI_Write16bitData(data) 			{hwp_spi0->CTROL = 0x10f9b;hwp_spi0->FIFODATA = data;}
+
+
+extern void Lcd_Write_data_dma(uint8_t *p_data, uint16_t len);
+extern void HW_SPI_Tx_DMA_16bit_ColorBlock(uint16 *pData, uint16 DataLen);
+
+
 
 
 #if 0
@@ -57,6 +74,57 @@ input lsbf;
 	
 }
 
+
+
+
+
+
+// 【核心DMA函数】一次性发送 count 个相同RGB565像素
+// 无buf、无拷贝、纯硬件重复发送
+void Lcd_Write_color_repeat_dma(uint8_t dh, uint8_t dl, uint8_t count)
+{
+    // 1. 把颜色放入DMA源寄存器（仅2字节，无数组）
+    //uint8_t dma_src_buf[2] = {dh, dl};  // 栈上2字节，不浪费RAM
+		
+		uint16_t color = (dh << 8) | dl;
+
+    // 2. 配置DMA：重复发送2字节，总长度 count*2
+    // 底层DMA自动循环发送这2字节，CPU不参与
+    //Lcd_Write_data_dma(dma_src_buf, count * 2);
+		HW_SPI_Tx_DMA_16bit_ColorBlock(&color,count);
+}
+
+
+// 【真正终极版】RGB565 RLE解码
+// ✅ 无任何buf   ✅ 无任何拷贝
+// ✅ 一次DMA    ✅ 发完count个像素
+// ✅ CPU零占用  ✅ 速度拉满
+void TFT565_draw_arry_rle2_img(uint16_t x, uint16_t y, 
+                               uint16_t sizex, uint16_t sizey, 
+                               const uint8_t *arry)
+{
+    const uint8_t *p = arry;
+    uint8_t count;
+
+    // 1. 配置LCD窗口（一次）
+    Lcd_SetRegion(x, y, x+sizex-1, y+sizey-1);
+
+    // 2. RLE解码（极简、高效）
+    while( (count = *p++) != 0 )
+    {
+        // 直接读取RLE里的像素数据（无拷贝）
+        uint8_t dh = *p++;
+        uint8_t dl = *p++;
+
+        // =============================================
+        // 【关键】DMA 配置为：重复发送2字节 count次
+        // 一次配置，硬件自动发完，CPU直接走人
+        // =============================================
+        Lcd_Write_color_repeat_dma(dh, dl, count);
+    }
+}
+
+
 #endif
 
 
@@ -64,42 +132,39 @@ input lsbf;
 
 
 
-//RGB565原始E数好据解压例程:
+//RGB565原始RLE数据解压例程:
 //字符串或数组解码例程(无文件头)RLE-2解码
-void TFT565_draw_arry_rle2_img(uint16_t x,uint16_t y, uint16_t sizex, uint16_t sizey, const uint8_t *arry)
+
+void TFT565_draw_arry_rle2_img(uint16_t x, uint16_t y, uint16_t sizex, uint16_t sizey, const uint8_t *arry)
 {
+    uint8_t count;      // 寄存器变量，最快访问
+    //uint8_t dh, dl;
+	  uint8_t dat[2];
+    const uint8_t *p = arry;     // 用局部指针更快，减少全局访问
 
-	  uint8_t num,dat0,dat1;
-	
-		Lcd_SetRegion(x, y, x + sizex - 1, y + sizey - 1);
-	
-		while (1) 
-		{ 	
-				num = *arry++;
+    // 设置显示区域（只执行1次，不动它）
+    Lcd_SetRegion(x, y, x + sizex - 1, y + sizey - 1);
+
+    // 主循环：RLE 块读取
+    for (;;) {
+        count = *p++;
+        if (count == 0) break;   // 结束符 0x00
 			
-				if (num == 0) 
-				{
-						break;
-				}
-				
-				dat0 = *arry++;
-				dat1 = *arry++;	
-				
-				while (num--) 
-				{
- 
-					  SPI_WriteData(dat0);//高8位
-						SPI_WriteData(dat1);//低8位
+				// 读取RGB565颜色（2字节）
+        dat[0] = *p++;
+        dat[1] = *p++;
+		
+        // ==============================
+        // 核心优化：纯发送循环，无任何多余操作
+        // ==============================
+        do {
+            SPI_WriteData(dat[0]);//高8位
+            SPI_WriteData(dat[1]);//低8位
+					  //SPI_Write16bitData(dat[0]<<8|dat[1] );//LSBF (1<<6) // 1'b0:MSB first (高位在前)
+        } while (--count);
 
-					  //SPI_Write16bitData(dat0<<8|dat1 );//LSBF (1<<6) // 1'b0:MSB first (高位在前)
-				}
-		}
-
+    }
 }
-
-
-
-
 
 
 

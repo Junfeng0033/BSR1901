@@ -717,12 +717,17 @@ extern void gpio_i2c_rdabt_rf_write_data(UINT32 addr,unsigned char regaddr, unsi
 extern void gpio_i2c_rdabt_rf_read_data(UINT32 addr,unsigned char regaddr, unsigned char *data, unsigned char datalen);
 
 
+extern void HW_SPI_Tx_DMA_8bit(uint16 *pData, uint16 DataLen);
 
 
 //unsigned char gek1109_ipxs_readByte(unsigned char deviceAddr, unsigned char regAddr);
 
 //void gek1109_ipxs_writeByte(unsigned char deviceAddr, unsigned char regAddr, unsigned char sendByte);
 
+
+extern const unsigned char gImage_charging[32768];
+extern const unsigned int gImage_128x128_battery_32b[8192];
+extern const unsigned char gImage_128x128_battery[32768];
 
 
 #endif

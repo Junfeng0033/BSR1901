@@ -19,8 +19,9 @@ extern void NVIC_EnableIRQ(IRQn_Type IRQn);
 extern void NVIC_DisableIRQ(IRQn_Type IRQn);
 
 
-extern void HW_SPI_Tx_DMA(HAL_SPI_ID_T id,uint16 *pData, uint16 DataLen);
-extern void HW_SPI_Tx_DMA_8bit(HAL_SPI_ID_T id,uint16 *pData, uint16 DataLen);
+extern void HW_SPI_Tx_DMA(uint16 *pData, uint16 DataLen);
+
+extern void HW_SPI_Tx_DMA_8bit(uint16 *pData, uint16 DataLen);
 
 uint16 location = 0;
 
@@ -186,9 +187,9 @@ void DMA_ISR_Routine(void)
 
 
 //	if(location)
-//		HW_SPI_Tx_DMA(HAL_SPI_0, gImage_libai, 25600);
+//		HW_SPI_Tx_DMA(gImage_libai, 25600);
 //	else 
-//		HW_SPI_Tx_DMA(HAL_SPI_0, gImage_taizi, 25600);
+//		HW_SPI_Tx_DMA(gImage_taizi, 25600);
   
 
 	

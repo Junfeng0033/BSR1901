@@ -1033,11 +1033,11 @@ void Task_UI_Refresh(void)
 
 //		if(count%10 == 1){
 //			if(count <= 10)
-//				HW_SPI_Tx_DMA(HAL_SPI_0, (uint16*)gImage_charge_10, 20000);
+//				HW_SPI_Tx_DMA((uint16*)gImage_charge_10, 20000);
 //			if(count <= 20)
-//				HW_SPI_Tx_DMA(HAL_SPI_0, (uint16*)gImage_charge_20, 20000);
+//				HW_SPI_Tx_DMA((uint16*)gImage_charge_20, 20000);
 //			if(count <= 30)
-//				HW_SPI_Tx_DMA(HAL_SPI_0, (uint16*)gImage_charge_30, 20000);
+//				HW_SPI_Tx_DMA((uint16*)gImage_charge_30, 20000);
 //		}
 		
 

@@ -25,7 +25,7 @@ void lcd_dma_refresh_colorblock(uint16_t xs, uint16_t ys, uint16_t w, uint16_t h
 	
 	Lcd_SetRegion(xs, ys, xs+w-1, ys+h-1);	
 	
-	HW_SPI_Tx_DMA_16bit_ColorBlock(HAL_SPI_0,color,len);
+	HW_SPI_Tx_DMA_16bit_ColorBlock(color,len);
 	
 }
 ===================================================================================================	

@@ -53,7 +53,7 @@ extern unsigned int gImage_128x128_star_32bit[8192];
 extern unsigned int gImage_128x128_cake_32bit[8192];
 extern  unsigned char gImage_128x128_cake[32768];
 extern  unsigned char gImage_128x128_star[32768];
-extern  unsigned char gImage_128x128_battery[32768];
+extern const unsigned char gImage_128x128_battery[32768];
 
 extern const unsigned char gImage_circle_100x100[20000];
 extern const unsigned char gImage_black_128x128[32768];

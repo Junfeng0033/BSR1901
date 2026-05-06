@@ -362,7 +362,7 @@ void Lcd_Clear(uint16_t Color)
 	
 	Lcd_SetRegion(0,0,X_MAX_PIXEL-1,Y_MAX_PIXEL-1);
 	
-	HW_SPI_Tx_DMA_16bit_ColorBlock(HAL_SPI_0,&Color,len);
+	HW_SPI_Tx_DMA_16bit_ColorBlock(&Color,len);
   
 }
 
@@ -389,7 +389,7 @@ void Lcd_Fill(uint16_t x,uint16_t y,uint16_t xend,uint16_t yend,uint16_t Color)
 	for(i=0; i<num; i++)
 		LCD_WriteData_16Bit(Color);
 	#else
-	HW_SPI_Tx_DMA_16bit_ColorBlock(HAL_SPI_0,&Color,num);
+	HW_SPI_Tx_DMA_16bit_ColorBlock(&Color,num);
 	#endif	
 }
 

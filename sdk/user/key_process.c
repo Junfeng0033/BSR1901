@@ -156,14 +156,14 @@ void Task_KeyScan(void)
 			{
 				//UATR1_PRINT_LOG((unsigned char *)("K27 KEY Press Down"));
         printf("\r\n K27 KEY Press Down \r\n ");
-				HW_SPI_Tx_DMA_8bit(HAL_SPI_0, (uint16*)gImage_128x128_star, 32768);			
+				HW_SPI_Tx_DMA_8bit((uint16*)gImage_128x128_star, 32768);			
 				
 				flag_key1=1;
 			}
 			else
 			{
 				printf("\r\n K27 KEY Press Down Again \r\n ");				
-				HW_SPI_Tx_DMA_8bit(HAL_SPI_0, (uint16*)gImage_128x128_cake, 32768);
+				HW_SPI_Tx_DMA_8bit((uint16*)gImage_128x128_cake, 32768);
 					
 				flag_key1=0;								
 			}

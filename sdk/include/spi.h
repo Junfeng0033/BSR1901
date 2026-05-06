@@ -218,7 +218,7 @@ void HW_SPI_Initialise(HAL_SPI_ID_T id);
 
 //void HW_SPI_Tx_Block(HAL_SPI_ID_T id,uint16 *pData, uint16 DataLen);
 void HW_SPI_Write_Data(uint16 address, uint16 data);
-void HW_SPI_Tx_DMA(HAL_SPI_ID_T id,uint16 *pData, uint16 DataLen);
+void HW_SPI_Tx_DMA(uint16 *pData, uint16 DataLen);
 
 
 
@@ -232,7 +232,9 @@ void lcd_dma_16bit_refresh(uint16_t xs, uint16_t ys, uint16_t w, uint16_t h, col
 
 
 
-void HW_SPI_Tx_DMA_8bit(HAL_SPI_ID_T id,uint16 *pData, uint16 DataLen);
-void HW_SPI_Tx_DMA_16bit_ColorBlock(HAL_SPI_ID_T id,uint16 *pData, uint16 DataLen);
-void HW_SPI_Tx_DMA_32bit(HAL_SPI_ID_T id,uint16 *pData, uint16 DataLen);
+void HW_SPI_Tx_DMA_8bit(uint16 *pData, uint16 DataLen);
+
+
+void HW_SPI_Tx_DMA_16bit_ColorBlock(uint16 *pData, uint16 DataLen);
+void HW_SPI_Tx_DMA_32bit(uint16 *pData, uint16 DataLen);
 
