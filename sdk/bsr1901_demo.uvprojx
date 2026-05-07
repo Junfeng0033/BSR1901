@@ -536,9 +536,9 @@
           <GroupName>rle_dec</GroupName>
           <Files>
             <File>
-              <FileName>rle_dec.c</FileName>
+              <FileName>rle_decompression.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\RLE_decompression\rle_dec.c</FilePath>
+              <FilePath>.\RLE_decompression\rle_decompression.c</FilePath>
             </File>
           </Files>
         </Group>

@@ -332,7 +332,7 @@ static const sc_image_t km_prt =
         .h = 30,
 };
 
-void sc_watch_demo_tast(sc_event_t *event)
+void sc_watch_demo_task(sc_event_t *event)
 {
 
     static Transform_t Trans; // 旋转参数

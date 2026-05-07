@@ -338,12 +338,13 @@ void Lcd_Write_data_dma(uint8_t *p_data, uint16_t len)
 //	Gecko_DMA_Transport((volatile uint32 *)(XR7_SPI_BASE + XR7_SPI_FIFO), p_data, len, 
 //						AHB_DMA_CONTROL_WORD_TR, AHB_DMA_CONTROL_SRC_INC_DES_NOINC);	
 
-
-
 	
 	SPI_8bit_Transfer();
+	//DMA_Req_Buslock_Enable();
 	Gecko_DMA_Transport((volatile uint32 *)(XR7_SPI_BASE + XR7_SPI_FIFO), p_data, len, 
 						AHB_DMA_CONTROL_BYTE_TR, AHB_DMA_CONTROL_SRC_INC_DES_NOINC);
+
+
 }
 
 

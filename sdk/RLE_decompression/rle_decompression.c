@@ -73,11 +73,11 @@ input lsbf;
 #endif	
 	
 }
+#endif
 
 
 
-
-
+#if 0
 
 // 【核心DMA函数】一次性发送 count 个相同RGB565像素
 // 无buf、无拷贝、纯硬件重复发送
@@ -129,8 +129,10 @@ void TFT565_draw_arry_rle2_img(uint16_t x, uint16_t y,
 
 
 
-
-
+// ==============================
+// 配置宏：可自由调整 DMA 触发阈值
+// ==============================
+#define RLE_DMA_THRESHOLD  8    // 像素数 > 此值时使用DMA，否则CPU直接发送
 
 
 __RAM_CODE__ static void RLE_Decode_Send(const uint8_t *arry)
@@ -149,21 +151,33 @@ __RAM_CODE__ static void RLE_Decode_Send(const uint8_t *arry)
         // 读取RGB565颜色
         dat[0] = *p++;
         dat[1] = *p++;
-        
-			  #if 0
-        // 循环发送
-        do
-        {
-            SPI_WriteData(dat[0]);//高8位
-            SPI_WriteData(dat[1]);//低8位
-					  //SPI_Write16bitData(dat[0]<<8|dat[1]);//LSBF (1<<6) // 1'b0:MSB first (高位在前)
-        } while (--count);
-				#else
-				color = (uint16_t)dat[0]<<8|dat[1];
-				HW_SPI_Tx_DMA_16bit_ColorBlock(&color,count);
-				#endif
+
+
+        // ================================
+        // 【自适应发送：优化逻辑】
+        // ================================			
+			  if (count <= RLE_DMA_THRESHOLD)
+				{
+					// 短数据：CPU 直接发，比 DMA 快
+					do
+					{
+							//SPI_WriteData(dat[0]);//高8位
+							//SPI_WriteData(dat[1]);//低8位
+							SPI_Write16bitData(dat[0]<<8|dat[1]);//LSBF (1<<6) // 1'b0:MSB first (高位在前)
+					} while (--count);
+					
+				}
+				else
+				{
+					// 长数据：DMA 批量发送，效率拉满
+					color = (uint16_t)dat[0]<<8|dat[1];
+					HW_SPI_Tx_DMA_16bit_ColorBlock(&color,count);
+			  }
+
     }
 }
+
+
 
 
 
@@ -178,9 +192,7 @@ void TFT565_draw_arry_rle2_img(uint16_t x, uint16_t y, uint16_t sizex, uint16_t 
     // 设置显示区域（只执行1次，不动它）
     Lcd_SetRegion(x, y, x + sizex - 1, y + sizey - 1);
 
-    // ======================
-    // 调用独立解码函数
-    // ======================
+    // 调用RAM中的解码函数
     RLE_Decode_Send(arry);
 }
 

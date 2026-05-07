@@ -44,6 +44,6 @@ void sc_demo_menu_task(sc_event_t *event);
 void sc_demo_DrawEye_task(sc_event_t *event);
 
 // 示例图像任务
-void sc_watch_demo_tast(sc_event_t *event);
+void sc_watch_demo_task(sc_event_t *event);
 #endif 
 // SC_DEMO_TEST_H

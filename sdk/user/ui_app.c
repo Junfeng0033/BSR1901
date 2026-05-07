@@ -9,23 +9,6 @@
 //void ShowNum_48(uint8_t n);
 
 //static img_source_t bat_persent_img = {(uint8_t*)gImage_bat_90x49, 90, 49};
-static volatile bool dma_busy = 0;
-
-
-
-
-#if 0
-
-//dma发送结束后会调用此函数通知
-void ui_dma_busy_release(void)
-{
-	dma_busy = 0;
-}
-	
-#endif
-
-
-
 
 
 //显示字符

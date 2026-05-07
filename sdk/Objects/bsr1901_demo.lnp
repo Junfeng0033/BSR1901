@@ -24,7 +24,7 @@
 ".\objects\dpi_common.o"
 ".\objects\xt25f32.o"
 ".\objects\lcd_driver.o"
-".\objects\rle_dec.o"
+".\objects\rle_decompression.o"
 ".\objects\120x240.o"
 ".\objects\120x240_1.o"
 ".\objects\120x240_1_32bit.o"

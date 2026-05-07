@@ -73,106 +73,9 @@ void Gui_Circle(uint16_t X, uint16_t Y, uint16_t R, uint16_t fc)
 
 
 
-#if 0
-// 画线函数，使用Bresenham 画线算法
-void Gui_DrawLine(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1, uint16_t Color)
-{
-	int dx,	 // difference in x's
-		dy,	 // difference in y's
-		dx2, // dx,dy * 2
-		dy2,
-		x_inc, // amount in pixel space to move during drawing
-		y_inc, // amount in pixel space to move during drawing
-		error, // the discriminant i.e. error i.e. decision variable
-		index; // used for looping
-
-	Lcd_SetXY(x0, y0);
-	dx = x1 - x0; // 计算x距离
-	dy = y1 - y0; // 计算y距离
-
-	if (dx >= 0)
-	{
-		x_inc = 1;
-	}
-	else
-	{
-		x_inc = -1;
-		dx = -dx;
-	}
-
-	if (dy >= 0)
-	{
-		y_inc = 1;
-	}
-	else
-	{
-		y_inc = -1;
-		dy = -dy;
-	}
-
-	dx2 = dx << 1;
-	dy2 = dy << 1;
-
-	if (dx > dy) // x距离大于y距离，那么每个x轴上只有一个点，每个y轴上有若干个点
-	{			 // 且线的点数等于x距离，以x轴递增画点
-		// initialize error term
-		error = dy2 - dx;
-
-		// draw the line
-		for (index = 0; index <= dx; index++) // 要画的点数不会超过x距离
-		{
-			// 画点
-			Gui_DrawPoint(x0, y0, Color);
-
-			// test if error has overflowed
-			if (error >= 0) // 是否需要增加y坐标值
-			{
-				error -= dx2;
-
-				// move to next line
-				y0 += y_inc; // 增加y坐标值
-			} // end if error overflowed
-
-			// adjust the error term
-			error += dy2;
-
-			// move to the next pixel
-			x0 += x_inc; // x坐标值每次画点后都递增1
-		} // end for
-	} // end if |slope| <= 1
-	else // y轴大于x轴，则每个y轴上只有一个点，x轴若干个点
-	{	 // 以y轴为递增画点
-		// initialize error term
-		error = dx2 - dy;
-
-		// draw the line
-		for (index = 0; index <= dy; index++)
-		{
-			// set the pixel
-			Gui_DrawPoint(x0, y0, Color);
-
-			// test if error overflowed
-			if (error >= 0)
-			{
-				error -= dy2;
-
-				// move to next line
-				x0 += x_inc;
-			} // end if error overflowed
-
-			// adjust the error term
-			error += dx2;
-
-			// move to the next pixel
-			y0 += y_inc;
-		} // end for
-	} // end else |slope| > 1
-}
-
-#endif
 
 
-// Bresenham 完美画线函数（优化版）
+// Bresenham 完美画线函数
 void Gui_DrawLine(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1, uint16_t Color)
 {
     int dx = x1 - x0;
@@ -280,22 +183,6 @@ void Gui_DrawLine_Fast(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1, uint1
 
 
 #if 0
-
-// 专为实心圆优化：极快水平线
-static inline void Fast_HLine(uint16_t x1, uint16_t x2, uint16_t y, uint16_t color)
-{
-    if (x1 > x2) {  // 保证 x1 <= x2
-        uint16_t tmp = x1;
-        x1 = x2;
-        x2 = tmp;
-    }
-    // 纯 x 递增，无任何多余计算
-    for (uint16_t x = x1; x <= x2; x++) {
-        Gui_DrawPoint(x, y, color);  // 你底层的画点函数
-    }
-}
-
-
 
 
 // 极快 水平线（仅水平方向，速度最大化）
@@ -486,97 +373,8 @@ void Gui_DrawSector_M0(uint16_t X0, uint16_t Y0, uint16_t R,
 
 
 
-// 实心填充矩形
-// x0, y0 : 左上角坐标
-// w      : 矩形宽度
-// h      : 矩形高度
-// color  : 填充颜色
-void Gui_DrawFillRect(uint16_t x0, uint16_t y0, uint16_t w, uint16_t h, uint16_t color)
-{
-    // 防止宽度/高度为0，避免死循环
-    if(w == 0 || h == 0) return;
-
-    // 计算右下角坐标
-    uint16_t x1 = x0 + w;
-    uint16_t y1 = y0 + h;
-
-    // 逐行画线填充（最稳定、最通用、M0无压力）
-    for(uint16_t y = y0; y <= y1; y++)
-    {
-        //Gui_DrawLine(x0, y, x1, y, color);
-			  Gui_DrawLine_Fast(x0, y, x1, y, color);
-    }
-}
 
 
-
-
-
-// 水平进度条（带边框 + 内部填充）
-// x0,y0    左上角坐标
-// w,h      总宽高
-// percent  进度 0~100
-// frameCol 边框颜色
-// barCol   进度条颜色
-// bgCol    背景颜色
-void Gui_ProgressBar(uint16_t x0, uint16_t y0, uint16_t w, uint16_t h,
-                    uint8_t percent, uint16_t frameCol, uint16_t barCol, uint16_t bgCol)
-{
-    // 限制进度 0~100
-    if(percent > 100) percent = 100;
-
-    // 画背景
-    Gui_DrawFillRect(x0, y0, w-1, h-1, bgCol);
-
-    // 画进度
-    uint16_t bar_w = (percent * (w-4)) / 100;
-    if(bar_w > 0)
-    {
-        Gui_DrawFillRect(x0+2, y0+2, bar_w, h-5, barCol);
-    }
-
-    // 画边框
-    Gui_DrawRect(x0, y0, w-1, h-1, frameCol);
-}
-
-
-
-// 坐标(50,100)，宽150，高20
-// 进度 60%
-// 边框：黑色
-// 进度条：绿色
-// 背景：灰色
-//Gui_ProgressBar(50, 100, 150, 20, 60, BLACK, GREEN, GRAY);
-
-
-
-
-
-
-
-
-
-
-#if 0
-// 内部辅助：判断角度并画点（纯整数，超快）
-static void DrawArcPoint(uint16_t cx, uint16_t cy, int x, int y,
-                         int sa, int ea, uint16_t color)
-{
-    int angle;
-
-    if(x == 0 && y == 0) return;
-    if(x >= 0 && y > 0)  angle = (x*45)/y;
-    else if(x < 0 && y >= 0) angle = 90 - ((-x)*45)/y;
-    else if(x <= 0 && y < 0) angle = 180 + ((-x)*45)/(-y);
-    else angle = 270 - ((x)*45)/(-y);
-
-    if( (angle >= sa && angle <= ea) ||
-        (sa > ea && (angle >= sa || angle <= ea)) )
-    {
-        Gui_DrawPoint(cx + x, cy + y, color);
-    }
-}
-#endif
 
 
 // 【弱CPU终极优化】圆弧画点：无除法、无乘法、极快
@@ -620,6 +418,7 @@ static void DrawArcPoint(uint16_t cx, uint16_t cy, int x, int y,
         Gui_DrawPoint(cx + x, cy + y, color);
     }
 }
+
 
 
 
@@ -692,6 +491,80 @@ void Gui_DrawArc(uint16_t x0, uint16_t y0, uint16_t r,
 
 //Gui_DrawArc(圆心X, 圆心Y, 半径, 起始角度, 结束角度, 颜色);
 //从起始角度 顺时针 画到 结束角度。
+
+
+
+
+
+
+
+
+
+// 实心填充矩形
+// x0, y0 : 左上角坐标
+// w      : 矩形宽度
+// h      : 矩形高度
+// color  : 填充颜色
+void Gui_DrawFillRect(uint16_t x0, uint16_t y0, uint16_t w, uint16_t h, uint16_t color)
+{
+    // 防止宽度/高度为0，避免死循环
+    if(w == 0 || h == 0) return;
+
+    // 计算右下角坐标
+    uint16_t x1 = x0 + w;
+    uint16_t y1 = y0 + h;
+
+    // 逐行画线填充（最稳定、最通用、M0无压力）
+    for(uint16_t y = y0; y <= y1; y++)
+    {
+        //Gui_DrawLine(x0, y, x1, y, color);
+			  Gui_DrawLine_Fast(x0, y, x1, y, color);
+    }
+}
+
+
+
+
+
+// 水平进度条（带边框 + 内部填充）
+// x0,y0    左上角坐标
+// w,h      总宽高
+// percent  进度 0~100
+// frameCol 边框颜色
+// barCol   进度条颜色
+// bgCol    背景颜色
+void Gui_ProgressBar(uint16_t x0, uint16_t y0, uint16_t w, uint16_t h,
+                    uint8_t percent, uint16_t frameCol, uint16_t barCol, uint16_t bgCol)
+{
+    // 限制进度 0~100
+    if(percent > 100) percent = 100;
+
+    // 画背景
+    Gui_DrawFillRect(x0, y0, w-1, h-1, bgCol);
+
+    // 画进度
+    uint16_t bar_w = (percent * (w-4)) / 100;
+    if(bar_w > 0)
+    {
+        Gui_DrawFillRect(x0+2, y0+2, bar_w, h-5, barCol);
+    }
+
+    // 画边框
+    Gui_DrawRect(x0, y0, w-1, h-1, frameCol);
+}
+
+
+
+// 坐标(50,100)，宽150，高20
+// 进度 60%
+// 边框：黑色
+// 进度条：绿色
+// 背景：灰色
+//Gui_ProgressBar(50, 100, 150, 20, 60, BLACK, GREEN, GRAY);
+
+
+
+
 
 
 
@@ -773,7 +646,7 @@ void GuiShowChar_16(uint16_t x, uint16_t y, uint8_t s)
 
 
 
-#if 1
+
 extern const uint8_t Font16_dital_Table [];
 
 //显示字符
@@ -840,7 +713,7 @@ void GuiShowChar_32(uint16_t x, uint16_t y, uint8_t n)
 	}
 }
 
-#endif
+
 
 
 
@@ -1052,45 +925,8 @@ void Task_UI_Refresh(void)
 
 
 
-#if 0
-// 实心圆填充函数
-// X, Y : 圆心坐标
-// R    : 半径
-// fc   : 填充颜色
-void Gui_FillCircle(uint16_t X, uint16_t Y, uint16_t R, uint16_t fc)
-{
-    unsigned short a, b;
-    int c;
-    a = 0;
-    b = R;
-    c = 3 - 2 * R;
-    while (a < b)
-    {
-        // 填充水平线
-        Gui_DrawLine(X - a, Y + b, X + a, Y + b, fc);
-        Gui_DrawLine(X - a, Y - b, X + a, Y - b, fc);
-        Gui_DrawLine(X - b, Y + a, X + b, Y + a, fc);
-        Gui_DrawLine(X - b, Y - a, X + b, Y - a, fc);
 
-        if (c < 0)
-            c = c + 4 * a + 6;
-        else
-        {
-            c = c + 4 * (a - b) + 10;
-            b -= 1;
-        }
-        a += 1;
-    }
-    if (a == b)
-    {
-        Gui_DrawLine(X - a, Y + b, X + a, Y + b, fc);
-        Gui_DrawLine(X - a, Y - b, X + a, Y - b, fc);
-        Gui_DrawLine(X - b, Y + a, X + b, Y + a, fc);
-        Gui_DrawLine(X - b, Y - a, X + b, Y - a, fc);
-    }
-}
 
-#endif
 
 
 
@@ -1134,6 +970,9 @@ void Gui_FillCircle(uint16_t X, uint16_t Y, uint16_t R, uint16_t fc)
         a++;
     }
 }
+
+
+
 
 
 
