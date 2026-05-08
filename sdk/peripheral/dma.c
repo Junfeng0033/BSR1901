@@ -135,12 +135,12 @@ __RAM_CODE__ void Clear_DMA_Interrupt(void)
 
 void Gecko_DMA_Transport(volatile void *dest,volatile const void *src, uint16 size,uint8 type, uint8 direct)
 {
-	volatile uint32 dma_statu,dma_ctrl;//cpu_flags;
+	//volatile uint32 dma_statu,dma_ctrl;//cpu_flags;
 
 	uint32 status = pEnterCriticalSection();
 
-	dma_statu=DMA_READ_REG(AHB_DMA_DONE_STS_REG);
-	dma_statu=DMA_READ_REG(AHB_DMA_STEP_CTRL_REG);
+	//dma_statu=DMA_READ_REG(AHB_DMA_DONE_STS_REG);
+	//dma_statu=DMA_READ_REG(AHB_DMA_STEP_CTRL_REG);
 	
     //SYSirq_Disable_Interrupts_Save_Flags(&cpu_flags);
 

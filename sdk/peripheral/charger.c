@@ -1,3 +1,45 @@
+/*****************************************************************************************************************************
+Note:
+
+At the moment of powering up the chip, before the software takes over the hardware, 
+
+it must be ensured that both Q1 and Q2 are non-conductive, which means that the default state of the PWM pin must be correct.
+
+*****************************************************************************************************************************/
+
+
+/*
+
+ADC channels 5, 0, and 1 have undergone a fixed voltage division process by dividing by 2 internally. 
+This is because considering that the external voltage is higher than the internal voltage, 
+the internal switch cannot be controlled, so it is fixed.
+
+ADC 通道5，通道0， 通道1 内部做了除2固定分压处理，因为考虑到外部电压高于内部电压，内部无法控制开关，所以固定死了。
+
+
+4.7uH inductance, with a PWM switching frequency set at 500kHz, achieves the highest stability and efficiency.
+
+4.7uH 电感，PWM开关频率设500kHz最稳、效率最高
+
+*/
+
+
+
+/*****************************************************************************************************************************
+
+硬件管脚资源 | 管脚位置 | 备注
+------------ | -------- | ------------------------------------------------
+ADC5         | 无       | 测量电池电压
+ADC4         | PAD19    | 测量 DC5V 电压（boost 升压时），分压后保证低于VBAT/3.3V接入ADC4
+
+ADC7         | PAD12    | 测量电池充电电流
+PWM0         | PAD13    | PWM_N
+PWM1         | PAD14    | PWM_P
+
+*****************************************************************************************************************************/
+
+
+
 
 #include "platform_config.h"
 
@@ -16,14 +58,39 @@ uint8 pwm_init_flag=0;
 
 
 
-/*****************************************************************************************************************************
-Note:
 
-At the moment of powering up the chip, before the software takes over the hardware, 
+//charger PWM0 config
+void Chg_PWM0_NMOS_Config(void)
+{
+	struct HAL_PWM_CFG_T PWM0_CFG;
+	PWM0_CFG.freq= 500000;//500KHZ
+	PWM0_CFG.ratio= 50;
+	PWM0_CFG.Tdead_cycle_count=0;//need config it to 400ns 
+	Config_PWM(HW_PWM_CHAN_0,&PWM0_CFG);	
+  //hw_pwm_invert(HW_PWM_CHAN_0);
+  hw_pwm_enable(HW_PWM_CHAN_0);	
+}
 
-it must be ensured that both Q1 and Q2 are non-conductive, which means that the default state of the PWM pin must be correct.
 
-*****************************************************************************************************************************/
+
+
+
+//charger PWM1 config
+void Chg_PWM1_PMOS_Config(void)
+{
+	struct HAL_PWM_CFG_T PWM1_CFG;
+	PWM1_CFG.freq= 500000;//500KHZ
+	PWM1_CFG.ratio= 50;
+	PWM1_CFG.Tdead_cycle_count=0;//need config it to 400ns 
+	Config_PWM(HW_PWM_CHAN_1,&PWM1_CFG);	
+  //hw_pwm_invert(HW_PWM_CHAN_1);
+  hw_pwm_enable(HW_PWM_CHAN_1);		
+}
+
+
+
+
+
 
 
 
@@ -92,7 +159,7 @@ uint16_t hal_get_vbat_mv(void) {
  * 硬件抽象层：读取充电电流 (OPA + ADC)
  */
 /**
- * 硬件抽象层：读取电池电压 (ADC7)
+ * 硬件抽象层：读取电池电流 (ADC7)
  */
 //adc_buck_curr_read
 uint16_t hal_get_icharge_ma(void) {
@@ -245,7 +312,7 @@ void pwm_io_init(void)
 		//iomux setting PAD8(GPIOA4) as PWM_CH2 function
 		//gecko_pinmux_config(PAD8,PWM_CH2);	
 	  //config PAD9(GPIOA5) as PWM_CH3
-	  gecko_pinmux_config(PAD9,PWM_CH6);	
+	  //gecko_pinmux_config(PAD9,PWM_CH6);	
 }
 
 

@@ -89,9 +89,9 @@ typedef struct {
 #define V_CV_THRESHOLD_MV     4200   // 恒压阈值 4.2V
 #define I_CC_TARGET_MA        500    // 恒流目标电流 500mA
 #define I_TERM_THRESHOLD_MA   50     // 终止电流阈值 50mA
-#define PWM_MAX               1000   // PWM 最大值 (100% 占空比, PMOS 关断)
+#define PWM_MAX               100    // PWM 最大值 (100% 占空比, PMOS 关断)
 #define PWM_MIN               0      // PWM 最小值 (0% 占空比, PMOS 全导通)
-#define PWM_PRECHARGE_DUTY    950    // 预充阶段高占空比 (微导通)
+#define PWM_PRECHARGE_DUTY    95     // 预充阶段高占空比 (微导通)
 
 
 
