@@ -75,7 +75,7 @@ void EnterDeepSleepMode(void)
 
 		bsr1901_prepare_sleep_for_pin_wakeup();
 		//sleep-wakeup setting
-		BSR1901_GPIO_WakeUp_From_DeepSleep();//
+		BSR1901_Config_GPIO_WakeUp_Source_From_DeepSleep();//
 		tc_gecko_cm0_aon_sleep();//deep sleep test for low power design
 }
 

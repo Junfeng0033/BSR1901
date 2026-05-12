@@ -975,4 +975,86 @@ void Gui_FillCircle(uint16_t X, uint16_t Y, uint16_t R, uint16_t fc)
 
 
 
+//空心圆角矩形
+
+void Gui_DrawRoundedRect(uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint16_t r, uint16_t color)
+{
+    uint16_t x2 = x + w;
+    uint16_t y2 = y + h;
+
+    // 4 条边
+    Gui_DrawLine_Fast(x + r, y, x2 - r, y, color);
+    Gui_DrawLine_Fast(x + r, y2, x2 - r, y2, color);
+    Gui_DrawLine_Fast(x, y + r, x, y2 - r, color);
+    Gui_DrawLine_Fast(x2, y + r, x2, y2 - r, color);
+
+    // 4 个圆角弧
+    Gui_DrawArc(x + r, y + r, r, 180, 270, color);
+    Gui_DrawArc(x2 - r, y + r, r, 270, 360, color);
+    Gui_DrawArc(x2 - r, y2 - r, r, 0, 90, color);
+    Gui_DrawArc(x + r, y2 - r, r, 90, 180, color);
+}
+
+
+
+
+//透明文字（不覆盖背景，必用）
+//Gui_ShowString_Transparent(左上角X, 左上角Y, 文字颜色, "你要显示的文字");
+void Gui_ShowString_Transparent(uint16_t x, uint16_t y, uint16_t fc, uint8_t *s)
+{
+    unsigned char i, j;
+    unsigned short k, x0;
+    x0 = x;
+
+    while (*s)
+    {
+        if ((*s) < 128)
+        {
+            k = *s;
+            if (k == 13)
+            {
+                x = x0;
+                y += 16;
+            }
+            else
+            {
+                if (k > 32) k -= 32;
+                else k = 0;
+
+                for (i = 0; i < 16; i++){
+                    for (j = 0; j < 8; j++)
+                    {
+                        if (asc16[(k << 4) + i] & (0x80 >> j))
+                            Gui_DrawPoint(x + j, y + i, fc);
+                    }
+                }
+                x += 8;
+            }
+            s++;
+        }
+    }
+}
+
+
+
+
+// 坐标(30,30)，白色文字，内容：HELLO
+//Gui_ShowString_Transparent(30, 30, WHITE, "HELLO");
+
+
+
+// 先画一个实心圆
+//Gui_FillCircle(64, 64, 30, BLUE);
+
+// 在圆中心透明显示数字（不会擦掉圆）
+//Gui_ShowString_Transparent(50, 55, WHITE, "100");
+
+
+
+
+
+//Gui_ProgressBar(50,100, 150,20, 60, BLACK,GREEN,GRAY);
+
+// 透明显示 60%，不破坏进度条
+//Gui_ShowString_Transparent(70, 102, WHITE, "60%");
 

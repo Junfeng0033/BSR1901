@@ -233,8 +233,11 @@ assign reg_aon_gpio_wakeup_lvl			=reg_0x01C[11:0];
 assign reg_aon_sleep_cnt_val			  =reg_0x060[23:0];
 */
 
-//kevin@20230725
-void BSR1901_GPIO_WakeUp_From_DeepSleep(void)
+
+
+//sleep-wakeup source setting,there are 12 GPIO wake-up sources
+
+void BSR1901_Config_GPIO_WakeUp_Source_From_DeepSleep(void)
 {
 	unsigned int wr_data;
 	
@@ -254,7 +257,10 @@ void BSR1901_GPIO_WakeUp_From_DeepSleep(void)
 	reg_write(GECKO_AON_BASE_ADDR+0x004, wr_data);
 
   wr_data=reg_read(GECKO_AON_BASE_ADDR+0x010);
-	
+
+
+//setting GPIO wakeup source(There are a total of 12 GPIO wake-up sources)
+
 //	wr_data |= GPIOA4_WAKEUP_EN_00;
 //	wr_data |= GPIOA5_WAKEUP_EN_01;
 //	wr_data |= GPIOA6_WAKEUP_EN_02;
@@ -269,6 +275,7 @@ void BSR1901_GPIO_WakeUp_From_DeepSleep(void)
 //	wr_data |= GPIOB5_WAKEUP_EN_09;
 	wr_data |= GPIOB6_WAKEUP_EN_10;
 //	wr_data |= GPIOB7_WAKEUP_EN_11;		
+	
 	
 	h2l_wr_busy();
 	reg_write(GECKO_AON_BASE_ADDR+0x010, wr_data);	
