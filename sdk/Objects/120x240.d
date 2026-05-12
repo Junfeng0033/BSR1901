@@ -1,1 +1,0 @@
-.\objects\120x240.o: img_res\120x240.c
