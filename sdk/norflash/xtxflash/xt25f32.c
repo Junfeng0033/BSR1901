@@ -1097,12 +1097,12 @@ sleep_cnt_val
 
 
 //reg_0x008 bit16
-#define BIT16_MASK (1 << 16)
+#define BIT16_MASK (1U << 16)
 void h2l_wr_busy(void)
 {
 	volatile uint32 tmp=0;
 	
-	while (reg_read(GECKO_AON_BASE_ADDR+0x008) & BIT16_MASK){
+	while ((reg_read(GECKO_AON_BASE_ADDR+0x008) & BIT16_MASK)!=0){
 		
 		 //reg_write(ADDR_AON_RETENTION_REG_0, reg_read(GECKO_AON_BASE_ADDR+0x008));
 		 //reg_write(ADDR_AON_RETENTION_REG_1, reg_read(GECKO_AON_BASE_ADDR+0x008) & BIT16_MASK);	
@@ -1110,7 +1110,7 @@ void h2l_wr_busy(void)
 		//__asm__("nop");//if bit16 =1,wait
 		  tmp++;
 		  //reg_write(ADDR_AON_RETENTION_REG_3, tmp);
-			if(tmp>100)
+			if(tmp>=1000)
 			{				
 			break;
 			}		
@@ -1142,12 +1142,142 @@ uint8_t OW_GetDQ(void)
 void tc_gecko_cm0_aon_sleep()
 {
     unsigned int ahb_wr_data;
-    //unsigned int ahb_rd_data;
+    unsigned int wr_data;
 		//char *string;	
+
+		wr_data=reg_read(GECKO_AON_BASE_ADDR+0x00C);
+		//wr_data = 0xC08;
+		wr_data = 0xFFF;	
+		//wr_data = 0x1;//just clear GPIO08 wakeup status,ZJF @ 20240131
+		
+		h2l_wr_busy();
+		reg_write(GECKO_AON_BASE_ADDR+0x00C, wr_data);
 	
-	  //delay_1us(1000);
-	  //reg_write(ADDR_AON_CFG_ANA_CTRL_2, 0x1f);	
+
+
+
+//    ahb_rd_data = reg_read(GECKO_AON_BASE_ADDR+004) & 0x1;
+//    reg_write(GECKO_AON_BASE_ADDR+004, 0x1); // Clear AON wake-up interrupt	
 	
+//		wr_data=reg_read(GECKO_AON_BASE_ADDR+0x004);
+//		wr_data |= 0x1;//aon_ena_wakeup_int
+//		h2l_wr_busy();
+//		reg_write(GECKO_AON_BASE_ADDR+0x004, wr_data);
+	
+
+    //assign reg_aon_ena_wakeup_int	=reg_0x004[0];
+		ahb_wr_data=reg_read(GECKO_AON_BASE_ADDR+0x004);
+		ahb_wr_data |= 0x1;
+		h2l_wr_busy();
+		reg_write(GECKO_AON_BASE_ADDR+0x004, ahb_wr_data);
+		
+
+
+	
+//setting GPIO wakeup source(There are a total of 12 GPIO wake-up sources)
+		wr_data=reg_read(GECKO_AON_BASE_ADDR+0x010);
+		wr_data |= GPIOA4_WAKEUP_EN_00;
+		wr_data |= GPIOA5_WAKEUP_EN_01;
+		wr_data |= GPIOA6_WAKEUP_EN_02;
+		wr_data |= GPIOA7_WAKEUP_EN_03;
+
+		wr_data |= GPIOB0_WAKEUP_EN_04;
+		wr_data |= GPIOB1_WAKEUP_EN_05;
+		wr_data |= GPIOB2_WAKEUP_EN_06;
+		wr_data |= GPIOB3_WAKEUP_EN_07;
+
+		wr_data |= GPIOB4_WAKEUP_EN_08;
+		wr_data |= GPIOB5_WAKEUP_EN_09;
+		wr_data |= GPIOB6_WAKEUP_EN_10;
+		wr_data |= GPIOB7_WAKEUP_EN_11;		
+		h2l_wr_busy();
+		reg_write(GECKO_AON_BASE_ADDR+0x010, wr_data);	
+
+
+/*
+
+
+edge active config
+
+assign reg_aon_gpio_wakeup_eact			=reg_0x014[11:0];
+
+assign reg_aon_gpio_wakeup_edge			=reg_0x018[11:0];
+
+assign reg_aon_gpio_wakeup_lvl			=reg_0x01C[11:0];
+
+
+assign gpio_wkup_active = reg_aon_gpio_wkup_eact ? gpio_wkup_edge : gpio_wkup_levl;
+
+
+*/
+
+  ////configure GPIO for rising edge triggering
+  wr_data=reg_read(GECKO_AON_BASE_ADDR+0x014);
+	wr_data |= 0xFFF;	
+	//wr_data &= 0x000;
+	//wr_data |= 0x400;
+	h2l_wr_busy();
+	reg_write(GECKO_AON_BASE_ADDR+0x014, wr_data);
+
+  wr_data=reg_read(GECKO_AON_BASE_ADDR+0x018);
+	wr_data |= 0xFFF;
+	//wr_data |= 0x400;
+	h2l_wr_busy();
+	reg_write(GECKO_AON_BASE_ADDR+0x018, wr_data);//GPIO input posedge(gpio wakeup edge config)
+
+  wr_data=reg_read(GECKO_AON_BASE_ADDR+0x01C);
+	wr_data |= 0xFFF;
+	//wr_data |= 0x400;
+	h2l_wr_busy();
+	reg_write(GECKO_AON_BASE_ADDR+0x01C, wr_data);	
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+/*
+assign reg_aon_sel_aon_clk16k   = reg_0x000[10];
+assign reg_aon_wait_ana_cntto   = reg_0x000[9:8];
+assign reg_aon_ena_pin_wakeup   = reg_0x000[7];
+//assign reg_aon_ena_rtc_wakeup   = reg_0x000[6];
+assign reg_aon_ena_sleep_cnt_wkup= reg_0x000[5];
+assign reg_aon_ena_sleep_cnt_run= reg_0x000[4];
+assign reg_aon_ena_litesleep    = reg_0x000[3];
+assign reg_aon_ena_deepsleep    = reg_0x000[2];
+assign reg_aon_wait_pu_cntto    = reg_0x000[1:0];
+*/
+
+
+    #if 0
+    ahb_wr_data =   (0x1 << GEK1109_SLEEP_CNT_RUN_Enable)  |
+                    (0x1 << GEK1109_SLEEP_CNT_WKUP_Enable) |
+                    //(0x1 << OFFSET_AON_FSM_CTRL_ENA_WAKEUP_INT) |
+                    (0x1 << GEK1109_DEEP_SLEEP_Enable)  ;
+	                  //(0x1 << OFFSET_AON_FSM_CTRL_ENA_LITESLEEP)  ;
+		#endif
+
+
+		ahb_wr_data=reg_read(GECKO_AON_BASE_ADDR+0x000);
+		
+		ahb_wr_data = GEK1109_PIN_WAKEUP_Enable  |
+								  GEK1109_DEEP_SLEEP_Enable ;
+    
+		#if 0 //GPIO pin wakeup
+    reg_write(GECKO_AON_BASE_ADDR+0x000, ahb_wr_data);
+		#else //sleep timer wakeup
+		h2l_wr_busy();
+    reg_write(GECKO_AON_BASE_ADDR+0x000, 0x34);//2024-9-13 @ Wuxi	
+		h2l_wr_busy();
+    //assign reg_aon_sleep_cnt_val = reg_0x060[23:0];		
+    reg_write(GECKO_AON_BASE_ADDR+0x060, 10000);//aon_sleep_cnt_val  2024-9-13 @ wuxi	
+    #endif		
+
+
 /***************************************************************************************/		
 
 //		ahb_wr_data=reg_read(GECKO_AON_BASE_ADDR+0x090);
@@ -1163,49 +1293,11 @@ void tc_gecko_cm0_aon_sleep()
 		reg_write(GECKO_AON_BASE_ADDR+0x090, ahb_wr_data);
 
 /***************************************************************************************/	
-	
-
-    //assign reg_aon_ena_wakeup_int	=reg_0x004[0];
-		ahb_wr_data=reg_read(GECKO_AON_BASE_ADDR+0x004);
-		ahb_wr_data |= 0x1;
-		h2l_wr_busy();
-		reg_write(GECKO_AON_BASE_ADDR+0x004, ahb_wr_data);
-
-    #if 0
-    ahb_wr_data =   (0x1 << GEK1109_SLEEP_CNT_RUN_Enable)  |
-                    (0x1 << GEK1109_SLEEP_CNT_WKUP_Enable) |
-                    //(0x1 << OFFSET_AON_FSM_CTRL_ENA_WAKEUP_INT) |
-                    (0x1 << GEK1109_DEEP_SLEEP_Enable)  ;
-	                  //(0x1 << OFFSET_AON_FSM_CTRL_ENA_LITESLEEP)  ;
-		#endif
 
 
-		ahb_wr_data=reg_read(GECKO_AON_BASE_ADDR+0x000);
-		
-		ahb_wr_data = GEK1109_PIN_WAKEUP_Enable  |
-								  GEK1109_DEEP_SLEEP_Enable ;
-
-    
-    //reg_write(GECKO_AON_BASE_ADDR+0x000, ahb_wr_data);
-		h2l_wr_busy();
-    reg_write(GECKO_AON_BASE_ADDR+0x000, 0x34);//2024-9-13 @ Wuxi	
-		h2l_wr_busy();		
-    reg_write(GECKO_AON_BASE_ADDR+0x060, 10000);//aon_sleep_cnt_val  2024-9-13 @ wuxi			
-		
-		#if 0
-		UATR0_PRINT_LOG((unsigned char *)("\r\n"));						
-		UATR0_PRINT_LOG((unsigned char *)("tc_gecko_cm0_aon_sleep---ADDR_AON_CFG_AON_FSM_CTRL = 0x"));
-		string=my_itoa(ahb_wr_data);
-		UATR0_PRINT_LOG((unsigned char *)(string));
-		UATR0_PRINT_LOG((unsigned char *)("\r\n"));	
-	
-    //reg_write(ADDR_AON_CFG_AON_SLEEP_CNT, 30000);
-		reg_write(GECKO_AON_BASE_ADDR+0x060, 100);//config "reg_aon_sleep_cnt_val" register
-		UATR0_PRINT_LOG((unsigned char *)("tc_gecko_cm0_aon_sleep---ADDR_AON_CFG_AON_SLEEP_CNT = 50000"));
-		#endif
-	  //delay_1us(100);
     manba_task_cpu_goto_sleep();
 		while(1);
+		
 }
 
 

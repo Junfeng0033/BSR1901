@@ -398,7 +398,7 @@ void gecko_aon_wakeup_irq_handler(void);
 void manba_task_clr_aon_wakeup_int (void);
 
 void GPIO_WakeUp_Setting(void);
-void BSR1901_Config_GPIO_WakeUp_Source_From_DeepSleep(void);
+
 void Osc32M_Freq_Trimming(void);
 
 

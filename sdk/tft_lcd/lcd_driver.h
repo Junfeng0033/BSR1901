@@ -93,6 +93,7 @@
 //液晶控制口置1操作语句宏定义
 
 #define	LCD_RS_SET  	gpio_set_value(LCD_RS_PORT, 1, LCD_RS_PIN)
+//#define LCD_RS_SET   {GpiopinMode(PB1,OUTPUT);GpiopinWrite(PB1,HIGH);}
 #define	LCD_BL_SET  	gpio_set_value(LCD_BL_PORT, 1, LCD_BL_PIN)
 #define	LCD_RST_SET  	gpio_set_value(LCD_RST_PORT, 1, LCD_RST_PIN)
 
@@ -100,6 +101,7 @@
 //液晶控制口置0操作语句宏定义
 
 #define	LCD_RS_CLR  	gpio_set_value(LCD_RS_PORT, 0, LCD_RS_PIN)
+//#define LCD_RS_CLR   {GpiopinMode(PB1,OUTPUT);GpiopinWrite(PB1,LOW);}
 #define	LCD_BL_CLR  	gpio_set_value(LCD_BL_PORT, 0, LCD_BL_PIN)
 #define	LCD_RST_CLR  	gpio_set_value(LCD_RST_PORT, 0, LCD_RST_PIN)
 

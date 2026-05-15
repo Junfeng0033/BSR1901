@@ -1381,11 +1381,11 @@ void Task_BMS_Update(void)
 	
 	/************************usb insert charging detect***************************************/
 		//read 0x31 register(STATE_CTL0)
-		//wr_data = ipxs_readByte(DEVICE_ADDR_IP, REG_STATE_CTL0);
+		wr_data = ipxs_readByte(DEVICE_ADDR_IP, REG_STATE_CTL0);
 	
-	  //printf("\r\n !!!!!!!!get_ip2366_state!!!!!  reg_ipxs = %x \r\n",wr_data);		
-		//wr_data=wr_data & 0x20;//(bit5,CHG_EN-------1,charging;0, not charging)
-	 	//printf("\r\n !!!!22222!!!!get_ip2366_state!!22222!!!  reg_ipxs = %x \r\n",wr_data);	
+	  printf("\r\n !!!!!!!!get_ip2366_state!!!!!  reg_ipxs = %x \r\n",wr_data);		
+		wr_data=wr_data & 0x20;//(bit5,CHG_EN-------1,charging;0, not charging)
+	  printf("\r\n !!!!22222!!!!get_ip2366_state!!22222!!!  reg_ipxs = %x \r\n",wr_data);	
 
 
 

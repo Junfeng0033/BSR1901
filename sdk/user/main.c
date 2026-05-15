@@ -75,8 +75,8 @@ void EnterDeepSleepMode(void)
 
 		bsr1901_prepare_sleep_for_pin_wakeup();
 		//sleep-wakeup setting
-		BSR1901_Config_GPIO_WakeUp_Source_From_DeepSleep();//
 		tc_gecko_cm0_aon_sleep();//deep sleep test for low power design
+	
 }
 
 
@@ -128,21 +128,18 @@ int main (void)
 	//LDO33_AUX enable, power supply for LCD module
 	LDO33_AUX_Enable();//BL control(BSR1901 use MOS to control backlight)
 	
-	
-	HW_SPI_Initialise(HAL_SPI_0);
-
 
 	Lcd_Init();
-	//bsr1901_pullup_pulldown_config(PAD_14,PAD_PULLUP);	//BL control	
-	//LCD_BL_SET;//turn on backlight
-	Lcd_SetRegion(0, 0, 127, 127);
-	//Lcd_Clear(BLACK);
+
 	
-	
+	HW_SPI_Initialise(HAL_SPI_0);	
 	DMA_Configuration();	
 
 
-
+	//bsr1901_pullup_pulldown_config(PAD_14,PAD_PULLUP);	//BL control	
+	//LCD_BL_SET;//turn on backlight
+	//Lcd_SetRegion(0, 0, 127, 127);
+	//Lcd_Clear(BLACK);
 	Lcd_Clear(WHITE);
 	
 	//Lcd_Fill(0,0,X_MAX_PIXEL,Y_MAX_PIXEL,RED);
@@ -150,8 +147,6 @@ int main (void)
 	Gui_FillCircle(64, 64, 20, C_RED);
 	
 	delay_1us(8000);	
-
-
 
 	HW_SPI_Tx_DMA_32bit((uint16*)gImage_128x128_star_32bit, 8192);	
 
@@ -218,6 +213,9 @@ int main (void)
 	//gecko_pinmux_config(PAD9,GPIO_A_5);
 	//gpio_set_output(GPIOA, 5);
 	//gpio_set_value(GPIOA, 1, 5);//default ouptut HIGH
+	
+	//GPIO_InitIO(OUTPUT,PA5);
+	//GPIO_WriteIO(HIGH, PA5);
 
 /***************************************************************/
 
@@ -226,6 +224,7 @@ int main (void)
 		gecko_pinmux_config(PAD19,GPIO_B_7);
 		extern void Set_GPIO_B7_Input(void);
 		Set_GPIO_B7_Input();
+		GPIO_InitIO(INPUT,PB7);
 	#endif
 
 
@@ -233,7 +232,9 @@ int main (void)
 		//config PAD10(GPIOA6) as GPIO input
 		gecko_pinmux_config(PAD10,GPIO_A_6);
 		extern void Set_GPIOA6_Input(void);
-		Set_GPIOA6_Input();	
+		Set_GPIOA6_Input();
+		
+		GPIO_InitIO(INPUT,PA6);		
 	#endif
 
 /**********************************************************************************	
@@ -262,8 +263,10 @@ int main (void)
 	gecko_pinmux_config(PAD10,GPIO_A_6);//I2C/INT
 
   //gpio_set_input(GPIOA,6);
+	//GPIO_InitIO(OUTPUT,PA6);
 	//GPIODIR_0|= BIT(6);
 	//gpio_set_value(GPIOA, 1, 6);
+	//GPIO_WriteIO(HIGH, PA6);
 	//IP2366_INT_SET;
 	//delay_1us(500);
 
@@ -291,8 +294,6 @@ int main (void)
 	
 
 
-
-
 /************************SCGUI******SCGUI*****SCGUI****************************/
 
 #if 0
@@ -318,8 +319,6 @@ int main (void)
 	
 
 
-
-
 /************************SysTick configure***************************************/
 	//----SysTick Init-----
 	SysTick_Config(20000);//SysTick === 1ms tick for KEY detect
@@ -342,15 +341,15 @@ int main (void)
 	
 		current_tick = TimeTick;
 		
-		if (current_tick % 50 == 0) Task_KeyScan();
+		if (current_tick % 10 == 0) Task_KeyScan();
 		
 		if (current_tick % 100 == 0) Get_Vbat_Voltage();
+		
 		if (current_tick % 100 == 0) Task_Charger_Control();	
 
 		if (current_tick % 200 == 0) Task_UI_Refresh();	
 
 		if (current_tick % 200 == 0) Task_BMS_Update();	
-		
 		
 	}
 	

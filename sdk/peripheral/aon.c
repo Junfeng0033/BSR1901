@@ -217,7 +217,78 @@ void GPIO_WakeUp_Setting(void)
 
 
 
+
+
 /*
+
+
+reg  dff_wr_por_status;
+wire wr_por_status = wr_sel_0x008 & byte1_sel & wdata[8];
+always @(posedge regfile_clk or negedge regfile_rst_n) begin
+    if (~regfile_rst_n)
+            dff_wr_por_status <= 1'b0;
+    else
+            dff_wr_por_status <= wr_por_status;
+end
+assign reg_aon_clr_por_status = dff_wr_por_status;
+
+reg  dff_wr_wakeup_int;
+wire wr_wakeup_int = wr_sel_0x008 & byte0_sel & wdata[0];
+always @(posedge regfile_clk or negedge regfile_rst_n) begin
+    if (~regfile_rst_n)
+            dff_wr_wakeup_int <= 1'b0;
+    else
+            dff_wr_wakeup_int <= wr_wakeup_int;
+end
+assign reg_aon_clr_wakeup_int = dff_wr_wakeup_int;
+
+
+assign r_reg_0x008_sts = {13'h0,ana2dig_cmp2_result2dig_bit_d[1],ana2dig_cmp1_result2dig_bit_d[1], h2l_wr_busy, 7'h0, reg_aon_roi_por_status, 7'h0, reg_aon_roi_wakeup_int};
+
+
+Register 0x008 is special:
+When read, it represents reg_aon_roi_wakeup_int,which indicates the current status of the wakeup interrupt.
+When written, it represents wr_wakeup_int, which enables the wakeup interrupt.
+
+
+
+
+
+always @(posedge regfile_clk or negedge regfile_rst_n) begin
+    if (~regfile_rst_n) begin
+            reg_0x00C <= 12'h0;
+    end
+    else if (wr_sel_0x00C) begin
+        if (byte0_sel)
+            reg_0x00C[ 7: 0] <= wdata[ 7: 0];
+        if (byte1_sel)
+            reg_0x00C[11: 8] <= wdata[11: 8];
+    end
+end
+
+
+
+reg  dff_wr_gpio11_wkup;
+wire wr_gpio11_wkup = wr_sel_0x00C & byte1_sel & wdata[11];
+always @(posedge regfile_clk or negedge regfile_rst_n) begin
+    if (~regfile_rst_n)
+            dff_wr_gpio11_wkup <= 1'b0;
+    else
+            dff_wr_gpio11_wkup <= wr_gpio11_wkup;
+end
+assign reg_aon_clr_gpio11_wkup = dff_wr_gpio11_wkup;
+
+
+
+
+Register 0x00C has special functions:
+On read: It indicates reg_aon_roi_gpio11_wkup, which shows which GPIO currently wakes up the CPU.
+On write: It acts as reg_aon_clr_gpio11_wkup, which clears the GPIO wakeup status flag bit.
+
+
+
+
+
 assign reg_aon_ena_wakeup_int				=reg_0x004[0];
 
 ADDR_REG_0x008:rdata_comb = {15'h0,h2l_wr_busy,7'h0,reg_aon_roi_por_status,7'h0,reg_aon_roi_wakeup_int};
@@ -231,22 +302,72 @@ assign reg_aon_gpio_wakeup_edge			=reg_0x018[11:0];
 assign reg_aon_gpio_wakeup_lvl			=reg_0x01C[11:0];
 
 assign reg_aon_sleep_cnt_val			  =reg_0x060[23:0];
+
+
+
+
+//  Low-power clock domain (slow-clock domain)
+assign gpio_wkup_edge = reg_aon_gpio_wkup_edge  ?   ((~gpio_pad_in_sync[2]) &   gpio_pad_in_sync[1]) : // GPIO Input Posedge
+                                                    (  gpio_pad_in_sync[2]  & (~gpio_pad_in_sync[1])); // GPIO Input Negedge
+
+assign gpio_wkup_levl = reg_aon_gpio_wkup_lvl   ?   (  gpio_pad_in_sync[2]  &   gpio_pad_in_sync[1]) : // GPIO Input 2x AON cycle high-level
+                                                    ((~gpio_pad_in_sync[2]) & (~gpio_pad_in_sync[1])); // GPIO Input 2x AON cycle low-level
+
+assign gpio_wkup_active = reg_aon_gpio_wkup_eact ? gpio_wkup_edge : gpio_wkup_levl;
+
+
+
+assign reg_aon_sel_aon_clk16k   = reg_0x000[10];
+assign reg_aon_wait_ana_cntto   = reg_0x000[9:8];
+assign reg_aon_ena_pin_wakeup   = reg_0x000[7];
+//assign reg_aon_ena_rtc_wakeup   = reg_0x000[6];
+assign reg_aon_ena_sleep_cnt_wkup= reg_0x000[5];
+assign reg_aon_ena_sleep_cnt_run= reg_0x000[4];
+assign reg_aon_ena_litesleep    = reg_0x000[3];
+assign reg_aon_ena_deepsleep    = reg_0x000[2];
+assign reg_aon_wait_pu_cntto    = reg_0x000[1:0];
+assign reg_aon_ena_wakeup_int   = reg_0x004[0];
+assign reg_aon_gpio_wkup_ena    = reg_0x010[11:0];
+assign reg_aon_gpio_wkup_eact   = reg_0x014[11:0];
+assign reg_aon_gpio_wkup_edge   = reg_0x018[11:0];
+assign reg_aon_gpio_wkup_lvl    = reg_0x01C[11:0];
+//assign reg_aon_sleep_cnt_val    = reg_0x060[11:0];
+assign reg_aon_sleep_cnt_val    = reg_0x060[23:0];
+
+assign aon_gpio_wkup_ena[11:0] = reg_aon_gpio_wkup_ena[11:0];
+
+
+
 */
 
 
+
+
+
+#if 0
 
 //sleep-wakeup source setting,there are 12 GPIO wake-up sources
 
 void BSR1901_Config_GPIO_WakeUp_Source_From_DeepSleep(void)
 {
 	unsigned int wr_data;
+
+
+	/*
 	
-	wr_data=reg_read(GECKO_AON_BASE_ADDR+0x00C);//test reg_0x00C read and write
+	register 0x00C has special functions:
+	READ: It indicates reg_aon_roi_gpio11_wkup, which shows which GPIO currently wakes up the CPU.
+	WRITE: It acts as reg_aon_clr_gpio11_wkup, which clears the GPIO wakeup status flag bit.
+	
+	*/
+
+	wr_data=reg_read(GECKO_AON_BASE_ADDR+0x00C);
 	//wr_data = 0xC08;
+	wr_data = 0xFFF;	
+	//wr_data = 0x1;//just clear GPIO08 wakeup status,ZJF @ 20240131
 	
-	wr_data |= 0x1;
 	h2l_wr_busy();
-  reg_write(GECKO_AON_BASE_ADDR+0x00C, wr_data);//
+  reg_write(GECKO_AON_BASE_ADDR+0x00C, wr_data);
 	
 		
 	
@@ -255,6 +376,9 @@ void BSR1901_Config_GPIO_WakeUp_Source_From_DeepSleep(void)
 	wr_data |= 0x1;//aon_ena_wakeup_int
 	h2l_wr_busy();
 	reg_write(GECKO_AON_BASE_ADDR+0x004, wr_data);
+	
+	
+	
 
   wr_data=reg_read(GECKO_AON_BASE_ADDR+0x010);
 
@@ -281,13 +405,57 @@ void BSR1901_Config_GPIO_WakeUp_Source_From_DeepSleep(void)
 	reg_write(GECKO_AON_BASE_ADDR+0x010, wr_data);	
 
 
-  wr_data=reg_read(GECKO_AON_BASE_ADDR+0x018);
-	//wr_data |= 0xFFF;
-	wr_data |= 0x400;
+
+/*
+
+
+edge active config
+
+assign reg_aon_gpio_wakeup_eact			=reg_0x014[11:0];
+
+assign reg_aon_gpio_wakeup_edge			=reg_0x018[11:0];
+
+assign reg_aon_gpio_wakeup_lvl			=reg_0x01C[11:0];
+
+
+assign gpio_wkup_active = reg_aon_gpio_wkup_eact ? gpio_wkup_edge : gpio_wkup_levl;
+
+
+*/
+
+  ////configure GPIO for rising edge triggering
+  wr_data=reg_read(GECKO_AON_BASE_ADDR+0x014);
+	wr_data |= 0xFFF;
+	
+	//wr_data &= 0x000;
+	//wr_data |= 0x400;
 	h2l_wr_busy();
-	reg_write(GECKO_AON_BASE_ADDR+0x018, wr_data);	
+	reg_write(GECKO_AON_BASE_ADDR+0x014, wr_data);
+
+
+
+  wr_data=reg_read(GECKO_AON_BASE_ADDR+0x018);
+	wr_data |= 0xFFF;
+	//wr_data |= 0x400;
+	h2l_wr_busy();
+	reg_write(GECKO_AON_BASE_ADDR+0x018, wr_data);//GPIO input posedge(gpio wakeup edge config)	
+	
+
+
+  wr_data=reg_read(GECKO_AON_BASE_ADDR+0x01C);
+	wr_data |= 0xFFF;
+	//wr_data |= 0x400;
+	h2l_wr_busy();
+	reg_write(GECKO_AON_BASE_ADDR+0x01C, wr_data);	
 	
 }
+
+#endif
+
+
+
+
+
 
 
 

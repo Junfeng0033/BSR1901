@@ -40,7 +40,7 @@ RLE解压缩
 
 extern void Lcd_Write_data_dma(uint8_t *p_data, uint16_t len);
 extern void HW_SPI_Tx_DMA_16bit_ColorBlock(uint16 *pData, uint16 DataLen);
-
+extern void HW_SPI_Tx_DMA_16bit_ColorBlock_Opt(uint16 *pData, uint16 DataLen);
 
 
 
@@ -171,7 +171,8 @@ __RAM_CODE__ static void RLE_Decode_Send(const uint8_t *arry)
 				{
 					// 长数据：DMA 批量发送，效率拉满
 					color = (uint16_t)dat[0]<<8|dat[1];
-					HW_SPI_Tx_DMA_16bit_ColorBlock(&color,count);
+					//HW_SPI_Tx_DMA_16bit_ColorBlock(&color,count);
+					HW_SPI_Tx_DMA_16bit_ColorBlock_Opt(&color,count);
 			  }
 
     }
