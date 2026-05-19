@@ -112,7 +112,7 @@ void iWDT_Timer_Init(void)
 	
 	Val|=IWDT_CLK_SEL;//Clock source of timer:[0:EXTCLK;1:PCLK]
 	Val|=IWDT_INT_EN;
-	//Val|=IWDT_RST_EN;
+	Val|=IWDT_RST_EN;
 	Val|=IWDT_EN;	
 
 	iWATCHDOG->CTRL=Val;	
@@ -124,6 +124,29 @@ void iWDT_Timer_Init(void)
 	hal_nvic_enable_irq(IWDT_IRQ);		
 	
 }
+
+
+#if 0
+void iWDT_Timer_Init(unsigned int cycle, int type)
+{
+	volatile int ID,Val;
+  ID=iWATCHDOG->IDREV;
+	
+	iWATCHDOG->WREN=WDT200_WP_NUM;//Write the magic number,0x5aa5
+
+	Val|=IWDT_INT_TIME(2);//The timer interval of the interrupt stage
+	Val|=IWDT_RST_TIME(2);//The time interval of the reset stage
+	
+	Val|=IWDT_CLK_SEL;	
+	Val|=IWDT_INT_EN;
+	Val|=IWDT_RST_EN;
+	Val|=IWDT_EN;	
+
+	iWATCHDOG->CTRL=Val;	
+	
+}
+#endif
+
 
 
 void iWDT_Timer_Restart(void)

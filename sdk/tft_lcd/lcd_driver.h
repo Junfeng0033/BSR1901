@@ -174,7 +174,7 @@ void LCD_GPIO_Init(void);
 void Lcd_WriteIndex(uint8_t Index);
 void Lcd_WriteData(uint8_t Data);
 void Lcd_WriteReg(uint8_t Index,uint8_t Data);
-uint16_t Lcd_ReadReg(uint8_t LCD_Reg);
+
 void Lcd_Reset(void);
 void Lcd_Init(void);
 void Lcd_Clear(uint16_t Color);

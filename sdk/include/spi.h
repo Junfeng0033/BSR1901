@@ -137,6 +137,23 @@ input lsbf;
 //#define 	SPI_Write16bitData(data) 			{hwp_spi0->CTROL = 0x10f9b;hwp_spi0->FIFODATA = data;}
 
 
+//hwp_spi0->CTROL = 0x10f8b;						//8bit spi data
+#define 	SPI_WriteData(data) 					{hwp_spi0->CTROL = 0x10f8b;hwp_spi0->FIFODATA = data;}
+
+//hwp_spi0->CTROL=0x10f9b;							//16bit spi data
+#define 	SPI_Write16bitData(data) 			{hwp_spi0->CTROL = 0x10f9b;hwp_spi0->FIFODATA = data;}
+
+
+
+
+//hwp_spi0->CTROL = 0x10f8b;						//8bit spi data
+//#define 	SPI_WriteData(data) 					{hwp_spi0->CTROL = 0x10f8b;hwp_spi0->FIFODATA = data;}
+
+////hwp_spi0->CTROL=0x10f9b;							//16bit spi data
+//#define 	SPI_Write16bitData(data) 			{hwp_spi0->CTROL = 0x10f9b;hwp_spi0->FIFODATA = data;}
+
+
+
 
 
 #define SPI_8bit_TRSF					{hwp_spi0->CTROL|= SPI_SIZE(0);}

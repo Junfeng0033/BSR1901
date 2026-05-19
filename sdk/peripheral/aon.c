@@ -961,47 +961,24 @@ PAD_21		1p8				uart1_dat(pogo_pin2)				i2c1_sda			gpio_a_3						pwm_ch7				ADC9
 */
 
 
-#define ADC2_FUNC					((0x1)<<0)   //PAD00
-#define ADC3_FUNC					(1<<1)			 //PAD01
 
-#define RSVD_1_FUNC				(1<<2)			 //PAD02
-#define RSVD_2_FUNC				(1<<3)       //PAD03
-#define RSVD_3_FUNC				(1<<4)			 //PAD04
-#define RSVD_4_FUNC				(1<<5)			 //PAD05
-#define RSVD_5_FUNC				(1<<6)			 //PAD06
-#define RSVD_6_FUNC				(1<<7)			 //PAD07
-
-
-#define ADC0_FUNC				    (1<<8)			 //PAD08
-#define ADC1_FUNC				    (1<<9)			 //PAD09
-#define ADC6_FUNC				    (1<<10)			 //PAD10
-#define CK32_OUT_FUNC				(1<<11)			 //PAD11
-#define ADC7_FUNC					  (1<<12)			 //PAD12
-
-#define OPA0_VIN_FUNC				  (1<<13)			 //PAD13
-#define OPA0_VIP_FUNC				  (1<<14)			 //PAD14
-#define OPA0_VO_FUNC				  (1<<15)			 //PAD15
-#define OPA1_VIN_FUNC					(1<<16)			 //PAD16
-#define OPA1_VIP_FUNC				  (1<<17)			 //PAD17
-#define OPA1_VO_FUNC				  (1<<18)			 //PAD18
-
-#define ADC4_FUNC				  	(1<<19)			 //PAD19
-#define ADC8_FUNC						(1<<20)			 //PAD20
-#define ADC9_FUNC						(1<<21)      //PAD21
 
 
 
 //Note: The AON register must be set after the chip is powered off and then powered back on to take effect
 
 
-void ConfigPort_AnalogFunction(void)
+void ConfigPort_AnalogFunction(uint32 func)
 {
 
 	unsigned int wr_data;
 	
 	wr_data=reg_read(GECKO_AON_BASE_ADDR+0x080);
 	
-  wr_data = (ADC0_FUNC|ADC1_FUNC);//set ADC0 and ADC1 port to analog fucntion
+  //wr_data |= (ADC0_FUNC|ADC1_FUNC);//set ADC0 and ADC1 port to analog fucntion
+	
+	wr_data |= func;
+	
 	
 	reg_write(GECKO_AON_BASE_ADDR+0x080, wr_data);	
 	

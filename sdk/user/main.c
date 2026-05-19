@@ -88,7 +88,6 @@ void EnterDeepSleepMode(void)
 
 int main (void) 
 {
-	//int wr_data;
 
 	uint32_t current_tick;
 
@@ -121,7 +120,7 @@ int main (void)
 	gecko_pinmux_config(PAD20,SPI_CSN_1);	
 
 
-	//gecko_pinmux_config(PAD24,GPIO_B_4);//default function,do not needed to config
+	//gecko_pinmux_config(PAD24,GPIO_B_4);//default function,do not needed to configure
 	gecko_pinmux_config(PAD21,GPIO_A_3);//DC control	
 	gecko_pinmux_config(PAD7,GPIOB_7);//RES(reset) control
 	
@@ -207,6 +206,7 @@ int main (void)
 //	gecko_pinmux_config(PAD20,GPIO_A_2);
 //	gecko_pinmux_config(PAD21,GPIO_A_3);
 //	bsr1901_adc_8_9_analog_port();
+//	ConfigPort_AnalogFunction(ADC0_FUNC|ADC1_FUNC);
 //	ADC_Init();
 
 	//initial Check_ON GPIO for ADC function
@@ -271,6 +271,7 @@ int main (void)
 	//delay_1us(500);
 
 	//Set_GPIOA6_Input();//Hardware pulldown(510K to ground)
+	//GPIO_InitIO(INPUT,PA6);	
 	//bsr1901_pullup_pulldown_config(PAD_10,PAD_HIZ);
 	//bsr1901_pullup_pulldown_config(PAD_10,PAD_PULLDOWN);
 
@@ -316,7 +317,26 @@ int main (void)
 	Gui_ProgressBar(20, 20, 100, 20, 60, BLACK, GREEN, GRAY1);
 	
 /************************SCGUI******SCGUI*****SCGUI****************************/
+
+
+
+	//watchdog_init(5000,1);
+
+
+
+  //iWatchDog for FSM Control
+
+//	  iWDT_Timer_Disable();
+//	  iWDT_Timer_Restart();	
+//	  iWDT_Timer_Init();
+
+/************************Buck-Boost Control***************************************/
+    
+  charger_init(&my_charger);
 	
+/************************Buck-Boost Control***************************************/	
+
+
 
 
 /************************SysTick configure***************************************/
@@ -324,14 +344,6 @@ int main (void)
 	SysTick_Config(20000);//SysTick === 1ms tick for KEY detect
 /************************SysTick configure***************************************/
 
-  //iWatchDog for FSM Control
-  //iWDT_Timer_Init();
-
-/************************Buck-Boost Control***************************************/
-    
-  charger_init(&my_charger);
-	
-/************************Buck-Boost Control***************************************/	
 
 	while(1)
 	{

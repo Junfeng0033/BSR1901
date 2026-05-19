@@ -89,7 +89,7 @@ extern void delay_1us(unsigned int delay_val);
 
 extern uint32 bsr1901_sram_test(void);
 
-extern void BSR1901_MOS_Gate_CTRL(void);
+//extern void BSR1901_MOS_Gate_CTRL(void);
 
 extern void gecko_task_cm0_sw_flash(void);
 extern void gecko_task_cm0_sw_flash_quad(void);

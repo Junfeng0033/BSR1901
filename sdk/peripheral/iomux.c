@@ -828,7 +828,13 @@ void gecko_pinmux_config(Pad_Num_Type pad_num, Pad_Func_Type pad_func)
 
 
 
+/*
+BSR1901 register 
 
+assign reg_aon_pad_pullup		=reg_0x88[23:0]   //default value is pull up
+assign reg_aon_pad_pulldn		=reg_0x8C[23:0]
+
+*/
 
 void bsr1901_pullup_pulldown_config(Pad_Num pad_num,Pad_PULL_CFG pull_type)
 {

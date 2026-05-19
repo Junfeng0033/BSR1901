@@ -1147,7 +1147,7 @@ void tc_gecko_cm0_aon_sleep()
 
 		wr_data=reg_read(GECKO_AON_BASE_ADDR+0x00C);
 		//wr_data = 0xC08;
-		wr_data = 0xFFF;	
+		wr_data = 0xFFF;//clear reg_aon_clr_gpio_wkup
 		//wr_data = 0x1;//just clear GPIO08 wakeup status,ZJF @ 20240131
 		
 		h2l_wr_busy();
@@ -1269,7 +1269,14 @@ assign reg_aon_wait_pu_cntto    = reg_0x000[1:0];
     
 		#if 0 //GPIO pin wakeup
     reg_write(GECKO_AON_BASE_ADDR+0x000, ahb_wr_data);
+		
+		
 		#else //sleep timer wakeup
+		
+		ahb_wr_data = GEK1109_SLEEP_CNT_RUN_Enable  |
+									GEK1109_SLEEP_CNT_WKUP_Enable |
+								  GEK1109_DEEP_SLEEP_Enable ;
+									
 		h2l_wr_busy();
     reg_write(GECKO_AON_BASE_ADDR+0x000, 0x34);//2024-9-13 @ Wuxi	
 		h2l_wr_busy();
@@ -2099,8 +2106,8 @@ uint32 hj_flash_rd_data;
 void HJ_Read_UserData(void)
 {
 	volatile unsigned long adr;
-	uint8 hj_user_sector=60;//addr=60*0x1000=0x3_C000;
-  adr=hj_user_sector * 0x1000;
+	uint8 hj2_user_sector=60;//addr=60*0x1000=0x3_C000;
+  adr=hj2_user_sector * 0x1000;
 	uint32 status;
   status=pEnterCriticalSection(); 
   hj_flash_rd_data=QSPI_NorFlash_ReadWord(adr);//read a word(4-byte) data
