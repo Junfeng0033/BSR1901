@@ -850,7 +850,7 @@ VSET<1:0>         Vout
 
 
 
-void LDO33_AUX_Enable(void)
+void LDO33_LCD_Enable(void)
 {
 	unsigned int wr_data;
 	wr_data = reg_read(0x40020000+0x28);
@@ -871,7 +871,9 @@ void LDO33_AUX_Enable(void)
 	#endif
 }
 
-void LDO33_AUX_Disable(void)
+
+
+void LDO33_LCD_Disable(void)
 {
 		unsigned int wr_data;
 		wr_data = reg_read(0x40020000+0x28);

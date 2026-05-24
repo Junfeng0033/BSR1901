@@ -64,7 +64,7 @@ void EnterDeepSleepMode(void)
 		#endif
 
 		//LDO33_AUX disable, power down LCD module			
-		LDO33_AUX_Disable();
+		LDO33_LCD_Disable();
 
 //	wr_data = 0x608e7885;
 //	reg_write(0x40020000+0x020, wr_data);
@@ -125,7 +125,7 @@ int main (void)
 	gecko_pinmux_config(PAD7,GPIOB_7);//RES(reset) control
 	
 	//LDO33_AUX enable, power supply for LCD module
-	LDO33_AUX_Enable();//BL control(BSR1901 use MOS to control backlight)
+	LDO33_LCD_Enable();//BL control(BSR1901 use MOS to control backlight)
 	
 
 	Lcd_Init();
@@ -219,7 +219,7 @@ int main (void)
 
 /***************************************************************/
 
-	#if  0//CHRG_INSET_DET_EN //charger insert detect
+	#if  0////charger insert detect
 		//config PAD19(GPIOB7) as GPIO input
 		gecko_pinmux_config(PAD19,GPIO_B_7);
 		extern void Set_GPIO_B7_Input(void);
@@ -228,7 +228,7 @@ int main (void)
 	#endif
 
 
-	#if 0//MIC_DET_EN  //air flow sensor
+	#if 0////air flow sensor
 		//config PAD10(GPIOA6) as GPIO input
 		gecko_pinmux_config(PAD10,GPIO_A_6);
 		extern void Set_GPIOA6_Input(void);

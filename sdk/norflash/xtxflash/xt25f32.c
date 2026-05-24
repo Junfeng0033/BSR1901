@@ -1145,7 +1145,6 @@ void tc_gecko_cm0_aon_sleep()
     unsigned int wr_data;
 		//char *string;	
 
-		wr_data=reg_read(GECKO_AON_BASE_ADDR+0x00C);
 		//wr_data = 0xC08;
 		wr_data = 0xFFF;//clear reg_aon_clr_gpio_wkup
 		//wr_data = 0x1;//just clear GPIO08 wakeup status,ZJF @ 20240131
@@ -1306,6 +1305,47 @@ assign reg_aon_wait_pu_cntto    = reg_0x000[1:0];
 		while(1);
 		
 }
+
+
+
+
+
+
+
+/*
+
+    force tbench.U_DUT_TOP.u_dig_wrap.u_aon_wrap.u_aon_top.u_aon_regsync.reg_0x010[11:0] = 12'h003;
+
+    force tbench.U_DUT_TOP.u_dig_wrap.u_aon_wrap.u_aon_top.u_aon_regsync.reg_0x014[11:0] = 12'h000;  
+
+    force tbench.U_DUT_TOP.u_dig_wrap.u_aon_wrap.u_aon_top.u_aon_regsync.reg_0x000[7]  = 1'b1;//pin wakeup enable
+
+
+		//read-only
+		ADDR_REG_0X008  : rdata_comb = r_reg_0x008_sts;
+		//read-only
+		ADDR_REG_0X00C  : rdata_comb = r_reg_0x00C_sts;
+		
+*/
+
+
+
+//获取是哪一个gpio唤醒源把cpu唤醒的
+//12 gpio pin wakeup source
+uint32 get_pin_wakeup_source(void)
+{
+	
+ //assign r_reg_0x00C_sts = {20'h0, reg_aon_roi_gpio11_wkup, reg_aon_roi_gpio10_wkup, reg_aon_roi_gpio09_wkup, reg_aon_roi_gpio08_wkup, reg_aon_roi_gpio07_wkup, reg_aon_roi_gpio06_wkup, reg_aon_roi_gpio05_wkup, reg_aon_roi_gpio04_wkup, reg_aon_roi_gpio03_wkup, reg_aon_roi_gpio02_wkup, reg_aon_roi_gpio01_wkup, reg_aon_roi_gpio00_wkup};
+	
+	uint32 wkup_src;
+	//wr_data=reg_read(GECKO_AON_BASE_ADDR+0x00C);
+	wkup_src =reg_read(GECKO_AON_BASE_ADDR+0x00C);
+	
+	return wkup_src;
+	
+}
+
+
 
 
 

@@ -193,7 +193,7 @@ void Task_KeyScan(void)
         #endif
 
 				//LDO33_AUX disable, power down LCD module			
-				LDO33_AUX_Disable();
+				LDO33_LCD_Disable();
 			
 //				wr_data = 0x608e7885;
 //				reg_write(0x40020000+0x020, wr_data);

@@ -31,22 +31,22 @@
     Program header entries: 1
     Section header entries: 17
 
-    Program header offset: 512360 (0x0007d168)
-    Section header offset: 512392 (0x0007d188)
+    Program header offset: 512772 (0x0007d304)
+    Section header offset: 512804 (0x0007d324)
 
     Section header string table index: 16
 
 ========================================================================
 
 ** Program header #0 (PT_LOAD) [PF_X + PF_W + PF_R + PF_ARM_ENTRY]
-    Size : 307408 bytes (307368 bytes in file)
+    Size : 307396 bytes (307356 bytes in file)
     Virtual address: 0x00000000 (Alignment 4)
 
 
 ========================================================================
 
 ** Section #1 'ER_IROM1' (SHT_PROGBITS) [SHF_ALLOC + SHF_EXECINSTR]
-    Size   : 306524 bytes (alignment 4)
+    Size   : 306512 bytes (alignment 4)
     Address: 0x00000000
 
 
@@ -85,7 +85,7 @@
 
 
 ** Section #8 '.debug_line' (SHT_PROGBITS)
-    Size   : 22108 bytes
+    Size   : 22100 bytes
 
 
 ** Section #9 '.debug_loc' (SHT_PROGBITS)
@@ -93,7 +93,7 @@
 
 
 ** Section #10 '.debug_macinfo' (SHT_PROGBITS)
-    Size   : 31412 bytes
+    Size   : 31280 bytes
 
 
 ** Section #11 '.debug_pubnames' (SHT_PROGBITS)
@@ -101,13 +101,13 @@
 
 
 ** Section #12 '.symtab' (SHT_SYMTAB)
-    Size   : 13552 bytes (alignment 4)
+    Size   : 13568 bytes (alignment 4)
     String table #13 '.strtab'
-    Last local symbol no. 528
+    Last local symbol no. 529
 
 
 ** Section #13 '.strtab' (SHT_STRTAB)
-    Size   : 10336 bytes
+    Size   : 10356 bytes
 
 
 ** Section #14 '.note' (SHT_NOTE)
@@ -115,7 +115,7 @@
 
 
 ** Section #15 '.comment' (SHT_PROGBITS)
-    Size   : 37564 bytes
+    Size   : 38092 bytes
 
 
 ** Section #16 '.shstrtab' (SHT_STRTAB)
@@ -138,22 +138,22 @@ address     size       variable name                            type
 0x00000000  0x2        ram_color                                volatile uint16
 
 address     size       variable name                            type
-0x00045e7c  0x4e20     gImage_circle_100x100                    array[20000] of const unsigned char
+0x00045e70  0x4e20     gImage_circle_100x100                    array[20000] of const unsigned char
 
 address     size       variable name                            type
-0x0003de7c  0x8000     gImage_128x128_star_32bit                array[8192] of const unsigned int
+0x0003de70  0x8000     gImage_128x128_star_32bit                array[8192] of const unsigned int
 
 address     size       variable name                            type
-0x00035e7c  0x8000     gImage_128x128_star                      array[32768] of const unsigned char
+0x00035e70  0x8000     gImage_128x128_star                      array[32768] of const unsigned char
 
 address     size       variable name                            type
-0x0002de7c  0x8000     gImage_128x128_cake                      array[32768] of const unsigned char
+0x0002de70  0x8000     gImage_128x128_cake                      array[32768] of const unsigned char
 
 address     size       variable name                            type
-0x00025e7c  0x8000     gImage_128x128_battery_32b               array[8192] of const unsigned int
+0x00025e70  0x8000     gImage_128x128_battery_32b               array[8192] of const unsigned int
 
 address     size       variable name                            type
-0x0001de7c  0x8000     gImage_128x128_battery                   array[32768] of const unsigned char
+0x0001de70  0x8000     gImage_128x128_battery                   array[32768] of const unsigned char
 
 address     size       variable name                            type
 0x00000000  0xa0       Font16_dital_Table                       array[160] of const unsigned char
@@ -162,22 +162,22 @@ address     size       variable name                            type
 0x00000000  0x280      Font32_dital_Table                       array[640] of const unsigned char
 
 address     size       variable name                            type
-0x0001d8bc  0x5a0      Font48_dital_Table                       array[1440] of const unsigned char
+0x0001d8b0  0x5a0      Font48_dital_Table                       array[1440] of const unsigned char
 
 address     size       variable name                            type
-0x0001de5c  0x20       Font_8x32_percent                        array[32] of const unsigned char
+0x0001de50  0x20       Font_8x32_percent                        array[32] of const unsigned char
 
 address     size       variable name                            type
-0x000158bc  0x8000     gImage_128x128_charging_32bit            array[8192] of const unsigned int
+0x000158b0  0x8000     gImage_128x128_charging_32bit            array[8192] of const unsigned int
 
 address     size       variable name                            type
-0x0000d8bc  0x8000     gImage_charging                          array[32768] of const unsigned char
+0x0000d8b0  0x8000     gImage_charging                          array[32768] of const unsigned char
 
 address     size       variable name                            type
-0x000058bc  0x8000     gImage_black_128x128                     array[32768] of const unsigned char
+0x000058b0  0x8000     gImage_black_128x128                     array[32768] of const unsigned char
 
 address     size       variable name                            type
-0x00003648  0x2274     gImage_bat_90x49                         array[8820] of const unsigned char
+0x0000363c  0x2274     gImage_bat_90x49                         array[8820] of const unsigned char
 
 address     size       variable name                            type
 0x00000000  0x4        ack_status                               volatile unsigned int

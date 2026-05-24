@@ -111,11 +111,15 @@ input lsbf;
 	
 }
 
-void Lcd_WriteReg(uint8_t Index,uint8_t Data)
-{
-	Lcd_WriteIndex(Index);
-	Lcd_WriteData(Data);
-}
+
+
+//void Lcd_WriteReg(uint8_t Index,uint8_t Data)
+//{
+//	Lcd_WriteIndex(Index);
+//	Lcd_WriteData(Data);
+//}
+
+
 
 void Lcd_Reset(void)
 {
@@ -126,6 +130,8 @@ void Lcd_Reset(void)
 	LCD_RST_SET;
 	delay_ms(50);
 }
+
+
 
 //LCD Init For 1.47Inch LCD Panel with NV3022B.
 void Lcd_Init(void)

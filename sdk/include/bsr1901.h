@@ -33,10 +33,8 @@
 //uint32 AON_CFG_GPIO_WAKEUP_CTRL_0x10_Default=0;//?
 */
 
-#define  QI_TEST_EN				0
-#define  LIGHTN_TEST_EN		0
 
-#define  LED_TEST_EN			1
+
 
 #define  PWM_TEST_EN			1
 #define  UART_TEST_EN			1
@@ -45,9 +43,7 @@
 #define  GPIO_TEST_EN			1
 #define  ADC_TEST_EN			1
 
-#define  DeepSleep_TEST_EN	1
 
-#define  DAC_TEST_EN			0
 #define  DMA_TEST_EN			1
 
 #define  TIMER_TEST_EN		1
@@ -58,9 +54,8 @@
 #define  MOS_TEST_EN			1
 
 
-//#define  CHRG_INSET_DET_EN	1
 
-#define  MIC_DET_EN		1
+
 
 
 //uart clock source, 20Mhz/26Mhz
@@ -69,7 +64,7 @@
 
 
 
-#define    BSR1901_SPI_MASTER_TEST      0
+
 
 
 

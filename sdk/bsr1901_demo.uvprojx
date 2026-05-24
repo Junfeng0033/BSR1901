@@ -81,7 +81,7 @@
             <nStopB2X>0</nStopB2X>
           </BeforeMake>
           <AfterMake>
-            <RunUserProg1>1</RunUserProg1>
+            <RunUserProg1>0</RunUserProg1>
             <RunUserProg2>0</RunUserProg2>
             <UserProg1Name>build.bat</UserProg1Name>
             <UserProg2Name>Keil5_disp_size_bar_v0.3.exe</UserProg2Name>
@@ -494,6 +494,11 @@
               <FileName>charger.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\peripheral\charger.c</FilePath>
+            </File>
+            <File>
+              <FileName>puf.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\peripheral\puf.c</FilePath>
             </File>
           </Files>
         </Group>

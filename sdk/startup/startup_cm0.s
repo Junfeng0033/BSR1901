@@ -108,7 +108,9 @@ __Vectors       DCD     __initial_sp              ; Top of Stack
 ; Reset Handler
 Reset_Handler   PROC
                 EXPORT  Reset_Handler             [WEAK]
+				;IMPORT  sram_puf_on_power_up
                 IMPORT  __main
+				;BL      sram_puf_on_power_up      ;上电先采SRAM PUF
                 LDR     R0, =__main
                 BX      R0
                 ENDP

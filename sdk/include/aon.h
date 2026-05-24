@@ -414,8 +414,8 @@ extern void delay_1us(unsigned int delay_val);
 
 
 
-void LDO33_AUX_Enable(void);
-void LDO33_AUX_Disable(void);
+void LDO33_LCD_Enable(void);
+void LDO33_LCD_Disable(void);
 
 void Analog_Ctrl_1_Init(void);
 void Analog_Ctrl_2_Init(void);
