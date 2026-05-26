@@ -776,14 +776,14 @@
               <FilePath>.\user\key_process.c</FilePath>
             </File>
             <File>
-              <FileName>GUI.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\user\GUI.c</FilePath>
-            </File>
-            <File>
               <FileName>ui_app.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\user\ui_app.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsr1901_GUI.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\user\bsr1901_GUI.c</FilePath>
             </File>
           </Files>
         </Group>

@@ -99,7 +99,7 @@ uint64_t sram_puf_init(void) {
 
 
 
-
+#if 0
 
 // 极简无内存占用 SoftPUF —— 专为 4KB SRAM 芯片设计
 // 特点：无全局数组、无常驻内存、用完即释放、只输出 64bit 唯一ID
@@ -151,12 +151,13 @@ uint64_t sram_puf_generate_uid(void)
 }
 
 
+#endif
 
 
 
 
 // 必须加上 volatile，禁止编译器优化掉 SRAM 读取
-//#define PUF_SRAM_BASE  0x20000000UL   // 你的芯片SRAM基地址
+#define PUF_SRAM_BASE  0x20000000UL   // 你的芯片SRAM基地址
 #define PUF_READ_SIZE  256            // 只读取256字节，足够生成64bit ID
 
 // 唯一全局变量：只占 8 字节 SRAM

@@ -464,14 +464,6 @@ void gecko_pinmux_config(Pad_Num_Type pad_num, Pad_Func_Type pad_func)
 //						SYS_HW32_REG_WR(0x308,iomux_val);	
 						
 						
-						#if 0//DEBUG_UATR0_PRINT_LOG
-						UATR0_PRINT_LOG((unsigned char *)("\r\n"));						
-						UATR0_PRINT_LOG((unsigned char *)("PAD14 AON_IOMUX_SEL_1(FUNC_I2C_SDA)--- = 0x"));
-						string=my_itoa(iomux_val);
-						UATR0_PRINT_LOG((unsigned char *)(string));
-						UATR0_PRINT_LOG((unsigned char *)("\r\n"));	
-						#endif
-						
 					}
 					else if (pad_func==GPIO_B_2)
 					{

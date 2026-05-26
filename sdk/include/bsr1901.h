@@ -27,10 +27,10 @@
 
 /*
 //AON Default Value
-//uint32 AON_BASE_ADDR_0x2C_Default=0;
+
 //uint32 AON_CFG_ANA_CTRL_1_0x20_Default=0x808E7885;//32bit
 //uint32 AON_CFG_ANA_CTRL_2_0x24_Default=0;
-//uint32 AON_CFG_GPIO_WAKEUP_CTRL_0x10_Default=0;//?
+
 */
 
 

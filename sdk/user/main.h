@@ -27,7 +27,7 @@
 #include "timer.h"
 #include "bms_ip2366.h"
 #include "lcd_driver.h"
-#include "gui.h"
+#include "bsr1901_gui.h"
 #include "ui_app.h"
 
 #include "sc_demo_test.h"

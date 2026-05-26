@@ -31,7 +31,7 @@
 
 
 //register 0x00
-#define dma_buslock_req_en				    (1<<6)
+#define dma_buslock_req_en				    (1<<6)		//dma_buslock_req_en 让 DMA 独占 AHB 总线,传输期间 Cortex-M0 被挂起
 
 
 /*

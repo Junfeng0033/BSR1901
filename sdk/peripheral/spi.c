@@ -252,7 +252,7 @@ void HW_SPI_Tx_DMA_32bit(uint16 *pData, uint16 DataLen)
 	
 	Gecko_DMA_Transport((volatile uint32 *)(XR7_SPI_BASE + XR7_SPI_FIFO), pData, DataLen, 
 						AHB_DMA_CONTROL_WORD_TR, AHB_DMA_CONTROL_SRC_INC_DES_NOINC);	
-	dma_sram_delay(1000);		
+	//dma_sram_delay(1000);		
 }
 
 
@@ -267,6 +267,39 @@ void HW_SPI_Tx_DMA_16bit(HAL_SPI_ID_T id,uint16 *pData, uint16 DataLen)
 	Gecko_DMA_Transport((volatile uint32 *)(XR7_SPI_BASE + XR7_SPI_FIFO), pData, DataLen, 
 						AHB_DMA_CONTROL_HWORD_TR, AHB_DMA_CONTROL_SRC_INC_DES_NOINC);	
 	//dma_sram_delay(1000);	
+
+	
+	
+	
+	
+#if 0
+
+	volatile uint32 dma_ctrl=0;
+	
+	LCD_RS_SET;	
+	hwp_spi0->CTROL=0x10f9b;//16bit
+	
+//	DMA_Req_Buslock_Enable();
+////===========================================================================
+////new function in chip BSR0035	
+//	dma_ctrl = DMA_READ_REG(AHB_DMA_CONTROL_REG);
+//	
+//	dma_ctrl |= dma_buslock_req_en;
+
+//	DMA_WRITE_REG((volatile uint32 *)AHB_DMA_CONTROL_REG, dma_ctrl);
+
+////===========================================================================
+
+	__disable_irq();
+	
+	DMA_WRITE_REG((volatile uint32 *)AHB_DMA_SRCADDR_REG, (uint32) pData);
+	DMA_WRITE_REG((volatile uint32 *)AHB_DMA_DESTADDR_REG, (uint32) (XR7_SPI_BASE + XR7_SPI_FIFO));
+	DMA_WRITE_REG((volatile uint32 *)AHB_DMA_DATALENGTH_REG, DataLen);
+	DMA_WRITE_REG((volatile uint32 *)AHB_DMA_CONTROL_REG,(AHB_DMA_CONTROL_HWORD_TR|AHB_DMA_CONTROL_SRC_INC_DES_NOINC));
+	__enable_irq();	
+	
+#endif
+	
 	
 }
 

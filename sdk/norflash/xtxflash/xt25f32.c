@@ -1125,16 +1125,6 @@ void h2l_wr_busy(void)
 
 
 
-uint8_t OW_GetDQ(void)
-{
-#if 0
-   if (gpio_get_value(GPIOA,2) == 0x04)
-      return 1;
-   else
-      return 0;
-#endif
-      return 0;
-}
 
 
 

@@ -1,4 +1,15 @@
 
+/*
+
+LDO33_OUT(LDO1)				给数字 Coretx-M0 供电
+LDO33_AWO							给数字 Always On 供电
+LDO33_FLASH_OUT				给 Norflash 使用
+LDO18_OUT							给 pad20/21/22/23/24 做 IO ring
+LDO33_AUX_OUT					给用户使用
+LDO33_ANA(LDO2)				给模拟模块使用
+
+*/
+
 #include "platform_config.h"
 //`define ADDR_BASE_APB_AON       32'h4002_0000
 #define GECKO_AON_BASE_ADDR             0x40020000//New for 1109

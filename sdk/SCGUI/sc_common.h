@@ -9,11 +9,11 @@
 #include "lvgl.h"
 
 /* 全局屏幕配置（统一修改）*/
-#define BSR1901_MCU 1
+#define BSR1901_SoC 1
 
 #define PY32_MCU 0
 
-#if BSR1901_MCU
+#if BSR1901_SoC
 
 #define SC_SCREEN_WIDTH (240)
 #define SC_SCREEN_HEIGHT (240)

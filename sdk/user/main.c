@@ -320,11 +320,11 @@ int main (void)
 
 
 
-	//watchdog_init(5000,1);
+//	watchdog_init(5000,1);
 
 
 
-  //iWatchDog for FSM Control
+//iWatchDog for FSM Control
 
 //	  iWDT_Timer_Disable();
 //	  iWDT_Timer_Restart();	

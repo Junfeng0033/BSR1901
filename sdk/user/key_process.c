@@ -23,7 +23,7 @@
 #include "i2c.h"
 #include "timer.h"
 
-#include "GUI.h"
+#include "bsr1901_GUI.h"
 
 
 // Initialize key handle structure

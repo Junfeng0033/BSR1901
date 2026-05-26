@@ -2,7 +2,7 @@
 #include "platform_config.h"
 
 #include "lcd_driver.h"
-#include "GUI.h"
+#include "bsr1901_GUI.h"
 #include "Font.h"
 
 /*
@@ -837,92 +837,6 @@ void GuiShowNumString_48(uint8_t x, uint8_t y, uint16_t num, uint8_t len)
 }
 
 
-
-
-
-void set_bat_percentage(uint8_t percent)
-{
-	static uint8_t history = 0;
-	
-	if(percent > 100)
-		return ;
-	
-	if(history == percent)
-		return ;
-	
-	Lcd_Fill(22, 41, 22+80.0/100*percent, 84, 0x051d);
-	Lcd_Fill(22+80.0/100*percent+1, 41, 102, 84, BLACK);
-
-	GuiShowNum(50, 55, percent, 3);
-	GuiShowChar_16(77,55, '%');
-}
-
-
-
-
-void set_charge_circle(uint8_t percent)
-{
-	static uint8_t history = 0;
-	
-	if(percent > 100)
-		return ;
-	
-	if(history == percent)
-		return ;
-	
-	if(0 == percent)
-		Gui_Circle(64, 64, 60, 0x051d);
-	
-	Gui_Circle(64, 64, 60, 0x051d);
-	
-
-	GuiShowNum(50, 55, percent, 3);
-	GuiShowChar_16(77,55, '%');
-}
-
-
-
-
-
-void Task_UI_Refresh(void)
-{
-	
-		uint16_t uicount = 90;
-	
-	
-		//ui_paint_color_circle();
-	
-		ui_paint_bat_percent(uicount);
-
-		if(uicount >= 100)
-			uicount = 0;
-		else 
-			uicount ++;
-		
-		
-		//Gui_ProgressBar(50, 100, 150, 20, 60, BLACK, GREEN, GRAY1);
-		
-		Gui_DrawArc(120, 120, 50, 135, 405, 0xFFFF);
-
-
-//		if(count%10 == 1){
-//			if(count <= 10)
-//				HW_SPI_Tx_DMA((uint16*)gImage_charge_10, 20000);
-//			if(count <= 20)
-//				HW_SPI_Tx_DMA((uint16*)gImage_charge_20, 20000);
-//			if(count <= 30)
-//				HW_SPI_Tx_DMA((uint16*)gImage_charge_30, 20000);
-//		}
-		
-
-		
-//		GuiShowNumString_16(50, 18, count, 2);
-//		GuiShowNumString_48(32, 35, count, 2);
-//		GuiShowPersent(45+40, 45);
-//		GuiShowNumString_16(50, 85, count, 2);
-
-	
-}
 
 
 

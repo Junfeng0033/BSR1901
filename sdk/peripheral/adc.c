@@ -30,13 +30,13 @@ AdcTypedef adcstruct;
 /*
 *ADC_REF_SEL			RSVD<3>					ADC_VREF
 *    1              X                3.3V
-*    0              1               0.5VBAT
+*    0              1                0.5VBAT
 *    0              0                1.2V
 ****************************************************************************/
 
 typedef enum {
     ADC_REF_3P3 			= 0x00000000,
-    ADC_REF_HALF_VBAT = 0x00000001,
+    ADC_REF_HALF_VBAT 		= 0x00000001,
     ADC_REF_1P2				= 0x00000002,
     ADC_REF_QTY
 } ADC_REF_VOL_T;   
@@ -243,7 +243,7 @@ void Get_Advalue_Func(void)
 #if 1//def DEBUG_EN	
 	char *string;	
 #endif	
-	if((hw_gpadc->status & GPADC_EOC))   //×ª»»Íê³É±ê¼Ç
+	if((hw_gpadc->status & GPADC_EOC))   //×ªï¿½ï¿½ï¿½ï¿½É±ï¿½ï¿½
 	{
 		switch(adcstruct.ad_channel_select)
 		{

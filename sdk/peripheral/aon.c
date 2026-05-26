@@ -11,7 +11,7 @@
 
 uint32 AON_CFG_ANA_CTRL_1_0x20_Default=0x808E7885;
 uint32 AON_CFG_ANA_CTRL_2_0x24_Default=0;
-uint32 AON_CFG_GPIO_WAKEUP_CTRL_0x10_Default=0;
+
 
 
 
@@ -208,11 +208,11 @@ void GPIO_WakeUp_Setting(void)
 {
 	unsigned int wr_data;
   wr_data=reg_read(ADDR_AON_CFG_GPIO_WAKEUP_CTRL);
-  wr_data=AON_CFG_GPIO_WAKEUP_CTRL_0x10_Default;	
+	
 //	wr_data |= (GPIO_WAKEUP_EN_00 |GPIO_WAKEUP_EN_01 |GPIO_WAKEUP_EN_02| GPIO_WAKEUP_EN_03);
 	wr_data |= (GPIO_WAKEUP_EN_01);
   reg_write(ADDR_AON_CFG_GPIO_WAKEUP_CTRL, wr_data);
-  AON_CFG_GPIO_WAKEUP_CTRL_0x10_Default=wr_data;	
+
 }
 
 

@@ -34,6 +34,16 @@ void ui_paint_bat(void);
 void ui_paint_bat_remain(uint8_t percent);
 
 
+void GuiShowNum(uint8_t x, uint8_t y, uint16_t num, uint8_t len);
+
+void GuiShowChar_16(uint16_t x, uint16_t y, uint8_t s);
+
+
+void Gui_Circle(uint16_t X, uint16_t Y, uint16_t R, uint16_t fc);
+
+
+void Gui_DrawArc(uint16_t x0, uint16_t y0, uint16_t r,
+                 int16_t sa, int16_t ea, uint16_t color);
 
 
 #endif
