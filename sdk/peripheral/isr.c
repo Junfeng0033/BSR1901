@@ -26,7 +26,6 @@ extern void watchdog_irq_clear(void);
 extern void gecko_timer1_irq_handler(void);
 
 extern void Clear_DMA_Interrupt(void);
-extern void SPI_DMA_Simulation(void);
 extern void DMA_ISR_Routine(void);
 
 extern uint32_t Get_SysTick_VALUE(void);
@@ -208,7 +207,6 @@ __RAM_CODE__  void DMA_IRQHandler(void)
 	dma_int_flag =1;	
 	Clear_DMA_Interrupt();
 	
-	//SPI_DMA_Simulation();
 	//DMA_ISR_Routine();
 	
 }

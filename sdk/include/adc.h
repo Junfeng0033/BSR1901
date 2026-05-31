@@ -154,7 +154,6 @@ typedef enum
     GPADC_CHAN_8,
     GPADC_CHAN_9,		
     GPADC_CHAN_QTY,	
-	
 } GPADC_CHAN_T;
 
 

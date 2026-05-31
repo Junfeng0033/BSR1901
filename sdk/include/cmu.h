@@ -13,17 +13,19 @@
 #define    GECKO_APB_CMU_BASE                0X40010000
 #define    GECKO_APB_SCU_BASE                0X40010000
 
-      
-typedef enum
-{
-    SYS_FREQ_32K     			= 32768,
-    SYS_FREQ_4M      			= 4000000,
-    SYS_FREQ_8M     			= 8000000,
-    SYS_FREQ_16M     			= 16000000,
-    SYS_FREQ_32M     			= 32000000,
-    SYS_FREQ_48M     			= 48000000,
-    SYS_FREQ_UNKNOWN = 0
-} SYS_FREQ_T;  
+//      
+//typedef enum
+//{
+//    SYS_FREQ_32K     			= 32768,
+//    SYS_FREQ_4M      			= 4000000,
+//    SYS_FREQ_8M     			= 8000000,
+//    SYS_FREQ_16M     			= 16000000,
+//    SYS_FREQ_32M     			= 32000000,
+//    SYS_FREQ_48M     			= 48000000,
+//    SYS_FREQ_UNKNOWN = 0
+//} SYS_FREQ_T;  
+//
+
 
 /*--------------------- Clock Configuration ----------------------------------*/
 /*----------------------------------------------------------------------------
@@ -256,6 +258,8 @@ assign uart2_clk_div                    = reg32_10[31:24];
 
 
 
+#if 0
+
 
 
 #define CMU_HCLK_MCU                (1 << 0)
@@ -382,7 +386,7 @@ assign uart2_clk_div                    = reg32_10[31:24];
 #define CMU_LOCK_CPU_EN             (1 << 31)
 
 
-
+#endif
 
 
 void gecko_cmu_init(void);

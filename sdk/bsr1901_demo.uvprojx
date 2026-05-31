@@ -401,6 +401,11 @@
           <GroupName>peripheral</GroupName>
           <Files>
             <File>
+              <FileName>API.md</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\peripheral\API.md</FilePath>
+            </File>
+            <File>
               <FileName>aon.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\peripheral\aon.c</FilePath>

@@ -31,7 +31,7 @@
 
 
 //register 0x00
-#define dma_buslock_req_en				    (1<<6)		//dma_buslock_req_en 让 DMA 独占 AHB 总线,传输期间 Cortex-M0 被挂起
+//#define dma_buslock_req_en				    (1<<6)		//dma_buslock_req_en 让 DMA 独占 AHB 总线,传输期间 Cortex-M0 被挂起
 
 
 /*
@@ -113,9 +113,6 @@ extern const unsigned char gImage_icon_1[3990];
 extern uint32 pEnterCriticalSection (void);
 extern void pExitCriticalSection (uint32 status);
 
-
-void DMA_Req_Buslock_Enable(void);
-void DMA_Req_Buslock_Disable(void);
 
 
 
