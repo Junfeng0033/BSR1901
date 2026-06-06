@@ -18,8 +18,7 @@
 #endif
 
 
-
-
+//#define LOG_SEGGER_RTT 						1
 
 
 /* Boot Option */

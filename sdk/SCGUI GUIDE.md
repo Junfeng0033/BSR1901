@@ -6,13 +6,10 @@ SCGUI porting guide
 
 Simplified Chinese(GB 2312) Encoding
 
-
-
 按 Ctrl + Shift + P 打开命令面板。
 输入 "Change File Encoding"。
 选择 "Reopen with Encoding"。
 从列表中选择 "Simplified Chinese(GB 2312)" 。
-
 
 */
 

@@ -1457,7 +1457,6 @@ int HCI_Send_Raw_PDU(uint8 type, struct st_dataBuf *pdu)
 {
     switch (type) {
         case 0:
-						//uart_write_data(pdu->buf,3);
 						//Gecko_Uart_Tx_Data(pdu->buf,3);
             break;
 				default:
@@ -1525,7 +1524,7 @@ void pDebugPrintfEX(char *format, ...)
 
 void print_build_information(void) 
 {
-#if 0
+#if 1
     pDebugPrintfEX("\n");
     pDebugPrintfEX("Gecko1108 TWS Charger Solution Software, Copyright (c) 2020-2022 SPARROW Inc.\n");
 	  printf("Gecko1108 TWS Charger Solution Software, Copyright (c) 2020-2022 SPARROW Inc.\n");
@@ -1539,10 +1538,10 @@ void print_build_information(void)
 	  pDebugPrintfEX("Chip Local Name:    %s\n",   CHIP_LOCAL_NAME);
 
 	
-    UATR0_PRINT_LOG("\r\n");
+//    UATR0_PRINT_LOG("\r\n");
 //    UATR0_PRINT_LOG("Gecko1108 TWS Charger Solution Software, Copyright (c) 2020-2022 Gecko Inc.\r\n");
-	  UATR0_PRINT_LOG("Gecko1108 TWS Charger Solution Software, Copyright (c) 2020-2022 Gecko Inc.\n");
-    UATR0_PRINT_LOG("\r\n");	
+//	  UATR0_PRINT_LOG("Gecko1108 TWS Charger Solution Software, Copyright (c) 2020-2022 Gecko Inc.\n");
+//    UATR0_PRINT_LOG("\r\n");	
 #endif	
 }
 
@@ -1550,20 +1549,25 @@ void print_build_information(void)
 
 
 
+
+#if 0
 void uart_tx_test(void)
 {
 	uint32 baudrate = 9600;
-	uint16 uart_setting = (GECKO_LCR_8BITS | GECKO_LCR_1STOP);	
-	Uart_16550_Initialise(HAL_UART_0,baudrate,uart_setting);
-	//volatile
+
 	uint8 testdata[3]={0xaa,0x55,0x7a};
+
+	uint16 uart_setting = (GECKO_LCR_8BITS | GECKO_LCR_1STOP);	
+
+	Uart_16550_Initialise(HAL_UART_0,baudrate,uart_setting);
+
 	while(1)
 	{
-		//uart_write_data(testdata,3);	
 		Gecko_Uart_Tx_Data(HAL_UART_0,testdata,3);
 	}	
-	
 }
+#endif
+
 
 
 

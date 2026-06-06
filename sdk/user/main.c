@@ -1,6 +1,6 @@
 
 #include "main.h"
-
+#include "SEGGER_RTT.h"
 
 //#define __RAM_CODE__ 		__attribute__((section("ram_code")))
 //int Trim[] __attribute__ ((section(".ARM.__at_0x0001F000"))) = {0x12345678,0x22334455};
@@ -95,6 +95,13 @@ int main (void)
 
 	aon_wakeup_irq_cfg();	
 	//gecko_efuse_read();
+
+
+#ifdef LOG_SEGGER_RTT
+    SEGGER_RTT_Init();
+    SEGGER_RTT_printf(0, "LOG_SEGGER_RTT Initial !\r\n");
+	  SEGGER_RTT_printf(0, "Tick Value: %d\r\n", current_tick);
+#endif
 
 	
 	gecko_pinmux_default_config();
@@ -357,11 +364,11 @@ int main (void)
 		
 		if (current_tick % 100 == 0) Get_Vbat_Voltage();
 		
-		if (current_tick % 100 == 0) Task_Charger_Control();	
+//		if (current_tick % 150 == 0) Task_Charger_Control();// 软件PWM方案	
 
 		if (current_tick % 200 == 0) Task_UI_Refresh();	
 
-		if (current_tick % 200 == 0) Task_BMS_Update();	
+		if (current_tick % 250 == 0) Task_BMS_Update();// IP2366 IC方案	
 		
 	}
 	

@@ -482,7 +482,6 @@ void Gecko_Uart2_Send_Char(char s);
 
 
 
-void uart_tx_test(void);
 
 void Gecko_Uart_Restart(void);
 void Gecko_Uart_Shutdown(void);

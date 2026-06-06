@@ -103,6 +103,19 @@ void GPIO_Hall_IRQ_Init(void)
 }
 
 
+//Hall Key ---> GPIO_0_5
+//set GPIO_A_5 Input 
+void GPIO_Hall_HighLevel_Interrupt_Init(void)
+{
+    uint8 gpio_offset=5;
+	gpio_set_lint_high(GPIO_GROUP_0,gpio_offset);
+
+	hal_nvic_clear_pending_irq(GPIO_A5_IRQn);//GPIO_0_5(GPIO05)
+	hal_nvic_set_priority(GPIO_A5_IRQn, 0);
+	hal_nvic_enable_irq(GPIO_A5_IRQn);	
+}
+
+
 ## 2. PWM
 
 1901包含8个16bit的 PWM模块。每个PWM 都支持反向，死区控制。
@@ -147,6 +160,12 @@ SixChCfg.freq= 200000;//配置PWM频率
 SixChCfg.ratio= 50;//配置PWM占空比
 SixChCfg.Tdead_cycle_count=1;//配置PWM死区的cycle
 Config_PWM(HW_PWM_CHAN_1,&SixChCfg);	
+
+
+//配置 PWM 输出
+struct HAL_PWM_CFG_T pwm_cfg = {200000, 50, 1};
+Config_PWM(HW_PWM_CHAN_1, &pwm_cfg);
+hw_pwm_enable(HW_PWM_CHAN_1);
 
 
 ## 3. SPI

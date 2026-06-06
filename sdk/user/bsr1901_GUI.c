@@ -567,6 +567,65 @@ void Gui_ProgressBar(uint16_t x0, uint16_t y0, uint16_t w, uint16_t h,
 
 
 
+/*
+* 环形圆环进度条
+* cx,cy:圆环圆心坐标
+* r_out:圆环外圆半径
+* ring_w:圆环线条宽度
+* per:进度0~100(uint8_t)
+* col_bg:圆环底色
+* col_pro:进度前景色
+* 绘制规则：起始135°，顺时针走到135+270°，总跨度270°(缺右上一小段开口)
+*/
+void Gui_RingProgress(uint16_t cx,uint16_t cy,uint16_t r_out,uint8_t ring_w,uint8_t per,uint16_t col_bg,uint16_t col_pro)
+{
+    uint16_t r_in;
+    uint16_t end_ang;
+
+    /* 进度限幅，uint8无符号无需判小于0 */
+    if(per > 100)
+        per = 100;
+    r_in = r_out - ring_w;
+    if(r_in < 1) r_in = 1;
+
+    /* 总有效角度270度，计算结束角度 */
+    end_ang = 135 + ((uint32_t)per * 270)/100;
+
+    /* 1.先画整圈底色环：内外两层圆弧 */
+    Gui_DrawArc(cx,cy,r_out,135,405,col_bg);
+    Gui_DrawArc(cx,cy,r_in,135,405,col_bg);
+    /* 填充环中间空隙 */
+    for(uint16_t i=r_in+1;i<r_out;i++)
+    {
+        Gui_DrawArc(cx,cy,i,135,405,col_bg);
+    }
+
+    /* 2.绘制当前进度前景 */
+    Gui_DrawArc(cx,cy,r_out,135,end_ang,col_pro);
+    Gui_DrawArc(cx,cy,r_in,135,end_ang,col_pro);
+    for(uint16_t i=r_in+1;i<r_out;i++)
+    {
+        Gui_DrawArc(cx,cy,i,135,end_ang,col_pro);
+    }
+}
+
+
+
+//圆心(80,80)，外半径35，环宽6，进度65%，灰底色，绿色进度
+//Gui_RingProgress(80,80,35,6,65,GRAY,GREEN);
+
+
+
+//关键特点
+//圆环粗细由 ring_w 控制，ring_w=6 就是 6 像素粗的圆环；
+//0%：整段圆环全是背景灰色；
+//100%：整段 270° 圆环全部被前景色填满；
+
+
+//Gui_RingProgress(80,80,35,6,0,GRAY,GREEN); → 全灰圆环
+//Gui_RingProgress(80,80,35,6,100,GRAY,GREEN); → 全绿圆环
+
+
 
 
 
