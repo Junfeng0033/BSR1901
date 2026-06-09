@@ -98,9 +98,19 @@ int main (void)
 
 
 #ifdef LOG_SEGGER_RTT
+	
     SEGGER_RTT_Init();
     SEGGER_RTT_printf(0, "LOG_SEGGER_RTT Initial !\r\n");
 	  SEGGER_RTT_printf(0, "Tick Value: %d\r\n", current_tick);
+	
+		SEGGER_RTT_SetTerminal(1);
+		SEGGER_RTT_WriteString(0, RTT_CTRL_TEXT_RED);
+		SEGGER_RTT_WriteString(0, "ERROR: Sensor timeout!\r\n");
+	
+		SEGGER_RTT_SetTerminal(2);
+		SEGGER_RTT_WriteString(0, RTT_CTRL_TEXT_GREEN);
+		SEGGER_RTT_WriteString(0, "INFO: Current = 1.23A\r\n");
+	
 #endif
 
 	
@@ -201,6 +211,11 @@ int main (void)
     hw_pwm_disable(HW_PWM_CHAN_3);	
 	  Set_PWM_CH3_Duty(10);//10% duty
 	  hw_pwm_enable(HW_PWM_CHAN_3);
+		
+		struct HAL_PWM_CFG_T pwm_cfg = {200000, 50, 1};
+		Config_PWM(HW_PWM_CHAN_1, &pwm_cfg);
+		hw_pwm_enable(HW_PWM_CHAN_1);
+		
 
 */
 
@@ -308,9 +323,7 @@ int main (void)
 	sc_gui_init(lcd_dma_16bit_refresh, 0, C_ROYAL_BLUE, C_BLUE, &lv_font_16);
 	sc_clear(0, 0, SC_SCREEN_WIDTH,SC_SCREEN_HEIGHT,gui->bkc);
 	
-	
 	sc_draw_Fill(NULL, 50, 50, 30, 30, C_RED, 255);	
-
 
 	sc_create_task(0, sc_demo_arc, 2);
 	//sc_create_task(0, sc_demo_text, 5);

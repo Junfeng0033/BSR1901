@@ -254,7 +254,7 @@ void HW_SPI_Tx_DMA_32bit(uint16 *pData, uint16 DataLen)
 }
 
 
-void HW_SPI_Tx_DMA_16bit(HAL_SPI_ID_T id,uint16 *pData, uint16 DataLen)
+void HW_SPI_Tx_DMA_16bit(uint16 *pData, uint16 DataLen)
 {
 	LCD_RS_SET;	
   //SPI_16bit_Transfer();
@@ -434,7 +434,7 @@ void lcd_dma_16bit_refresh(uint16_t xs, uint16_t ys, uint16_t w, uint16_t h, col
 	
 	Lcd_SetRegion(xs, ys, xs+w-1, ys+h-1);	
 	
-	HW_SPI_Tx_DMA_16bit(HAL_SPI_0,color,len);
+	HW_SPI_Tx_DMA_16bit(color,len);
 	
 }
 

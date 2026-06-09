@@ -10,6 +10,11 @@
 #define  DEBUG_UATR0_PRINT_LOG            1
 
 
+
+//#define LOG_SEGGER_RTT 						1
+
+
+
 /* Debug option */
 #ifdef WIN32
 #define pDEBUG                              1
@@ -18,7 +23,7 @@
 #endif
 
 
-//#define LOG_SEGGER_RTT 						1
+
 
 
 /* Boot Option */

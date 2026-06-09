@@ -508,21 +508,6 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>rtt</GroupName>
-          <Files>
-            <File>
-              <FileName>SEGGER_RTT.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\RTT\SEGGER_RTT.c</FilePath>
-            </File>
-            <File>
-              <FileName>SEGGER_RTT_printf.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\RTT\SEGGER_RTT_printf.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
           <GroupName>bms</GroupName>
           <Files>
             <File>
@@ -564,6 +549,21 @@
               <FileName>rle_decompression.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\RLE_decompression\rle_decompression.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>segger_rtt</GroupName>
+          <Files>
+            <File>
+              <FileName>SEGGER_RTT.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\RTT\SEGGER_RTT.c</FilePath>
+            </File>
+            <File>
+              <FileName>SEGGER_RTT_printf.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\RTT\SEGGER_RTT_printf.c</FilePath>
             </File>
           </Files>
         </Group>

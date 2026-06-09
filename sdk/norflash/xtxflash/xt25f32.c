@@ -590,7 +590,7 @@ void tc_qspi_to_xtx_sanity()
 void tc_qspi_to_xtx_single_wr()
 {
     //unsigned int ahb_wr_data;
-	  char * string;
+	  //char * string;
     volatile unsigned int ahb_rd_data;
     //  unsigned int ahb_tmp_data, ahb_tmp_addr;
     unsigned int test_data[64];
@@ -615,7 +615,7 @@ void tc_qspi_to_xtx_single_wr()
     ahb_rd_data = reg_read(ADDR_QSPI_CFG_SPI_DATA);
 		
 		
-			  #if 1//DEBUG_UATR0_PRINT_LOG
+			  #if 0//DEBUG_UATR0_PRINT_LOG
 				UATR0_PRINT_LOG((unsigned char *)("\r\n"));		
         UATR0_PRINT_LOG((unsigned char *)("tc_qspi_to_xtx_single_wr ---READ---####111"));		
 				//UATR0_PRINT_LOG((unsigned char *)("tc_qspi_to_xtx_single_wr --- qspi_tx_fifo_empty = 0x"));
@@ -655,7 +655,7 @@ void tc_qspi_to_xtx_single_wr()
         qspi_tx_fifo_empty = reg_read(ADDR_QSPI_CFG_SPI_STATUS) & (0x1<<OFFSET_SPI_STATUS_TX_EMPTY);
 			
 			
-			  #if 1//DEBUG_UATR0_PRINT_LOG
+			  #if 0//DEBUG_UATR0_PRINT_LOG
 				UATR0_PRINT_LOG((unsigned char *)("\r\n"));		
         UATR0_PRINT_LOG((unsigned char *)("tc_qspi_to_xtx_single_wr ---XTX_QSPI_CMD_PAGE_PROG"));		
 				UATR0_PRINT_LOG((unsigned char *)("tc_qspi_to_xtx_single_wr --- qspi_tx_fifo_empty = 0x"));
@@ -690,7 +690,7 @@ void tc_qspi_to_xtx_single_wr()
 		
 		
 		
-			  #if 1//DEBUG_UATR0_PRINT_LOG
+			  #if 0//DEBUG_UATR0_PRINT_LOG
 				UATR0_PRINT_LOG((unsigned char *)("\r\n"));		
         UATR0_PRINT_LOG((unsigned char *)("tc_qspi_to_xtx_single_wr ---PAGE_PROG---####2222"));		
 				UATR0_PRINT_LOG((unsigned char *)("\r\n"));				
@@ -721,7 +721,7 @@ void tc_qspi_to_xtx_single_wr()
     }
 		
 		
-			  #if 1//DEBUG_UATR0_PRINT_LOG
+			  #if 0//DEBUG_UATR0_PRINT_LOG
 				UATR0_PRINT_LOG((unsigned char *)("\r\n"));		
         UATR0_PRINT_LOG((unsigned char *)("tc_qspi_to_xtx_single_wr ---Read-back check---END####99999"));		
 				UATR0_PRINT_LOG((unsigned char *)("\r\n"));				

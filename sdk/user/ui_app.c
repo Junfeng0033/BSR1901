@@ -213,7 +213,10 @@ void Task_UI_Refresh(void)
 		
 		Gui_DrawArc(120, 120, 50, 135, 405, 0xFFFF);
 
+    //BSR1901_FireEye_Demo();
 
+
+		
 //		if(count%10 == 1){
 //			if(count <= 10)
 //				HW_SPI_Tx_DMA((uint16*)gImage_charge_10, 20000);

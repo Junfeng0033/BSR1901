@@ -615,7 +615,6 @@ void Gui_RingProgress(uint16_t cx,uint16_t cy,uint16_t r_out,uint8_t ring_w,uint
 //Gui_RingProgress(80,80,35,6,65,GRAY,GREEN);
 
 
-
 //关键特点
 //圆环粗细由 ring_w 控制，ring_w=6 就是 6 像素粗的圆环；
 //0%：整段圆环全是背景灰色；

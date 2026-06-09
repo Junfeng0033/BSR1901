@@ -15,8 +15,6 @@ Simplified Chinese(GB 2312) Encoding
 
 
 
-
-
 //单屏（非双屏） BSR1901 推荐硬件端口
 //本程序适配 BSR1901 推荐硬件端口
 //              GND   电源地
@@ -46,6 +44,23 @@ Simplified Chinese(GB 2312) Encoding
 #define SC_PFB_BUF_SIZE (SC_SCREEN_WIDTH * 5) // 示例：5行高度，帧缓冲仅缓存5行数据，降低SRAM占用
 #define SC_LCD_DMA_2BUF (0)                   // 是否启用DMA双buf传输
 #define SC_LCD_DMA_WAP (0)                    // 是否DMA传输时高低位WAP
+
+
+
+以128*128分辨率显示屏为例：
+
+128x128=16384像素
+
+SCGUI SPI和DMA都是16bit传输，每次5行高度，即每次刷新128×5=640像素。
+
+16384/640=25.6，DMA需要分成26次传输。
+
+SCGUI 把一帧切成 26 个 5 行的切片分次发送，26 次小范围 (0,0,127,4), (0,5,127,9) ...
+
+具体来说：
+
+SCGUI 通过 sc_clear(0, 0, 128, 128, ...) 从 y=0 开始清屏
+PFB 切片渲染通过 sc_pfb_refresh(0, 0, 128, 5, buf) 从 y=0 开始以 5 行为单位刷屏，最终调用 Lcd_SetRegion(0, 0, 127, 4)写入Lcd控制器。
 
 
 2,修改队列和线程的数量，减少SRAM占用

@@ -19,7 +19,7 @@ extern const uint8_t Font48_dital_Table [];
 extern const uint8_t gImage_bat_90x49[];
 extern const unsigned char gImage_circle_100x100[20000];
 
-
+extern void BSR1901_FireEye_Demo(void);
 
 extern void Lcd_Write_data_dma(uint8_t *p_data, uint16_t len);
 

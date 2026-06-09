@@ -302,10 +302,19 @@ void Lcd_SetRegion(uint16_t x_start,uint16_t y_start,uint16_t x_end,uint16_t y_e
 	LCD_WriteData_16Bit(x_end);
 
 	Lcd_WriteIndex(0x2b);
+	
+/*
+RASET(0x2B) 写入 Y 坐标时加上偏移
+LCD_WriteData_16Bit(y_start + 60);
+LCD_WriteData_16Bit(y_end + 60);
+*/	
+	
 	//Lcd_WriteData(0x00);
 	LCD_WriteData_16Bit(y_start);
 	//Lcd_WriteData(0x00);
 	LCD_WriteData_16Bit(y_end);	
+	
+	
 	Lcd_WriteIndex(0x2c);
 
 }
