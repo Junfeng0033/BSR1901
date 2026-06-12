@@ -336,12 +336,12 @@ int main (void)
 	
 	Gui_ProgressBar(20, 20, 100, 20, 60, BLACK, GREEN, GRAY1);
 	
+	//Gui_RingProgress(80,80,35,6,65,GRAY0,GREEN);
+	
 /************************SCGUI******SCGUI*****SCGUI****************************/
 
 
-
 //	watchdog_init(5000,1);
-
 
 
 //iWatchDog for FSM Control

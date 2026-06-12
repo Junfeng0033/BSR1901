@@ -478,6 +478,9 @@ Section Cross References
     xt25f32.o(i.ReadPage) refers to dpi_common.o(ram_code) for reg_write
     xt25f32.o(i.ReadPage) refers to xt25f32.o(i.qspi_task_wait_endint) for qspi_task_wait_endint
     xt25f32.o(i.ReadPage) refers to dpi_common.o(i.reg_read_8bit) for reg_read_8bit
+    xt25f32.o(i.bsr1901_cm0_lite_sleep) refers to xt25f32.o(i.h2l_wr_busy) for h2l_wr_busy
+    xt25f32.o(i.bsr1901_cm0_lite_sleep) refers to dpi_common.o(ram_code) for reg_write
+    xt25f32.o(i.bsr1901_cm0_lite_sleep) refers to xt25f32.o(i.manba_task_cpu_goto_sleep) for manba_task_cpu_goto_sleep
     xt25f32.o(i.bsr1901_prepare_sleep_for_pin_wakeup) refers to dpi_common.o(ram_code) for reg_write
     xt25f32.o(i.gecko_ahb2qspi_ctrl_irq_handler) refers to dpi_common.o(ram_code) for reg_read
     xt25f32.o(i.gecko_aon_wakeup_irq_handler) refers to dpi_common.o(ram_code) for reg_write
@@ -1877,6 +1880,7 @@ Removing Unused input sections from the image.
     Removing xt25f32.o(i.Init), (4 bytes).
     Removing xt25f32.o(i.ReadPage), (76 bytes).
     Removing xt25f32.o(i.UnInit), (4 bytes).
+    Removing xt25f32.o(i.bsr1901_cm0_lite_sleep), (28 bytes).
     Removing xt25f32.o(i.gecko_task_cm0_sw_flash_quad), (308 bytes).
     Removing xt25f32.o(i.get_pin_wakeup_source), (16 bytes).
     Removing xt25f32.o(i.manba_task_clr_aon_wakeup_int), (24 bytes).
@@ -2177,7 +2181,7 @@ Removing Unused input sections from the image.
     Removing fepilogue.o(.text), (130 bytes).
     Removing sc_transform.o(i.__ARM_common_ll_mulss), (48 bytes).
 
-700 unused section(s) (total 1004810 bytes) removed from the image.
+701 unused section(s) (total 1004838 bytes) removed from the image.
 
 ==============================================================================
 
@@ -2852,37 +2856,37 @@ Memory Map of the image
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
     0x00000000   0x00000000   0x000000c0   Data   RO            2    RESET               startup_cm0.o
-    0x000000c0   0x000000c0   0x00000000   Code   RO         4513  * .ARM.Collect$$$$00000000  mc_p.l(entry.o)
-    0x000000c0   0x000000c0   0x00000004   Code   RO         4849    .ARM.Collect$$$$00000001  mc_p.l(entry2.o)
-    0x000000c4   0x000000c4   0x00000004   Code   RO         4852    .ARM.Collect$$$$00000004  mc_p.l(entry5.o)
-    0x000000c8   0x000000c8   0x00000000   Code   RO         4854    .ARM.Collect$$$$00000008  mc_p.l(entry7b.o)
-    0x000000c8   0x000000c8   0x00000000   Code   RO         4856    .ARM.Collect$$$$0000000A  mc_p.l(entry8b.o)
-    0x000000c8   0x000000c8   0x00000008   Code   RO         4857    .ARM.Collect$$$$0000000B  mc_p.l(entry9a.o)
-    0x000000d0   0x000000d0   0x00000000   Code   RO         4859    .ARM.Collect$$$$0000000D  mc_p.l(entry10a.o)
-    0x000000d0   0x000000d0   0x00000000   Code   RO         4861    .ARM.Collect$$$$0000000F  mc_p.l(entry11a.o)
-    0x000000d0   0x000000d0   0x00000004   Code   RO         4850    .ARM.Collect$$$$00002712  mc_p.l(entry2.o)
+    0x000000c0   0x000000c0   0x00000000   Code   RO         4519  * .ARM.Collect$$$$00000000  mc_p.l(entry.o)
+    0x000000c0   0x000000c0   0x00000004   Code   RO         4855    .ARM.Collect$$$$00000001  mc_p.l(entry2.o)
+    0x000000c4   0x000000c4   0x00000004   Code   RO         4858    .ARM.Collect$$$$00000004  mc_p.l(entry5.o)
+    0x000000c8   0x000000c8   0x00000000   Code   RO         4860    .ARM.Collect$$$$00000008  mc_p.l(entry7b.o)
+    0x000000c8   0x000000c8   0x00000000   Code   RO         4862    .ARM.Collect$$$$0000000A  mc_p.l(entry8b.o)
+    0x000000c8   0x000000c8   0x00000008   Code   RO         4863    .ARM.Collect$$$$0000000B  mc_p.l(entry9a.o)
+    0x000000d0   0x000000d0   0x00000000   Code   RO         4865    .ARM.Collect$$$$0000000D  mc_p.l(entry10a.o)
+    0x000000d0   0x000000d0   0x00000000   Code   RO         4867    .ARM.Collect$$$$0000000F  mc_p.l(entry11a.o)
+    0x000000d0   0x000000d0   0x00000004   Code   RO         4856    .ARM.Collect$$$$00002712  mc_p.l(entry2.o)
     0x000000d4   0x000000d4   0x0000001c   Code   RO            3    .text               startup_cm0.o
-    0x000000f0   0x000000f0   0x0000002c   Code   RO         4516    .text               mc_p.l(uidiv.o)
-    0x0000011c   0x0000011c   0x00000028   Code   RO         4518    .text               mc_p.l(idiv.o)
-    0x00000144   0x00000144   0x00000020   Code   RO         4520    .text               mc_p.l(llshl.o)
-    0x00000164   0x00000164   0x00000014   Code   RO         4821    .text               mc_p.l(uread4.o)
-    0x00000178   0x00000178   0x00000164   Code   RO         4827    .text               mf_p.l(dadd.o)
-    0x000002dc   0x000002dc   0x000000d0   Code   RO         4829    .text               mf_p.l(dmul.o)
-    0x000003ac   0x000003ac   0x000000f0   Code   RO         4831    .text               mf_p.l(ddiv.o)
-    0x0000049c   0x0000049c   0x00000028   Code   RO         4835    .text               mf_p.l(dflti.o)
-    0x000004c4   0x000004c4   0x00000048   Code   RO         4841    .text               mf_p.l(dfixi.o)
-    0x0000050c   0x0000050c   0x00000060   Code   RO         4864    .text               mc_p.l(uldiv.o)
-    0x0000056c   0x0000056c   0x00000022   Code   RO         4866    .text               mc_p.l(llushr.o)
-    0x0000058e   0x0000058e   0x00000026   Code   RO         4868    .text               mc_p.l(llsshr.o)
-    0x000005b4   0x000005b4   0x00000000   Code   RO         4872    .text               mc_p.l(iusefp.o)
-    0x000005b4   0x000005b4   0x000000be   Code   RO         4875    .text               mf_p.l(depilogue.o)
+    0x000000f0   0x000000f0   0x0000002c   Code   RO         4522    .text               mc_p.l(uidiv.o)
+    0x0000011c   0x0000011c   0x00000028   Code   RO         4524    .text               mc_p.l(idiv.o)
+    0x00000144   0x00000144   0x00000020   Code   RO         4526    .text               mc_p.l(llshl.o)
+    0x00000164   0x00000164   0x00000014   Code   RO         4827    .text               mc_p.l(uread4.o)
+    0x00000178   0x00000178   0x00000164   Code   RO         4833    .text               mf_p.l(dadd.o)
+    0x000002dc   0x000002dc   0x000000d0   Code   RO         4835    .text               mf_p.l(dmul.o)
+    0x000003ac   0x000003ac   0x000000f0   Code   RO         4837    .text               mf_p.l(ddiv.o)
+    0x0000049c   0x0000049c   0x00000028   Code   RO         4841    .text               mf_p.l(dflti.o)
+    0x000004c4   0x000004c4   0x00000048   Code   RO         4847    .text               mf_p.l(dfixi.o)
+    0x0000050c   0x0000050c   0x00000060   Code   RO         4870    .text               mc_p.l(uldiv.o)
+    0x0000056c   0x0000056c   0x00000022   Code   RO         4872    .text               mc_p.l(llushr.o)
+    0x0000058e   0x0000058e   0x00000026   Code   RO         4874    .text               mc_p.l(llsshr.o)
+    0x000005b4   0x000005b4   0x00000000   Code   RO         4878    .text               mc_p.l(iusefp.o)
+    0x000005b4   0x000005b4   0x000000be   Code   RO         4881    .text               mf_p.l(depilogue.o)
     0x00000672   0x00000672   0x00000002   PAD
-    0x00000674   0x00000674   0x00000040   Code   RO         4879    .text               mf_p.l(dfixul.o)
-    0x000006b4   0x000006b4   0x00000028   Code   RO         4881    .text               mf_p.l(cdrcmple.o)
-    0x000006dc   0x000006dc   0x00000024   Code   RO         4883    .text               mc_p.l(init.o)
-    0x00000700   0x00000700   0x0000000c   Ven    RO         4893    Veneer$$Code        anon$$obj.o
-    0x0000070c   0x0000070c   0x0000000c   Ven    RO         4894    Veneer$$Code        anon$$obj.o
-    0x00000718   0x00000718   0x0000000c   Ven    RO         4895    Veneer$$Code        anon$$obj.o
+    0x00000674   0x00000674   0x00000040   Code   RO         4885    .text               mf_p.l(dfixul.o)
+    0x000006b4   0x000006b4   0x00000028   Code   RO         4887    .text               mf_p.l(cdrcmple.o)
+    0x000006dc   0x000006dc   0x00000024   Code   RO         4889    .text               mc_p.l(init.o)
+    0x00000700   0x00000700   0x0000000c   Ven    RO         4899    Veneer$$Code        anon$$obj.o
+    0x0000070c   0x0000070c   0x0000000c   Ven    RO         4900    Veneer$$Code        anon$$obj.o
+    0x00000718   0x00000718   0x0000000c   Ven    RO         4901    Veneer$$Code        anon$$obj.o
     0x00000724   0x00000724   0x00000008   Code   RO          352    i.AON_WKUP_IRQHandler  isr.o
     0x0000072c   0x0000072c   0x00000008   Code   RO          353    i.APB_SPI0_IRQnHandler  isr.o
     0x00000734   0x00000734   0x00000002   Code   RO          354    i.APB_SPI1_IRQnHandler  isr.o
@@ -2895,7 +2899,7 @@ Memory Map of the image
     0x000007b8   0x000007b8   0x0000000c   Code   RO          916    i.DRV_GpioGetLevel_I2C  gpio_i2c.o
     0x000007c4   0x000007c4   0x00000012   Code   RO          917    i.DRV_GpioSetDirection_I2C  gpio_i2c.o
     0x000007d6   0x000007d6   0x00000012   Code   RO          918    i.DRV_GpioSetLevel_I2C  gpio_i2c.o
-    0x000007e8   0x000007e8   0x00000096   Code   RO         4345    i.DrawArcPoint      bsr1901_gui.o
+    0x000007e8   0x000007e8   0x00000096   Code   RO         4351    i.DrawArcPoint      bsr1901_gui.o
     0x0000087e   0x0000087e   0x00000002   Code   RO          357    i.GPIO_A5_IRQHandler  isr.o
     0x00000880   0x00000880   0x00000002   Code   RO          358    i.GPIO_B6_IRQHandler  isr.o
     0x00000882   0x00000882   0x0000000e   Code   RO          919    i.GPIO_InitIO       gpio_i2c.o
@@ -2907,14 +2911,14 @@ Memory Map of the image
     0x000009bc   0x000009bc   0x00000010   Code   RO          495    i.Gecko_Uart0_Send_Char  uart.o
     0x000009cc   0x000009cc   0x0000000c   Code   RO         1358    i.Get_SysTick_VALUE  systick.o
     0x000009d8   0x000009d8   0x00000104   Code   RO         1053    i.Get_Vbat_Voltage  adc.o
-    0x00000adc   0x00000adc   0x000000de   Code   RO         4358    i.Gui_DrawArc       bsr1901_gui.o
-    0x00000bba   0x00000bba   0x00000032   Code   RO         4359    i.Gui_DrawFillRect  bsr1901_gui.o
-    0x00000bec   0x00000bec   0x0000004e   Code   RO         4361    i.Gui_DrawLine_Fast  bsr1901_gui.o
+    0x00000adc   0x00000adc   0x000000de   Code   RO         4364    i.Gui_DrawArc       bsr1901_gui.o
+    0x00000bba   0x00000bba   0x00000032   Code   RO         4365    i.Gui_DrawFillRect  bsr1901_gui.o
+    0x00000bec   0x00000bec   0x0000004e   Code   RO         4367    i.Gui_DrawLine_Fast  bsr1901_gui.o
     0x00000c3a   0x00000c3a   0x00000002   PAD
-    0x00000c3c   0x00000c3c   0x0000002c   Code   RO         2604    i.Gui_DrawPoint     lcd_driver.o
-    0x00000c68   0x00000c68   0x0000004e   Code   RO         4362    i.Gui_DrawRect      bsr1901_gui.o
-    0x00000cb6   0x00000cb6   0x0000009e   Code   RO         4365    i.Gui_FillCircle    bsr1901_gui.o
-    0x00000d54   0x00000d54   0x00000066   Code   RO         4367    i.Gui_ProgressBar   bsr1901_gui.o
+    0x00000c3c   0x00000c3c   0x0000002c   Code   RO         2610    i.Gui_DrawPoint     lcd_driver.o
+    0x00000c68   0x00000c68   0x0000004e   Code   RO         4368    i.Gui_DrawRect      bsr1901_gui.o
+    0x00000cb6   0x00000cb6   0x0000009e   Code   RO         4371    i.Gui_FillCircle    bsr1901_gui.o
+    0x00000d54   0x00000d54   0x00000066   Code   RO         4373    i.Gui_ProgressBar   bsr1901_gui.o
     0x00000dba   0x00000dba   0x00000002   PAD
     0x00000dbc   0x00000dbc   0x000000b8   Code   RO         1143    i.HW_SPI_Initialise  spi.o
     0x00000e74   0x00000e74   0x00000030   Code   RO         1144    i.HW_SPI_Interrupt_Handler  spi.o
@@ -2923,18 +2927,18 @@ Memory Map of the image
     0x00000f04   0x00000f04   0x00000030   Code   RO         1152    i.HW_SPI_Tx_DMA_32bit  spi.o
     0x00000f34   0x00000f34   0x00000030   Code   RO         1153    i.HW_SPI_Tx_DMA_8bit  spi.o
     0x00000f64   0x00000f64   0x00000002   Code   RO          360    i.HardFault_Handler  isr.o
-    0x00000f66   0x00000f66   0x00000034   Code   RO         2605    i.LCD_GPIO_Init     lcd_driver.o
+    0x00000f66   0x00000f66   0x00000034   Code   RO         2611    i.LCD_GPIO_Init     lcd_driver.o
     0x00000f9a   0x00000f9a   0x00000002   PAD
-    0x00000f9c   0x00000f9c   0x00000020   Code   RO         2606    i.LCD_WriteData_16Bit  lcd_driver.o
+    0x00000f9c   0x00000f9c   0x00000020   Code   RO         2612    i.LCD_WriteData_16Bit  lcd_driver.o
     0x00000fbc   0x00000fbc   0x00000018   Code   RO          161    i.LDO33_LCD_Disable  aon.o
     0x00000fd4   0x00000fd4   0x00000024   Code   RO          162    i.LDO33_LCD_Enable  aon.o
-    0x00000ff8   0x00000ff8   0x0000001c   Code   RO         2607    i.Lcd_Clear         lcd_driver.o
-    0x00001014   0x00001014   0x000002b2   Code   RO         2609    i.Lcd_Init          lcd_driver.o
-    0x000012c6   0x000012c6   0x00000036   Code   RO         2610    i.Lcd_Reset         lcd_driver.o
-    0x000012fc   0x000012fc   0x00000036   Code   RO         2611    i.Lcd_SetRegion     lcd_driver.o
+    0x00000ff8   0x00000ff8   0x0000001c   Code   RO         2613    i.Lcd_Clear         lcd_driver.o
+    0x00001014   0x00001014   0x000002b2   Code   RO         2615    i.Lcd_Init          lcd_driver.o
+    0x000012c6   0x000012c6   0x00000036   Code   RO         2616    i.Lcd_Reset         lcd_driver.o
+    0x000012fc   0x000012fc   0x00000036   Code   RO         2617    i.Lcd_SetRegion     lcd_driver.o
     0x00001332   0x00001332   0x00000002   PAD
-    0x00001334   0x00001334   0x00000020   Code   RO         2612    i.Lcd_WriteData     lcd_driver.o
-    0x00001354   0x00001354   0x00000020   Code   RO         2613    i.Lcd_WriteIndex    lcd_driver.o
+    0x00001334   0x00001334   0x00000020   Code   RO         2618    i.Lcd_WriteData     lcd_driver.o
+    0x00001354   0x00001354   0x00000020   Code   RO         2619    i.Lcd_WriteIndex    lcd_driver.o
     0x00001374   0x00001374   0x00000030   Code   RO         1155    i.Lcd_Write_data_dma  spi.o
     0x000013a4   0x000013a4   0x00000002   Code   RO          361    i.NMI_Handler       isr.o
     0x000013a6   0x000013a6   0x00000002   PAD
@@ -2945,15 +2949,15 @@ Memory Map of the image
     0x00001498   0x00001498   0x00000002   Code   RO          362    i.PendSV_Handler    isr.o
     0x0000149a   0x0000149a   0x00000008   Code   RO          363    i.QSPI_CTRL_IRQHandler  isr.o
     0x000014a2   0x000014a2   0x00000002   Code   RO          364    i.SVC_Handler       isr.o
-    0x000014a4   0x000014a4   0x00000068   Code   RO         4280    i.ShowNum_48        ui_app.o
-    0x0000150c   0x0000150c   0x00000050   Code   RO         4281    i.ShowPersent       ui_app.o
+    0x000014a4   0x000014a4   0x00000068   Code   RO         4286    i.ShowNum_48        ui_app.o
+    0x0000150c   0x0000150c   0x00000050   Code   RO         4287    i.ShowPersent       ui_app.o
     0x0000155c   0x0000155c   0x00000030   Code   RO         1365    i.SysTick_Config    systick.o
-    0x0000158c   0x0000158c   0x00000024   Code   RO         4153    i.SystemInit        main.o
+    0x0000158c   0x0000158c   0x00000024   Code   RO         4159    i.SystemInit        main.o
     0x000015b0   0x000015b0   0x00000008   Code   RO          365    i.TIMER0_IRQHandler  isr.o
     0x000015b8   0x000015b8   0x00000008   Code   RO          366    i.TIMER1_IRQHandler  isr.o
     0x000015c0   0x000015c0   0x00000110   Code   RO         1856    i.Task_BMS_Update   bms_ip2366.o
-    0x000016d0   0x000016d0   0x000000f4   Code   RO         4252    i.Task_KeyScan      key_process.o
-    0x000017c4   0x000017c4   0x00000024   Code   RO         4282    i.Task_UI_Refresh   ui_app.o
+    0x000016d0   0x000016d0   0x000000f4   Code   RO         4258    i.Task_KeyScan      key_process.o
+    0x000017c4   0x000017c4   0x00000024   Code   RO         4288    i.Task_UI_Refresh   ui_app.o
     0x000017e8   0x000017e8   0x00000010   Code   RO         1304    i.Timer0_Interrupt_Handler  timer.o
     0x000017f8   0x000017f8   0x00000008   Code   RO          367    i.UART0_IRQHandler  isr.o
     0x00001800   0x00001800   0x00000034   Code   RO          506    i.UART0_Interrupt_Handler  uart.o
@@ -2961,26 +2965,26 @@ Memory Map of the image
     0x0000183c   0x0000183c   0x00000034   Code   RO          507    i.UART1_Interrupt_Handler  uart.o
     0x00001870   0x00001870   0x0000005c   Code   RO          513    i.Uart_16550_Initialise  uart.o
     0x000018cc   0x000018cc   0x00000020   Code   RO          369    i.WDT_IRQHandler    isr.o
-    0x000018ec   0x000018ec   0x00000020   Code   RO         4765    i.__0printf         mc_p.l(printfa.o)
-    0x0000190c   0x0000190c   0x0000002e   Code   RO         4877    i.__ARM_clz         mf_p.l(depilogue.o)
+    0x000018ec   0x000018ec   0x00000020   Code   RO         4771    i.__0printf         mc_p.l(printfa.o)
+    0x0000190c   0x0000190c   0x0000002e   Code   RO         4883    i.__ARM_clz         mf_p.l(depilogue.o)
     0x0000193a   0x0000193a   0x0000001a   Code   RO          337    i.__ARM_common_switch8  iomux.o
-    0x00001954   0x00001954   0x0000000e   Code   RO         4887    i.__scatterload_copy  mc_p.l(handlers.o)
-    0x00001962   0x00001962   0x00000002   Code   RO         4888    i.__scatterload_null  mc_p.l(handlers.o)
-    0x00001964   0x00001964   0x0000000e   Code   RO         4889    i.__scatterload_zeroinit  mc_p.l(handlers.o)
+    0x00001954   0x00001954   0x0000000e   Code   RO         4893    i.__scatterload_copy  mc_p.l(handlers.o)
+    0x00001962   0x00001962   0x00000002   Code   RO         4894    i.__scatterload_null  mc_p.l(handlers.o)
+    0x00001964   0x00001964   0x0000000e   Code   RO         4895    i.__scatterload_zeroinit  mc_p.l(handlers.o)
     0x00001972   0x00001972   0x00000002   PAD
-    0x00001974   0x00001974   0x00000174   Code   RO         4772    i._fp_digits        mc_p.l(printfa.o)
-    0x00001ae8   0x00001ae8   0x000006ec   Code   RO         4773    i._printf_core      mc_p.l(printfa.o)
-    0x000021d4   0x000021d4   0x00000020   Code   RO         4774    i._printf_post_padding  mc_p.l(printfa.o)
-    0x000021f4   0x000021f4   0x0000002c   Code   RO         4775    i._printf_pre_padding  mc_p.l(printfa.o)
+    0x00001974   0x00001974   0x00000174   Code   RO         4778    i._fp_digits        mc_p.l(printfa.o)
+    0x00001ae8   0x00001ae8   0x000006ec   Code   RO         4779    i._printf_core      mc_p.l(printfa.o)
+    0x000021d4   0x000021d4   0x00000020   Code   RO         4780    i._printf_post_padding  mc_p.l(printfa.o)
+    0x000021f4   0x000021f4   0x0000002c   Code   RO         4781    i._printf_pre_padding  mc_p.l(printfa.o)
     0x00002220   0x00002220   0x00000018   Code   RO          167    i.aon_wakeup_irq_cfg  aon.o
-    0x00002238   0x00002238   0x00000068   Code   RO         2410    i.bsr1901_prepare_sleep_for_pin_wakeup  xt25f32.o
+    0x00002238   0x00002238   0x00000068   Code   RO         2411    i.bsr1901_prepare_sleep_for_pin_wakeup  xt25f32.o
     0x000022a0   0x000022a0   0x00000034   Code   RO         1741    i.charger_init      charger.o
-    0x000022d4   0x000022d4   0x00000016   Code   RO         2615    i.delay_1ms         lcd_driver.o
+    0x000022d4   0x000022d4   0x00000016   Code   RO         2621    i.delay_1ms         lcd_driver.o
     0x000022ea   0x000022ea   0x00000010   Code   RO         2327    i.delay_1us         dpi_common.o
-    0x000022fa   0x000022fa   0x00000014   Code   RO         2616    i.delay_ms          lcd_driver.o
+    0x000022fa   0x000022fa   0x00000014   Code   RO         2622    i.delay_ms          lcd_driver.o
     0x0000230e   0x0000230e   0x0000000e   Code   RO          515    i.fputc             uart.o
-    0x0000231c   0x0000231c   0x00000024   Code   RO         2411    i.gecko_ahb2qspi_ctrl_irq_handler  xt25f32.o
-    0x00002340   0x00002340   0x00000010   Code   RO         2412    i.gecko_aon_wakeup_irq_handler  xt25f32.o
+    0x0000231c   0x0000231c   0x00000024   Code   RO         2412    i.gecko_ahb2qspi_ctrl_irq_handler  xt25f32.o
+    0x00002340   0x00002340   0x00000010   Code   RO         2413    i.gecko_aon_wakeup_irq_handler  xt25f32.o
     0x00002350   0x00002350   0x00000014   Code   RO          279    i.gecko_cmu_init    cmu.o
     0x00002364   0x00002364   0x000001b8   Code   RO          312    i.gecko_pinmux_config  iomux.o
     0x0000251c   0x0000251c   0x00000010   Code   RO          313    i.gecko_pinmux_default_config  iomux.o
@@ -2996,7 +3000,7 @@ Memory Map of the image
     0x00002958   0x00002958   0x00000054   Code   RO          931    i.gpio_i2c_stop     gpio_i2c.o
     0x000029ac   0x000029ac   0x0000003c   Code   RO          717    i.gpio_set_output   gpio.o
     0x000029e8   0x000029e8   0x00000024   Code   RO          718    i.gpio_set_value    gpio.o
-    0x00002a0c   0x00002a0c   0x0000002c   Code   RO         2415    i.h2l_wr_busy       xt25f32.o
+    0x00002a0c   0x00002a0c   0x0000002c   Code   RO         2416    i.h2l_wr_busy       xt25f32.o
     0x00002a38   0x00002a38   0x00000030   Code   RO          933    i.hal_GpioClr       gpio_i2c.o
     0x00002a68   0x00002a68   0x00000030   Code   RO          934    i.hal_GpioGet       gpio_i2c.o
     0x00002a98   0x00002a98   0x00000030   Code   RO          935    i.hal_GpioSet       gpio_i2c.o
@@ -3010,30 +3014,30 @@ Memory Map of the image
     0x00002b58   0x00002b58   0x00000014   Code   RO         1891    i.ipxs_readByte     bms_ip2366.o
     0x00002b6c   0x00002b6c   0x00000022   Code   RO         1161    i.lcd_dma_refresh_colorblock  spi.o
     0x00002b8e   0x00002b8e   0x00000002   PAD
-    0x00002b90   0x00002b90   0x000001c8   Code   RO         4154    i.main              main.o
-    0x00002d58   0x00002d58   0x00000014   Code   RO         2417    i.manba_task_cpu_goto_sleep  xt25f32.o
+    0x00002b90   0x00002b90   0x000001c8   Code   RO         4160    i.main              main.o
+    0x00002d58   0x00002d58   0x00000014   Code   RO         2418    i.manba_task_cpu_goto_sleep  xt25f32.o
     0x00002d6c   0x00002d6c   0x00000024   Code   RO          719    i.mi_tou_detect     gpio.o
     0x00002d90   0x00002d90   0x00000006   Code   RO           26    i.pEnterCriticalSection  system_initial.o
     0x00002d96   0x00002d96   0x00000004   Code   RO           27    i.pExitCriticalSection  system_initial.o
     0x00002d9a   0x00002d9a   0x00000002   PAD
-    0x00002d9c   0x00002d9c   0x000000e8   Code   RO         2426    i.tc_gecko_cm0_aon_sleep  xt25f32.o
-    0x00002e84   0x00002e84   0x000000ac   Code   RO         4286    i.ui_paint_bat_percent  ui_app.o
-    0x00002f30   0x00002f30   0x00000020   Code   RO         4288    i.ui_paint_color_circle  ui_app.o
-    0x00002f50   0x00002f50   0x00002274   Data   RO         3012    .constdata          bat_90x49.o
-    0x000051c4   0x000051c4   0x00008000   Data   RO         3020    .constdata          black_128x128.o
-    0x0000d1c4   0x0000d1c4   0x00008000   Data   RO         3028    .constdata          charging.o
-    0x000151c4   0x000151c4   0x00008000   Data   RO         3036    .constdata          charging_32bit.o
-    0x0001d1c4   0x0001d1c4   0x000005a0   Data   RO         3060    .constdata          font_0_9_digital_32b.o
-    0x0001d764   0x0001d764   0x00000020   Data   RO         3062    .constdata          font_0_9_digital_32b.o
-    0x0001d784   0x0001d784   0x00008000   Data   RO         3078    .constdata          img_battery.o
-    0x00025784   0x00025784   0x00008000   Data   RO         3086    .constdata          img_battery_32b.o
-    0x0002d784   0x0002d784   0x00008000   Data   RO         3094    .constdata          img_cake.o
-    0x00035784   0x00035784   0x00008000   Data   RO         3110    .constdata          img_star.o
-    0x0003d784   0x0003d784   0x00008000   Data   RO         3118    .constdata          img_star_32b.o
-    0x00045784   0x00045784   0x00004e20   Data   RO         3126    .constdata          ui_circle_100x100.o
+    0x00002d9c   0x00002d9c   0x000000e8   Code   RO         2427    i.tc_gecko_cm0_aon_sleep  xt25f32.o
+    0x00002e84   0x00002e84   0x000000ac   Code   RO         4292    i.ui_paint_bat_percent  ui_app.o
+    0x00002f30   0x00002f30   0x00000020   Code   RO         4294    i.ui_paint_color_circle  ui_app.o
+    0x00002f50   0x00002f50   0x00002274   Data   RO         3018    .constdata          bat_90x49.o
+    0x000051c4   0x000051c4   0x00008000   Data   RO         3026    .constdata          black_128x128.o
+    0x0000d1c4   0x0000d1c4   0x00008000   Data   RO         3034    .constdata          charging.o
+    0x000151c4   0x000151c4   0x00008000   Data   RO         3042    .constdata          charging_32bit.o
+    0x0001d1c4   0x0001d1c4   0x000005a0   Data   RO         3066    .constdata          font_0_9_digital_32b.o
+    0x0001d764   0x0001d764   0x00000020   Data   RO         3068    .constdata          font_0_9_digital_32b.o
+    0x0001d784   0x0001d784   0x00008000   Data   RO         3084    .constdata          img_battery.o
+    0x00025784   0x00025784   0x00008000   Data   RO         3092    .constdata          img_battery_32b.o
+    0x0002d784   0x0002d784   0x00008000   Data   RO         3100    .constdata          img_cake.o
+    0x00035784   0x00035784   0x00008000   Data   RO         3116    .constdata          img_star.o
+    0x0003d784   0x0003d784   0x00008000   Data   RO         3124    .constdata          img_star_32b.o
+    0x00045784   0x00045784   0x00004e20   Data   RO         3132    .constdata          ui_circle_100x100.o
     0x0004a5a4   0x0004a5a4   0x0000008e   Data   RO         1911    .conststring        bms_ip2366.o
     0x0004a632   0x0004a632   0x00000002   PAD
-    0x0004a634   0x0004a634   0x00000030   Data   RO         4885    Region$$Table       anon$$obj.o
+    0x0004a634   0x0004a634   0x00000030   Data   RO         4891    Region$$Table       anon$$obj.o
 
 
     Execution Region RW_IRAM1 (Exec base: 0x20000000, Load base: 0x0004a664, Size: 0x00000088, Max: 0x00001000, ABSOLUTE)
@@ -3047,10 +3051,10 @@ Memory Map of the image
     0x20000018   0x0004a67c   0x00000008   Data   RW         1162    .data               spi.o
     0x20000020   0x0004a684   0x00000004   Data   RW         1306    .data               timer.o
     0x20000024   0x0004a688   0x00000031   Data   RW         1912    .data               bms_ip2366.o
-    0x20000055   0x0004a6b9   0x00000001   Data   RW         4158    .data               main.o
-    0x20000056   0x0004a6ba   0x00000003   Data   RW         4289    .data               ui_app.o
+    0x20000055   0x0004a6b9   0x00000001   Data   RW         4164    .data               main.o
+    0x20000056   0x0004a6ba   0x00000003   Data   RW         4295    .data               ui_app.o
     0x20000059   0x0004a6bd   0x00000003   PAD
-    0x2000005c   0x0004a6c0   0x00000004   Data   RW         4863    .data               mc_p.l(stdout.o)
+    0x2000005c   0x0004a6c0   0x00000004   Data   RW         4869    .data               mc_p.l(stdout.o)
     0x20000060        -       0x00000028   Zero   RW         1751    .bss                charger.o
 
 
@@ -3058,13 +3062,13 @@ Memory Map of the image
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x20000088   0x0004a6c4   0x0000000c   Ven    RO         4896    Veneer$$Code        anon$$obj.o
-    0x20000094   0x0004a6d0   0x0000000c   Ven    RO         4897    Veneer$$Code        anon$$obj.o
-    0x200000a0   0x0004a6dc   0x0000000c   Ven    RO         4898    Veneer$$Code        anon$$obj.o
+    0x20000088   0x0004a6c4   0x0000000c   Ven    RO         4902    Veneer$$Code        anon$$obj.o
+    0x20000094   0x0004a6d0   0x0000000c   Ven    RO         4903    Veneer$$Code        anon$$obj.o
+    0x200000a0   0x0004a6dc   0x0000000c   Ven    RO         4904    Veneer$$Code        anon$$obj.o
     0x200000ac   0x0004a6e8   0x00000040   Code   RO          371    ram_code            isr.o
     0x200000ec   0x0004a728   0x00000048   Code   RO         1613    ram_code            dma.o
     0x20000134   0x0004a770   0x0000001c   Code   RO         2337    ram_code            dpi_common.o
-    0x20000150   0x0004a78c   0x0000021c   Code   RO         2434    ram_code            xt25f32.o
+    0x20000150   0x0004a78c   0x0000021c   Code   RO         2435    ram_code            xt25f32.o
 
 
 ==============================================================================

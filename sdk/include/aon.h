@@ -435,7 +435,12 @@ void PWR_MOS_Gate_CTRL(uint8 gate);
 
 
 void manba_task_cpu_goto_sleep (void);
+
+
 void tc_gecko_cm0_aon_sleep(void);
+void bsr1901_cm0_lite_sleep(void);
+
+
 //void tc_gecko_aon_sanity(void);
 void tc_gecko_aon_sanity_cm0(void);
 void tc_qspi_to_xtx_sanity(void);//read chip id

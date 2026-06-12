@@ -186,6 +186,9 @@ uint8_t sc_pfb_next_slice(sc_pfb_t *dest)
     {
         return 0; // 没有下一个切片了
     }
+		
+		//for (volatile uint32_t _dly = 0; _dly < 80; _dly++) {}
+		
     uint32_t remaining_height = dest->y_end - dest->y;
     dest->h = SC_MIN(remaining_height, dest->h);
     sc_pfb_memset(dest); // 填充下一个切片

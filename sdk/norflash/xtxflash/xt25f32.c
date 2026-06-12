@@ -1301,6 +1301,38 @@ assign reg_aon_wait_pu_cntto    = reg_0x000[1:0];
 
 
 
+//lite sleep mode (cpu stop mode), 
+//it is different to deep sleep mode
+
+/*
+Note that Lite Sleep is essentially implemented via the WFI command to place the CPU into STOP mode. 
+In this state, any interrupt can wake the CPU up from STOP mode. 
+If you intend to enable only one specific interrupt for wakeup, 
+you must mask all other interrupts prior to entering STOP mode.
+*/
+
+void bsr1901_cm0_lite_sleep(void)
+{
+	
+		unsigned int ahb_wr_data;
+	
+		ahb_wr_data = GEK1109_SLEEP_CNT_RUN_Enable  |
+									GEK1109_SLEEP_CNT_WKUP_Enable |	
+									GEK1109_LITE_SLEEP_Enable  ;
+									
+		h2l_wr_busy();
+    reg_write(GECKO_AON_BASE_ADDR+0x000, ahb_wr_data);
+	
+	  manba_task_cpu_goto_sleep();
+}
+
+
+
+
+
+
+
+
 
 /*
 
