@@ -362,6 +362,16 @@ uint16 GeckoGpadcGetRawData(GPADC_CHAN_T channel)
 
 
 
+## 7. SoftPUF
+
+在 Reset_Handler 里面调用这个功能。
+
+void sram_puf_on_power_up(void)
+
+CPU上电，初始化之前，先获取SRAM PUF，在startup_cm0.s里面调用sram_puf_on_power_up。
+
+
+
 ---
 
 

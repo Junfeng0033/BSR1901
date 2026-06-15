@@ -1135,7 +1135,6 @@ void tc_gecko_cm0_aon_sleep()
     unsigned int wr_data;
 		//char *string;	
 
-		//wr_data = 0xC08;
 		wr_data = 0xFFF;//clear reg_aon_clr_gpio_wkup
 		//wr_data = 0x1;//just clear GPIO08 wakeup status,ZJF @ 20240131
 		
@@ -1204,19 +1203,16 @@ assign gpio_wkup_active = reg_aon_gpio_wkup_eact ? gpio_wkup_edge : gpio_wkup_le
   wr_data=reg_read(GECKO_AON_BASE_ADDR+0x014);
 	wr_data |= 0xFFF;	
 	//wr_data &= 0x000;
-	//wr_data |= 0x400;
 	h2l_wr_busy();
 	reg_write(GECKO_AON_BASE_ADDR+0x014, wr_data);
 
   wr_data=reg_read(GECKO_AON_BASE_ADDR+0x018);
 	wr_data |= 0xFFF;
-	//wr_data |= 0x400;
 	h2l_wr_busy();
 	reg_write(GECKO_AON_BASE_ADDR+0x018, wr_data);//GPIO input posedge(gpio wakeup edge config)
 
   wr_data=reg_read(GECKO_AON_BASE_ADDR+0x01C);
 	wr_data |= 0xFFF;
-	//wr_data |= 0x400;
 	h2l_wr_busy();
 	reg_write(GECKO_AON_BASE_ADDR+0x01C, wr_data);	
 

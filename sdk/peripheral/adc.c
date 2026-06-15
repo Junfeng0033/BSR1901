@@ -619,3 +619,108 @@ uint16 adc_vbatvalue_read(void)
 
 
 
+
+
+
+
+//ADC 误差两点校准（修正失调 + 增益）
+
+/*
+ADC 输入短接模拟地
+V1（低电位，推荐 0V / 100mV）→ 采样平均得 Code1
+
+接参考电压满量程
+V2（高电位，推荐VREF/2 或接近满量程，如 3.0V）→ 采样平均得Code2
+
+*/
+
+
+// 硬件参数配置
+#define ADC_BIT        12U        // ADC位数
+#define ADC_FULL_CODE  (1U << ADC_BIT)  // 满量程码值 4096
+#define V_REF          3.3f       // 参考电压(V)
+#define SAMPLE_CNT     32U        // 单点位采样次数（滤波）
+
+// 两点校准标准电压（方案A：0V + VREF）
+#define CAL_V1         0.0f
+#define CAL_V2         V_REF
+
+// 校准全局参数
+float adc_k = 0.0f;     // 增益系数 K
+uint16_t adc_b = 0;     // 失调偏移 B
+
+
+
+
+uint16_t ADC_Get_Avg_Code(void)
+{
+    uint32_t sum = 0;
+    for(uint16_t i = 0; i < SAMPLE_CNT; i++)
+    {
+        sum += adc_vbatvalue_read();
+    }
+    return (uint16_t)(sum / SAMPLE_CNT);
+}
+
+
+
+
+
+/**
+ * @brief  ADC两点校准，计算K、B
+ * @note   调用前：硬件切换ADC输入到CAL_V1、CAL_V2
+ */
+void ADC_TwoPoint_Calibrate(void)
+{
+    uint16_t code1, code2;
+
+    // 第一步：采集低压点 V1 = 0V
+    code1 = ADC_Get_Avg_Code();
+
+    // 第二步：切换硬件/内部MUX到高压点 V2，等待电压稳定(可加短延时)
+    adc_delay_us(10);
+    code2 = ADC_Get_Avg_Code();
+
+    // 核心公式计算 K、B
+    adc_k = (float)(code2 - code1) / (CAL_V2 - CAL_V1);
+    adc_b = code1 - (uint16_t)(adc_k * CAL_V1);
+
+	
+	  // 合理性检查
+    if (adc_k < 0.5f || adc_k > 1.5f) {
+        adc_k = 1.0f; adc_b = 0.0f;
+    }
+		
+		
+    // 【可选】将 adc_k、adc_b 写入Flash保存（量产使用）
+    // Flash_Write(ADDR_K, &adc_k, 4);
+    // Flash_Write(ADDR_B, &adc_b, 2);
+}
+
+
+
+
+
+/**
+ * @brief  获取校准后的真实电压
+ * @retval 实际电压值(V)
+ */
+float ADC_Get_Cal_Voltage(void)
+{
+    uint16_t raw_code = ADC_Get_Avg_Code();
+    // 两点校准公式反推真实电压
+    float vol = (float)(raw_code - adc_b) / adc_k;
+	
+    if (vol < 0.0f) vol = 0.0f;
+    if (vol > V_REF) vol = V_REF;
+	
+    return vol;
+}
+
+
+
+
+// float voltage = ADC_Get_Cal_Voltage();
+
+
+

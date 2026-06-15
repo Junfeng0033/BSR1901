@@ -231,6 +231,15 @@ int main (void)
 //	ConfigPort_AnalogFunction(ADC0_FUNC|ADC1_FUNC);
 //	ADC_Init();
 
+
+
+
+//  上电执行一次两点校准
+//  ADC_TwoPoint_Calibrate();
+
+
+
+
 	//initial Check_ON GPIO for ADC function
 	//gecko_pinmux_config(PAD9,GPIO_A_5);
 	//gpio_set_output(GPIOA, 5);

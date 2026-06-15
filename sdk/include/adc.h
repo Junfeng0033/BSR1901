@@ -230,6 +230,8 @@ extern void reg_write(int, int);
 
 void ADC_Init(void);
 
+void ADC_TwoPoint_Calibrate(void);
+
 //uint16 GeckoGpadcGetRawData(uint8 channel);
 
 uint16 Get_Vbat_Voltage(void);
@@ -244,5 +246,7 @@ uint16 adc_vbatvalue_read(void);
 
 uint16 adc_buck_curr_read(void);
 
+
+float ADC_Get_Cal_Voltage(void);
 
 	
