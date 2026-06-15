@@ -89,16 +89,14 @@ sc_gui_init(lcd_dma_16bit_refresh, 0, C_ROYAL_BLUE,C_BLUE, &lv_font_16);
 
 
 在BSR1901上是这样写的:
+
 void lcd_dma_16bit_refresh(uint16_t xs, uint16_t ys, uint16_t w, uint16_t h, color_t *color)
+
 {
 	uint32_t len = w*h;
-	
 	Lcd_SetRegion(xs, ys, xs+w-1, ys+h-1);	
-	
 	HW_SPI_Tx_DMA_16bit(HAL_SPI_0,color,len);
-	
 }
-
 
 
 
@@ -138,6 +136,7 @@ uint32_t sc_tick = 0;      // 中间tick变量，在主循环中使用
 
 
 __RAM_CODE__ void SysTick_Handler(void)  //interrupt routine
+
 {
 
 	TimeTick++;//TimeTick will increase by "1"  every 1000us
@@ -149,25 +148,22 @@ __RAM_CODE__ void SysTick_Handler(void)  //interrupt routine
 
 ## 5,在做清除屏幕时，DMA刷新“色块”更快
 
-
-
 ===================================================================================================	
 
   uint16_t blue_color = BLACK;//C_TOMATO;//C_BLACK;//C_BLUE;
+  
   lcd_dma_refresh_colorblock(0, 0, X_MAX_PIXEL, Y_MAX_PIXEL,&blue_color);
 	
 ===================================================================================================	
 
 void lcd_dma_refresh_colorblock(uint16_t xs, uint16_t ys, uint16_t w, uint16_t h, color_t *color)
+
 {
 	uint32_t len = w*h;
-	
 	Lcd_SetRegion(xs, ys, xs+w-1, ys+h-1);	
-	
 	HW_SPI_Tx_DMA_16bit_ColorBlock(HAL_SPI_0,color,len);
-	
 }
-===================================================================================================	
+
 
 
 
@@ -179,16 +175,17 @@ When testing LCD color blocks, call "HW_SPI_Tx_DMA_16bit_ColorBlock" function
 *************************************************************************************/
 
 void HW_SPI_Tx_DMA_16bit_ColorBlock(HAL_SPI_ID_T id,uint16 *pData, uint16 DataLen)
+
 {
+
 	LCD_RS_SET;	
-    SPI_16bit_Transfer();
+  SPI_16bit_Transfer();
 	//DMA_Req_Buslock_Enable();
 	Gecko_DMA_Transport((volatile uint32 *)(XR7_SPI_BASE + XR7_SPI_FIFO), pData, DataLen, 
-						AHB_DMA_CONTROL_HWORD_TR, AHB_DMA_CONTROL_SRC_NOINC_DES_NOINC);	
+						AHB_DMA_CONTROL_HWORD_TR, AHB_DMA_CONTROL_SRC_NOINC_DES_NOINC);
+						
 	dma_sram_delay(1000);	
-	
 }
-
 
 
 
