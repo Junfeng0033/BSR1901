@@ -28,7 +28,7 @@ Simplified Chinese(GB 2312) Encoding
 
 
 
-1,ÐÞ¸Ä´úÂë·Ö±æÂÊ£¬ÊÊÅä¿Í»§ÏÔÊ¾ÆÁ·Ö±æÂÊ
+## 1,ÐÞ¸Ä´úÂë·Ö±æÂÊ£¬ÊÊÅä¿Í»§ÏÔÊ¾ÆÁ·Ö±æÂÊ
 
 
 ..\BSR1901\software\sdk\SCGUI\sc_common.h
@@ -63,7 +63,7 @@ SCGUI Í¨¹ý sc_clear(0, 0, 128, 128, ...) ´Ó y=0 ¿ªÊ¼ÇåÆÁ
 PFB ÇÐÆ¬äÖÈ¾Í¨¹ý sc_pfb_refresh(0, 0, 128, 5, buf) ´Ó y=0 ¿ªÊ¼ÒÔ 5 ÐÐÎªµ¥Î»Ë¢ÆÁ£¬×îÖÕµ÷ÓÃ Lcd_SetRegion(0, 0, 127, 4)Ð´ÈëLcd¿ØÖÆÆ÷¡£
 
 
-2,ÐÞ¸Ä¶ÓÁÐºÍÏß³ÌµÄÊýÁ¿£¬¼õÉÙSRAMÕ¼ÓÃ
+## 2,ÐÞ¸Ä¶ÓÁÐºÍÏß³ÌµÄÊýÁ¿£¬¼õÉÙSRAMÕ¼ÓÃ
 
 ..\BSR1901\software\sdk\SCGUI\sc_event_task.h
 
@@ -75,7 +75,7 @@ PFB ÇÐÆ¬äÖÈ¾Í¨¹ý sc_pfb_refresh(0, 0, 128, 5, buf) ´Ó y=0 ¿ªÊ¼ÒÔ 5 ÐÐÎªµ¥Î»Ë¢ÆÁ£
 
 
 
-3,Ôö¼ÓDMAË¢ÐÂLCDµÄ»Øµ÷º¯Êý
+## 3,Ôö¼ÓDMAË¢ÐÂLCDµÄ»Øµ÷º¯Êý
 
 
 ..\BSR1901\software\sdk\SCGUI\sc_gui.c
@@ -121,7 +121,7 @@ void sc_gui_init(lcd_refresh_cb refresh_cb, color_t bkc, color_t fc, color_t bc,
 }
 
 
-4,Ôö¼ÓCortex-M CPUµÄSysTick£¬ÊÊÅäSCGUIµÄ¡°system_tick¡±È«¾Ö±äÁ¿
+## 4,Ôö¼ÓCortex-M CPUµÄSysTick£¬ÊÊÅäSCGUIµÄ¡°system_tick¡±È«¾Ö±äÁ¿
 
 
 ..\BSR1901\software\sdk\SCGUI\sc_event_task.c
@@ -147,7 +147,7 @@ __RAM_CODE__ void SysTick_Handler(void)  //interrupt routine
 }
 
 
-5,ÔÚ×öÇå³ýÆÁÄ»Ê±£¬DMAË¢ÐÂ¡°É«¿é¡±¸ü¿ì
+## 5,ÔÚ×öÇå³ýÆÁÄ»Ê±£¬DMAË¢ÐÂ¡°É«¿é¡±¸ü¿ì
 
 
 
@@ -192,7 +192,7 @@ void HW_SPI_Tx_DMA_16bit_ColorBlock(HAL_SPI_ID_T id,uint16 *pData, uint16 DataLe
 
 
 
-6,Cortex-M0 ÔËËãÄÜÁ¦Èõ¡¢ÊýÑ§¼ÆËãÂý µÄ½â¾ö·½°¸
+## 6,Cortex-M0 ÔËËãÄÜÁ¦Èõ¡¢ÊýÑ§¼ÆËãÂý µÄ½â¾ö·½°¸
 
 
 
@@ -200,8 +200,6 @@ Cortex-M0 Ã»ÓÐÓ²¼þ³Ë·¨Æ÷¡¢Ã»ÓÐ³ý·¨Ö¸Áî¡¢Ã»ÓÐ¸¡µãÔËËã£¬
 ÉÔÎ¢¸´ÔÓÒ»µãµÄ GUI »æÖÆ£¨Ðý×ª¡¢Ëõ·Å¡¢Alpha »ìºÏ¡¢¿¹¾â³Ý¡¢Ô²»¡£©¶¼»á¾Þ¿¨¡¢¾ÞÕ¼ CPU¡£
 
 ¶ÔÓÚ±ØÐëµÄ£¬²»¿É±ÜÃâµÄ£¬¹Ø¼üµÄ³Ë³ý·¨ÔËËãº¯Êý£¬ÇëÔÚº¯ÊýÃûÇ°¹ÚÒÔ¡°__RAM_CODE__¡±£¬ÒÔÌáÉýÔËËãÄÜÁ¦¡£
-
-
 
 
 
@@ -277,7 +275,7 @@ DMA°áÔË²»Õ¼ÓÃ CPU£¬M0¿ÉÒÔË¯¾õµÈË¢ÆÁÍê³É
 
 
 
-7, SCGUI ÔÚLCDÉÏÏÔÊ¾ÎÄ×Ö
+## 7, SCGUI ÔÚLCDÉÏÏÔÊ¾ÎÄ×Ö
 
 
 ¼òµ¥ÎÄ±¾ÏÔÊ¾ `sc_draw_Text()`
@@ -307,7 +305,7 @@ sc_draw_Text(NULL, 50, 50, gui->font, str, C_WHITE, gui->bkc);
 
 
 
-8, SCGUI ÔÚLCDÉÏÏÔÊ¾Êý×Ö
+## 8, SCGUI ÔÚLCDÉÏÏÔÊ¾Êý×Ö
 
 Êý×ÖÏÔÊ¾ - `sc_draw_Num()`
 
@@ -332,7 +330,7 @@ sc_draw_Num(NULL, 100, 60, 60, 20, gui->font, 1234, 100, C_GREEN, gui->bkc);
 
 
 
-9, SCGUI ÔÚLCDÉÏ»æÖÆ¾ØÐÎ
+## 9, SCGUI ÔÚLCDÉÏ»æÖÆ¾ØÐÎ
 
 
 ÊµÐÄ¾ØÐÎ - `sc_draw_Fill()`
@@ -389,7 +387,7 @@ sc_draw_Frame(NULL, 50, 50, 100, 80, 2, C_BLUE, 255);
 
 
 
-10, ÔÚLCDÉÏ»æÖÆÔ²»¡
+## 10, ÔÚLCDÉÏ»æÖÆÔ²»¡
 
 
 ..\BSR1901\software\sdk\user\GUI.c
