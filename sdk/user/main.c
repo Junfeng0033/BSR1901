@@ -375,6 +375,7 @@ int main (void)
 
 
 	while(1)
+
 	{
 	
 //		sc_task_loop(NULL);		

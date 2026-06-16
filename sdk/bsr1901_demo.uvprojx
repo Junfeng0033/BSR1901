@@ -681,9 +681,9 @@
           <GroupName>scgui</GroupName>
           <Files>
             <File>
-              <FileName>SCGUI GUIDE.md</FileName>
+              <FileName>SCGUI_GUIDE.md</FileName>
               <FileType>5</FileType>
-              <FilePath>.\SCGUI GUIDE.md</FilePath>
+              <FilePath>.\SCGUI\SCGUI_GUIDE.md</FilePath>
             </File>
             <File>
               <FileName>sc_arc.c</FileName>

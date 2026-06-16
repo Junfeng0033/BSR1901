@@ -387,8 +387,8 @@ sc_draw_Frame(NULL, 50, 50, 100, 80, 2, C_BLUE, 255);
 ## 10, ‘⁄LCD…œªÊ÷∆‘≤ª°
 
 
-..\BSR1901\software\sdk\user\GUI.c
-..\BSR1901\software\sdk\user\ui.c
+..\BSR1901\software\sdk\user\bsr1901_GUI.c
+..\BSR1901\software\sdk\user\ui_app.c
 
 
 
