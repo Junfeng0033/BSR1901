@@ -577,6 +577,8 @@ void Gui_ProgressBar(uint16_t x0, uint16_t y0, uint16_t w, uint16_t h,
 * col_pro:进度前景色
 * 绘制规则：起始135°，顺时针走到135+270°，总跨度270°(缺右上一小段开口)
 */
+
+#if 0
 void Gui_RingProgress(uint16_t cx,uint16_t cy,uint16_t r_out,uint8_t ring_w,uint8_t per,uint16_t col_bg,uint16_t col_pro)
 {
     uint16_t r_in;
@@ -608,6 +610,38 @@ void Gui_RingProgress(uint16_t cx,uint16_t cy,uint16_t r_out,uint8_t ring_w,uint
         Gui_DrawArc(cx,cy,i,135,end_ang,col_pro);
     }
 }
+#endif
+
+void Gui_RingProgress(uint16_t cx,uint16_t cy,uint16_t r_out,uint8_t ring_w,uint8_t per,uint16_t col_bg,uint16_t col_pro)
+{
+    uint16_t r_in;
+    uint16_t end_ang;
+
+    if(per > 100)
+        per = 100;
+    r_in = r_out - ring_w;
+    if(r_in < 1) r_in = 1;
+
+    end_ang = 135 + ((uint32_t)per * 270)/100;
+
+    /* 1.先画背景区：end_ang → 405°（前景不会覆盖的部分）*/
+    Gui_DrawArc(cx,cy,r_out,end_ang,405,col_bg);//`135,405` 改为 `end_ang,405`，其余不变
+    Gui_DrawArc(cx,cy,r_in,end_ang,405,col_bg); //`135,405` 改为 `end_ang,405`，其余不变
+    for(uint16_t i=r_in+1;i<r_out;i++)
+    {
+        Gui_DrawArc(cx,cy,i,end_ang,405,col_bg);//`135,405` 改为 `end_ang,405`，其余不变
+    }
+
+    /* 2.再画前景区：135° → end_ang（不会被覆盖，只画一次）*/
+    Gui_DrawArc(cx,cy,r_out,135,end_ang,col_pro);
+    Gui_DrawArc(cx,cy,r_in,135,end_ang,col_pro);
+    for(uint16_t i=r_in+1;i<r_out;i++)
+    {
+        Gui_DrawArc(cx,cy,i,135,end_ang,col_pro);
+    }
+}
+
+
 
 
 
@@ -779,17 +813,18 @@ void GuiShowChar_32(uint16_t x, uint16_t y, uint8_t n)
 
 
 
-static int oled_pow(uint8_t m, uint8_t n)
-{
-	uint32_t result = 1;
-	while (n--)
-		result *= m;
-	return result;
-}
+//static int oled_pow(uint8_t m, uint8_t n)
+//{
+//	uint32_t result = 1;
+//	while (n--)
+//		result *= m;
+//	return result;
+//}
 
 
 
 
+#if 0
 void GuiShowNum(uint8_t x, uint8_t y, uint16_t num, uint8_t len)
 {
 	uint8_t t, temp;
@@ -812,6 +847,44 @@ void GuiShowNum(uint8_t x, uint8_t y, uint16_t num, uint8_t len)
 	}
 }
 
+#endif
+
+
+
+// ========== 优化 GuiShowNum ==========
+void GuiShowNum(uint8_t x, uint8_t y, uint16_t num, uint8_t len)
+{
+    uint8_t t, temp;
+    uint8_t enshow = 0;
+    uint16_t divisor = 1;                    // 新增：预计算除数
+
+    // 预计算 10^(len-1)，只算一次
+    for (t = 0; t < len - 1; t++)
+        divisor *= 10;                       // len=3 → divisor=100
+
+    for (t = 0; t < len; t++)
+    {
+        temp = (num / divisor) % 10;         // 直接除，不再调 oled_pow
+        if (enshow == 0 && t < (len - 1))
+        {
+            if (temp == 0)
+            {
+                GuiShowChar_16(x + 8 * t, y, ' ');
+                divisor /= 10;               // 新增：除数递减
+                continue;
+            }
+            else
+                enshow = 1;
+        }
+        GuiShowChar_16(x + 8 * t, y, temp + '0');
+        divisor /= 10;                       // 新增：除数递减
+    }
+}
+
+
+
+
+
 extern const uint8_t Font_8x32_percent[];
 
 void GuiShowPersent(uint8_t x, uint8_t y)
@@ -828,6 +901,11 @@ void GuiShowPersent(uint8_t x, uint8_t y)
 	}
 }
 
+
+
+
+
+#if 0
 void GuiShowNumString_16(uint8_t x, uint8_t y, uint16_t num, uint8_t len)
 {
 	uint8_t t, temp;
@@ -849,7 +927,41 @@ void GuiShowNumString_16(uint8_t x, uint8_t y, uint16_t num, uint8_t len)
 		GuiShowNum_16(x + 8 * t, y, temp + 0);
 	}
 }
+#endif
 
+
+// ========== 优化 GuiShowNumString_16 ==========
+void GuiShowNumString_16(uint8_t x, uint8_t y, uint16_t num, uint8_t len)
+{
+    uint8_t t, temp;
+    uint8_t enshow = 0;
+    uint16_t divisor = 1;
+
+    for (t = 0; t < len - 1; t++)
+        divisor *= 10;
+
+    for (t = 0; t < len; t++)
+    {
+        temp = (num / divisor) % 10;
+        if (enshow == 0 && t < (len - 1))
+        {
+            if (temp == 0)
+            {
+                GuiShowNum_16(x + 8 * t, y, 0);
+                divisor /= 10;
+                continue;
+            }
+            else
+                enshow = 1;
+        }
+        GuiShowNum_16(x + 8 * t, y, temp + 0);
+        divisor /= 10;
+    }
+}
+
+
+
+#if 0
 void GuiShowNumString_32(uint8_t x, uint8_t y, uint16_t num, uint8_t len)
 {
 	uint8_t t, temp;
@@ -871,7 +983,43 @@ void GuiShowNumString_32(uint8_t x, uint8_t y, uint16_t num, uint8_t len)
 		GuiShowNum_32(x + 16 * t, y, temp + 0);
 	}
 }
+#endif
 
+
+
+// ========== 优化 GuiShowNumString_32 ==========
+void GuiShowNumString_32(uint8_t x, uint8_t y, uint16_t num, uint8_t len)
+{
+    uint8_t t, temp;
+    uint8_t enshow = 0;
+    uint16_t divisor = 1;
+
+    for (t = 0; t < len - 1; t++)
+        divisor *= 10;
+
+    for (t = 0; t < len; t++)
+    {
+        temp = (num / divisor) % 10;
+        if (enshow == 0 && t < (len - 1))
+        {
+            if (temp == 0)
+            {
+                GuiShowNum_32(x + 16 * t, y, 0);
+                divisor /= 10;
+                continue;
+            }
+            else
+                enshow = 1;
+        }
+        GuiShowNum_32(x + 16 * t, y, temp + 0);
+        divisor /= 10;
+    }
+}
+
+
+
+
+#if 0
 void GuiShowNumString_48(uint8_t x, uint8_t y, uint16_t num, uint8_t len)
 {
 	uint8_t t, temp;
@@ -893,7 +1041,36 @@ void GuiShowNumString_48(uint8_t x, uint8_t y, uint16_t num, uint8_t len)
 		GuiShowNum_48(x + 24 * t, y, temp + 0);
 	}
 }
+#endif
 
+// ========== 优化 GuiShowNumString_48 ==========
+void GuiShowNumString_48(uint8_t x, uint8_t y, uint16_t num, uint8_t len)
+{
+    uint8_t t, temp;
+    uint8_t enshow = 0;
+    uint16_t divisor = 1;
+
+    for (t = 0; t < len - 1; t++)
+        divisor *= 10;
+
+    for (t = 0; t < len; t++)
+    {
+        temp = (num / divisor) % 10;
+        if (enshow == 0 && t < (len - 1))
+        {
+            if (temp == 0)
+            {
+                GuiShowNum_48(x + 24 * t, y, 0);
+                divisor /= 10;
+                continue;
+            }
+            else
+                enshow = 1;
+        }
+        GuiShowNum_48(x + 24 * t, y, temp + 0);
+        divisor /= 10;
+    }
+}
 
 
 

@@ -10,7 +10,6 @@
 #define  DEBUG_UATR0_PRINT_LOG            1
 
 
-
 //#define LOG_SEGGER_RTT 						1
 
 

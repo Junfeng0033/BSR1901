@@ -576,65 +576,65 @@ Section Cross References
     rle_decompression.o(i.TFT565_draw_arry_rle2_img) refers to lcd_driver.o(i.Lcd_SetRegion) for Lcd_SetRegion
     rle_decompression.o(i.TFT565_draw_arry_rle2_img) refers to dma.o(ram_code) for HW_SPI_Tx_DMA_16bit_ColorBlock_Opt
     segger_rtt.o(i.SEGGER_RTT_AllocDownBuffer) refers to segger_rtt.o(i._DoInit) for _DoInit
-    segger_rtt.o(i.SEGGER_RTT_AllocDownBuffer) refers to segger_rtt.o(.bss) for .bss
+    segger_rtt.o(i.SEGGER_RTT_AllocDownBuffer) refers to segger_rtt.o(.noinit) for .noinit
     segger_rtt.o(i.SEGGER_RTT_AllocUpBuffer) refers to segger_rtt.o(i._DoInit) for _DoInit
-    segger_rtt.o(i.SEGGER_RTT_AllocUpBuffer) refers to segger_rtt.o(.bss) for .bss
+    segger_rtt.o(i.SEGGER_RTT_AllocUpBuffer) refers to segger_rtt.o(.noinit) for .noinit
     segger_rtt.o(i.SEGGER_RTT_ConfigDownBuffer) refers to segger_rtt.o(i._DoInit) for _DoInit
-    segger_rtt.o(i.SEGGER_RTT_ConfigDownBuffer) refers to segger_rtt.o(.bss) for .bss
+    segger_rtt.o(i.SEGGER_RTT_ConfigDownBuffer) refers to segger_rtt.o(.noinit) for .noinit
     segger_rtt.o(i.SEGGER_RTT_ConfigUpBuffer) refers to segger_rtt.o(i._DoInit) for _DoInit
-    segger_rtt.o(i.SEGGER_RTT_ConfigUpBuffer) refers to segger_rtt.o(.bss) for .bss
+    segger_rtt.o(i.SEGGER_RTT_ConfigUpBuffer) refers to segger_rtt.o(.noinit) for .noinit
     segger_rtt.o(i.SEGGER_RTT_GetKey) refers to segger_rtt.o(i.SEGGER_RTT_Read) for SEGGER_RTT_Read
-    segger_rtt.o(i.SEGGER_RTT_HasData) refers to segger_rtt.o(.bss) for .bss
-    segger_rtt.o(i.SEGGER_RTT_HasDataUp) refers to segger_rtt.o(.bss) for .bss
+    segger_rtt.o(i.SEGGER_RTT_HasData) refers to segger_rtt.o(.noinit) for .noinit
+    segger_rtt.o(i.SEGGER_RTT_HasDataUp) refers to segger_rtt.o(.noinit) for .noinit
     segger_rtt.o(i.SEGGER_RTT_HasKey) refers to segger_rtt.o(i._DoInit) for _DoInit
-    segger_rtt.o(i.SEGGER_RTT_HasKey) refers to segger_rtt.o(.bss) for .bss
+    segger_rtt.o(i.SEGGER_RTT_HasKey) refers to segger_rtt.o(.noinit) for .noinit
     segger_rtt.o(i.SEGGER_RTT_Init) refers to segger_rtt.o(i._DoInit) for _DoInit
     segger_rtt.o(i.SEGGER_RTT_PutChar) refers to segger_rtt.o(i._DoInit) for _DoInit
-    segger_rtt.o(i.SEGGER_RTT_PutChar) refers to segger_rtt.o(.bss) for .bss
+    segger_rtt.o(i.SEGGER_RTT_PutChar) refers to segger_rtt.o(.noinit) for .noinit
     segger_rtt.o(i.SEGGER_RTT_PutCharSkip) refers to segger_rtt.o(i._DoInit) for _DoInit
-    segger_rtt.o(i.SEGGER_RTT_PutCharSkip) refers to segger_rtt.o(.bss) for .bss
-    segger_rtt.o(i.SEGGER_RTT_PutCharSkipNoLock) refers to segger_rtt.o(.bss) for .bss
+    segger_rtt.o(i.SEGGER_RTT_PutCharSkip) refers to segger_rtt.o(.noinit) for .noinit
+    segger_rtt.o(i.SEGGER_RTT_PutCharSkipNoLock) refers to segger_rtt.o(.noinit) for .noinit
     segger_rtt.o(i.SEGGER_RTT_Read) refers to segger_rtt.o(i.SEGGER_RTT_ReadNoLock) for SEGGER_RTT_ReadNoLock
     segger_rtt.o(i.SEGGER_RTT_ReadNoLock) refers to segger_rtt.o(i._DoInit) for _DoInit
     segger_rtt.o(i.SEGGER_RTT_ReadNoLock) refers to memcpya.o(.text) for __aeabi_memcpy
-    segger_rtt.o(i.SEGGER_RTT_ReadNoLock) refers to segger_rtt.o(.bss) for .bss
+    segger_rtt.o(i.SEGGER_RTT_ReadNoLock) refers to segger_rtt.o(.noinit) for .noinit
     segger_rtt.o(i.SEGGER_RTT_SetFlagsDownBuffer) refers to segger_rtt.o(i._DoInit) for _DoInit
-    segger_rtt.o(i.SEGGER_RTT_SetFlagsDownBuffer) refers to segger_rtt.o(.bss) for .bss
+    segger_rtt.o(i.SEGGER_RTT_SetFlagsDownBuffer) refers to segger_rtt.o(.noinit) for .noinit
     segger_rtt.o(i.SEGGER_RTT_SetFlagsUpBuffer) refers to segger_rtt.o(i._DoInit) for _DoInit
-    segger_rtt.o(i.SEGGER_RTT_SetFlagsUpBuffer) refers to segger_rtt.o(.bss) for .bss
+    segger_rtt.o(i.SEGGER_RTT_SetFlagsUpBuffer) refers to segger_rtt.o(.noinit) for .noinit
     segger_rtt.o(i.SEGGER_RTT_SetNameDownBuffer) refers to segger_rtt.o(i._DoInit) for _DoInit
-    segger_rtt.o(i.SEGGER_RTT_SetNameDownBuffer) refers to segger_rtt.o(.bss) for .bss
+    segger_rtt.o(i.SEGGER_RTT_SetNameDownBuffer) refers to segger_rtt.o(.noinit) for .noinit
     segger_rtt.o(i.SEGGER_RTT_SetNameUpBuffer) refers to segger_rtt.o(i._DoInit) for _DoInit
-    segger_rtt.o(i.SEGGER_RTT_SetNameUpBuffer) refers to segger_rtt.o(.bss) for .bss
+    segger_rtt.o(i.SEGGER_RTT_SetNameUpBuffer) refers to segger_rtt.o(.noinit) for .noinit
     segger_rtt.o(i.SEGGER_RTT_SetTerminal) refers to segger_rtt.o(i._DoInit) for _DoInit
     segger_rtt.o(i.SEGGER_RTT_SetTerminal) refers to segger_rtt.o(i._GetAvailWriteSpace) for _GetAvailWriteSpace
     segger_rtt.o(i.SEGGER_RTT_SetTerminal) refers to segger_rtt.o(i._WriteNoCheck) for _WriteNoCheck
     segger_rtt.o(i.SEGGER_RTT_SetTerminal) refers to segger_rtt.o(i._WriteBlocking) for _WriteBlocking
-    segger_rtt.o(i.SEGGER_RTT_SetTerminal) refers to segger_rtt.o(.bss) for .bss
+    segger_rtt.o(i.SEGGER_RTT_SetTerminal) refers to segger_rtt.o(.noinit) for .noinit
     segger_rtt.o(i.SEGGER_RTT_SetTerminal) refers to segger_rtt.o(.data) for .data
     segger_rtt.o(i.SEGGER_RTT_TerminalOut) refers to segger_rtt.o(i._DoInit) for _DoInit
     segger_rtt.o(i.SEGGER_RTT_TerminalOut) refers to strlen.o(.text) for strlen
     segger_rtt.o(i.SEGGER_RTT_TerminalOut) refers to segger_rtt.o(i._GetAvailWriteSpace) for _GetAvailWriteSpace
     segger_rtt.o(i.SEGGER_RTT_TerminalOut) refers to segger_rtt.o(i._PostTerminalSwitch) for _PostTerminalSwitch
     segger_rtt.o(i.SEGGER_RTT_TerminalOut) refers to segger_rtt.o(i._WriteBlocking) for _WriteBlocking
-    segger_rtt.o(i.SEGGER_RTT_TerminalOut) refers to segger_rtt.o(.bss) for .bss
+    segger_rtt.o(i.SEGGER_RTT_TerminalOut) refers to segger_rtt.o(.noinit) for .noinit
     segger_rtt.o(i.SEGGER_RTT_TerminalOut) refers to segger_rtt.o(.data) for .data
     segger_rtt.o(i.SEGGER_RTT_WaitKey) refers to segger_rtt.o(i.SEGGER_RTT_GetKey) for SEGGER_RTT_GetKey
     segger_rtt.o(i.SEGGER_RTT_Write) refers to segger_rtt.o(i._DoInit) for _DoInit
     segger_rtt.o(i.SEGGER_RTT_Write) refers to segger_rtt.o(i.SEGGER_RTT_WriteNoLock) for SEGGER_RTT_WriteNoLock
-    segger_rtt.o(i.SEGGER_RTT_Write) refers to segger_rtt.o(.bss) for .bss
+    segger_rtt.o(i.SEGGER_RTT_Write) refers to segger_rtt.o(.noinit) for .noinit
     segger_rtt.o(i.SEGGER_RTT_WriteNoLock) refers to segger_rtt.o(i._GetAvailWriteSpace) for _GetAvailWriteSpace
     segger_rtt.o(i.SEGGER_RTT_WriteNoLock) refers to segger_rtt.o(i._WriteNoCheck) for _WriteNoCheck
     segger_rtt.o(i.SEGGER_RTT_WriteNoLock) refers to segger_rtt.o(i._WriteBlocking) for _WriteBlocking
-    segger_rtt.o(i.SEGGER_RTT_WriteNoLock) refers to segger_rtt.o(.bss) for .bss
+    segger_rtt.o(i.SEGGER_RTT_WriteNoLock) refers to segger_rtt.o(.noinit) for .noinit
     segger_rtt.o(i.SEGGER_RTT_WriteSkipNoLock) refers to memcpya.o(.text) for __aeabi_memcpy
-    segger_rtt.o(i.SEGGER_RTT_WriteSkipNoLock) refers to segger_rtt.o(.bss) for .bss
+    segger_rtt.o(i.SEGGER_RTT_WriteSkipNoLock) refers to segger_rtt.o(.noinit) for .noinit
     segger_rtt.o(i.SEGGER_RTT_WriteString) refers to strlen.o(.text) for strlen
     segger_rtt.o(i.SEGGER_RTT_WriteString) refers to segger_rtt.o(i.SEGGER_RTT_Write) for SEGGER_RTT_Write
     segger_rtt.o(i.SEGGER_RTT_WriteWithOverwriteNoLock) refers to memcpya.o(.text) for __aeabi_memcpy
-    segger_rtt.o(i.SEGGER_RTT_WriteWithOverwriteNoLock) refers to segger_rtt.o(.bss) for .bss
+    segger_rtt.o(i.SEGGER_RTT_WriteWithOverwriteNoLock) refers to segger_rtt.o(.noinit) for .noinit
     segger_rtt.o(i._DoInit) refers to strcpy.o(.text) for strcpy
-    segger_rtt.o(i._DoInit) refers to segger_rtt.o(.bss) for .bss
+    segger_rtt.o(i._DoInit) refers to segger_rtt.o(.noinit) for .noinit
     segger_rtt.o(i._PostTerminalSwitch) refers to segger_rtt.o(i._WriteBlocking) for _WriteBlocking
     segger_rtt.o(i._PostTerminalSwitch) refers to segger_rtt.o(.data) for .data
     segger_rtt.o(i._WriteBlocking) refers to memcpya.o(.text) for __aeabi_memcpy
@@ -651,6 +651,11 @@ Section Cross References
     segger_rtt_printf.o(i._PrintUnsigned) refers to segger_rtt_printf.o(i._StoreChar) for _StoreChar
     segger_rtt_printf.o(i._PrintUnsigned) refers to segger_rtt_printf.o(.constdata) for .constdata
     segger_rtt_printf.o(i._StoreChar) refers to segger_rtt.o(i.SEGGER_RTT_Write) for SEGGER_RTT_Write
+    segger_rtt_syscalls_keil.o(i._sys_open) refers to strcmp.o(.text) for strcmp
+    segger_rtt_syscalls_keil.o(i._sys_open) refers to segger_rtt_syscalls_keil.o(.constdata) for .constdata
+    segger_rtt_syscalls_keil.o(i._sys_write) refers to segger_rtt.o(i.SEGGER_RTT_Write) for SEGGER_RTT_Write
+    segger_rtt_syscalls_keil.o(i._ttywrch) refers to uart.o(i.fputc) for fputc
+    segger_rtt_syscalls_keil.o(i._ttywrch) refers to stdout.o(.data) for __stdout
     sc_arc.o(i.DrawEye_Blink_test) refers to sc_common.o(i.sc_pfb_init_slices) for sc_pfb_init_slices
     sc_arc.o(i.DrawEye_Blink_test) refers to sc_common.o(i.sc_pfb_intersection) for sc_pfb_intersection
     sc_arc.o(i.DrawEye_Blink_test) refers to sc_arc.o(i.sc_draw_Eye_blink) for sc_draw_Eye_blink
@@ -1100,10 +1105,7 @@ Section Cross References
     ui_app.o(i.ShowPersent) refers to font_0_9_digital_32b.o(.constdata) for Font_8x32_percent
     ui_app.o(i.Task_UI_Refresh) refers to ui_app.o(i.ui_paint_bat_percent) for ui_paint_bat_percent
     ui_app.o(i.Task_UI_Refresh) refers to bsr1901_gui.o(i.Gui_DrawArc) for Gui_DrawArc
-    ui_app.o(i.set_bat_percentage) refers to dfltui.o(.text) for __aeabi_ui2d
-    ui_app.o(i.set_bat_percentage) refers to dmul.o(.text) for __aeabi_dmul
-    ui_app.o(i.set_bat_percentage) refers to dadd.o(.text) for __aeabi_dadd
-    ui_app.o(i.set_bat_percentage) refers to dfixui.o(.text) for __aeabi_d2uiz
+    ui_app.o(i.set_bat_percentage) refers to uidiv.o(.text) for __aeabi_uidivmod
     ui_app.o(i.set_bat_percentage) refers to lcd_driver.o(i.Lcd_Fill) for Lcd_Fill
     ui_app.o(i.set_bat_percentage) refers to bsr1901_gui.o(i.GuiShowNum) for GuiShowNum
     ui_app.o(i.set_bat_percentage) refers to bsr1901_gui.o(i.GuiShowChar_16) for GuiShowChar_16
@@ -1129,17 +1131,13 @@ Section Cross References
     bsr1901_gui.o(i.GuiShowChar_16) refers to bsr1901_gui.o(.constdata) for .constdata
     bsr1901_gui.o(i.GuiShowChar_32) refers to lcd_driver.o(i.Gui_DrawPoint) for Gui_DrawPoint
     bsr1901_gui.o(i.GuiShowChar_32) refers to font_a_z_32b.o(.constdata) for Font32_char_Table
-    bsr1901_gui.o(i.GuiShowNum) refers to bsr1901_gui.o(i.oled_pow) for oled_pow
-    bsr1901_gui.o(i.GuiShowNum) refers to idiv.o(.text) for __aeabi_idivmod
+    bsr1901_gui.o(i.GuiShowNum) refers to uidiv.o(.text) for __aeabi_uidivmod
     bsr1901_gui.o(i.GuiShowNum) refers to bsr1901_gui.o(i.GuiShowChar_16) for GuiShowChar_16
-    bsr1901_gui.o(i.GuiShowNumString_16) refers to bsr1901_gui.o(i.oled_pow) for oled_pow
-    bsr1901_gui.o(i.GuiShowNumString_16) refers to idiv.o(.text) for __aeabi_idivmod
+    bsr1901_gui.o(i.GuiShowNumString_16) refers to uidiv.o(.text) for __aeabi_uidivmod
     bsr1901_gui.o(i.GuiShowNumString_16) refers to bsr1901_gui.o(i.GuiShowNum_16) for GuiShowNum_16
-    bsr1901_gui.o(i.GuiShowNumString_32) refers to bsr1901_gui.o(i.oled_pow) for oled_pow
-    bsr1901_gui.o(i.GuiShowNumString_32) refers to idiv.o(.text) for __aeabi_idivmod
+    bsr1901_gui.o(i.GuiShowNumString_32) refers to uidiv.o(.text) for __aeabi_uidivmod
     bsr1901_gui.o(i.GuiShowNumString_32) refers to bsr1901_gui.o(i.GuiShowNum_32) for GuiShowNum_32
-    bsr1901_gui.o(i.GuiShowNumString_48) refers to bsr1901_gui.o(i.oled_pow) for oled_pow
-    bsr1901_gui.o(i.GuiShowNumString_48) refers to idiv.o(.text) for __aeabi_idivmod
+    bsr1901_gui.o(i.GuiShowNumString_48) refers to uidiv.o(.text) for __aeabi_uidivmod
     bsr1901_gui.o(i.GuiShowNumString_48) refers to bsr1901_gui.o(i.GuiShowNum_48) for GuiShowNum_48
     bsr1901_gui.o(i.GuiShowNum_16) refers to lcd_driver.o(i.Gui_DrawPoint) for Gui_DrawPoint
     bsr1901_gui.o(i.GuiShowNum_16) refers to font_0_9_digital_32b.o(.constdata) for Font16_dital_Table
@@ -1451,10 +1449,6 @@ Section Cross References
     fmul.o(.text) refers (Special) to iusefp.o(.text) for __I$use$fp
     fdiv.o(.text) refers (Special) to iusefp.o(.text) for __I$use$fp
     fdiv.o(.text) refers to fepilogue.o(.text) for _float_round
-    dadd.o(.text) refers (Special) to iusefp.o(.text) for __I$use$fp
-    dadd.o(.text) refers to llshl.o(.text) for __aeabi_llsl
-    dadd.o(.text) refers to llsshr.o(.text) for __aeabi_lasr
-    dadd.o(.text) refers to depilogue.o(.text) for _double_epilogue
     dmul.o(.text) refers (Special) to iusefp.o(.text) for __I$use$fp
     dmul.o(.text) refers to depilogue.o(.text) for _double_epilogue
     ddiv.o(.text) refers (Special) to iusefp.o(.text) for __I$use$fp
@@ -1484,6 +1478,9 @@ Section Cross References
     depilogue.o(.text) refers to depilogue.o(i.__ARM_clz) for __ARM_clz
     depilogue.o(.text) refers to llshl.o(.text) for __aeabi_llsl
     depilogue.o(.text) refers to llushr.o(.text) for __aeabi_llsr
+    dadd.o(.text) refers to llshl.o(.text) for __aeabi_llsl
+    dadd.o(.text) refers to llsshr.o(.text) for __aeabi_lasr
+    dadd.o(.text) refers to depilogue.o(.text) for _double_epilogue
     dfixul.o(.text) refers to llushr.o(.text) for __aeabi_llsr
     dfixul.o(.text) refers to llshl.o(.text) for __aeabi_llsl
     init.o(.text) refers to entry5.o(.ARM.Collect$$$$00000004) for __main_after_scatterload
@@ -1955,14 +1952,28 @@ Removing Unused input sections from the image.
     Removing segger_rtt.o(i._PostTerminalSwitch), (32 bytes).
     Removing segger_rtt.o(i._WriteBlocking), (96 bytes).
     Removing segger_rtt.o(i._WriteNoCheck), (60 bytes).
-    Removing segger_rtt.o(.bss), (1208 bytes).
     Removing segger_rtt.o(.data), (17 bytes).
+    Removing segger_rtt.o(.noinit), (1208 bytes).
     Removing segger_rtt_printf.o(i.SEGGER_RTT_printf), (24 bytes).
     Removing segger_rtt_printf.o(i.SEGGER_RTT_vprintf), (410 bytes).
     Removing segger_rtt_printf.o(i._PrintInt), (200 bytes).
     Removing segger_rtt_printf.o(i._PrintUnsigned), (216 bytes).
     Removing segger_rtt_printf.o(i._StoreChar), (62 bytes).
     Removing segger_rtt_printf.o(.constdata), (16 bytes).
+    Removing segger_rtt_syscalls_keil.o(i._sys_close), (4 bytes).
+    Removing segger_rtt_syscalls_keil.o(i._sys_command_string), (2 bytes).
+    Removing segger_rtt_syscalls_keil.o(i._sys_ensure), (6 bytes).
+    Removing segger_rtt_syscalls_keil.o(i._sys_exit), (2 bytes).
+    Removing segger_rtt_syscalls_keil.o(i._sys_flen), (4 bytes).
+    Removing segger_rtt_syscalls_keil.o(i._sys_istty), (16 bytes).
+    Removing segger_rtt_syscalls_keil.o(i._sys_open), (52 bytes).
+    Removing segger_rtt_syscalls_keil.o(i._sys_read), (4 bytes).
+    Removing segger_rtt_syscalls_keil.o(i._sys_seek), (4 bytes).
+    Removing segger_rtt_syscalls_keil.o(i._sys_tmpnam), (4 bytes).
+    Removing segger_rtt_syscalls_keil.o(i._sys_write), (28 bytes).
+    Removing segger_rtt_syscalls_keil.o(i._ttywrch), (20 bytes).
+    Removing segger_rtt_syscalls_keil.o(.constdata), (6 bytes).
+    Removing segger_rtt_syscalls_keil.o(.constdata), (14 bytes).
     Removing 120x240.o(.constdata), (57600 bytes).
     Removing 120x240_1.o(.constdata), (57600 bytes).
     Removing 120x240_1_32bit.o(.constdata), (57600 bytes).
@@ -2164,16 +2175,16 @@ Removing Unused input sections from the image.
     Removing main.o(.data), (1 bytes).
     Removing key_process.o(i.Key_Process), (140 bytes).
     Removing key_process.o(.bss), (16 bytes).
-    Removing ui_app.o(i.set_bat_percentage), (144 bytes).
+    Removing ui_app.o(i.set_bat_percentage), (100 bytes).
     Removing ui_app.o(i.set_charge_circle), (80 bytes).
     Removing ui_app.o(i.ui_paint_bat), (16 bytes).
     Removing ui_app.o(i.ui_paint_bat_remain), (16 bytes).
     Removing bsr1901_gui.o(i.GuiShowChar_16), (84 bytes).
     Removing bsr1901_gui.o(i.GuiShowChar_32), (96 bytes).
-    Removing bsr1901_gui.o(i.GuiShowNum), (92 bytes).
-    Removing bsr1901_gui.o(i.GuiShowNumString_16), (88 bytes).
-    Removing bsr1901_gui.o(i.GuiShowNumString_32), (88 bytes).
-    Removing bsr1901_gui.o(i.GuiShowNumString_48), (92 bytes).
+    Removing bsr1901_gui.o(i.GuiShowNum), (114 bytes).
+    Removing bsr1901_gui.o(i.GuiShowNumString_16), (112 bytes).
+    Removing bsr1901_gui.o(i.GuiShowNumString_32), (112 bytes).
+    Removing bsr1901_gui.o(i.GuiShowNumString_48), (116 bytes).
     Removing bsr1901_gui.o(i.GuiShowNum_16), (84 bytes).
     Removing bsr1901_gui.o(i.GuiShowNum_32), (96 bytes).
     Removing bsr1901_gui.o(i.GuiShowNum_48), (100 bytes).
@@ -2184,9 +2195,8 @@ Removing Unused input sections from the image.
     Removing bsr1901_gui.o(i.Gui_DrawRoundedRect), (190 bytes).
     Removing bsr1901_gui.o(i.Gui_DrawSector_M0), (354 bytes).
     Removing bsr1901_gui.o(i.Gui_PointInAngle), (110 bytes).
-    Removing bsr1901_gui.o(i.Gui_RingProgress), (192 bytes).
+    Removing bsr1901_gui.o(i.Gui_RingProgress), (190 bytes).
     Removing bsr1901_gui.o(i.Gui_ShowString_Transparent), (132 bytes).
-    Removing bsr1901_gui.o(i.oled_pow), (20 bytes).
     Removing bsr1901_gui.o(.constdata), (1521 bytes).
     Removing fadd.o(.text), (178 bytes).
     Removing fmul.o(.text), (122 bytes).
@@ -2201,7 +2211,7 @@ Removing Unused input sections from the image.
     Removing fepilogue.o(.text), (130 bytes).
     Removing sc_transform.o(i.__ARM_common_ll_mulss), (48 bytes).
 
-707 unused section(s) (total 1005142 bytes) removed from the image.
+720 unused section(s) (total 1005336 bytes) removed from the image.
 
 ==============================================================================
 
@@ -2226,67 +2236,71 @@ Image Symbol Table
 
     RESET                                    0x00000000   Section      192  startup_cm0.o(RESET)
     ../clib/microlib/division.c              0x00000000   Number         0  uldiv.o ABSOLUTE
-    ../clib/microlib/division.c              0x00000000   Number         0  idiv.o ABSOLUTE
     ../clib/microlib/division.c              0x00000000   Number         0  uidiv.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry2.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry10a.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry11a.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry7a.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry11b.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry7b.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry.o ABSOLUTE
+    ../clib/microlib/division.c              0x00000000   Number         0  idiv.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry10b.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry5.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry8a.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry10a.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry9b.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry9a.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry8b.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry9b.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry8a.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry7b.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry2.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry11b.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry11a.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry7a.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry5.o ABSOLUTE
     ../clib/microlib/longlong.c              0x00000000   Number         0  llsshr.o ABSOLUTE
-    ../clib/microlib/longlong.c              0x00000000   Number         0  llushr.o ABSOLUTE
     ../clib/microlib/longlong.c              0x00000000   Number         0  llshl.o ABSOLUTE
-    ../clib/microlib/malloc/malloc.c         0x00000000   Number         0  malloca.o ABSOLUTE
-    ../clib/microlib/malloc/malloc.c         0x00000000   Number         0  malloc.o ABSOLUTE
+    ../clib/microlib/longlong.c              0x00000000   Number         0  llushr.o ABSOLUTE
     ../clib/microlib/malloc/malloc.c         0x00000000   Number         0  mallocr.o ABSOLUTE
+    ../clib/microlib/malloc/malloc.c         0x00000000   Number         0  malloca.o ABSOLUTE
     ../clib/microlib/malloc/malloc.c         0x00000000   Number         0  mallocra.o ABSOLUTE
+    ../clib/microlib/malloc/malloc.c         0x00000000   Number         0  malloc.o ABSOLUTE
     ../clib/microlib/malloc/mvars.c          0x00000000   Number         0  mvars.o ABSOLUTE
+    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printfa.o ABSOLUTE
+    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf6.o ABSOLUTE
     ../clib/microlib/printf/printf.c         0x00000000   Number         0  printfb.o ABSOLUTE
+    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf5.o ABSOLUTE
     ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf0.o ABSOLUTE
-    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf1.o ABSOLUTE
     ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf2.o ABSOLUTE
     ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf3.o ABSOLUTE
+    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf1.o ABSOLUTE
     ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf4.o ABSOLUTE
-    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf6.o ABSOLUTE
-    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf7.o ABSOLUTE
     ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf8.o ABSOLUTE
-    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf5.o ABSOLUTE
-    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printfa.o ABSOLUTE
+    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf7.o ABSOLUTE
     ../clib/microlib/printf/stubs.s          0x00000000   Number         0  stubs.o ABSOLUTE
+    ../clib/microlib/stdio/fflush.c          0x00000000   Number         0  fflush.o ABSOLUTE
     ../clib/microlib/stdio/streams.c         0x00000000   Number         0  stdout.o ABSOLUTE
-    ../clib/microlib/string/memcpy.c         0x00000000   Number         0  memcpya.o ABSOLUTE
     ../clib/microlib/string/memcpy.c         0x00000000   Number         0  memcpyb.o ABSOLUTE
+    ../clib/microlib/string/memcpy.c         0x00000000   Number         0  memcpya.o ABSOLUTE
     ../clib/microlib/string/memset.c         0x00000000   Number         0  memseta.o ABSOLUTE
+    ../clib/microlib/string/strcmp.c         0x00000000   Number         0  strcmp.o ABSOLUTE
     ../clib/microlib/string/strcpy.c         0x00000000   Number         0  strcpy.o ABSOLUTE
     ../clib/microlib/string/strlen.c         0x00000000   Number         0  strlen.o ABSOLUTE
+    ../clib/microlib/stubs.s                 0x00000000   Number         0  useno.o ABSOLUTE
     ../clib/microlib/stubs.s                 0x00000000   Number         0  iusefp.o ABSOLUTE
     ../clib/microlib/unhosted.c              0x00000000   Number         0  uread4.o ABSOLUTE
-    ../fplib/microlib/fpadd.c                0x00000000   Number         0  dadd.o ABSOLUTE
     ../fplib/microlib/fpadd.c                0x00000000   Number         0  fadd.o ABSOLUTE
-    ../fplib/microlib/fpdiv.c                0x00000000   Number         0  fdiv.o ABSOLUTE
+    ../fplib/microlib/fpadd.c                0x00000000   Number         0  dadd.o ABSOLUTE
     ../fplib/microlib/fpdiv.c                0x00000000   Number         0  ddiv.o ABSOLUTE
-    ../fplib/microlib/fpepilogue.c           0x00000000   Number         0  depilogue.o ABSOLUTE
+    ../fplib/microlib/fpdiv.c                0x00000000   Number         0  fdiv.o ABSOLUTE
     ../fplib/microlib/fpepilogue.c           0x00000000   Number         0  fepilogue.o ABSOLUTE
-    ../fplib/microlib/fpfix.c                0x00000000   Number         0  dfixul.o ABSOLUTE
-    ../fplib/microlib/fpfix.c                0x00000000   Number         0  dfixi.o ABSOLUTE
+    ../fplib/microlib/fpepilogue.c           0x00000000   Number         0  depilogue.o ABSOLUTE
     ../fplib/microlib/fpfix.c                0x00000000   Number         0  dfixui.o ABSOLUTE
+    ../fplib/microlib/fpfix.c                0x00000000   Number         0  dfixi.o ABSOLUTE
     ../fplib/microlib/fpfix.c                0x00000000   Number         0  ffixi.o ABSOLUTE
-    ../fplib/microlib/fpflt.c                0x00000000   Number         0  ffltui.o ABSOLUTE
+    ../fplib/microlib/fpfix.c                0x00000000   Number         0  dfixul.o ABSOLUTE
     ../fplib/microlib/fpflt.c                0x00000000   Number         0  fflti.o ABSOLUTE
-    ../fplib/microlib/fpflt.c                0x00000000   Number         0  dflti.o ABSOLUTE
     ../fplib/microlib/fpflt.c                0x00000000   Number         0  dfltui.o ABSOLUTE
-    ../fplib/microlib/fpmul.c                0x00000000   Number         0  dmul.o ABSOLUTE
+    ../fplib/microlib/fpflt.c                0x00000000   Number         0  dflti.o ABSOLUTE
+    ../fplib/microlib/fpflt.c                0x00000000   Number         0  ffltui.o ABSOLUTE
     ../fplib/microlib/fpmul.c                0x00000000   Number         0  fmul.o ABSOLUTE
+    ../fplib/microlib/fpmul.c                0x00000000   Number         0  dmul.o ABSOLUTE
     RLE_decompression\rle_decompression.c    0x00000000   Number         0  rle_decompression.o ABSOLUTE
     RTT\SEGGER_RTT.c                         0x00000000   Number         0  segger_rtt.o ABSOLUTE
+    RTT\SEGGER_RTT_Syscalls_KEIL.c           0x00000000   Number         0  segger_rtt_syscalls_keil.o ABSOLUTE
     RTT\SEGGER_RTT_printf.c                  0x00000000   Number         0  segger_rtt_printf.o ABSOLUTE
     SCGUI\bmp\bashen.c                       0x00000000   Number         0  bashen.o ABSOLUTE
     SCGUI\bmp\test_img.c                     0x00000000   Number         0  test_img.o ABSOLUTE
@@ -2377,19 +2391,19 @@ Image Symbol Table
     .text                                    0x0000011c   Section        0  idiv.o(.text)
     .text                                    0x00000144   Section        0  llshl.o(.text)
     .text                                    0x00000164   Section        0  uread4.o(.text)
-    .text                                    0x00000178   Section        0  dadd.o(.text)
-    .text                                    0x000002dc   Section        0  dmul.o(.text)
-    .text                                    0x000003ac   Section        0  ddiv.o(.text)
-    .text                                    0x0000049c   Section        0  dflti.o(.text)
-    .text                                    0x000004c4   Section        0  dfixi.o(.text)
-    .text                                    0x0000050c   Section        0  uldiv.o(.text)
-    .text                                    0x0000056c   Section        0  llushr.o(.text)
-    .text                                    0x0000058e   Section        0  llsshr.o(.text)
-    .text                                    0x000005b4   Section        0  depilogue.o(.text)
-    .text                                    0x000005b4   Section        0  iusefp.o(.text)
-    .text                                    0x00000674   Section        0  dfixul.o(.text)
-    .text                                    0x000006b4   Section       40  cdrcmple.o(.text)
-    .text                                    0x000006dc   Section       36  init.o(.text)
+    .text                                    0x00000178   Section        0  dmul.o(.text)
+    .text                                    0x00000248   Section        0  ddiv.o(.text)
+    .text                                    0x00000338   Section        0  dflti.o(.text)
+    .text                                    0x00000360   Section        0  dfixi.o(.text)
+    .text                                    0x000003a8   Section        0  uldiv.o(.text)
+    .text                                    0x00000408   Section        0  llushr.o(.text)
+    .text                                    0x0000042a   Section        0  iusefp.o(.text)
+    .text                                    0x0000042a   Section        0  depilogue.o(.text)
+    .text                                    0x000004e8   Section        0  dadd.o(.text)
+    .text                                    0x0000064c   Section        0  dfixul.o(.text)
+    .text                                    0x0000068c   Section       40  cdrcmple.o(.text)
+    .text                                    0x000006b4   Section       36  init.o(.text)
+    .text                                    0x000006d8   Section        0  llsshr.o(.text)
     i.AON_WKUP_IRQHandler                    0x00000724   Section        0  isr.o(i.AON_WKUP_IRQHandler)
     i.APB_SPI0_IRQnHandler                   0x0000072c   Section        0  isr.o(i.APB_SPI0_IRQnHandler)
     i.APB_SPI1_IRQnHandler                   0x00000734   Section        0  isr.o(i.APB_SPI1_IRQnHandler)
@@ -2561,6 +2575,14 @@ Image Symbol Table
     BuildAttributes$$THM_ISAv3M$S$PE$A:L22$X:L11$S22$IEEE1$IW$USESV6$~STKCKD$USESV7$~SHL$OTIME$ROPI$EBA8$MICROLIB$REQ8$PRES8$EABIv2 0x00000000   Number         0  anon$$obj.o ABSOLUTE
     __ARM_use_no_argv                        0x00000000   Number         0  main.o ABSOLUTE
     __Vectors                                0x00000000   Data           4  startup_cm0.o(RESET)
+    __use_no_errno                           0x00000000   Number         0  useno.o ABSOLUTE
+    __use_no_exception_handling              0x00000000   Number         0  useno.o ABSOLUTE
+    __use_no_fp                              0x00000000   Number         0  useno.o ABSOLUTE
+    __use_no_heap                            0x00000000   Number         0  useno.o ABSOLUTE
+    __use_no_heap_region                     0x00000000   Number         0  useno.o ABSOLUTE
+    __use_no_semihosting                     0x00000000   Number         0  useno.o ABSOLUTE
+    __use_no_semihosting_swi                 0x00000000   Number         0  useno.o ABSOLUTE
+    __use_no_signal_handling                 0x00000000   Number         0  useno.o ABSOLUTE
     _printf_a                                0x00000000   Number         0  stubs.o ABSOLUTE
     _printf_c                                0x00000000   Number         0  stubs.o ABSOLUTE
     _printf_charcount                        0x00000000   Number         0  stubs.o ABSOLUTE
@@ -2648,25 +2670,25 @@ Image Symbol Table
     __aeabi_uread4                           0x00000165   Thumb Code    20  uread4.o(.text)
     __rt_uread4                              0x00000165   Thumb Code     0  uread4.o(.text)
     _uread4                                  0x00000165   Thumb Code     0  uread4.o(.text)
-    __aeabi_dadd                             0x00000179   Thumb Code   328  dadd.o(.text)
-    __aeabi_dsub                             0x000002c1   Thumb Code    12  dadd.o(.text)
-    __aeabi_drsub                            0x000002cd   Thumb Code    12  dadd.o(.text)
-    __aeabi_dmul                             0x000002dd   Thumb Code   202  dmul.o(.text)
-    __aeabi_ddiv                             0x000003ad   Thumb Code   234  ddiv.o(.text)
-    __aeabi_i2d                              0x0000049d   Thumb Code    34  dflti.o(.text)
-    __aeabi_d2iz                             0x000004c5   Thumb Code    62  dfixi.o(.text)
-    __aeabi_uldivmod                         0x0000050d   Thumb Code    96  uldiv.o(.text)
-    __aeabi_llsr                             0x0000056d   Thumb Code    34  llushr.o(.text)
-    _ll_ushift_r                             0x0000056d   Thumb Code     0  llushr.o(.text)
-    __aeabi_lasr                             0x0000058f   Thumb Code    38  llsshr.o(.text)
-    _ll_sshift_r                             0x0000058f   Thumb Code     0  llsshr.o(.text)
-    __I$use$fp                               0x000005b5   Thumb Code     0  iusefp.o(.text)
-    _double_round                            0x000005b5   Thumb Code    26  depilogue.o(.text)
-    _double_epilogue                         0x000005cf   Thumb Code   164  depilogue.o(.text)
-    __aeabi_d2ulz                            0x00000675   Thumb Code    54  dfixul.o(.text)
-    __aeabi_cdrcmple                         0x000006b5   Thumb Code    38  cdrcmple.o(.text)
-    __scatterload                            0x000006dd   Thumb Code    28  init.o(.text)
-    __scatterload_rt2                        0x000006dd   Thumb Code     0  init.o(.text)
+    __aeabi_dmul                             0x00000179   Thumb Code   202  dmul.o(.text)
+    __aeabi_ddiv                             0x00000249   Thumb Code   234  ddiv.o(.text)
+    __aeabi_i2d                              0x00000339   Thumb Code    34  dflti.o(.text)
+    __aeabi_d2iz                             0x00000361   Thumb Code    62  dfixi.o(.text)
+    __aeabi_uldivmod                         0x000003a9   Thumb Code    96  uldiv.o(.text)
+    __aeabi_llsr                             0x00000409   Thumb Code    34  llushr.o(.text)
+    _ll_ushift_r                             0x00000409   Thumb Code     0  llushr.o(.text)
+    __I$use$fp                               0x0000042b   Thumb Code     0  iusefp.o(.text)
+    _double_round                            0x0000042b   Thumb Code    26  depilogue.o(.text)
+    _double_epilogue                         0x00000445   Thumb Code   164  depilogue.o(.text)
+    __aeabi_dadd                             0x000004e9   Thumb Code   328  dadd.o(.text)
+    __aeabi_dsub                             0x00000631   Thumb Code    12  dadd.o(.text)
+    __aeabi_drsub                            0x0000063d   Thumb Code    12  dadd.o(.text)
+    __aeabi_d2ulz                            0x0000064d   Thumb Code    54  dfixul.o(.text)
+    __aeabi_cdrcmple                         0x0000068d   Thumb Code    38  cdrcmple.o(.text)
+    __scatterload                            0x000006b5   Thumb Code    28  init.o(.text)
+    __scatterload_rt2                        0x000006b5   Thumb Code     0  init.o(.text)
+    __aeabi_lasr                             0x000006d9   Thumb Code    38  llsshr.o(.text)
+    _ll_sshift_r                             0x000006d9   Thumb Code     0  llsshr.o(.text)
     Long Thumb to Thumb Veneer to reg_read   0x00000701   Thumb Code    12  anon$$obj.o(Veneer$$Code)
     Long Thumb to Thumb Veneer to reg_write  0x0000070d   Thumb Code    12  anon$$obj.o(Veneer$$Code)
     Long Thumb to Thumb Veneer to gecko_task_cm0_sw_flash 0x00000719   Thumb Code    12  anon$$obj.o(Veneer$$Code)
@@ -2878,37 +2900,37 @@ Memory Map of the image
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
     0x00000000   0x00000000   0x000000c0   Data   RO            2    RESET               startup_cm0.o
-    0x000000c0   0x000000c0   0x00000000   Code   RO         4537  * .ARM.Collect$$$$00000000  mc_p.l(entry.o)
-    0x000000c0   0x000000c0   0x00000004   Code   RO         4877    .ARM.Collect$$$$00000001  mc_p.l(entry2.o)
-    0x000000c4   0x000000c4   0x00000004   Code   RO         4880    .ARM.Collect$$$$00000004  mc_p.l(entry5.o)
-    0x000000c8   0x000000c8   0x00000000   Code   RO         4882    .ARM.Collect$$$$00000008  mc_p.l(entry7b.o)
-    0x000000c8   0x000000c8   0x00000000   Code   RO         4884    .ARM.Collect$$$$0000000A  mc_p.l(entry8b.o)
-    0x000000c8   0x000000c8   0x00000008   Code   RO         4885    .ARM.Collect$$$$0000000B  mc_p.l(entry9a.o)
-    0x000000d0   0x000000d0   0x00000000   Code   RO         4887    .ARM.Collect$$$$0000000D  mc_p.l(entry10a.o)
-    0x000000d0   0x000000d0   0x00000000   Code   RO         4889    .ARM.Collect$$$$0000000F  mc_p.l(entry11a.o)
-    0x000000d0   0x000000d0   0x00000004   Code   RO         4878    .ARM.Collect$$$$00002712  mc_p.l(entry2.o)
+    0x000000c0   0x000000c0   0x00000000   Code   RO         4623  * .ARM.Collect$$$$00000000  mc_p.l(entry.o)
+    0x000000c0   0x000000c0   0x00000004   Code   RO         4966    .ARM.Collect$$$$00000001  mc_p.l(entry2.o)
+    0x000000c4   0x000000c4   0x00000004   Code   RO         4969    .ARM.Collect$$$$00000004  mc_p.l(entry5.o)
+    0x000000c8   0x000000c8   0x00000000   Code   RO         4971    .ARM.Collect$$$$00000008  mc_p.l(entry7b.o)
+    0x000000c8   0x000000c8   0x00000000   Code   RO         4973    .ARM.Collect$$$$0000000A  mc_p.l(entry8b.o)
+    0x000000c8   0x000000c8   0x00000008   Code   RO         4974    .ARM.Collect$$$$0000000B  mc_p.l(entry9a.o)
+    0x000000d0   0x000000d0   0x00000000   Code   RO         4976    .ARM.Collect$$$$0000000D  mc_p.l(entry10a.o)
+    0x000000d0   0x000000d0   0x00000000   Code   RO         4978    .ARM.Collect$$$$0000000F  mc_p.l(entry11a.o)
+    0x000000d0   0x000000d0   0x00000004   Code   RO         4967    .ARM.Collect$$$$00002712  mc_p.l(entry2.o)
     0x000000d4   0x000000d4   0x0000001c   Code   RO            3    .text               startup_cm0.o
-    0x000000f0   0x000000f0   0x0000002c   Code   RO         4540    .text               mc_p.l(uidiv.o)
-    0x0000011c   0x0000011c   0x00000028   Code   RO         4542    .text               mc_p.l(idiv.o)
-    0x00000144   0x00000144   0x00000020   Code   RO         4544    .text               mc_p.l(llshl.o)
-    0x00000164   0x00000164   0x00000014   Code   RO         4845    .text               mc_p.l(uread4.o)
-    0x00000178   0x00000178   0x00000164   Code   RO         4853    .text               mf_p.l(dadd.o)
-    0x000002dc   0x000002dc   0x000000d0   Code   RO         4855    .text               mf_p.l(dmul.o)
-    0x000003ac   0x000003ac   0x000000f0   Code   RO         4857    .text               mf_p.l(ddiv.o)
-    0x0000049c   0x0000049c   0x00000028   Code   RO         4863    .text               mf_p.l(dflti.o)
-    0x000004c4   0x000004c4   0x00000048   Code   RO         4869    .text               mf_p.l(dfixi.o)
-    0x0000050c   0x0000050c   0x00000060   Code   RO         4892    .text               mc_p.l(uldiv.o)
-    0x0000056c   0x0000056c   0x00000022   Code   RO         4894    .text               mc_p.l(llushr.o)
-    0x0000058e   0x0000058e   0x00000026   Code   RO         4896    .text               mc_p.l(llsshr.o)
-    0x000005b4   0x000005b4   0x00000000   Code   RO         4900    .text               mc_p.l(iusefp.o)
-    0x000005b4   0x000005b4   0x000000be   Code   RO         4903    .text               mf_p.l(depilogue.o)
-    0x00000672   0x00000672   0x00000002   PAD
-    0x00000674   0x00000674   0x00000040   Code   RO         4907    .text               mf_p.l(dfixul.o)
-    0x000006b4   0x000006b4   0x00000028   Code   RO         4909    .text               mf_p.l(cdrcmple.o)
-    0x000006dc   0x000006dc   0x00000024   Code   RO         4911    .text               mc_p.l(init.o)
-    0x00000700   0x00000700   0x0000000c   Ven    RO         4921    Veneer$$Code        anon$$obj.o
-    0x0000070c   0x0000070c   0x0000000c   Ven    RO         4922    Veneer$$Code        anon$$obj.o
-    0x00000718   0x00000718   0x0000000c   Ven    RO         4923    Veneer$$Code        anon$$obj.o
+    0x000000f0   0x000000f0   0x0000002c   Code   RO         4629    .text               mc_p.l(uidiv.o)
+    0x0000011c   0x0000011c   0x00000028   Code   RO         4631    .text               mc_p.l(idiv.o)
+    0x00000144   0x00000144   0x00000020   Code   RO         4633    .text               mc_p.l(llshl.o)
+    0x00000164   0x00000164   0x00000014   Code   RO         4936    .text               mc_p.l(uread4.o)
+    0x00000178   0x00000178   0x000000d0   Code   RO         4944    .text               mf_p.l(dmul.o)
+    0x00000248   0x00000248   0x000000f0   Code   RO         4946    .text               mf_p.l(ddiv.o)
+    0x00000338   0x00000338   0x00000028   Code   RO         4952    .text               mf_p.l(dflti.o)
+    0x00000360   0x00000360   0x00000048   Code   RO         4958    .text               mf_p.l(dfixi.o)
+    0x000003a8   0x000003a8   0x00000060   Code   RO         4980    .text               mc_p.l(uldiv.o)
+    0x00000408   0x00000408   0x00000022   Code   RO         4982    .text               mc_p.l(llushr.o)
+    0x0000042a   0x0000042a   0x00000000   Code   RO         4986    .text               mc_p.l(iusefp.o)
+    0x0000042a   0x0000042a   0x000000be   Code   RO         4989    .text               mf_p.l(depilogue.o)
+    0x000004e8   0x000004e8   0x00000164   Code   RO         4993    .text               mf_p.l(dadd.o)
+    0x0000064c   0x0000064c   0x00000040   Code   RO         4995    .text               mf_p.l(dfixul.o)
+    0x0000068c   0x0000068c   0x00000028   Code   RO         4997    .text               mf_p.l(cdrcmple.o)
+    0x000006b4   0x000006b4   0x00000024   Code   RO         4999    .text               mc_p.l(init.o)
+    0x000006d8   0x000006d8   0x00000026   Code   RO         5001    .text               mc_p.l(llsshr.o)
+    0x000006fe   0x000006fe   0x00000002   PAD
+    0x00000700   0x00000700   0x0000000c   Ven    RO         5011    Veneer$$Code        anon$$obj.o
+    0x0000070c   0x0000070c   0x0000000c   Ven    RO         5012    Veneer$$Code        anon$$obj.o
+    0x00000718   0x00000718   0x0000000c   Ven    RO         5013    Veneer$$Code        anon$$obj.o
     0x00000724   0x00000724   0x00000008   Code   RO          352    i.AON_WKUP_IRQHandler  isr.o
     0x0000072c   0x0000072c   0x00000008   Code   RO          353    i.APB_SPI0_IRQnHandler  isr.o
     0x00000734   0x00000734   0x00000002   Code   RO          354    i.APB_SPI1_IRQnHandler  isr.o
@@ -2921,7 +2943,7 @@ Memory Map of the image
     0x000007b8   0x000007b8   0x0000000c   Code   RO          916    i.DRV_GpioGetLevel_I2C  gpio_i2c.o
     0x000007c4   0x000007c4   0x00000012   Code   RO          917    i.DRV_GpioSetDirection_I2C  gpio_i2c.o
     0x000007d6   0x000007d6   0x00000012   Code   RO          918    i.DRV_GpioSetLevel_I2C  gpio_i2c.o
-    0x000007e8   0x000007e8   0x00000096   Code   RO         4369    i.DrawArcPoint      bsr1901_gui.o
+    0x000007e8   0x000007e8   0x00000096   Code   RO         4460    i.DrawArcPoint      bsr1901_gui.o
     0x0000087e   0x0000087e   0x00000002   Code   RO          357    i.GPIO_A5_IRQHandler  isr.o
     0x00000880   0x00000880   0x00000002   Code   RO          358    i.GPIO_B6_IRQHandler  isr.o
     0x00000882   0x00000882   0x0000000e   Code   RO          919    i.GPIO_InitIO       gpio_i2c.o
@@ -2933,14 +2955,14 @@ Memory Map of the image
     0x000009bc   0x000009bc   0x00000010   Code   RO          495    i.Gecko_Uart0_Send_Char  uart.o
     0x000009cc   0x000009cc   0x0000000c   Code   RO         1376    i.Get_SysTick_VALUE  systick.o
     0x000009d8   0x000009d8   0x00000104   Code   RO         1056    i.Get_Vbat_Voltage  adc.o
-    0x00000adc   0x00000adc   0x000000de   Code   RO         4382    i.Gui_DrawArc       bsr1901_gui.o
-    0x00000bba   0x00000bba   0x00000032   Code   RO         4383    i.Gui_DrawFillRect  bsr1901_gui.o
-    0x00000bec   0x00000bec   0x0000004e   Code   RO         4385    i.Gui_DrawLine_Fast  bsr1901_gui.o
+    0x00000adc   0x00000adc   0x000000de   Code   RO         4473    i.Gui_DrawArc       bsr1901_gui.o
+    0x00000bba   0x00000bba   0x00000032   Code   RO         4474    i.Gui_DrawFillRect  bsr1901_gui.o
+    0x00000bec   0x00000bec   0x0000004e   Code   RO         4476    i.Gui_DrawLine_Fast  bsr1901_gui.o
     0x00000c3a   0x00000c3a   0x00000002   PAD
     0x00000c3c   0x00000c3c   0x0000002c   Code   RO         2628    i.Gui_DrawPoint     lcd_driver.o
-    0x00000c68   0x00000c68   0x0000004e   Code   RO         4386    i.Gui_DrawRect      bsr1901_gui.o
-    0x00000cb6   0x00000cb6   0x0000009e   Code   RO         4389    i.Gui_FillCircle    bsr1901_gui.o
-    0x00000d54   0x00000d54   0x00000066   Code   RO         4391    i.Gui_ProgressBar   bsr1901_gui.o
+    0x00000c68   0x00000c68   0x0000004e   Code   RO         4477    i.Gui_DrawRect      bsr1901_gui.o
+    0x00000cb6   0x00000cb6   0x0000009e   Code   RO         4480    i.Gui_FillCircle    bsr1901_gui.o
+    0x00000d54   0x00000d54   0x00000066   Code   RO         4482    i.Gui_ProgressBar   bsr1901_gui.o
     0x00000dba   0x00000dba   0x00000002   PAD
     0x00000dbc   0x00000dbc   0x000000b8   Code   RO         1161    i.HW_SPI_Initialise  spi.o
     0x00000e74   0x00000e74   0x00000030   Code   RO         1162    i.HW_SPI_Interrupt_Handler  spi.o
@@ -2971,15 +2993,15 @@ Memory Map of the image
     0x00001498   0x00001498   0x00000002   Code   RO          362    i.PendSV_Handler    isr.o
     0x0000149a   0x0000149a   0x00000008   Code   RO          363    i.QSPI_CTRL_IRQHandler  isr.o
     0x000014a2   0x000014a2   0x00000002   Code   RO          364    i.SVC_Handler       isr.o
-    0x000014a4   0x000014a4   0x00000068   Code   RO         4304    i.ShowNum_48        ui_app.o
-    0x0000150c   0x0000150c   0x00000050   Code   RO         4305    i.ShowPersent       ui_app.o
+    0x000014a4   0x000014a4   0x00000068   Code   RO         4395    i.ShowNum_48        ui_app.o
+    0x0000150c   0x0000150c   0x00000050   Code   RO         4396    i.ShowPersent       ui_app.o
     0x0000155c   0x0000155c   0x00000030   Code   RO         1383    i.SysTick_Config    systick.o
-    0x0000158c   0x0000158c   0x00000024   Code   RO         4177    i.SystemInit        main.o
+    0x0000158c   0x0000158c   0x00000024   Code   RO         4271    i.SystemInit        main.o
     0x000015b0   0x000015b0   0x00000008   Code   RO          365    i.TIMER0_IRQHandler  isr.o
     0x000015b8   0x000015b8   0x00000008   Code   RO          366    i.TIMER1_IRQHandler  isr.o
     0x000015c0   0x000015c0   0x00000110   Code   RO         1874    i.Task_BMS_Update   bms_ip2366.o
-    0x000016d0   0x000016d0   0x000000f4   Code   RO         4276    i.Task_KeyScan      key_process.o
-    0x000017c4   0x000017c4   0x00000024   Code   RO         4306    i.Task_UI_Refresh   ui_app.o
+    0x000016d0   0x000016d0   0x000000f4   Code   RO         4367    i.Task_KeyScan      key_process.o
+    0x000017c4   0x000017c4   0x00000024   Code   RO         4397    i.Task_UI_Refresh   ui_app.o
     0x000017e8   0x000017e8   0x00000010   Code   RO         1322    i.Timer0_Interrupt_Handler  timer.o
     0x000017f8   0x000017f8   0x00000008   Code   RO          367    i.UART0_IRQHandler  isr.o
     0x00001800   0x00001800   0x00000034   Code   RO          506    i.UART0_Interrupt_Handler  uart.o
@@ -2987,17 +3009,17 @@ Memory Map of the image
     0x0000183c   0x0000183c   0x00000034   Code   RO          507    i.UART1_Interrupt_Handler  uart.o
     0x00001870   0x00001870   0x0000005c   Code   RO          513    i.Uart_16550_Initialise  uart.o
     0x000018cc   0x000018cc   0x00000020   Code   RO          369    i.WDT_IRQHandler    isr.o
-    0x000018ec   0x000018ec   0x00000020   Code   RO         4789    i.__0printf         mc_p.l(printfa.o)
-    0x0000190c   0x0000190c   0x0000002e   Code   RO         4905    i.__ARM_clz         mf_p.l(depilogue.o)
+    0x000018ec   0x000018ec   0x00000020   Code   RO         4880    i.__0printf         mc_p.l(printfa.o)
+    0x0000190c   0x0000190c   0x0000002e   Code   RO         4991    i.__ARM_clz         mf_p.l(depilogue.o)
     0x0000193a   0x0000193a   0x0000001a   Code   RO          337    i.__ARM_common_switch8  iomux.o
-    0x00001954   0x00001954   0x0000000e   Code   RO         4915    i.__scatterload_copy  mc_p.l(handlers.o)
-    0x00001962   0x00001962   0x00000002   Code   RO         4916    i.__scatterload_null  mc_p.l(handlers.o)
-    0x00001964   0x00001964   0x0000000e   Code   RO         4917    i.__scatterload_zeroinit  mc_p.l(handlers.o)
+    0x00001954   0x00001954   0x0000000e   Code   RO         5005    i.__scatterload_copy  mc_p.l(handlers.o)
+    0x00001962   0x00001962   0x00000002   Code   RO         5006    i.__scatterload_null  mc_p.l(handlers.o)
+    0x00001964   0x00001964   0x0000000e   Code   RO         5007    i.__scatterload_zeroinit  mc_p.l(handlers.o)
     0x00001972   0x00001972   0x00000002   PAD
-    0x00001974   0x00001974   0x00000174   Code   RO         4796    i._fp_digits        mc_p.l(printfa.o)
-    0x00001ae8   0x00001ae8   0x000006ec   Code   RO         4797    i._printf_core      mc_p.l(printfa.o)
-    0x000021d4   0x000021d4   0x00000020   Code   RO         4798    i._printf_post_padding  mc_p.l(printfa.o)
-    0x000021f4   0x000021f4   0x0000002c   Code   RO         4799    i._printf_pre_padding  mc_p.l(printfa.o)
+    0x00001974   0x00001974   0x00000174   Code   RO         4887    i._fp_digits        mc_p.l(printfa.o)
+    0x00001ae8   0x00001ae8   0x000006ec   Code   RO         4888    i._printf_core      mc_p.l(printfa.o)
+    0x000021d4   0x000021d4   0x00000020   Code   RO         4889    i._printf_post_padding  mc_p.l(printfa.o)
+    0x000021f4   0x000021f4   0x0000002c   Code   RO         4890    i._printf_pre_padding  mc_p.l(printfa.o)
     0x00002220   0x00002220   0x00000018   Code   RO          167    i.aon_wakeup_irq_cfg  aon.o
     0x00002238   0x00002238   0x00000068   Code   RO         2429    i.bsr1901_prepare_sleep_for_pin_wakeup  xt25f32.o
     0x000022a0   0x000022a0   0x00000034   Code   RO         1759    i.charger_init      charger.o
@@ -3036,30 +3058,30 @@ Memory Map of the image
     0x00002b58   0x00002b58   0x00000014   Code   RO         1909    i.ipxs_readByte     bms_ip2366.o
     0x00002b6c   0x00002b6c   0x00000022   Code   RO         1179    i.lcd_dma_refresh_colorblock  spi.o
     0x00002b8e   0x00002b8e   0x00000002   PAD
-    0x00002b90   0x00002b90   0x000001c8   Code   RO         4178    i.main              main.o
+    0x00002b90   0x00002b90   0x000001c8   Code   RO         4272    i.main              main.o
     0x00002d58   0x00002d58   0x00000014   Code   RO         2436    i.manba_task_cpu_goto_sleep  xt25f32.o
     0x00002d6c   0x00002d6c   0x00000024   Code   RO          719    i.mi_tou_detect     gpio.o
     0x00002d90   0x00002d90   0x00000006   Code   RO           26    i.pEnterCriticalSection  system_initial.o
     0x00002d96   0x00002d96   0x00000004   Code   RO           27    i.pExitCriticalSection  system_initial.o
     0x00002d9a   0x00002d9a   0x00000002   PAD
     0x00002d9c   0x00002d9c   0x000000e8   Code   RO         2445    i.tc_gecko_cm0_aon_sleep  xt25f32.o
-    0x00002e84   0x00002e84   0x000000ac   Code   RO         4310    i.ui_paint_bat_percent  ui_app.o
-    0x00002f30   0x00002f30   0x00000020   Code   RO         4312    i.ui_paint_color_circle  ui_app.o
-    0x00002f50   0x00002f50   0x00002274   Data   RO         3036    .constdata          bat_90x49.o
-    0x000051c4   0x000051c4   0x00008000   Data   RO         3044    .constdata          black_128x128.o
-    0x0000d1c4   0x0000d1c4   0x00008000   Data   RO         3052    .constdata          charging.o
-    0x000151c4   0x000151c4   0x00008000   Data   RO         3060    .constdata          charging_32bit.o
-    0x0001d1c4   0x0001d1c4   0x000005a0   Data   RO         3084    .constdata          font_0_9_digital_32b.o
-    0x0001d764   0x0001d764   0x00000020   Data   RO         3086    .constdata          font_0_9_digital_32b.o
-    0x0001d784   0x0001d784   0x00008000   Data   RO         3102    .constdata          img_battery.o
-    0x00025784   0x00025784   0x00008000   Data   RO         3110    .constdata          img_battery_32b.o
-    0x0002d784   0x0002d784   0x00008000   Data   RO         3118    .constdata          img_cake.o
-    0x00035784   0x00035784   0x00008000   Data   RO         3134    .constdata          img_star.o
-    0x0003d784   0x0003d784   0x00008000   Data   RO         3142    .constdata          img_star_32b.o
-    0x00045784   0x00045784   0x00004e20   Data   RO         3150    .constdata          ui_circle_100x100.o
+    0x00002e84   0x00002e84   0x000000ac   Code   RO         4401    i.ui_paint_bat_percent  ui_app.o
+    0x00002f30   0x00002f30   0x00000020   Code   RO         4403    i.ui_paint_color_circle  ui_app.o
+    0x00002f50   0x00002f50   0x00002274   Data   RO         3130    .constdata          bat_90x49.o
+    0x000051c4   0x000051c4   0x00008000   Data   RO         3138    .constdata          black_128x128.o
+    0x0000d1c4   0x0000d1c4   0x00008000   Data   RO         3146    .constdata          charging.o
+    0x000151c4   0x000151c4   0x00008000   Data   RO         3154    .constdata          charging_32bit.o
+    0x0001d1c4   0x0001d1c4   0x000005a0   Data   RO         3178    .constdata          font_0_9_digital_32b.o
+    0x0001d764   0x0001d764   0x00000020   Data   RO         3180    .constdata          font_0_9_digital_32b.o
+    0x0001d784   0x0001d784   0x00008000   Data   RO         3196    .constdata          img_battery.o
+    0x00025784   0x00025784   0x00008000   Data   RO         3204    .constdata          img_battery_32b.o
+    0x0002d784   0x0002d784   0x00008000   Data   RO         3212    .constdata          img_cake.o
+    0x00035784   0x00035784   0x00008000   Data   RO         3228    .constdata          img_star.o
+    0x0003d784   0x0003d784   0x00008000   Data   RO         3236    .constdata          img_star_32b.o
+    0x00045784   0x00045784   0x00004e20   Data   RO         3244    .constdata          ui_circle_100x100.o
     0x0004a5a4   0x0004a5a4   0x0000008e   Data   RO         1929    .conststring        bms_ip2366.o
     0x0004a632   0x0004a632   0x00000002   PAD
-    0x0004a634   0x0004a634   0x00000030   Data   RO         4913    Region$$Table       anon$$obj.o
+    0x0004a634   0x0004a634   0x00000030   Data   RO         5003    Region$$Table       anon$$obj.o
 
 
     Execution Region RW_IRAM1 (Exec base: 0x20000000, Load base: 0x0004a664, Size: 0x00000088, Max: 0x00001000, ABSOLUTE)
@@ -3073,10 +3095,10 @@ Memory Map of the image
     0x20000018   0x0004a67c   0x00000008   Data   RW         1180    .data               spi.o
     0x20000020   0x0004a684   0x00000004   Data   RW         1324    .data               timer.o
     0x20000024   0x0004a688   0x00000031   Data   RW         1930    .data               bms_ip2366.o
-    0x20000055   0x0004a6b9   0x00000001   Data   RW         4182    .data               main.o
-    0x20000056   0x0004a6ba   0x00000003   Data   RW         4313    .data               ui_app.o
+    0x20000055   0x0004a6b9   0x00000001   Data   RW         4276    .data               main.o
+    0x20000056   0x0004a6ba   0x00000003   Data   RW         4404    .data               ui_app.o
     0x20000059   0x0004a6bd   0x00000003   PAD
-    0x2000005c   0x0004a6c0   0x00000004   Data   RW         4891    .data               mc_p.l(stdout.o)
+    0x2000005c   0x0004a6c0   0x00000004   Data   RW         4628    .data               mc_p.l(stdout.o)
     0x20000060        -       0x00000028   Zero   RW         1769    .bss                charger.o
 
 
@@ -3084,9 +3106,9 @@ Memory Map of the image
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x20000088   0x0004a6c4   0x0000000c   Ven    RO         4924    Veneer$$Code        anon$$obj.o
-    0x20000094   0x0004a6d0   0x0000000c   Ven    RO         4925    Veneer$$Code        anon$$obj.o
-    0x200000a0   0x0004a6dc   0x0000000c   Ven    RO         4926    Veneer$$Code        anon$$obj.o
+    0x20000088   0x0004a6c4   0x0000000c   Ven    RO         5014    Veneer$$Code        anon$$obj.o
+    0x20000094   0x0004a6d0   0x0000000c   Ven    RO         5015    Veneer$$Code        anon$$obj.o
+    0x200000a0   0x0004a6dc   0x0000000c   Ven    RO         5016    Veneer$$Code        anon$$obj.o
     0x200000ac   0x0004a6e8   0x00000040   Code   RO          371    ram_code            isr.o
     0x200000ec   0x0004a728   0x00000048   Code   RO         1631    ram_code            dma.o
     0x20000134   0x0004a770   0x0000001c   Code   RO         2355    ram_code            dpi_common.o

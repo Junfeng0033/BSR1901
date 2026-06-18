@@ -71,6 +71,10 @@ Revision: $Rev: 13573 $
   #include <intrinsics.h>
 #endif
 
+
+#define SEGGER_RTT_SECTION ".noinit"
+
+
 /*********************************************************************
 *
 *       Defines, configurable
@@ -132,7 +136,7 @@ Revision: $Rev: 13573 $
 */
 #if 0
 #if (defined __SES_ARM) || (defined __CROSSWORKS_ARM) || (defined __GNUC__) || (defined __clang__)
-  #if 1//(defined(__ARM_ARCH_6M__) || defined(__ARM_ARCH_8M_BASE__))
+  #if (defined(__ARM_ARCH_6M__) || defined(__ARM_ARCH_8M_BASE__))
     #define SEGGER_RTT_LOCK()   {                                                                   \
                                     unsigned int LockState;                                         \
                                   __asm volatile ("mrs   %0, primask  \n\t"                         \

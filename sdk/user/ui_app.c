@@ -159,8 +159,10 @@ void set_bat_percentage(uint8_t percent)
 	if(history == percent)
 		return ;
 	
-	Lcd_Fill(22, 41, 22+80.0/100*percent, 84, 0x051d);
-	Lcd_Fill(22+80.0/100*percent+1, 41, 102, 84, BLACK);
+	//Lcd_Fill(22, 41, 22+80.0/100*percent, 84, 0x051d);
+	Lcd_Fill(22, 41, 22+(80*percent)/100, 84, 0x051d);
+	//Lcd_Fill(22+80.0/100*percent+1, 41, 102, 84, BLACK);
+	Lcd_Fill(22+(80*percent)/100+1, 41, 102, 84, BLACK);
 
 	GuiShowNum(50, 55, percent, 3);
 	GuiShowChar_16(77,55, '%');

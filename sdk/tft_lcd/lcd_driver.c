@@ -9,11 +9,15 @@
 
 //游程编码（Run-Length Encoding, RLE）压缩算法
 
+//https://github.com/KOUFU-DIY/WeGui_RGB
+
 //https://gitee.com/li_yucheng/scgui
 
 //https://gitee.com/landlord_money/ugui
 
 //https://github.com/olikraus/u8g2
+
+//https://gitee.com/Polarix/simplegui
 
 ******************************************************************************************************/
 

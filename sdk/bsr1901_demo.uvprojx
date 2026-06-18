@@ -565,6 +565,11 @@
               <FileType>1</FileType>
               <FilePath>.\RTT\SEGGER_RTT_printf.c</FilePath>
             </File>
+            <File>
+              <FileName>SEGGER_RTT_Syscalls_KEIL.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\RTT\SEGGER_RTT_Syscalls_KEIL.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

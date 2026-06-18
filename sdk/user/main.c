@@ -96,23 +96,6 @@ int main (void)
 	aon_wakeup_irq_cfg();	
 	//gecko_efuse_read();
 
-
-#ifdef LOG_SEGGER_RTT
-	
-    SEGGER_RTT_Init();
-    SEGGER_RTT_printf(0, "LOG_SEGGER_RTT Initial !\r\n");
-	  SEGGER_RTT_printf(0, "Tick Value: %d\r\n", current_tick);
-	
-		SEGGER_RTT_SetTerminal(1);
-		SEGGER_RTT_WriteString(0, RTT_CTRL_TEXT_RED);
-		SEGGER_RTT_WriteString(0, "ERROR: Sensor timeout!\r\n");
-	
-		SEGGER_RTT_SetTerminal(2);
-		SEGGER_RTT_WriteString(0, RTT_CTRL_TEXT_GREEN);
-		SEGGER_RTT_WriteString(0, "INFO: Current = 1.23A\r\n");
-	
-#endif
-
 	
 	gecko_pinmux_default_config();
 	
@@ -374,6 +357,24 @@ int main (void)
 /************************SysTick configure***************************************/
 
 
+
+
+#ifdef LOG_SEGGER_RTT
+	
+	SEGGER_RTT_Init();
+	SEGGER_RTT_printf(0, "LOG_SEGGER_RTT Initial !\r\n");
+	SEGGER_RTT_printf(0, "Tick Value: %d\r\n", current_tick);
+
+	SEGGER_RTT_SetTerminal(1);
+	SEGGER_RTT_WriteString(0, RTT_CTRL_TEXT_RED);
+	SEGGER_RTT_WriteString(0, "ERROR: Sensor timeout!\r\n");
+
+	SEGGER_RTT_SetTerminal(2);
+	SEGGER_RTT_WriteString(0, RTT_CTRL_TEXT_GREEN);
+	SEGGER_RTT_WriteString(0, "INFO: Current = 1.23A\r\n");
+	
+#endif
+
 	while(1)
 
 	{
@@ -382,12 +383,22 @@ int main (void)
 //		system_tick=TimeTick;//1ms tick
 	
 		current_tick = TimeTick;
+
+		
+		#ifdef LOG_SEGGER_RTT
+		SEGGER_RTT_printf(0, "! SEGGER RTT LOG OK !\r\n");
+		delay_1us(100);
+		SEGGER_RTT_printf(0, "Tick Value: %d\r\n", current_tick);
+		delay_1us(100);
+		#endif
+
+
 		
 		if (current_tick % 10 == 0) Task_KeyScan();
 		
 		if (current_tick % 100 == 0) Get_Vbat_Voltage();
 		
-//		if (current_tick % 150 == 0) Task_Charger_Control();// 软件PWM方案	
+		//if (current_tick % 150 == 0) Task_Charger_Control();// 软件PWM方案	
 
 		if (current_tick % 200 == 0) Task_UI_Refresh();	
 
