@@ -62,6 +62,9 @@ Purpose : Retargeting module for KEIL MDK-CM3.
 Revision: $Rev: 9599 $
 ----------------------------------------------------------------------
 */
+#include "platform_config.h"
+
+#ifdef LOG_SEGGER_RTT
 
 #ifdef __CC_ARM
 
@@ -376,5 +379,5 @@ void _sys_exit(int ReturnCode) {
 }
 
 #endif
-
+#endif
 /*************************** End of file ****************************/

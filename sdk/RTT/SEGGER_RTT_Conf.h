@@ -71,10 +71,6 @@ Revision: $Rev: 13573 $
   #include <intrinsics.h>
 #endif
 
-
-#define SEGGER_RTT_SECTION ".noinit"
-
-
 /*********************************************************************
 *
 *       Defines, configurable
@@ -262,9 +258,9 @@ Revision: $Rev: 13573 $
 *
 *       RTT lock configuration for KEIL ARM
 */
-
 #ifdef __CC_ARM
-  #if 1//(defined __TARGET_ARCH_6S_M)
+  #if (defined __TARGET_ARCH_6S_M)
+    //#warning "===== Cortex-M0/M0+ ====="
     #define SEGGER_RTT_LOCK()   {                                                                   \
                                   unsigned int LockState;                                           \
                                   register unsigned char PRIMASK __asm( "primask");                 \

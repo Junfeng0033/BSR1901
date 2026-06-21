@@ -82,9 +82,11 @@ Additional information:
 
 ----------------------------------------------------------------------
 */
+#include "platform_config.h"
+
+#ifdef LOG_SEGGER_RTT
 
 #include "SEGGER_RTT.h"
-
 #include <string.h>                 // for memcpy
 
 /*********************************************************************
@@ -1699,5 +1701,5 @@ int SEGGER_RTT_TerminalOut (char TerminalId, const char* s) {
   }
   return Status;
 }
-
+#endif
 /*************************** End of file ****************************/

@@ -69,6 +69,8 @@ Revision: $Rev: 13573 $
 
 #include "SEGGER_RTT_Conf.h"
 
+
+
 /*********************************************************************
 *
 *       Defines, defaults

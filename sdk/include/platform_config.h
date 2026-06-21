@@ -204,7 +204,7 @@ typedef struct
 typedef struct st_gecko_pwm_cfg{ 
 	int8 	 duty_cycle;//0.5
 	uint16 freq;//1000hz
-	uint8  port;//PWM_OUTPUT_CH8
+	uint8  port;//PWM_OUTPUT_CH0
 }gecko_pwm_cfg;
 */
 
