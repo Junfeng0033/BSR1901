@@ -2,15 +2,13 @@
 #define _UI_H_
 
 #include "stdint.h"
-
-
+#include "platform_config.h"
 
 typedef struct source{
 	uint8_t *p_img;
 	uint16_t width;
 	uint16_t high;
 }img_source_t;
-
 
 
 extern const uint8_t Font_8x32_percent[];
@@ -22,15 +20,13 @@ extern const unsigned char gImage_circle_100x100[20000];
 extern void BSR1901_FireEye_Demo(void);
 
 extern void Lcd_Write_data_dma(uint8_t *p_data, uint16_t len);
+extern void HW_SPI_Tx_DMA_16bit_ColorBlock(uint16 *pData, uint16 DataLen);
 
 
-
-
-
-//»æÖÆ¿Õµç³Ø
+//ç»˜åˆ¶ç©ºç”µæ± 
 void ui_paint_bat(void);
 
-//»æÖÆµç³ØÈÝÁ¿
+//ç»˜åˆ¶ç”µæ± å‰©ä½™
 void ui_paint_bat_remain(uint8_t percent);
 
 
@@ -46,6 +42,10 @@ void Gui_DrawArc(uint16_t x0, uint16_t y0, uint16_t r,
                  int16_t sa, int16_t ea, uint16_t color);
 
 
+void Gui_ProgressBar(uint16_t x0, uint16_t y0, uint16_t w, uint16_t h,
+                    uint8_t percent, uint16_t frameCol, uint16_t barCol, uint16_t bgCol);
+
+void Gui_RingProgress(uint16_t cx,uint16_t cy,uint16_t r_out,uint8_t ring_w,uint8_t per,uint16_t col_bg,uint16_t col_pro);
+
+	
 #endif
-
-

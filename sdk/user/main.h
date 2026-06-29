@@ -123,6 +123,8 @@ extern const unsigned char gImage_charge_30[20000];
 
 extern const unsigned char gImage_charging[32768];
 
+extern const unsigned int img_watch_2_240x240[28800];
+
 extern uint16 Get_Vbat_Voltage(void);
 
 extern void Task_KeyScan(void);

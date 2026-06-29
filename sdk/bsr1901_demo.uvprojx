@@ -680,6 +680,11 @@
               <FileType>1</FileType>
               <FilePath>.\img_res\ui_circle_100x100.c</FilePath>
             </File>
+            <File>
+              <FileName>img_watch_240x240.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\img_res\img_watch_240x240.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

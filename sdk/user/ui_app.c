@@ -102,7 +102,9 @@ void ui_paint_bat_percent(uint8_t percent)
 	else{
 		if(history == 100){
 			Lcd_SetRegion(22, 35, 70+23, 35+47);
-			Lcd_Write_data_dma((uint8_t*)gImage_black_128x128, 72*47*2);
+			//Lcd_Write_data_dma((uint8_t*)gImage_black_128x128, 72*47*2);
+			uint16_t color = BLACK;
+			HW_SPI_Tx_DMA_16bit_ColorBlock(&color,72*47);
 
 		}
 		
@@ -212,6 +214,8 @@ void Task_UI_Refresh(void)
 		
 		
 		//Gui_ProgressBar(50, 100, 150, 20, 60, BLACK, GREEN, GRAY1);
+		//Gui_RingProgress(80,80,35,6,65,GRAY1,GREEN);
+		
 		
 		Gui_DrawArc(120, 120, 50, 135, 405, 0xFFFF);
 
@@ -219,21 +223,21 @@ void Task_UI_Refresh(void)
 
 
 		
-//		if(count%10 == 1){
-//			if(count <= 10)
+//		if(uicount%10 == 1){
+//			if(uicount <= 10)
 //				HW_SPI_Tx_DMA((uint16*)gImage_charge_10, 20000);
-//			if(count <= 20)
+//			if(uicount <= 20)
 //				HW_SPI_Tx_DMA((uint16*)gImage_charge_20, 20000);
-//			if(count <= 30)
+//			if(uicount <= 30)
 //				HW_SPI_Tx_DMA((uint16*)gImage_charge_30, 20000);
 //		}
 		
 
 		
-//		GuiShowNumString_16(50, 18, count, 2);
-//		GuiShowNumString_48(32, 35, count, 2);
+//		GuiShowNumString_16(50, 18, uicount, 2);
+//		GuiShowNumString_48(32, 35, uicount, 2);
 //		GuiShowPersent(45+40, 45);
-//		GuiShowNumString_16(50, 85, count, 2);
+//		GuiShowNumString_16(50, 85, uicount, 2);
 
 	
 }

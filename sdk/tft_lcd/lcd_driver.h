@@ -46,11 +46,19 @@
 
 #include "stdint.h"
 
-#define X_MAX_PIXEL		128
-#define Y_MAX_PIXEL		128
+//#define X_MAX_PIXEL		128
+//#define Y_MAX_PIXEL		128
+
+//#define USE_HORIZONTAL 1  //设置横屏或者竖屏显示 0或1为竖屏 2或3为横屏
 
 
-#define USE_HORIZONTAL 1  //设置横屏或者竖屏显示 0或1为竖屏 2或3为横屏
+
+#define USE_HORIZONTAL   0  //设置横屏或者竖屏显示 0或1为竖屏 2或3为横屏
+
+#define X_MAX_PIXEL 240
+#define Y_MAX_PIXEL 240
+
+
 
 
 #if USE_HORIZONTAL==0||USE_HORIZONTAL==1
@@ -79,27 +87,27 @@
 //==================================================================================================
 
 // backlight control
-#define LCD_BL_PORT  		GPIOB			//MCU_PB2--->>TFT --LCD_LEDK
-#define LCD_BL_PIN       	  2  	  //MCU_PB2--->>TFT --BL
+#define LCD_BL_PORT  		GPIOB			//MCU_PB4--->>TFT --LCD_LEDK
+#define LCD_BL_PIN       	  4  	  //MCU_PB4--->>TFT --BL
 
-#define LCD_RS_PORT			GPIOB
-#define LCD_RS_PIN         	1		  //PB1--->>TFT --RS/DC
+#define LCD_DC_PORT			GPIOA
+#define LCD_DC_PIN         	3		  //PA3--->>TFT --RS/DC
 
 #define LCD_RST_PORT		GPIOB
-#define LCD_RST_PIN     	  0		  //PB0--->>TFT --RST
+#define LCD_RST_PIN     	  7		  //PB7--->>TFT --RST
 
 //液晶控制口置1操作语句宏定义
 
-#define	LCD_RS_SET  	gpio_set_value(LCD_RS_PORT, 1, LCD_RS_PIN)
-//#define LCD_RS_SET   {GpiopinMode(PB1,OUTPUT);GpiopinWrite(PB1,HIGH);}
+#define	LCD_DC_SET  	gpio_set_value(LCD_DC_PORT, 1, LCD_DC_PIN)
+//#define LCD_DC_SET   {GpiopinMode(PB1,OUTPUT);GpiopinWrite(PB1,HIGH);}
 #define	LCD_BL_SET  	gpio_set_value(LCD_BL_PORT, 1, LCD_BL_PIN)
 #define	LCD_RST_SET  	gpio_set_value(LCD_RST_PORT, 1, LCD_RST_PIN)
 
 
 //液晶控制口置0操作语句宏定义
 
-#define	LCD_RS_CLR  	gpio_set_value(LCD_RS_PORT, 0, LCD_RS_PIN)
-//#define LCD_RS_CLR   {GpiopinMode(PB1,OUTPUT);GpiopinWrite(PB1,LOW);}
+#define	LCD_DC_CLR  	gpio_set_value(LCD_DC_PORT, 0, LCD_DC_PIN)
+//#define LCD_DC_CLR   {GpiopinMode(PB1,OUTPUT);GpiopinWrite(PB1,LOW);}
 #define	LCD_BL_CLR  	gpio_set_value(LCD_BL_PORT, 0, LCD_BL_PIN)
 #define	LCD_RST_CLR  	gpio_set_value(LCD_RST_PORT, 0, LCD_RST_PIN)
 
@@ -133,6 +141,8 @@ LCD_WR_SET;\
 
 
 
+#define 	LCD_WR_REG										Lcd_WriteIndex //写入命令
+#define 	LCD_WR_DATA8									Lcd_WriteData	 //写入数据
 
 
 #define 	LCD_NV3022_CMD								Lcd_WriteIndex

@@ -3,8 +3,8 @@
 #include "SEGGER_RTT.h"
 
 //#define __RAM_CODE__ 		__attribute__((section("ram_code")))
-//int Trim[] __attribute__ ((section(".ARM.__at_0x0001F000"))) = {0x12345678,0x22334455};
-//volatile int *myVariable = (volatile int *)0x0001F000;
+int const Trim[] __attribute__ ((section(".ARM.__at_0x0001F000"))) = {0x12345678,0x22334455};
+volatile int *myVariable = (volatile int *)0x0001F000;
 
 const uint8 gSysDate[12] = __DATE__;
 const uint8 gSysTime[16] = __TIME__;
@@ -90,12 +90,13 @@ int main (void)
 {
 
 	uint32_t current_tick;
+	
+	//int val=*myVariable;//access variables through pointers
 
 	SystemInit();
 
 	aon_wakeup_irq_cfg();	
 	//gecko_efuse_read();
-
 	
 	gecko_pinmux_default_config();
 	
@@ -120,12 +121,12 @@ int main (void)
 	gecko_pinmux_config(PAD20,SPI_CSN_1);	
 
 
-	//gecko_pinmux_config(PAD24,GPIO_B_4);//default function,do not needed to configure
+	//gecko_pinmux_config(PAD24,GPIO_B_4);//BL control,default function,do not needed to configure
 	gecko_pinmux_config(PAD21,GPIO_A_3);//DC control	
 	gecko_pinmux_config(PAD7,GPIOB_7);//RES(reset) control
 	
 	//LDO33_AUX enable, power supply for LCD module
-	LDO33_LCD_Enable();//BL control(BSR1901 use MOS to control backlight)
+	LDO33_LCD_Enable();//power supply control(BSR1901 use MOS to control backlight)
 	
 
 	Lcd_Init();
@@ -145,19 +146,24 @@ int main (void)
 	
 	Gui_FillCircle(64, 64, 20, C_RED);
 	
+	
 	delay_1us(8000);	
 
-	HW_SPI_Tx_DMA_32bit((uint16*)gImage_128x128_star_32bit, 8192);	
+//	HW_SPI_Tx_DMA_32bit((uint16*)gImage_128x128_star_32bit, 8192);	
 
-	delay_1us(10000);	
-  //HW_SPI_Tx_DMA_32bit((uint16*)gImage_128x128_cake_32bit, 8192);	
+//	delay_1us(10000);	
+//  HW_SPI_Tx_DMA_32bit((uint16*)gImage_128x128_cake_32bit, 8192);	
 
-	
-	HW_SPI_Tx_DMA_32bit((uint16*)gImage_128x128_charging_32bit, 8192);
+//	
+//	HW_SPI_Tx_DMA_32bit((uint16*)gImage_128x128_charging_32bit, 8192);
+//	delay_1us(8000);
+//	
+
+
+	HW_SPI_Tx_DMA_32bit((uint16*)img_watch_2_240x240, 28800);
 	delay_1us(8000);
-	
-	HW_SPI_Tx_DMA_32bit((uint16*)gImage_128x128_battery_32b, 8192);
-	delay_1us(8000);
+
+
 
   uint16_t blue_color = BLACK;//C_TOMATO;//C_BLACK;//C_BLUE;
   lcd_dma_refresh_colorblock(0, 0, X_MAX_PIXEL, Y_MAX_PIXEL,&blue_color);
@@ -323,6 +329,7 @@ int main (void)
 	//sc_create_task(0, sc_demo_DrawEye_tesk, 2);
 	//sc_create_task(0, sc_demo_drity_tesk, 2);	
 #endif
+////////////////////////////////////////////////////////////////////////////////
 
 	Gui_DrawRect(10, 10, 100, 60, RED);
 	
@@ -362,8 +369,21 @@ int main (void)
 #ifdef LOG_SEGGER_RTT
 	
 	SEGGER_RTT_Init();
+	
+//  SEGGER_RTT_ConfigUpBuffer(0, NULL, NULL, 0, SEGGER_RTT_MODE_BLOCK_IF_FIFO_FULL);
+
+//  SEGGER_RTT_WriteString(0, "SEGGER Real-Time-Terminal Sample\r\n\r\n");
+//  SEGGER_RTT_WriteString(0, "###### Testing SEGGER_printf() ######\r\n");
+//  SEGGER_RTT_printf(0, "printf Test: %%c,         'S' : %c.\r\n", 'S');
+//  SEGGER_RTT_printf(0, "printf Test: %%5c,        'E' : %5c.\r\n", 'E');
+//  SEGGER_RTT_printf(0, "printf Test: %%-5c,       'G' : %-5c.\r\n", 'G');
+//  SEGGER_RTT_printf(0, "printf Test: %%5.3c,      'G' : %-5c.\r\n", 'G');
+//  SEGGER_RTT_printf(0, "printf Test: %%.3c,       'E' : %-5c.\r\n", 'E');
+//  SEGGER_RTT_printf(0, "printf Test: %%c,         'R' : %c.\r\n", 'R');
+
+
 	SEGGER_RTT_printf(0, "LOG_SEGGER_RTT Initial !\r\n");
-	SEGGER_RTT_printf(0, "Tick Value: %d\r\n", current_tick);
+	SEGGER_RTT_printf(0, "Tick Value: %d\r\n", TimeTick);
 
 //	SEGGER_RTT_SetTerminal(1);
 //	SEGGER_RTT_WriteString(0, RTT_CTRL_TEXT_RED);
@@ -386,10 +406,9 @@ int main (void)
 
 		
 		#ifdef LOG_SEGGER_RTT
-		SEGGER_RTT_printf(0, "! SEGGER RTT LOG OK !\r\n");
-		delay_1us(100);
-		SEGGER_RTT_printf(0, "Tick Value: %d\r\n", current_tick);
-		delay_1us(100);
+		if (current_tick % 1000 == 0) {
+			SEGGER_RTT_printf(0, "! SEGGER RTT LOG OK !");
+		}
 		#endif
 
 

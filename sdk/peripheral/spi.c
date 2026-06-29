@@ -245,7 +245,7 @@ void HW_SPI_Tx(HAL_SPI_ID_T id,uint8 *pData, uint16 DataLen)
 
 void HW_SPI_Tx_DMA_32bit(uint16 *pData, uint16 DataLen)
 {
-	LCD_RS_SET;	
+	LCD_DC_SET;	
   SPI_32bit_Transfer();
 	
 	Gecko_DMA_Transport((volatile uint32 *)(XR7_SPI_BASE + XR7_SPI_FIFO), pData, DataLen, 
@@ -256,7 +256,7 @@ void HW_SPI_Tx_DMA_32bit(uint16 *pData, uint16 DataLen)
 
 void HW_SPI_Tx_DMA_16bit(uint16 *pData, uint16 DataLen)
 {
-	LCD_RS_SET;	
+	LCD_DC_SET;	
   //SPI_16bit_Transfer();
 	hwp_spi0->CTROL=0x10f9b;
 	
@@ -310,7 +310,7 @@ When testing LCD color blocks, call "HW_SPI_Tx_DMA_16bit_ColorBlock" function
 
 void HW_SPI_Tx_DMA_16bit_ColorBlock(uint16 *pData, uint16 DataLen)
 {
-	LCD_RS_SET;	
+	LCD_DC_SET;	
   SPI_16bit_Transfer();
 	
 	Gecko_DMA_Transport((volatile uint32 *)(XR7_SPI_BASE + XR7_SPI_FIFO), pData, DataLen, 
@@ -326,7 +326,7 @@ void HW_SPI_Tx_DMA_16bit_ColorBlock(uint16 *pData, uint16 DataLen)
 
 void HW_SPI_Tx_DMA(uint16 *pData, uint16 DataLen)
 {
-	LCD_RS_SET;
+	LCD_DC_SET;
   SPI_8bit_Transfer();
 	
 	Gecko_DMA_Transport((volatile uint32 *)(XR7_SPI_BASE + XR7_SPI_FIFO), pData, DataLen, 
@@ -339,7 +339,7 @@ void HW_SPI_Tx_DMA(uint16 *pData, uint16 DataLen)
 
 void HW_SPI_Tx_DMA_8bit(uint16 *pData, uint16 DataLen)
 {
-	LCD_RS_SET;
+	LCD_DC_SET;
   SPI_8bit_Transfer();
 	
 	Gecko_DMA_Transport((volatile uint32 *)(XR7_SPI_BASE + XR7_SPI_FIFO), pData, DataLen, 
@@ -356,7 +356,7 @@ void HW_SPI_Tx_DMA_8bit(uint16 *pData, uint16 DataLen)
 //向lcd写入数据通过dma的方式
 void Lcd_Write_data_dma(uint8_t *p_data, uint16_t len)
 {
-	LCD_RS_SET;
+	LCD_DC_SET;
 
 	
 //	SPI_32bit_Transfer();	

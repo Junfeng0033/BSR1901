@@ -142,7 +142,7 @@ __RAM_CODE__ void HW_SPI_Tx_DMA_16bit_ColorBlock_Opt(uint16 *pData, uint16 DataL
 {
 	volatile uint32 dma_ctrl=0;
 	
-	LCD_RS_SET;	
+	LCD_DC_SET;	
 	hwp_spi0->CTROL=0x10f9b;//16bit
 	
 //	DMA_Req_Buslock_Enable();
@@ -196,7 +196,7 @@ void DMA_ISR_Routine(void)
 
 //	Lcd_SetRegion(location, 0, 85+location, 49);		//◊¯±Í…Ë÷√
 
-	LCD_RS_SET;
+	LCD_DC_SET;
 
 
 //	if(location)
