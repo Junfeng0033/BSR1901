@@ -67,23 +67,25 @@ class BlinkSimulator:
         self.root = root
         self.root.title("Realistic Eye Blink Simulation")
         
-        # Black background like the image
-        self.canvas = tk.Canvas(root, width=SCREEN_WIDTH, height=SCREEN_HEIGHT, bg="black", highlightthickness=0)
+        # White background
+        self.canvas = tk.Canvas(root, width=SCREEN_WIDTH, height=SCREEN_HEIGHT, bg="white", highlightthickness=0)
         self.canvas.pack()
         
         self.eye = EyeBlink()
         self.start_perf = time.perf_counter()
         
-        # Eye geometry parameters - More symmetrical and elongated as in the new image
+        # Eye geometry parameters - Elliptical shape
         self.center_x = SCREEN_WIDTH // 2
         self.center_y = SCREEN_HEIGHT // 2
-        self.eye_w = 230
-        self.eye_h_top = 70   
-        self.eye_h_bottom = 65 
+        self.eye_w = 220
+        self.eye_h = 130
         
-        # 1. Draw Sclera (Lavender-white)
-        self.sclera_points = self.get_almond_points(self.center_x, self.center_y, self.eye_w, self.eye_h_top, self.eye_h_bottom)
-        self.sclera = self.canvas.create_polygon(self.sclera_points, fill="#f5f5ff", outline="") 
+        # 1. Draw Sclera (Lavender-white) - Elliptical
+        self.sclera = self.canvas.create_oval(
+            self.center_x - self.eye_w//2, self.center_y - self.eye_h//2,
+            self.center_x + self.eye_w//2, self.center_y + self.eye_h//2,
+            fill="#f5f5ff", outline=""
+        ) 
         
         # 2. Draw Iris (Bright Purple, Centered)
         iris_cx = self.center_x
@@ -113,13 +115,10 @@ class BlinkSimulator:
         # One small one (Bottom-Left)
         self.highlights.append(self.canvas.create_oval(iris_cx - 25, iris_cy + 15, iris_cx - 12, iris_cy + 28, fill="white", outline=""))
         
-        # 5. Eyelids (Pure Black to blend with background)
+        # 5. Eyelids (Black)
         self.skin_color = "#000000" 
         self.upper_lid = self.canvas.create_polygon([0,0,0,0], fill=self.skin_color, outline="")
         self.lower_lid = self.canvas.create_polygon([0,0,0,0], fill=self.skin_color, outline="")
-        
-        # 6. Static Mask Overlay
-        self.draw_overlay()
         
         self.update_simulation()
 
@@ -142,20 +141,15 @@ class BlinkSimulator:
             points.extend([x, y])
         return points
 
-    def draw_overlay(self):
-        # Create a large black rectangle covering everything, then "cut out" the almond hole
-        screen_poly = [
-            -10, -10,
-            SCREEN_WIDTH + 10, -10,
-            SCREEN_WIDTH + 10, SCREEN_HEIGHT + 10,
-            -10, SCREEN_HEIGHT + 10,
-            -10, -10
-        ]
-        # Get smooth almond points
-        hole_points = self.get_almond_points(self.center_x, self.center_y, self.eye_w, self.eye_h_top, self.eye_h_bottom)
-        # Reverse to create hole effect
-        screen_poly.extend(hole_points[::-1])
-        self.canvas.create_polygon(screen_poly, fill="black", outline="", smooth=True)
+    def get_ellipse_points(self, cx, cy, w, h):
+        points = []
+        steps = 100
+        for i in range(steps + 1):
+            angle = 2 * math.pi * i / steps
+            x = cx + (w/2) * math.cos(angle)
+            y = cy + (h/2) * math.sin(angle)
+            points.extend([x, y])
+        return points
 
     def update_simulation(self):
         try:
@@ -182,36 +176,38 @@ class BlinkSimulator:
             self.canvas.coords(self.highlights[2], iris_cx + 35, iris_cy + 12, iris_cx + 42, iris_cy + 19)
             self.canvas.coords(self.highlights[3], iris_cx - 25, iris_cy + 15, iris_cx - 12, iris_cy + 28)
 
-            # 2. Update eyelid polygons
-            u_move_range = self.eye_h_top + 25
+            # 2. Update eyelid polygons for elliptical eye
+            u_move_range = self.eye_h/2 + 20
             u_offset = (uT * u_move_range) / 254
-            l_move_range = self.eye_h_bottom + 15
+            l_move_range = self.eye_h/2 + 15
             l_offset = (lT * l_move_range) / 254
             
+            # Upper eyelid
             u_lid_pts = []
             steps = 50
             for i in range(steps + 1):
                 x = self.center_x - self.eye_w//2 + (self.eye_w * i / steps)
                 angle = math.pi * i / steps
-                y_curve = self.center_y - (self.eye_h_top * math.sin(angle))
+                y_curve = self.center_y - (self.eye_h/2 * math.sin(angle))
                 u_lid_pts.extend([x, y_curve])
-            y_edge = self.center_y - self.eye_h_top + u_offset
+            y_edge = self.center_y - self.eye_h/2 + u_offset
             u_lid_pts.extend([self.center_x + self.eye_w//2 + 50, y_edge, 
-                             self.center_x + self.eye_w//2 + 50, self.center_y - self.eye_h_top - 50,
-                             self.center_x - self.eye_w//2 - 50, self.center_y - self.eye_h_top - 50,
+                             self.center_x + self.eye_w//2 + 50, self.center_y - self.eye_h/2 - 50,
+                             self.center_x - self.eye_w//2 - 50, self.center_y - self.eye_h/2 - 50,
                              self.center_x - self.eye_w//2 - 50, y_edge])
             self.canvas.coords(self.upper_lid, *u_lid_pts)
             
+            # Lower eyelid
             l_lid_pts = []
             for i in range(steps, -1, -1):
                 x = self.center_x - self.eye_w//2 + (self.eye_w * i / steps)
                 angle = math.pi * i / steps
-                y_curve = self.center_y + (self.eye_h_bottom * math.sin(angle))
+                y_curve = self.center_y + (self.eye_h/2 * math.sin(angle))
                 l_lid_pts.extend([x, y_curve])
-            y_edge = self.center_y + self.eye_h_bottom - l_offset
+            y_edge = self.center_y + self.eye_h/2 - l_offset
             l_lid_pts.extend([self.center_x - self.eye_w//2 - 50, y_edge,
-                             self.center_x - self.eye_w//2 - 50, self.center_y + self.eye_h_bottom + 50,
-                             self.center_x + self.eye_w//2 + 50, self.center_y + self.eye_h_bottom + 50,
+                             self.center_x - self.eye_w//2 - 50, self.center_y + self.eye_h/2 + 50,
+                             self.center_x + self.eye_w//2 + 50, self.center_y + self.eye_h/2 + 50,
                              self.center_x + self.eye_w//2 + 50, y_edge])
             self.canvas.coords(self.lower_lid, *l_lid_pts)
             

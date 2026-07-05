@@ -95,6 +95,9 @@ extern void gecko_task_cm0_sw_flash(void);
 extern void gecko_task_cm0_sw_flash_quad(void);
 
 
+extern void bsr1901_cm0_lite_sleep(void);
+	
+
 extern void OP_Amp_Config(void);
 extern int reg_read(int addr);
 extern void reg_write(int addr, int data);

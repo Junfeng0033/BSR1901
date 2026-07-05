@@ -309,9 +309,9 @@ void pwm_io_init(void)
 	 P0 &= ~BIT(2);
 	 P0 |= BIT(3);
 #endif	
-		//iomux setting PAD8(GPIOA4) as PWM_CH2 function
-		//gecko_pinmux_config(PAD8,PWM_CH2);	
-	  //config PAD9(GPIOA5) as PWM_CH3
+		//iomux setting PAD8(GPIOA4) as PWM_CH3 function
+		//gecko_pinmux_config(PAD8,PWM_CH3);	
+	  //config PAD9(GPIOA5) as PWM_CH6
 	  //gecko_pinmux_config(PAD9,PWM_CH6);	
 }
 

@@ -251,6 +251,7 @@ void manba_task_sys_debug (unsigned int debug_msg_cmd, unsigned int debug_msg_ad
 void manba_task_cpu_goto_sleep ()
 {
     #if TB_CPU_BEHAVIOR_CTRL //  Use TestBench behavioral control
+	  
     reg_write(ADDR_TEST_TB_CONTROL_SLEEP_CMD, 0x1);
     #endif
     #if TB_ARM_CORTEXM_MACRO //  Use TestBench behavioral control
@@ -1288,7 +1289,7 @@ assign reg_aon_wait_pu_cntto    = reg_0x000[1:0];
 
 
     manba_task_cpu_goto_sleep();
-		while(1);
+		//while(1);
 		
 }
 
@@ -1307,6 +1308,7 @@ If you intend to enable only one specific interrupt for wakeup,
 you must mask all other interrupts prior to entering STOP mode.
 */
 
+//cpu hold (cpu stop) mode
 void bsr1901_cm0_lite_sleep(void)
 {
 	
@@ -1318,11 +1320,30 @@ void bsr1901_cm0_lite_sleep(void)
 									
 		h2l_wr_busy();
     reg_write(GECKO_AON_BASE_ADDR+0x000, ahb_wr_data);
+
+		__disable_irq();
 	
-	  manba_task_cpu_goto_sleep();
+	  //manba_task_cpu_goto_sleep();
+		SCB->SCR |= SCB_SCR_SLEEPDEEP_Msk; // Select deep sleep mode
+		__wfi();
+
 }
 
 
+
+//CPU 时钟停、内核带电
+void bsr1901_cpu_stop_mode(void)
+{
+		__disable_irq();
+		
+		// 清除 SLEEPDEEP 位
+		SCB->SCR &= ~SCB_SCR_SLEEPDEEP_Msk;
+	
+	  //NVIC_ClearPendingIRQ(SysTick_IRQn);
+		hal_nvic_clear_pending_irq(SysTick_IRQn);
+	
+		__wfi();
+}
 
 
 

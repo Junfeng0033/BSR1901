@@ -132,9 +132,9 @@ __RAM_CODE__ static void RLE_Decode_Send(const uint8_t *arry)
 
 
 //RGB565原始RLE数据解压例程:
-//字符串或数组解码例程(无文件头)RLE-2解码
+//字符串或数组解码例程(无文件头)RLE解码
 
-void TFT565_draw_arry_rle2_img(uint16_t x, uint16_t y, uint16_t sizex, uint16_t sizey, const uint8_t *arry)
+void TFT565_draw_arry_rle_img(uint16_t x, uint16_t y, uint16_t sizex, uint16_t sizey, const uint8_t *arry)
 {
 
     // 设置显示区域（只执行1次，不动它）

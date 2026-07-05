@@ -55,6 +55,16 @@ void SystemInit(void)
 
 
 
+
+
+/*
+标准深度休眠必须同时满足四个硬性条件：
+1，切断 CPU 内核、SRAM、主外设的主电源域；
+2，只给 RTC、备份 IO、独立看门狗等极小的 AlwaysOn 备份域单独供电；
+3，SRAM、CPU 寄存器全部丢失，运行状态无法保存；
+4，唤醒后触发上电复位，程序从头运行，不能从休眠断点继续执行。
+*/
+
 void EnterDeepSleepMode(void)
 {
 	
@@ -89,7 +99,7 @@ void EnterDeepSleepMode(void)
 int main (void) 
 {
 
-	uint32_t current_tick;
+	//uint32_t current_tick;
 	
 	//int val=*myVariable;//access variables through pointers
 
@@ -103,7 +113,7 @@ int main (void)
 
 //本程序适配 BSR1901 推荐硬件端口
 //              GND   电源地
-//              VCC   接3.3v电源--LDO33_AUX_OUT
+//              VCC   接3.3v电源--LDO33_LCD_OUT
 
 //              SCL   接SPI_CLK--------(PAD22)
 //              SDA   接SPI_MOSI-------(PAD23)
@@ -126,7 +136,7 @@ int main (void)
 	gecko_pinmux_config(PAD7,GPIOB_7);//RES(reset) control
 	
 	//LDO33_AUX enable, power supply for LCD module
-	LDO33_LCD_Enable();//power supply control(BSR1901 use MOS to control backlight)
+	LDO33_LCD_Enable();//power supply control(BSR1901 control backlight)
 	
 
 	Lcd_Init();
@@ -198,7 +208,7 @@ int main (void)
 	  pwm_io_init();
 	
     hw_pwm_disable(HW_PWM_CHAN_3);	
-	  Set_PWM_CH3_Duty(10);//10% duty
+	  //Set_PWM_CH3_Duty(10);//10% duty
 	  hw_pwm_enable(HW_PWM_CHAN_3);
 		
 		struct HAL_PWM_CFG_T pwm_cfg = {200000, 50, 1};
@@ -231,10 +241,10 @@ int main (void)
 
 	//initial Check_ON GPIO for ADC function
 	//gecko_pinmux_config(PAD9,GPIO_A_5);
-	//gpio_set_output(GPIOA, 5);
-	//gpio_set_value(GPIOA, 1, 5);//default ouptut HIGH
 	
 	//GPIO_InitIO(OUTPUT,PA5);
+	
+	//GpiopinMode(PA5,OUTPUT);
 	//GPIO_WriteIO(HIGH, PA5);
 
 /***************************************************************/
@@ -242,19 +252,18 @@ int main (void)
 	#if  0////charger insert detect
 		//config PAD19(GPIOB7) as GPIO input
 		gecko_pinmux_config(PAD19,GPIO_B_7);
-		extern void Set_GPIO_B7_Input(void);
-		Set_GPIO_B7_Input();
-		GPIO_InitIO(INPUT,PB7);
+		GpiopinMode(PB7,INPUT);
+		//GPIO_InitIO(INPUT,PB7);
 	#endif
 
 
 	#if 0////air flow sensor
 		//config PAD10(GPIOA6) as GPIO input
 		gecko_pinmux_config(PAD10,GPIO_A_6);
-		extern void Set_GPIOA6_Input(void);
-		Set_GPIOA6_Input();
+
+		GpiopinMode(PA6,INPUT);
 		
-		GPIO_InitIO(INPUT,PA6);		
+		//GPIO_InitIO(INPUT,PA6);		
 	#endif
 
 /**********************************************************************************	
@@ -351,7 +360,7 @@ int main (void)
 
 /************************Buck-Boost Control***************************************/
     
-  charger_init(&my_charger);
+  //charger_init(&my_charger);
 	
 /************************Buck-Boost Control***************************************/	
 
@@ -360,16 +369,14 @@ int main (void)
 
 /************************SysTick configure***************************************/
 	//----SysTick Init-----
-	SysTick_Config(20000);//SysTick === 1ms tick for KEY detect
+	//SysTick_Config(20000);//SysTick === 1ms tick for KEY detect
 /************************SysTick configure***************************************/
-
 
 
 
 #ifdef LOG_SEGGER_RTT
 	
 	SEGGER_RTT_Init();
-	
 //  SEGGER_RTT_ConfigUpBuffer(0, NULL, NULL, 0, SEGGER_RTT_MODE_BLOCK_IF_FIFO_FULL);
 
 //  SEGGER_RTT_WriteString(0, "SEGGER Real-Time-Terminal Sample\r\n\r\n");
@@ -381,10 +388,9 @@ int main (void)
 //  SEGGER_RTT_printf(0, "printf Test: %%.3c,       'E' : %-5c.\r\n", 'E');
 //  SEGGER_RTT_printf(0, "printf Test: %%c,         'R' : %c.\r\n", 'R');
 
-
 	SEGGER_RTT_printf(0, "LOG_SEGGER_RTT Initial !\r\n");
 	SEGGER_RTT_printf(0, "Tick Value: %d\r\n", TimeTick);
-
+	
 //	SEGGER_RTT_SetTerminal(1);
 //	SEGGER_RTT_WriteString(0, RTT_CTRL_TEXT_RED);
 //	SEGGER_RTT_WriteString(0, "ERROR: Timeout!\r\n");
@@ -402,26 +408,18 @@ int main (void)
 //		sc_task_loop(NULL);		
 //		system_tick=TimeTick;//1ms tick
 	
-		current_tick = TimeTick;
+//		current_tick = TimeTick;
 
+		Task_KeyScan();
 		
-		#ifdef LOG_SEGGER_RTT
-		if (current_tick % 1000 == 0) {
-			SEGGER_RTT_printf(0, "! SEGGER RTT LOG OK !");
-		}
-		#endif
-
-
+		Get_Vbat_Voltage();
 		
-		if (current_tick % 10 == 0) Task_KeyScan();
-		
-		if (current_tick % 100 == 0) Get_Vbat_Voltage();
-		
-		//if (current_tick % 150 == 0) Task_Charger_Control();// 软件PWM方案	
+		//Task_Charger_Control();// 软件PWM方案	
 
-		if (current_tick % 200 == 0) Task_UI_Refresh();	
+		Task_UI_Refresh();	
 
-		if (current_tick % 250 == 0) Task_BMS_Update();// IP2366 IC方案	
+		Task_BMS_Update();// IP2366 IC方案
+
 		
 	}
 	

@@ -140,22 +140,11 @@ void Gecko_DMA_Transport(volatile void *dest,volatile const void *src, uint16 si
 //优化函数写法
 __RAM_CODE__ void HW_SPI_Tx_DMA_16bit_ColorBlock_Opt(uint16 *pData, uint16 DataLen)
 {
-	volatile uint32 dma_ctrl=0;
+	//volatile uint32 dma_ctrl=0;
 	
 	LCD_DC_SET;	
 	hwp_spi0->CTROL=0x10f9b;//16bit
 	
-//	DMA_Req_Buslock_Enable();
-////===========================================================================
-////new function in chip BSR0035	
-//	dma_ctrl = DMA_READ_REG(AHB_DMA_CONTROL_REG);
-//	
-//	dma_ctrl |= dma_buslock_req_en;
-
-//	DMA_WRITE_REG((volatile uint32 *)AHB_DMA_CONTROL_REG, dma_ctrl);
-
-////===========================================================================
-
 	__disable_irq();
 	
 	DMA_WRITE_REG((volatile uint32 *)AHB_DMA_SRCADDR_REG, (uint32) pData);

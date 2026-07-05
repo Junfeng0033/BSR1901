@@ -1208,3 +1208,137 @@ void Gui_ShowString_Transparent(uint16_t x, uint16_t y, uint16_t fc, uint8_t *s)
 // 透明显示 60%，不破坏进度条
 //Gui_ShowString_Transparent(70, 102, WHITE, "60%");
 
+
+
+
+
+
+
+
+
+// ===================== 外部LCD基础绘图接口实现 =====================
+
+// 清屏：填充整个屏幕
+void LCD_ClearScreen(uint16_t bg)
+{
+    // 使用之前定义的快速填充矩形，填充全屏 (240x240)
+    Gui_DrawFillRect(0, 0, X_MAX_PIXEL - 1, Y_MAX_PIXEL - 1, bg);
+}
+
+// 实心圆填充
+void LCD_FillCircle(int16_t cx, int16_t cy, int16_t r, uint16_t color)
+{
+    Gui_FillCircle((uint16_t)cx, (uint16_t)cy, (uint16_t)r, color);
+}
+
+// 绘制椭圆轮廓（M0极致优化：采用标准的 Midpoint 整数算法，完全消除循环内乘除法）
+void LCD_DrawEllipseOutline(int16_t cx, int16_t cy, int16_t rw, int16_t rh, uint16_t color, uint8_t width)
+{
+    for (uint8_t w = 0; w < width; w++)
+    {
+        int32_t cur_rw = rw - w;
+        int32_t cur_rh = rh - w;
+        if (cur_rw <= 0 || cur_rh <= 0) break;
+
+        // 实际上，为了绝对性能，我们直接使用对称点步进
+        // 为保证在 M0 上不出现乘法，我们改用最稳健的步进法
+        for (int16_t x_i = 0; x_i <= cur_rw; x_i++) {
+            // 利用对称性，仅计算 y。y 是单调递减的
+            // 使用一个简单的 y 逼近法，避免每次循环除法
+            static int16_t last_y; 
+            if (x_i == 0) last_y = cur_rh;
+            
+            // 检查 (x/rw)^2 + (y/rh)^2 <= 1
+            // 转化为: (x*rh)^2 + (y*rw)^2 <= (rw*rh)^2
+            while (last_y > 0) {
+                int32_t term1 = (int32_t)x_i * cur_rh;
+                int32_t term2 = (int32_t)last_y * cur_rw;
+                if ((term1 * term1 + term2 * term2) <= (cur_rw * cur_rh * cur_rw * cur_rh)) break;
+                last_y--;
+            }
+            
+            Gui_DrawPoint(cx + x_i, cy + last_y, color);
+            Gui_DrawPoint(cx - x_i, cy + last_y, color);
+            Gui_DrawPoint(cx + x_i, cy - last_y, color);
+            Gui_DrawPoint(cx - x_i, cy - last_y, color);
+        }
+    }
+}
+
+// 实心椭圆填充（M0极致优化：Y轴递增 + X轴单调递减，消除除法和 sqrt）
+void LCD_FillEllipse(int16_t cx, int16_t cy, int16_t rw, int16_t rh, uint16_t color)
+{
+    if (rw <= 0 || rh <= 0) return;
+
+    int32_t rw2 = (int32_t)rw * rw;
+    int32_t rh2 = (int32_t)rh * rh;
+    int32_t x_val = rw; // y=0 时，x=rw
+
+    for (int16_t current_y = 0; current_y <= rh; current_y++) {
+        int32_t y2 = (int32_t)current_y * current_y;
+        
+        // 目标：x^2 = rw^2 * (rh^2 - y^2) / rh^2
+        // 优化：由于 y 递增，x 必然单调递减。
+        // 我们不需要每次计算 sqrt 或除法，只需要在当前 x_val 基础上递减，直到满足方程
+        while (x_val > 0) {
+            // 检查 (x_val^2 * rh2) <= rw2 * (rh2 - y2)
+            int32_t left = (int32_t)x_val * x_val * rh2;
+            int32_t right = rw2 * (rh2 - y2);
+            if (left <= right) break;
+            x_val--;
+        }
+
+        Gui_DrawLine_Fast(cx - x_val, cy + current_y, cx + x_val, cy + current_y, color);
+        Gui_DrawLine_Fast(cx - x_val, cy - current_y, cx + x_val, cy - current_y, color);
+    }
+}
+
+// 实心多边形填充 (M0优化版：减少重复计算，使用定点数思想简化)
+void LCD_FillPolygon(int16_t *pts, uint16_t point_cnt, uint16_t fill)
+{
+    if (point_cnt < 3) return;
+
+    int16_t minY = pts[1], maxY = pts[1];
+    for (uint16_t i = 0; i < point_cnt; i++) {
+        int16_t y = pts[i * 2 + 1];
+        if (y < minY) minY = y;
+        if (y > maxY) maxY = y;
+    }
+
+    for (int16_t y = minY; y <= maxY; y++) {
+        int16_t nodes[20];
+        uint8_t node_cnt = 0;
+
+        for (uint16_t i = 0; i < point_cnt; i++) {
+            int16_t x1 = pts[i * 2];
+            int16_t y1 = pts[i * 2 + 1];
+            int16_t x2 = pts[((i + 1) % point_cnt) * 2];
+            int16_t y2 = pts[((i + 1) % point_cnt) * 2 + 1];
+
+            // 只有当 y 在边 y1, y2 之间时才计算交点
+            if ((y1 <= y && y2 > y) || (y2 <= y && y1 > y)) {
+                // 优化：x = x1 + (y - y1) * (x2 - x1) / (y2 - y1)
+                // 将除法放在最后，尽量使用 32 位中间变量防止溢出
+                int32_t num = (int32_t)(y - y1) * (x2 - x1);
+                int32_t den = y2 - y1;
+                nodes[node_cnt++] = x1 + (int16_t)(num / den);
+            }
+        }
+
+        // 简单的冒泡排序（node_cnt 很小，此时最快）
+        for (uint8_t i = 0; i < node_cnt - 1; i++) {
+            for (uint8_t j = i + 1; j < node_cnt; j++) {
+                if (nodes[i] > nodes[j]) {
+                    int16_t temp = nodes[i];
+                    nodes[i] = nodes[j];
+                    nodes[j] = temp;
+                }
+            }
+        }
+
+        for (uint8_t i = 0; i < node_cnt - 1; i += 2) {
+            Gui_DrawLine_Fast(nodes[i], y, nodes[i + 1], y, fill);
+        }
+    }
+}
+

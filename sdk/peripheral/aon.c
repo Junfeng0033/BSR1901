@@ -559,7 +559,7 @@ assign reg_aon_pad_pulldn		=reg_0x8C[23:0]
 
 */
 
-void GEK1109_PAD_pullup_pulldown_Config(void)
+void bsr1901_PAD_pullup_pulldown_Config(void)
 {
 	  unsigned int wr_data;
 		wr_data=reg_read(GECKO_AON_BASE_ADDR+0x088);//pull up
@@ -987,7 +987,7 @@ void ConfigPort_AnalogFunction(uint32 func)
 }
 
 
-void gek1109_adc_0_1_analog_port(void)
+void bsr1901_adc_0_1_analog_port(void)
 {
 	
 		unsigned int wr_data;

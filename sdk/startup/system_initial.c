@@ -15,18 +15,7 @@
 #include "timer.h"
 #include "pwm.h"
 
-
-
-
-//extern uint32_t __boot_sram_start_flash__[];
-//extern uint32_t __boot_sram_end_flash__[];
-//extern uint32_t __boot_sram_start__[];
-//extern uint32_t __boot_bss_sram_start__[];
-//extern uint32_t __boot_bss_sram_end__[];
-
 extern void SystemInit(void);
-
-
 
 
 
@@ -38,12 +27,6 @@ uint32 bsr1901_sram_test(void)
     uint32 size = 0x00000400;  
     //char *string;	
 	
-    /* Initialize SRAM */
-    //sram_init( ); //sram
- 
-    /* Data tests */
-    //memory_fill_print( base, size, 0xFFFAAAAA );
-
     uint32 start=base;
 	  uint32 len=size;
 	  uint32 val=0xFFFAAAAA;
@@ -77,64 +60,6 @@ uint32 bsr1901_sram_test(void)
     }
 		return errorcount;	
 }
-
-
-
-
-
-
-
-void BootInit(void)
-{
-    //uint32_t *dst, *src;
-#if 0
-    // Init boot sections
-    for (dst = __boot_sram_start__, src = __boot_sram_start_flash__;
-            src < __boot_sram_end_flash__;
-            dst++, src++) {
-        *dst = *src;
-    }
-
-    for (dst = __boot_bss_sram_start__; dst < __boot_bss_sram_end__; dst++) {
-        *dst = 0;
-    }
-#endif
-	
-#ifdef FPGA
-    hal_cmu_fpga_setup();
-		hal_norflash_init();
-#else
-    //hal_cmu_setup();
-		//hal_norflash_init();
-#endif
-
-#if 0
-    for (dst = __sram_text_data_start__, src = __sram_text_data_start_flash__;
-            src < __sram_text_data_end_flash__;
-            dst++, src++) {
-        *dst = *src;
-    }
-    for (dst = __sram_bss_start__; dst < __sram_bss_end__; dst++) {
-        *dst = 0;
-    }
-    for (dst = __fast_sram_text_data_start__, src = __fast_sram_text_data_start_flash__;
-            src < __fast_sram_text_data_end_flash__;
-            dst++, src++) {
-        *dst = *src;
-    }
-#endif						
-
-}
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -189,31 +114,11 @@ void SysExitCriticalSection(uint32 status)
 
 
 
-
-#ifdef VECT_TAB_RAM
-/* Set the Vector Table base location at 0x20000000 */
-NVIC_SetVectorTable(NVIC_VectTab_RAM+0x2000, 0x0);
-#else /* VECT_TAB_FLASH */
-/* Set the Vector Table base location at 0x08000000 */
-//NVIC_SetVectorTable(NVIC_VectTab_RAM, 0x0); // NVIC_VectTab_FLASH
-#endif
-
-
-
-
-
-
-
-
-
 /* Interrupt Priorities are WORD accessible only under ARMv6M                   */
 /* The following MACROS handle generation of the register offset and byte masks */
 #define _BIT_SHIFT(IRQn)         (  ((((uint32_t)(int32_t)(IRQn)))               &  0x03UL) * 8UL)
 #define _SHP_IDX(IRQn)           ( (((((uint32_t)(int32_t)(IRQn)) & 0x0FUL)-8UL) >>    2UL)      )
 #define _IP_IDX(IRQn)            (   (((uint32_t)(int32_t)(IRQn))                >>    2UL)      )
-
-
-
 
 
 

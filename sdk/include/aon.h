@@ -473,5 +473,5 @@ void ConfigPort_AnalogFunction(uint32 func);
 
 	
 void bsr1901_adc_8_9_analog_port(void);
-void gek1109_adc_0_1_analog_port(void);
+void bsr1901_adc_0_1_analog_port(void);
 
