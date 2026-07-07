@@ -45,7 +45,7 @@ void SystemInit(void)
     hal_nvic_clear_pending_irq(CMU2AHB_IRQ);
     hal_nvic_set_priority(CMU2AHB_IRQ, 0);
     hal_nvic_enable_irq(CMU2AHB_IRQ);   
-    //  gecko_task_cm0_sw_flash(); //
+
 		gecko_task_cm0_sw_flash_quad();
     //----------------------------------
 #endif
@@ -111,7 +111,7 @@ int main (void)
 	gecko_pinmux_default_config();
 	
 
-//本程序适配 BSR1901 推荐硬件端口
+//本程序适配 BSR1901 推荐硬件端口（单显示屏，非双屏异显）
 //              GND   电源地
 //              VCC   接3.3v电源--LDO33_LCD_OUT
 
@@ -135,7 +135,7 @@ int main (void)
 	gecko_pinmux_config(PAD21,GPIO_A_3);//DC control	
 	gecko_pinmux_config(PAD7,GPIOB_7);//RES(reset) control
 	
-	//LDO33_AUX enable, power supply for LCD module
+	//LDO33_LCD enable, power supply for LCD module
 	LDO33_LCD_Enable();//power supply control(BSR1901 control backlight)
 	
 
