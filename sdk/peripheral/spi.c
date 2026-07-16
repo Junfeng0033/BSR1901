@@ -250,7 +250,7 @@ void HW_SPI_Tx_DMA_32bit(uint16 *pData, uint16 DataLen)
 	
 	Gecko_DMA_Transport((volatile uint32 *)(XR7_SPI_BASE + XR7_SPI_FIFO), pData, DataLen, 
 						AHB_DMA_CONTROL_WORD_TR, AHB_DMA_CONTROL_SRC_INC_DES_NOINC);	
-	//dma_sram_delay(1000);		
+	dma_sram_wait(1000);		
 }
 
 
@@ -263,7 +263,7 @@ void HW_SPI_Tx_DMA_16bit(uint16 *pData, uint16 DataLen)
 	
 	Gecko_DMA_Transport((volatile uint32 *)(XR7_SPI_BASE + XR7_SPI_FIFO), pData, DataLen, 
 						AHB_DMA_CONTROL_HWORD_TR, AHB_DMA_CONTROL_SRC_INC_DES_NOINC);	
-	//dma_sram_delay(1000);	
+	dma_sram_wait(1000);	
 
 	
 	
@@ -315,7 +315,7 @@ void HW_SPI_Tx_DMA_16bit_ColorBlock(uint16 *pData, uint16 DataLen)
 	
 	Gecko_DMA_Transport((volatile uint32 *)(XR7_SPI_BASE + XR7_SPI_FIFO), pData, DataLen, 
 						AHB_DMA_CONTROL_HWORD_TR, AHB_DMA_CONTROL_SRC_NOINC_DES_NOINC);	
-	//dma_sram_delay(1000);	
+	dma_sram_wait(1000);	
 	
 }
 
@@ -332,7 +332,7 @@ void HW_SPI_Tx_DMA(uint16 *pData, uint16 DataLen)
 	Gecko_DMA_Transport((volatile uint32 *)(XR7_SPI_BASE + XR7_SPI_FIFO), pData, DataLen, 
 						AHB_DMA_CONTROL_BYTE_TR, AHB_DMA_CONTROL_SRC_INC_DES_NOINC);
 
-	//dma_sram_delay(1000);
+	dma_sram_wait(1000);
 }
 
 
@@ -345,7 +345,7 @@ void HW_SPI_Tx_DMA_8bit(uint16 *pData, uint16 DataLen)
 	Gecko_DMA_Transport((volatile uint32 *)(XR7_SPI_BASE + XR7_SPI_FIFO), pData, DataLen, 
 						AHB_DMA_CONTROL_BYTE_TR, AHB_DMA_CONTROL_SRC_INC_DES_NOINC);
 
-	//dma_sram_delay(1000);
+	dma_sram_wait(1000);
 }
 
 
@@ -402,7 +402,7 @@ __RAM_CODE__ void HW_SPI_Tx_DMA(uint16 *pData, uint16 DataLen)
 
 	//#endif
 	
-	dma_sram_delay(1000);
+	dma_sram_wait(1000);
 }
 
 #endif

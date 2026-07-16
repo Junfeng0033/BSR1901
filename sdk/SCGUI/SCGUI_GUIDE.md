@@ -401,4 +401,12 @@ void Gui_ProgressBar(uint16_t x0, uint16_t y0, uint16_t w, uint16_t h,uint8_t pe
 
 
 
+## 11, 在PC电脑上模拟UI
+
+所有的UI都可以用python模拟，例如：
+python  D:\SVN\projects\BSR1901\software\sdk\eye_blink\eye_blink_sim.py
+
+在..\sdk\peripheral目录下，有一个charger.png，这是一个充电原理图，可以在PC上模拟充电过程：
+python  D:\SVN\projects\BSR1901\software\sdk\user\buck-boost.py
+
 

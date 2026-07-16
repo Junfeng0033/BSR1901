@@ -212,8 +212,8 @@ __RAM_CODE__  void DMA_IRQHandler(void)
 }
 
 
-
-__RAM_CODE__ void dma_sram_delay(unsigned long delay)
+//wait DMA transfer complete
+__RAM_CODE__ void dma_sram_wait(unsigned long delay)
 {
     unsigned int i;
     unsigned long count;

@@ -5,6 +5,7 @@
 
 #include "ui_app.h"
 
+//多用局部刷新（只更新变化区域），不要每帧 LCD_ClearScreen
 
 //void ShowNum_48(uint8_t n);
 

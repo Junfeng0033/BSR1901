@@ -296,5 +296,63 @@ uint32_t hal_nvic_get_pending_irq(IRQn_Type irq_number)
 
 
 
+/** \brief  System Reset
 
+    The function initiates a system reset request to reset the MCU.
+ */
+void NVIC_SystemReset(void)
+{
+  __DSB();                                                     /* Ensure all outstanding memory accesses included
+                                                                  buffered write are completed before reset */
+  SCB->AIRCR  = ((0x5FA << SCB_AIRCR_VECTKEY_Pos)      |
+                 SCB_AIRCR_SYSRESETREQ_Msk);
+  __DSB();                                                     /* Ensure completion of memory access */
+  while(1);                                                    /* wait until reset */
+}
+
+
+
+
+#if 0
+void NVIC_SystemReset(void)
+{
+    __asm("DSB");
+	
+		SCB->AIRCR = ((0x5FA << SCB_AIRCR_VECTKEY_Pos) | SCB_AIRCR_SYSRESETREQ_Msk);	
+
+    __asm("DSB");	
+	
+//	  for(;;)
+//		{
+//			//__NOP();
+//			__asm("nop");
+//		}
+			
+	
+}
+#endif
+
+
+
+void __set_FAULTMASK(uint32_t faultMask)
+{
+  //register uint32_t __regFaultMask;
+	
+	//__asm("faultmask");
+	
+	__disable_irq();
+	
+  //__regFaultMask = (faultMask & (uint32_t)1U);
+}
+
+
+
+
+void soft_reset(void)
+{
+
+    //__set_FAULTMASK(1); 
+
+    NVIC_SystemReset(); 
+}
 

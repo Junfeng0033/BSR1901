@@ -1399,7 +1399,7 @@ void Task_BMS_Update(void)
 			//Lcd_Clear(YELLOW);
 			
 			HW_SPI_Tx_DMA_8bit((uint16*)gImage_charging, 32768);
-			//dma_sram_delay(1000);
+			//dma_sram_wait(1000);
 		}
 		else if(wr_data==0x0)
 		{
@@ -1408,7 +1408,7 @@ void Task_BMS_Update(void)
 			//Lcd_Clear(RED);
 			//HW_SPI_Tx_DMA((uint16*)gImage_128x128_cake, 32768);
 			HW_SPI_Tx_DMA_8bit((uint16*)gImage_128x128_battery, 32768);
-			//dma_sram_delay(1000);		
+			//dma_sram_wait(1000);		
 		}
 		
 		get_ipxs_state();

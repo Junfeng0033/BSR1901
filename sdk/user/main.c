@@ -130,6 +130,7 @@ int main (void)
 	gecko_pinmux_config(PAD23,SPIMOSI);	
 	gecko_pinmux_config(PAD20,SPI_CSN_1);	
 
+	//gecko_pinmux_config(PAD24,SPI_CSN_2);
 
 	//gecko_pinmux_config(PAD24,GPIO_B_4);//BL control,default function,do not needed to configure
 	gecko_pinmux_config(PAD21,GPIO_A_3);//DC control	

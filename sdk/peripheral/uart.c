@@ -1526,8 +1526,8 @@ void print_build_information(void)
 {
 #if 1
     pDebugPrintfEX("\n");
-    pDebugPrintfEX("Gecko1108 TWS Charger Solution Software, Copyright (c) 2020-2022 SPARROW Inc.\n");
-	  printf("Gecko1108 TWS Charger Solution Software, Copyright (c) 2020-2022 SPARROW Inc.\n");
+    pDebugPrintfEX("Gecko1108 TWS Charger Solution Software, Copyright (c) 2020-2022 BraveStarr Inc.\n");
+	  //printf("Gecko1108 TWS Charger Solution Software, Copyright (c) 2020-2022 BraveStarr Inc.\n");
     pDebugPrintfEX("\n");
     pDebugPrintfEX("PlatForm: "PLATFORMSTRING", compiled "__DATE__" "__TIME__"\n");
     pDebugPrintfEX("\n");

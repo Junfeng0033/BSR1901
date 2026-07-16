@@ -225,7 +225,7 @@ void HW_SPI_Empty_FIFO(void);
 
 
 
-extern void dma_sram_delay(unsigned long delay);
+extern void dma_sram_wait(unsigned long delay);
 
 
 

@@ -303,6 +303,73 @@ typedef struct
 
 
 
+/** \brief  No Operation
+
+    No Operation does nothing. This instruction can be used for code alignment purposes.
+ */
+#define __NOP                             __nop
+
+
+/** \brief  Wait For Interrupt
+
+    Wait For Interrupt is a hint instruction that suspends execution
+    until one of a number of events occurs.
+ */
+#define __WFI                             __wfi
+
+
+/** \brief  Wait For Event
+
+    Wait For Event is a hint instruction that permits the processor to enter
+    a low-power state until one of a number of events occurs.
+ */
+#define __WFE                             __wfe
+
+
+/** \brief  Send Event
+
+    Send Event is a hint instruction. It causes an event to be signaled to the CPU.
+ */
+#define __SEV                             __sev
+
+
+/** \brief  Instruction Synchronization Barrier
+
+    Instruction Synchronization Barrier flushes the pipeline in the processor,
+    so that all instructions following the ISB are fetched from cache or
+    memory, after the instruction has been completed.
+ */
+#define __ISB()                           __isb(0xF)
+
+
+/** \brief  Data Synchronization Barrier
+
+    This function acts as a special kind of Data Memory Barrier.
+    It completes when all explicit memory accesses before this instruction complete.
+ */
+#define __DSB()                           __dsb(0xF)
+
+
+/** \brief  Data Memory Barrier
+
+    This function ensures the apparent order of the explicit memory operations before
+    and after the instruction, without ensuring their completion.
+ */
+#define __DMB()                           __dmb(0xF)
+
+
+/** \brief  Reverse byte order (32 bit)
+
+    This function reverses the byte order in integer value.
+
+    \param [in]    value  Value to reverse
+    \return               Reversed value
+ */
+#define __REV                             __rev
+
+
+
+
 /* SCB CPUID Register Definitions */
 #define SCB_CPUID_IMPLEMENTER_Pos          24U                                            /*!< SCB CPUID: IMPLEMENTER Position */
 #define SCB_CPUID_IMPLEMENTER_Msk          (0xFFUL << SCB_CPUID_IMPLEMENTER_Pos)          /*!< SCB CPUID: IMPLEMENTER Mask */
