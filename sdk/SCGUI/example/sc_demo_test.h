@@ -13,7 +13,7 @@ extern const SC_img_zip watch_106_64_zip; // 表盘底图
 ///演示代码性能测试
 void sc_demo_rect_pfs(int spi_clk);
 
-void sc_demo_Image_zip(void);
+void sc_demo_Image_zip(sc_event_t *event);
 
 void sc_demo_arc(sc_event_t *event);
 	
@@ -21,7 +21,8 @@ void sc_demo_arc(sc_event_t *event);
 void sc_demo_text(sc_event_t *event);
 
 //演示代码,组合控件显示
-void sc_demo_commpose(void);
+void sc_demo_commpose(sc_event_t *event);
+
 
 //演示代码,按钮显示
 void sc_demo_gif_task(sc_event_t *event);

@@ -160,8 +160,8 @@ void Config_PWM(HW_PWM_CHAN_T channel,const struct HAL_PWM_CFG_T *cfg)
 			case HW_PWM_CHAN_0:
 					Gecko_PWM->r_pwm01_initial = SET_BITFIELD(Gecko_PWM->r_pwm01_initial, PWM_LOAD01_0, load);
 			
-					printf("\r\n PWM_CHAN_0 Gecko_PWM->r_pwm01_initial = %d",Gecko_PWM->r_pwm01_initial);
-					printf("\r\n PWM_CHAN_0 Gecko_PWM->r_pwm01_initial = %x",Gecko_PWM->r_pwm01_initial);			
+					//printf("\r\n PWM_CHAN_0 Gecko_PWM->r_pwm01_initial = %d",Gecko_PWM->r_pwm01_initial);
+					//printf("\r\n PWM_CHAN_0 Gecko_PWM->r_pwm01_initial = %x",Gecko_PWM->r_pwm01_initial);			
 			
 
 		
@@ -177,14 +177,14 @@ void Config_PWM(HW_PWM_CHAN_T channel,const struct HAL_PWM_CFG_T *cfg)
 			
 					Gecko_PWM->r_pwm01_toggle = tempval+PWM_TOGGLE01_0(regval);	//inclue toggle0 and toggle1			 			
 
-					printf("\r\n PWM_CHAN_0 Gecko_PWM->r_pwm01_toggle = %d",Gecko_PWM->r_pwm01_toggle);
-					printf("\r\n PWM_CHAN_0 Gecko_PWM->r_pwm01_toggle = %x",Gecko_PWM->r_pwm01_toggle);				
+					//printf("\r\n PWM_CHAN_0 Gecko_PWM->r_pwm01_toggle = %d",Gecko_PWM->r_pwm01_toggle);
+					//printf("\r\n PWM_CHAN_0 Gecko_PWM->r_pwm01_toggle = %x",Gecko_PWM->r_pwm01_toggle);				
 			
 
 					Gecko_PWM->r_pwm03_Td_cycle |= PWM0_Td_Cycle(Tdead_Cycle);
 
-					printf("\r\n PWM_CHAN_0 Gecko_PWM->r_pwm03_Td_cycle = %d",Gecko_PWM->r_pwm03_Td_cycle);
-					printf("\r\n PWM_CHAN_0 Gecko_PWM->r_pwm03_Td_cycle = %x",Gecko_PWM->r_pwm03_Td_cycle);		
+					//printf("\r\n PWM_CHAN_0 Gecko_PWM->r_pwm03_Td_cycle = %d",Gecko_PWM->r_pwm03_Td_cycle);
+					//printf("\r\n PWM_CHAN_0 Gecko_PWM->r_pwm03_Td_cycle = %x",Gecko_PWM->r_pwm03_Td_cycle);		
 
 	
 					break;
@@ -845,6 +845,86 @@ void Set_PWM_CH3_Duty(uint8 duty_count)
 	Config_PWM(HW_PWM_CHAN_3,&PwmCh3Cfg);
 
 }
+
+
+
+
+
+#if 0
+	//PWM
+	struct HAL_PWM_CFG_T pwm_cfg = {100000, 50, 0};
+	Config_PWM(HW_PWM_CHAN_5, &pwm_cfg);
+	hw_pwm_enable(HW_PWM_CHAN_5);//PAD19
+
+#endif	
+
+
+
+
+
+
+
+#if 0
+
+
+#if 0
+	//PWM
+	struct HAL_PWM_CFG_T pwm_cfg = {100000, 50, 0};
+	Config_PWM(HW_PWM_CHAN_5, &pwm_cfg);
+	hw_pwm_enable(HW_PWM_CHAN_5);//PAD19
+
+#endif	
+	
+	
+	struct HAL_PWM_CFG_T pwm_cfg = {100000, 50, 0};
+	Config_PWM(HW_PWM_CHAN_5, &pwm_cfg);
+	//hw_pwm_enable(HW_PWM_CHAN_5);
+	
+
+
+	pwm_cfg = (struct HAL_PWM_CFG_T){100000, 50, 1};
+	Config_PWM(HW_PWM_CHAN_3, &pwm_cfg);
+
+
+	pwm_cfg = (struct HAL_PWM_CFG_T){100000, 50, 0};
+	Config_PWM(HW_PWM_CHAN_6, &pwm_cfg);
+		
+
+
+	pwm_cfg = (struct HAL_PWM_CFG_T){100000, 50, 0};
+	Config_PWM(HW_PWM_CHAN_2, &pwm_cfg);
+
+
+	pwm_cfg = (struct HAL_PWM_CFG_T){100000, 50, 0};
+	Config_PWM(HW_PWM_CHAN_7, &pwm_cfg);
+
+	
+	
+	pwm_cfg = (struct HAL_PWM_CFG_T){100000, 50, 0};
+	Config_PWM(HW_PWM_CHAN_1, &pwm_cfg);
+	//hw_pwm_enable(HW_PWM_CHAN_1);
+
+
+	pwm_cfg = (struct HAL_PWM_CFG_T){200000, 50, 0};
+	Config_PWM(HW_PWM_CHAN_0, &pwm_cfg);
+
+//PCLK_OUT PAD
+	pwm_cfg = (struct HAL_PWM_CFG_T){100000, 50, 1};
+	Config_PWM(HW_PWM_CHAN_4, &pwm_cfg);
+	
+  gecko_pwm_start();
+	
+	
+//	struct HAL_PWM_CFG_T PWM0_CFG;
+//	PWM0_CFG.freq= 500000;//500KHZ
+//	PWM0_CFG.ratio= 50;
+//	PWM0_CFG.Tdead_cycle_count=0;//need config it to 400ns 
+//	Config_PWM(HW_PWM_CHAN_0,&PWM0_CFG);	
+//  //hw_pwm_invert(HW_PWM_CHAN_0);
+//  hw_pwm_enable(HW_PWM_CHAN_0);	
+
+
+#endif
 
 
 

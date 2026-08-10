@@ -57,9 +57,7 @@ extern const unsigned char gImage_128x128_battery[32768];
 
 extern const unsigned char gImage_circle_100x100[20000];
 extern const unsigned char gImage_black_128x128[32768];
-extern const unsigned char gImage_charge_10[20000];
-extern const unsigned char gImage_charge_20[20000];
-extern const unsigned char gImage_charge_30[20000];
+
 
 extern const unsigned char gImage_charging[32768];
 

@@ -1906,7 +1906,7 @@ void bsr1901_product_information(void)
 /* retarget the C library printf function to the USART */
 int fputc(int ch, FILE *f)
 {
-	Gecko_Uart0_Send_Char(ch);
+	Gecko_Uart1_Send_Char(ch);
 	return ch;
 }
 

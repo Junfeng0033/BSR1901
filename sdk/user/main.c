@@ -12,6 +12,22 @@ const uint8 gSysTime[16] = __TIME__;
 //#define VERSION "(\"BraveStarr 1901+ GPU\" - GPU MCU Firware  - "__DATE__" - "__TIME__")"
 
 
+extern void BSR1901_MOS_Enable(void);
+extern void BSR1901_MOS_Disable(void);
+
+extern void Gui_Draw_Line(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1, uint16_t Color);
+
+extern void Gui_Circle(uint16_t X, uint16_t Y, uint16_t R, uint16_t fc);
+extern void Gui_FillCircle(uint16_t X, uint16_t Y, uint16_t R, uint16_t fc);
+
+extern void Gui_DrawRect(uint16_t x0, uint16_t y0, uint16_t w, uint16_t h, uint16_t Color);
+extern void Gui_DrawFillRect(uint16_t x0, uint16_t y0, uint16_t w, uint16_t h, uint16_t color);
+
+extern void Gui_ShowString_Transparent(uint16_t x, uint16_t y, uint16_t fc, uint8_t *s);
+
+
+
+
 
 
 
@@ -56,61 +72,37 @@ void SystemInit(void)
 
 
 
-
-/*
-标准深度休眠必须同时满足四个硬性条件：
-1，切断 CPU 内核、SRAM、主外设的主电源域；
-2，只给 RTC、备份 IO、独立看门狗等极小的 AlwaysOn 备份域单独供电；
-3，SRAM、CPU 寄存器全部丢失，运行状态无法保存；
-4，唤醒后触发上电复位，程序从头运行，不能从休眠断点继续执行。
-*/
-
-void EnterDeepSleepMode(void)
-{
-	
-		#if 0
-		//LCD_BL_CLR;
-		//bsr1901_pullup_pulldown_config(PAD_14,PAD_PULLDOWN);	
-		#endif
-
-		//LDO33_AUX disable, power down LCD module			
-		LDO33_LCD_Disable();
-
-//	wr_data = 0x608e7885;
-//	reg_write(0x40020000+0x020, wr_data);
-//				
-//	wr_data=reg_read(0x40020000+0x000);
-//	wr_data |= 0x200;//(set bit10=1)
-//	reg_write(0x40020000+0x000, wr_data);
-
-		bsr1901_prepare_sleep_for_pin_wakeup();
-		//sleep-wakeup setting
-		tc_gecko_cm0_aon_sleep();//deep sleep test for low power design
-	
-}
-
-
-
-
-
-
-
-
 int main (void) 
 {
 
 	//uint32_t current_tick;
-	
+	uint32 wr_data;
 	//int val=*myVariable;//access variables through pointers
 
 	SystemInit();
+	
+	//LDO33_LCD enable, power supply for LCD module
+	//LDO33_LCD_Enable();//power supply control(BSR1901 control backlight)
+	
 
-	aon_wakeup_irq_cfg();	
+
+
+	
+	//aon_wakeup_irq_cfg();	
 	//gecko_efuse_read();
 	
 	gecko_pinmux_default_config();
 	
+	
+	//gecko_pinmux_config(PAD12,PCLK_OUT);
 
+
+
+
+
+
+
+	
 //本程序适配 BSR1901 推荐硬件端口（单显示屏，非双屏异显）
 //              GND   电源地
 //              VCC   接3.3v电源--LDO33_LCD_OUT
@@ -126,75 +118,158 @@ int main (void)
 //              BLK   接PB4(PWM4/CSN2)-(PAD24)
 
 
+
+#if 1
 	gecko_pinmux_config(PAD22,SPICLK);
+	
 	gecko_pinmux_config(PAD23,SPIMOSI);	
+	
 	gecko_pinmux_config(PAD20,SPI_CSN_1);	
 
-	//gecko_pinmux_config(PAD24,SPI_CSN_2);
-
+	gecko_pinmux_config(PAD24,SPI_CSN_2);
 	//gecko_pinmux_config(PAD24,GPIO_B_4);//BL control,default function,do not needed to configure
+	
+	
 	gecko_pinmux_config(PAD21,GPIO_A_3);//DC control	
+	
+	
+	//gecko_pinmux_config(PAD6,GPIOA_7);//RES(reset) control
 	gecko_pinmux_config(PAD7,GPIOB_7);//RES(reset) control
 	
-	//LDO33_LCD enable, power supply for LCD module
-	LDO33_LCD_Enable();//power supply control(BSR1901 control backlight)
-	
+#else
 
-	Lcd_Init();
+pad20_as_spi_csn1();
+//pad21_as_spi_miso();
+pad21_as_gpio_a3();//LCD DC control	
+gecko_pinmux_config(PAD6,GPIOA_7);//LCD reset
+	
+pad22_as_spi_clk();
+pad23_as_spi_mosi();
+//pad24_as_spi_csn2();//LCD BL Control	
+
+#endif
+
+
+
 
 	
 	HW_SPI_Initialise(HAL_SPI_0);	
-	DMA_Configuration();	
-
-
-	//bsr1901_pullup_pulldown_config(PAD_14,PAD_PULLUP);	//BL control	
-	//LCD_BL_SET;//turn on backlight
-	//Lcd_SetRegion(0, 0, 127, 127);
-	//Lcd_Clear(BLACK);
-	Lcd_Clear(WHITE);
 	
-	//Lcd_Fill(0,0,X_MAX_PIXEL,Y_MAX_PIXEL,RED);
-	
-	Gui_FillCircle(64, 64, 20, C_RED);
-	
-	
-	delay_1us(8000);	
+	Lcd_Init();
 
-//	HW_SPI_Tx_DMA_32bit((uint16*)gImage_128x128_star_32bit, 8192);	
+	LCD_BL_SET;//turn on backlight
+	
 
-//	delay_1us(10000);	
-//  HW_SPI_Tx_DMA_32bit((uint16*)gImage_128x128_cake_32bit, 8192);	
 
-//	
-//	HW_SPI_Tx_DMA_32bit((uint16*)gImage_128x128_charging_32bit, 8192);
+	//LDO33_AUX enable, power supply for LCD module
+	wr_data = reg_read(0x40020000+0x28);
+	wr_data |= 0x340;
+	reg_write(0x40020000+0x28,wr_data);
+	//gek1109_pullup_pulldown_config(PAD_14,PAD_PULLDOWN);	
+
+	DMA_Configuration();
+	
+
+	Lcd_Clear(BLACK);	
+  delay_1us(8000);
+
+
+	Gui_Draw_Line(10,20, 200,20, BLUE);  // 水平线
+	Gui_Draw_Line(50,10, 50,150, GREEN); // 垂直线
+	//Gui_Circle(100,100,30,RED);
+	
+	//Gui_FillCircle(100,100,30,RED);
+	
+	//Gui_DrawRect(50, 50, 100, 60, RED);
+	//Gui_DrawFillRect(50, 50, 100, 60, RED);
+	
+	Gui_ShowString_Transparent(100, 100, RED, (uint8_t *)"HELLO");
+	
+  delay_1us(8000);
+
+
+
+  Lcd_Fill(0,0,X_MAX_PIXEL,Y_MAX_PIXEL,RED);//DMA fast
+	delay_1us(8000);
+	
+//  Gui_ProgressBar(50, 100, 150, 20, 60, BLACK, GREEN, GRAY1);
+//  while(1);
+
+//	Gui_RingProgress(80,80,35,6,55,BLUE,GREEN);
+//	//Gui_RingProgress(80,80,35,6,100,GRAY1,GREEN);
+//  while(1);
+	
+	
+	delay_1us(8000);
+
+
+
+	
+//	Lcd_Clear(BLACK);
+//	delay_1us(8000);	
+//	Lcd_Clear(WHITE);	
+//	delay_1us(8000);	
+//	Lcd_Clear(YELLOW);
 //	delay_1us(8000);
-//	
 
 
-	HW_SPI_Tx_DMA_32bit((uint16*)img_watch_2_240x240, 28800);
+
+  Lcd_Fill(0,0,X_MAX_PIXEL,Y_MAX_PIXEL,RED);//DMA fast
+	delay_1us(8000);
+	
+  Lcd_Fill(0,0,X_MAX_PIXEL,Y_MAX_PIXEL,GREEN);//DMA fast
 	delay_1us(8000);
 
 
-
-  uint16_t blue_color = BLACK;//C_TOMATO;//C_BLACK;//C_BLUE;
-  lcd_dma_refresh_colorblock(0, 0, X_MAX_PIXEL, Y_MAX_PIXEL,&blue_color);
+  Lcd_Fill(0,0,X_MAX_PIXEL,Y_MAX_PIXEL,C_BLUE);//DMA fast
 	delay_1us(8000);
-	
 
-	Lcd_SetRegion(20, 39, 109, 87);
-	HW_SPI_Tx_DMA((uint16*)gImage_bat_90x49, 8820);
+
+  //Lcd_Fill(0,0,X_MAX_PIXEL,Y_MAX_PIXEL,C_TOMATO);//DMA fast
+	//delay_1us(8000);
 
 	
-	Lcd_SetRegion(10, 10, 109, 109);
-	//HW_SPI_Tx_DMA((uint16*)gImage_circle_100x100, 20000);
+	
+	Lcd_SetRegion(70, 70, 197, 197);						//坐标设置
+	
+	//SPI_32bit_Transfer();
+	HW_SPI_Tx_DMA_32bit((uint16*)gImage_128x128_star_32bit, 8192);	
+
+	delay_1us(10000);	
+	HW_SPI_Tx_DMA_32bit( (uint16*)gImage_128x128_cake_32bit, 8192);	
+
+	delay_1us(10000);	
+	
+	//while(1)
+	HW_SPI_Tx_DMA_32bit((uint16*)gImage_128x128_charging_32bit, 8192);		
+
+	delay_1us(8000);
+
+  gecko_pinmux_config(PAD12,PCLK_OUT);
+
+
+
+	HW_SPI_Tx_DMA_32bit((uint16*)gImage_128x128_battery_32b, 8192);	
+
+	delay_1us(8000);
+		
+
+//	Lcd_SetRegion(20, 39, 109, 87);
+//	HW_SPI_Tx_DMA((uint16*)gImage_bat_90x49, 8820);
+//  delay_1us(8000);
+	
+		
+	Lcd_SetRegion(30, 30, 129, 129);
 	HW_SPI_Tx_DMA_8bit((uint16*)gImage_circle_100x100, 20000);	
 	delay_1us(8000);
- 
-	ui_paint_color_circle();
-	delay_1us(8000);	
+
+
+
+
+
+
 	
-
-
+	
 /*
 
     //PWM Charger
@@ -229,7 +304,8 @@ int main (void)
 //	gecko_pinmux_config(PAD21,GPIO_A_3);
 //	bsr1901_adc_8_9_analog_port();
 //	ConfigPort_AnalogFunction(ADC0_FUNC|ADC1_FUNC);
-//	ADC_Init();
+
+	ADC_Init();
 
 
 
@@ -275,8 +351,8 @@ int main (void)
 //		gecko_pinmux_config(PAD0,UART0_OUT);
 //		gecko_pinmux_config(PAD1,UART0_IN);
 
-//		gecko_pinmux_config(PAD13,UART1_OUT);
-//		gecko_pinmux_config(PAD14,UART1_IN);
+		gecko_pinmux_config(PAD13,UART1_OUT);
+		gecko_pinmux_config(PAD14,UART1_IN);
 		
 		Uart_16550_Initialise(HAL_UART_0,115200,0x3);	
 		Uart_16550_Initialise(HAL_UART_1,115200,0x3);	
@@ -288,9 +364,9 @@ int main (void)
 
 /************************i2c configure***************************************/
 
-	gecko_pinmux_config(PAD8,GPIO_A_4);//I2C/SDA
-	gecko_pinmux_config(PAD9,GPIO_A_5);//I2C/SCL
-	gecko_pinmux_config(PAD10,GPIO_A_6);//I2C/INT
+//	gecko_pinmux_config(PAD8,GPIO_A_4);//I2C/SDA
+//	gecko_pinmux_config(PAD9,GPIO_A_5);//I2C/SCL
+//	gecko_pinmux_config(PAD10,GPIO_A_6);//I2C/INT
 
   //gpio_set_input(GPIOA,6);
 	//GPIO_InitIO(OUTPUT,PA6);
@@ -313,41 +389,89 @@ int main (void)
 /************************i2c configure***************************************/
 
 
-	
-	#if 0
+	#if 1
   printf("date:%s \r\n",gSysDate);
   printf("time:%s \r\n",gSysTime);
 	printf("\r\n");
 	printf(VERSION);
-	printf("Manufacturer Name: %#04x\n\n", MANUFACTURER_NAME);
+	//printf("Manufacturer Name: %#04x\n\n", MANUFACTURER_NAME);
 	printf("Chip Local Name:    %s\n",   CHIP_LOCAL_NAME);
 	#endif
-	
+
 
 
 /************************SCGUI******SCGUI*****SCGUI****************************/
 
-#if 0
+#if 1
 	sc_gui_init(lcd_dma_16bit_refresh, 0, C_ROYAL_BLUE, C_BLUE, &lv_font_16);
+	
 	sc_clear(0, 0, SC_SCREEN_WIDTH,SC_SCREEN_HEIGHT,gui->bkc);
+	//sc_clear(0, 0, SC_SCREEN_WIDTH,SC_SCREEN_HEIGHT,gui->bkc);
 	
-	sc_draw_Fill(NULL, 50, 50, 30, 30, C_RED, 255);	
+	//sc_draw_Fill(NULL, 40, 40, 30, 30, C_RED, 255);	
+	
+	
+	
+	//sc_create_task(0, sc_demo_arc, 2);
 
-	sc_create_task(0, sc_demo_arc, 2);
-	//sc_create_task(0, sc_demo_text, 5);
 	
-	//sc_create_task(0, sc_demo_DrawEye_tesk, 2);
-	//sc_create_task(0, sc_demo_drity_tesk, 2);	
+	//sc_create_task(0, sc_demo_text, 2);	
+
+	sc_create_task(0, sc_demo_DrawEye_task, 2);	
+	
+	//sc_create_task(0, sc_watch_demo_task, 2);	
+
+	//sc_create_task(0, sc_demo_commpose, 2);	
+
+
+	//sc_create_task(0, sc_demo_Image_zip, 2);	
+
+
+	//sc_create_task(0, sc_demo_arc, 2);
+
+	//sc_create_task(0, sc_demo_text, 2);
+	
+#if 1
+	// 在 (60, 65) 位置画一个 100x16 的进度条，60% 进度
+	sc_draw_Bar(NULL,
+							60, 65,           // x, y 左上角坐标
+							100, 16,          // 宽, 高
+							6, 5,             // 外圆角半径, 内圆角半径
+							//C_BLACK,        // 外框颜色
+							C_GOLD,
+							C_GREEN,          // 填充颜色
+							60, 100);         // 当前值 60, 最大值 100 → 60%
+
+
+
+	// 在 (120, 170) 画一个 120x16 的滑块，50% 进度
+	sc_draw_Slider(NULL,
+								 120, 170,         // x, y
+								 120, 16,          // 宽, 高
+								 //C_BLACK,        // 轨道边框色
+								 C_RED,
+								 C_GREEN,          // 填充色
+								 50, 100);         // 当前值, 最大值
+#endif
+
 #endif
 ////////////////////////////////////////////////////////////////////////////////
 
-	Gui_DrawRect(10, 10, 100, 60, RED);
-	
-	Gui_ProgressBar(20, 20, 100, 20, 60, BLACK, GREEN, GRAY1);
-	
-	//Gui_RingProgress(80,80,35,6,65,GRAY0,GREEN);
+
 	
 /************************SCGUI******SCGUI*****SCGUI****************************/
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 //	watchdog_init(5000,1);
@@ -370,7 +494,7 @@ int main (void)
 
 /************************SysTick configure***************************************/
 	//----SysTick Init-----
-	//SysTick_Config(20000);//SysTick === 1ms tick for KEY detect
+	//SysTick_Config(2000);//SysTick === 1ms tick for KEY detect
 /************************SysTick configure***************************************/
 
 
@@ -402,24 +526,27 @@ int main (void)
 	
 #endif
 
+  //Lcd_Fill(0,0,X_MAX_PIXEL,Y_MAX_PIXEL,BLACK);//DMA fast
+	//Lcd_SetRegion(0, 30, 159, 159);
 	while(1)
-
 	{
 	
-//		sc_task_loop(NULL);		
-//		system_tick=TimeTick;//1ms tick
+		sc_task_loop(NULL);		
+		system_tick++;
+		//system_tick=TimeTick;//1ms tick
 	
-//		current_tick = TimeTick;
-
-		Task_KeyScan();
+		//current_tick = TimeTick;
+   
+		//Task_KeyScan();
 		
 		Get_Vbat_Voltage();
 		
 		//Task_Charger_Control();// 软件PWM方案	
-
+		
+    #if 0
 		Task_UI_Refresh();	
-
 		Task_BMS_Update();// IP2366 IC方案
+		#endif
 
 		
 	}

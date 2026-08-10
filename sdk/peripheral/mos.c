@@ -337,3 +337,14 @@ void BSR1901_MOS_Gate_CTRL(void)
 
 
 
+//	BSR1901_MOS_Enable();
+//	
+//  delay_1us(8000);
+//	
+//	BSR1901_MOS_Disable();
+	
+
+
+
+
+

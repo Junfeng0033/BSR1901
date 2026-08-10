@@ -23,7 +23,7 @@
 #include "i2c.h"
 #include "timer.h"
 
-#include "bsr1901_GUI.h"
+
 
 
 // Initialize key handle structure
@@ -138,35 +138,41 @@ void Task_KeyScan(void)
 	
 /************************key process debug***************************************/
 		
-	
-		//KEY1
+	   
+		//KEY1(SW2)
 		#if 1
-//		//PAD11(GPIOA7)
-//		gpio_status=K27_KEY_Detect();//default gpio_status=0x80 
-//		key_status=gpio_status & 0x80;
-	
-	  //PAD16(GPIOB4)
-		gpio_status=BSR1901_KEY1_Detect();
-		key_status=gpio_status & 0x10;	
+		//PAD11(GPIOA7)
+		gpio_status=K27_KEY_Detect();//default gpio_status=0x40 
 
+	  printf("\r\nnSW2 GPIO Value = %x",gpio_status);	
+
+		key_status=gpio_status & 0x40;	
+
+    printf("\r\nn----PAD11 GPIO_A7 SW2 KEY Value = %x",key_status);	
+		
+		
 		if(key_status==0x0)
 		{
-			Lcd_SetRegion(0, 0, 127, 127);
+			printf("\r\n K27 KEY Press Down \r\n ");
+			#if 0
+			//Lcd_SetRegion(0, 0, 127, 127);
 			if(flag_key1==0)
 			{
 				//UATR1_PRINT_LOG((unsigned char *)("K27 KEY Press Down"));
         printf("\r\n K27 KEY Press Down \r\n ");
-				HW_SPI_Tx_DMA_8bit((uint16*)gImage_128x128_star, 32768);			
+				//HW_SPI_Tx_DMA_8bit((uint16*)gImage_128x128_star, 32768);			
 				
 				flag_key1=1;
 			}
 			else
 			{
 				printf("\r\n K27 KEY Press Down Again \r\n ");				
-				HW_SPI_Tx_DMA_8bit((uint16*)gImage_128x128_cake, 32768);
+				//HW_SPI_Tx_DMA_8bit((uint16*)gImage_128x128_cake, 32768);
 					
 				flag_key1=0;								
 			}
+			#endif
+			
 		}
 		#endif
 
@@ -174,20 +180,29 @@ void Task_KeyScan(void)
 
 
 
-		//KEY2
-		#if 1	
+		//KEY2(SW1)
+		#if 0
 //		//PAD18(GPIOB6)		
 //		gpio_status=KP85_KEY2_Detect();//default gpio_status=0x40 
 //		key_status=gpio_status & 0x40;
 
 	  //PAD17(GPIOB5)
 		gpio_status=BSR1901_KEY2_Detect();
+		
+		printf("\r\nn----SW1 GPIO Value = %x",gpio_status);	
+		
+		
 		key_status=gpio_status & 0x20;			
 	
+		printf("\r\nn----SW1 KEY Value = %x",key_status);	
+		
+		
 		
 		if(key_status==0x0)
 		{
-			  #if 0
+			  
+			  printf("\r\n BSR1901_KEY2_Detect Press Down \r\n ");
+				#if 0
 				//LCD_BL_CLR;
 				//bsr1901_pullup_pulldown_config(PAD_14,PAD_PULLDOWN);	
         #endif
@@ -202,9 +217,9 @@ void Task_KeyScan(void)
 //				wr_data |= 0x200;//(set bit10=1)
 //				reg_write(0x40020000+0x000, wr_data);
 			
-        bsr1901_prepare_sleep_for_pin_wakeup();
-			  //sleep-wakeup setting
-				tc_gecko_cm0_aon_sleep();//deep sleep test for low power design
+//        bsr1901_prepare_sleep_for_pin_wakeup();
+//			  //sleep-wakeup setting
+//				tc_gecko_cm0_aon_sleep();//deep sleep test for low power design
 
 		}
 		#endif
@@ -214,7 +229,7 @@ void Task_KeyScan(void)
 
 
 
-		#if 1
+		#if 0
 		//////////////////mi tou/////////////////////////////////////	
 		//PAD10(GPIOA6)
 		//PAD10 pulldown

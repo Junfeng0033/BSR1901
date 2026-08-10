@@ -7,33 +7,42 @@
 
 //多用局部刷新（只更新变化区域），不要每帧 LCD_ClearScreen
 
-//void ShowNum_48(uint8_t n);
 
 //static img_source_t bat_persent_img = {(uint8_t*)gImage_bat_90x49, 90, 49};
 
 
-//显示字符
+#if 0
+static uint8_t ui_buf[1024];
 
-//`n` 就是你要在屏幕上画出来的那个 0-9 之间的具体数字
-
-void ShowNum_48(uint8_t n)
-{
-	unsigned char i, j;
-	uint8_t row_buf[48];
 	
-	for (i = 0; i < 48; i++){
-		for (j = 0; j < 24; j++){
-			if (Font48_dital_Table[n * 144 + i*3 + j/8] & (0x80 >> (j%8))){
-				row_buf[j*2] = (GREEN>>8)&0xFF;
-				row_buf[j*2+1] = GREEN&0xFF;
-			} else {
-				row_buf[j*2] = 0;
-				row_buf[j*2+1] = 0;
-			}
+//通过大的区域截取小区域
+static void img_cut_out(img_source_t *source, uint16_t x, uint16_t y, uint16_t width, uint16_t high)
+{
+	uint16_t i, j;
+	
+	if(source == NULL)
+		return ;
+
+	for(i=0; i<high; i++){
+		if((y+i) >= source->high)
+			break;
+		
+		for(j=0; j<width; j++){
+			if((x+j) >= source->width)
+				break;
+			
+			ui_buf[(i * width + j)*2] = source->p_img[((y+j)*source->width+(x+j))*2];
+			ui_buf[(i * width + j)*2 + 1] = source->p_img[((y+j)*source->width+(x+j))*2 + 1];		
 		}
-		Lcd_Write_data_dma(row_buf, 48);
 	}
 }
+#endif
+
+
+
+
+
+
 
 
 
@@ -67,17 +76,15 @@ void ShowPersent(void)
 //绘制空电池
 void ui_paint_bat(void)
 {
-	Lcd_SetRegion(20, 39, 109, 87);						//
-	//Lcd_Write_data_dma((uint8_t*)gImage_bat_90x49, 8820);
+	Lcd_SetRegion(20, 39, 109, 87);
+	Lcd_Write_data_dma((uint8_t*)gImage_bat_90x49, 8820);
+	
+	//img_cut_out(&bat_persent_img, 0, 0, 81, 43);	
+
+
+	
 }
 
-//绘制电池容量
-void ui_paint_bat_remain(uint8_t percent)
-{
-	//img_cut_out(&bat_persent_img, 0, 0, 81, 43);
-	Lcd_SetRegion(32, 39, 109, 87);						//
-	//Lcd_Write_data_dma(ui_buf, 81*43*2);
-}
 
 
 
@@ -213,32 +220,10 @@ void Task_UI_Refresh(void)
 		else 
 			uicount ++;
 		
-		
-		//Gui_ProgressBar(50, 100, 150, 20, 60, BLACK, GREEN, GRAY1);
-		//Gui_RingProgress(80,80,35,6,65,GRAY1,GREEN);
-		
-		
-		Gui_DrawArc(120, 120, 50, 135, 405, 0xFFFF);
+
+
 
     //BSR1901_FireEye_Demo();
-
-
-		
-//		if(uicount%10 == 1){
-//			if(uicount <= 10)
-//				HW_SPI_Tx_DMA((uint16*)gImage_charge_10, 20000);
-//			if(uicount <= 20)
-//				HW_SPI_Tx_DMA((uint16*)gImage_charge_20, 20000);
-//			if(uicount <= 30)
-//				HW_SPI_Tx_DMA((uint16*)gImage_charge_30, 20000);
-//		}
-		
-
-		
-//		GuiShowNumString_16(50, 18, uicount, 2);
-//		GuiShowNumString_48(32, 35, uicount, 2);
-//		GuiShowPersent(45+40, 45);
-//		GuiShowNumString_16(50, 85, uicount, 2);
 
 	
 }

@@ -27,7 +27,7 @@
 #include "timer.h"
 #include "bms_ip2366.h"
 #include "lcd_driver.h"
-#include "bsr1901_gui.h"
+
 #include "ui_app.h"
 
 #include "sc_demo_test.h"
@@ -117,12 +117,10 @@ extern  unsigned char gImage_128x128_star[32768];
 
 extern  const unsigned char gImage_128x128_battery[32768];
 
-//extern unsigned char gImage_bat_90x49[8820];
+
 extern const unsigned char gImage_circle_100x100[20000];
 extern const unsigned char gImage_black_128x128[32768];
-extern const unsigned char gImage_charge_10[20000];
-extern const unsigned char gImage_charge_20[20000];
-extern const unsigned char gImage_charge_30[20000];
+
 
 extern const unsigned char gImage_charging[32768];
 
@@ -131,6 +129,8 @@ extern const unsigned int img_watch_2_240x240[28800];
 extern uint16 Get_Vbat_Voltage(void);
 
 extern void Task_KeyScan(void);
+
+extern void Task_UI_Refresh(void);
 
 extern uint8 gpio_i2c_initialize(VOID);
 
@@ -143,11 +143,20 @@ extern void charger_process(charger_manager_t *charger);
 extern lv_font_t lv_font_16; 
 
 
-extern void lcd_dma_refresh_colorblock(uint16_t xs, uint16_t ys, uint16_t w, uint16_t h, color_t *color);
+extern void lcd_dma_refresh_colorblock(uint16_t xs, uint16_t ys, uint16_t xend,uint16_t yend, color_t *color);
 
 
+extern void GPIO_Toggle(uint8 pin);
 
 
+extern void pad20_as_spi_csn1(void);
+
+extern void pad21_as_spi_miso(void);
+extern void pad21_as_gpio_a3(void);
+
+extern void pad22_as_spi_clk(void);
+extern void pad23_as_spi_mosi(void);
+extern void pad24_as_spi_csn2(void);
 
 
 

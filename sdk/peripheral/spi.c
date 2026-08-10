@@ -120,7 +120,7 @@ void HW_SPI_Initialise(HAL_SPI_ID_T id)
 
 	if(id==HAL_SPI_0)
 	{
-#if 0
+#if 1
 		//register write test
 		//HW_SPI_SET_REG(0x00,0x1234);
 		//hwp_spi0->FIFODATA=0x1234;			
@@ -144,14 +144,16 @@ void HW_SPI_Initialise(HAL_SPI_ID_T id)
 		hwp_spi0->RCVINT=XR7_SPI_RECV_TRIG_1;				
 		/* set initial recv trigger value */
 
-		//HW_SPI_SET_REG(XR7_SPI_CTL, (XR7_SPI_CTL_LSB_ENABLE |XR7_SPI_CTL_MISO_ENABLE | XR7_SPI_CTL_SPI_ENABLE | XR7_SPI_CTL_FLUSH));
-		//hwp_spi0->CTROL=(XR7_SPI_CTL_LSB_ENABLE |XR7_SPI_CTL_MISO_ENABLE | XR7_SPI_CTL_SPI_ENABLE | XR7_SPI_CTL_FLUSH);
+		HW_SPI_SET_REG(XR7_SPI_CTL, (XR7_SPI_CTL_LSB_ENABLE |XR7_SPI_CTL_MISO_ENABLE | XR7_SPI_CTL_SPI_ENABLE | XR7_SPI_CTL_FLUSH));
+		hwp_spi0->CTROL=(XR7_SPI_CTL_LSB_ENABLE |XR7_SPI_CTL_MISO_ENABLE | XR7_SPI_CTL_SPI_ENABLE | XR7_SPI_CTL_FLUSH);
 		//0x04=0x1_0fbb;
+		HW_SPI_SET_REG(XR7_SPI_CTL,0x10fab);				
+		SPI_WRITE_CTLREG(GECKO_APB_SPI_CONTROL_REG,0x10fbb);
 		HW_SPI_SET_REG(XR7_SPI_CTL,0x10fab);
+
 		hwp_spi0->CTROL = 0x10f8b;	//8bit spi data
 		hwp_spi0->RCVINT = 0x0;		//mask all interrupt
 		
-		printf("HW_SPI_0_Initialise XR7_SPI_CTL hwp_spi0->CTROL= %x",hwp_spi0->CTROL);
 		
 	}		
 	
@@ -254,8 +256,11 @@ void HW_SPI_Tx_DMA_32bit(uint16 *pData, uint16 DataLen)
 }
 
 
-void HW_SPI_Tx_DMA_16bit(uint16 *pData, uint16 DataLen)
+ void HW_SPI_Tx_DMA_16bit(uint16 *pData, uint16 DataLen)
 {
+	
+#if 1
+	
 	LCD_DC_SET;	
   //SPI_16bit_Transfer();
 	hwp_spi0->CTROL=0x10f9b;
@@ -266,27 +271,11 @@ void HW_SPI_Tx_DMA_16bit(uint16 *pData, uint16 DataLen)
 	dma_sram_wait(1000);	
 
 	
-	
-	
-	
-#if 0
+#else
 
-	volatile uint32 dma_ctrl=0;
-	
-	LCD_RS_SET;	
+	LCD_DC_SET;	
 	hwp_spi0->CTROL=0x10f9b;//16bit
 	
-
-////===========================================================================
-////new function in chip BSR0035	
-//	dma_ctrl = DMA_READ_REG(AHB_DMA_CONTROL_REG);
-//	
-//	dma_ctrl |= dma_buslock_req_en;
-
-//	DMA_WRITE_REG((volatile uint32 *)AHB_DMA_CONTROL_REG, dma_ctrl);
-
-////===========================================================================
-
 	__disable_irq();
 	
 	DMA_WRITE_REG((volatile uint32 *)AHB_DMA_SRCADDR_REG, (uint32) pData);
@@ -294,7 +283,7 @@ void HW_SPI_Tx_DMA_16bit(uint16 *pData, uint16 DataLen)
 	DMA_WRITE_REG((volatile uint32 *)AHB_DMA_DATALENGTH_REG, DataLen);
 	DMA_WRITE_REG((volatile uint32 *)AHB_DMA_CONTROL_REG,(AHB_DMA_CONTROL_HWORD_TR|AHB_DMA_CONTROL_SRC_INC_DES_NOINC));
 	__enable_irq();	
-	
+
 #endif
 	
 	
@@ -414,13 +403,15 @@ extern void Lcd_SetRegion(uint16_t x_start,uint16_t y_start,uint16_t x_end,uint1
 
 
 
-void lcd_dma_refresh_colorblock(uint16_t xs, uint16_t ys, uint16_t w, uint16_t h, color_t *color)
+void lcd_dma_refresh_colorblock(uint16_t xs, uint16_t ys, uint16_t xend,uint16_t yend, color_t *color)
 {
-	uint32_t len = w*h;
+
+	uint16_t num = (xend-xs+1)*(yend-ys+1);
 	
-	Lcd_SetRegion(xs, ys, xs+w-1, ys+h-1);	
+	Lcd_SetRegion(xs,ys,xend,yend);	
 	
-	HW_SPI_Tx_DMA_16bit_ColorBlock(color,len);
+	HW_SPI_Tx_DMA_16bit_ColorBlock(color,num);
+	
 	
 }
 
@@ -428,7 +419,7 @@ void lcd_dma_refresh_colorblock(uint16_t xs, uint16_t ys, uint16_t w, uint16_t h
 
 
 
-void lcd_dma_16bit_refresh(uint16_t xs, uint16_t ys, uint16_t w, uint16_t h, color_t *color)
+ void lcd_dma_16bit_refresh(uint16_t xs, uint16_t ys, uint16_t w, uint16_t h, color_t *color)
 {
 	uint32_t len = w*h;
 	
@@ -738,114 +729,116 @@ extern const unsigned int fire_eye_8[12800];
 extern void delay_1us(unsigned int delay_val);
 
 
+#define DLY_INTERVAL  500
+
 void BSR1901_FireEye_Demo(void)
 {
 	#if 1
 
-	SPI_8bit_Transfer();
+	//SPI_8bit_Transfer();
   Lcd_SetRegion(0, 30, 159, 159);		
-	SPI_32bit_Transfer();
+	//SPI_32bit_Transfer();
 	HW_SPI_Tx_DMA_32bit((uint16*)fire_eye_1, 12800);	
 
-	delay_1us(9500);
+	delay_1us(DLY_INTERVAL);
 
-	SPI_8bit_Transfer();
+	//SPI_8bit_Transfer();
   Lcd_SetRegion(0, 30, 159, 159);		
-	SPI_32bit_Transfer();
+	//SPI_32bit_Transfer();
 	HW_SPI_Tx_DMA_32bit((uint16*)fire_eye_2, 12800);	
 
-	delay_1us(9500);
+	delay_1us(DLY_INTERVAL);
 
-	SPI_8bit_Transfer();
+	//SPI_8bit_Transfer();
   Lcd_SetRegion(0, 30, 159, 159);		
-	SPI_32bit_Transfer();
+	//SPI_32bit_Transfer();
 	HW_SPI_Tx_DMA_32bit((uint16*)fire_eye_3, 12800);	
 
-	delay_1us(9500);
+	delay_1us(DLY_INTERVAL);
 
-	SPI_8bit_Transfer();
+	//SPI_8bit_Transfer();
   Lcd_SetRegion(0, 30, 159, 159);		
-	SPI_32bit_Transfer();
+	//SPI_32bit_Transfer();
 	HW_SPI_Tx_DMA_32bit((uint16*)fire_eye_4, 12800);	
 
-	delay_1us(9500);
+	delay_1us(DLY_INTERVAL);
 
-	SPI_8bit_Transfer();
+	//SPI_8bit_Transfer();
   Lcd_SetRegion(0, 30, 159, 159);		
-	SPI_32bit_Transfer();
+	//SPI_32bit_Transfer();
 	HW_SPI_Tx_DMA_32bit((uint16*)fire_eye_5, 12800);	
 
-	delay_1us(9500);
+	delay_1us(DLY_INTERVAL);
 
-	SPI_8bit_Transfer();
+	//SPI_8bit_Transfer();
   Lcd_SetRegion(0, 30, 159, 159);		
-	SPI_32bit_Transfer();
+	//SPI_32bit_Transfer();
 	HW_SPI_Tx_DMA_32bit((uint16*)fire_eye_6, 12800);	
 
-	delay_1us(9500);
+	delay_1us(DLY_INTERVAL);
 
-	SPI_8bit_Transfer();
+	//SPI_8bit_Transfer();
   Lcd_SetRegion(0, 30, 159, 159);		
-	SPI_32bit_Transfer();
+	//SPI_32bit_Transfer();
 	HW_SPI_Tx_DMA_32bit((uint16*)fire_eye_7, 12800);	
 
-	delay_1us(9500);
+	delay_1us(DLY_INTERVAL);
 
-	SPI_8bit_Transfer();
+	//SPI_8bit_Transfer();
   Lcd_SetRegion(0, 30, 159, 159);		
-	SPI_32bit_Transfer();
+	//SPI_32bit_Transfer();
 	HW_SPI_Tx_DMA_32bit((uint16*)fire_eye_8, 12800);	
 
-	delay_1us(9500);
+	delay_1us(DLY_INTERVAL);
 
-	SPI_8bit_Transfer();
+	//SPI_8bit_Transfer();
   Lcd_SetRegion(0, 30, 159, 159);		
-	SPI_32bit_Transfer();
+	//SPI_32bit_Transfer();
 	HW_SPI_Tx_DMA_32bit((uint16*)fire_eye_7, 12800);	
 
-	delay_1us(9500);
+	delay_1us(DLY_INTERVAL);
 
-	SPI_8bit_Transfer();
+	//SPI_8bit_Transfer();
   Lcd_SetRegion(0, 30, 159, 159);		
-	SPI_32bit_Transfer();
+	//SPI_32bit_Transfer();
 	HW_SPI_Tx_DMA_32bit((uint16*)fire_eye_6, 12800);	
 
-	delay_1us(9500);
+	delay_1us(DLY_INTERVAL);
 
-	SPI_8bit_Transfer();
+	//SPI_8bit_Transfer();
   Lcd_SetRegion(0, 30, 159, 159);		
-	SPI_32bit_Transfer();
+	//SPI_32bit_Transfer();
 	HW_SPI_Tx_DMA_32bit((uint16*)fire_eye_5, 12800);	
 
-	delay_1us(9500);
+	delay_1us(DLY_INTERVAL);
 
-	SPI_8bit_Transfer();
+	//SPI_8bit_Transfer();
   Lcd_SetRegion(0, 30, 159, 159);		
-	SPI_32bit_Transfer();
+	//SPI_32bit_Transfer();
 	HW_SPI_Tx_DMA_32bit((uint16*)fire_eye_4, 12800);	
 
-	delay_1us(9500);
+	delay_1us(DLY_INTERVAL);
 
-	SPI_8bit_Transfer();
+	//SPI_8bit_Transfer();
   Lcd_SetRegion(0, 30, 159, 159);		
-	SPI_32bit_Transfer();
+	//SPI_32bit_Transfer();
 	HW_SPI_Tx_DMA_32bit((uint16*)fire_eye_3, 12800);	
 
-	delay_1us(9500);
+	delay_1us(DLY_INTERVAL);
 
-	SPI_8bit_Transfer();
+	//SPI_8bit_Transfer();
   Lcd_SetRegion(0, 30, 159, 159);		
-	SPI_32bit_Transfer();
+	//SPI_32bit_Transfer();
 	HW_SPI_Tx_DMA_32bit((uint16*)fire_eye_2, 12800);	
 
-	delay_1us(9500);
+	delay_1us(DLY_INTERVAL);
 
-	SPI_8bit_Transfer();
+	//SPI_8bit_Transfer();
   Lcd_SetRegion(0, 30, 159, 159);		
-	SPI_32bit_Transfer();
+	//SPI_32bit_Transfer();
 	HW_SPI_Tx_DMA_32bit((uint16*)fire_eye_1, 12800);	
 
-	delay_1us(9500);
+	//delay_1us(DLY_INTERVAL);
 
 
 
@@ -853,6 +846,8 @@ void BSR1901_FireEye_Demo(void)
 #endif
 	
 }
+
+
 
 
 

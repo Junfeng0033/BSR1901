@@ -57,14 +57,14 @@ void sc_demo_rect_pfs(int spi_clk)
 }
 
 //@brief 演示压缩图片
-void sc_demo_Image_zip(void)
+void sc_demo_Image_zip(sc_event_t *event)
 {
     sc_dec_zip dec;
-    sc_draw_Image_zip(NULL, 0, 0, &logo_160_80_zip, &dec, 0);
+    sc_draw_Image_zip(NULL, 100, 100, &logo_160_80_zip, &dec, 0);
 
-    sc_draw_Image(NULL, 10, 10, &tempC_img_48, 0);
+    sc_draw_Image(NULL, 60, 60, &tempC_img_48, 0);
 
-    sc_draw_Image(NULL, 80, 10, &EDA_img_32, 0);
+    sc_draw_Image(NULL, 130, 110, &EDA_img_32, 0);
 }
 
 
@@ -98,7 +98,7 @@ void sc_demo_text(sc_event_t *event)
 }
 
 //@brief 演示代码,组合控件显示
-void sc_demo_commpose(void)
+void sc_demo_commpose(sc_event_t *event)
 {
     sc_button_t button1;
     sc_init_Button(&button1, gui->font, "but1", C_BLACK);
@@ -288,8 +288,8 @@ void sc_demo_menu_task(sc_event_t *event)
 
 void sc_demo_DrawEye_task(sc_event_t *event)
 {
-    sc_rect_t rect1 = (sc_rect_t){10, 10, 50, 50};
-    sc_rect_t rect2 = (sc_rect_t){10, 70, 50, 50};
+    sc_rect_t rect1 = (sc_rect_t){60, 30, 50, 50};
+    sc_rect_t rect2 = (sc_rect_t){120, 90, 50, 50};
     static int Eye = 0;
     static int stup = 2;
 
@@ -340,7 +340,7 @@ void sc_watch_demo_task(sc_event_t *event)
     static int16_t stup = 2;
     static sc_dec_zip dec;
 
-    sc_rect_t rect1 = (sc_rect_t){20, 10, watch_106_64_zip.w, watch_106_64_zip.h};
+    sc_rect_t rect1 = (sc_rect_t){80, 50, watch_106_64_zip.w, watch_106_64_zip.h};
     if (event->type == SC_EVENT_TYPE_INIT)
     {
         int16_t cx = rect1.w / 2 + rect1.x - 7;         // X中心

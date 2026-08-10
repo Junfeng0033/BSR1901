@@ -695,12 +695,12 @@ void gecko_pinmux_config(Pad_Num_Type pad_num, Pad_Func_Type pad_func)
 			    if(pad_func==GPIO_A_3)
 					{
 						iomux_val = SYS_HW32_REG_RD(0x300);
-						iomux_val|=FUNC0_PWM_CH1;
+						iomux_val|=FUNC0_GPIOA_3;
 						SYS_HW32_REG_WR(0x300,iomux_val);
 						
 						//clear func1
 						iomux_val = SYS_HW32_REG_RD(0x304);
-						iomux_val&=(~FUNC0_PWM_CH1);
+						iomux_val&=(~FUNC0_GPIOA_3);
 						SYS_HW32_REG_WR(0x304,iomux_val);
 //						//clear func2						
 //						iomux_val = SYS_HW32_REG_RD(0x308);
@@ -813,6 +813,139 @@ void gecko_pinmux_config(Pad_Num_Type pad_num, Pad_Func_Type pad_func)
 
 	
 }
+
+
+
+
+
+
+
+
+
+//#define FUNC0_GPIOA_3						(1<<21)      //PAD21
+
+
+
+#define FUNC1_SPI_CS1						(1<<20)			 //PAD20
+#define FUNC1_SPI_MISO					(1<<21)      //PAD21
+#define FUNC1_SPI_CLK						(1<<22)			 //PAD22
+#define FUNC1_SPI_MOSI					(1<<23)      //PAD23
+#define FUNC1_SPI_CS2						(1<<24)      //PAD24
+
+
+
+void pad20_as_spi_csn1(void)
+{
+
+	uint32 iomux_val;
+	
+	
+	iomux_val = SYS_HW32_REG_RD(0x304);
+	iomux_val|=FUNC1_SPI_CS1;
+	SYS_HW32_REG_WR(0x304,iomux_val);	
+	
+	//clear func0
+	iomux_val = SYS_HW32_REG_RD(0x300);
+	iomux_val&=(~FUNC1_SPI_CS1);
+	SYS_HW32_REG_WR(0x300,iomux_val);
+								
+
+}
+
+
+
+void pad21_as_spi_miso(void)
+{
+
+	uint32 iomux_val;
+	
+	iomux_val = SYS_HW32_REG_RD(0x304);
+	iomux_val|=FUNC1_SPI_MISO;
+	SYS_HW32_REG_WR(0x304,iomux_val);	
+	
+	//clear func0
+	iomux_val = SYS_HW32_REG_RD(0x300);
+	iomux_val&=(~FUNC1_SPI_MISO);
+	SYS_HW32_REG_WR(0x300,iomux_val);
+					
+}
+
+
+void pad21_as_gpio_a3(void)
+{
+
+	uint32 iomux_val;
+	
+
+	iomux_val = SYS_HW32_REG_RD(0x300);
+	iomux_val|=FUNC0_GPIOA_3;
+	SYS_HW32_REG_WR(0x300,iomux_val);
+	
+	//clear func1
+	iomux_val = SYS_HW32_REG_RD(0x304);
+	iomux_val&=(~FUNC0_GPIOA_3);
+	SYS_HW32_REG_WR(0x304,iomux_val);
+
+					
+}
+
+
+void pad22_as_spi_clk(void)
+{
+
+	uint32 iomux_val;
+	
+	iomux_val = SYS_HW32_REG_RD(0x304);
+	iomux_val|=FUNC1_SPI_CLK;
+	SYS_HW32_REG_WR(0x304,iomux_val);	
+	
+	//clear func0
+	iomux_val = SYS_HW32_REG_RD(0x300);
+	iomux_val&=(~FUNC1_SPI_CLK);
+	SYS_HW32_REG_WR(0x300,iomux_val);
+					
+
+}
+
+
+
+void pad23_as_spi_mosi(void)
+{
+
+	uint32 iomux_val;
+	
+	iomux_val = SYS_HW32_REG_RD(0x304);
+	iomux_val|=FUNC1_SPI_MOSI;
+	SYS_HW32_REG_WR(0x304,iomux_val);	
+	
+	//clear func0
+	iomux_val = SYS_HW32_REG_RD(0x300);
+	iomux_val&=(~FUNC1_SPI_MOSI);
+	SYS_HW32_REG_WR(0x300,iomux_val);
+					
+
+}
+
+
+
+
+void pad24_as_spi_csn2(void)
+{
+
+	uint32 iomux_val;
+	
+	iomux_val = SYS_HW32_REG_RD(0x304);
+	iomux_val|=FUNC1_SPI_CS2;
+	SYS_HW32_REG_WR(0x304,iomux_val);	
+	
+	//clear func0
+	iomux_val = SYS_HW32_REG_RD(0x300);
+	iomux_val&=(~FUNC1_SPI_CS2);
+	SYS_HW32_REG_WR(0x300,iomux_val);
+					
+
+}
+
 
 
 

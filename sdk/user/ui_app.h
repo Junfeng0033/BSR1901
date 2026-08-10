@@ -22,17 +22,18 @@ extern void BSR1901_FireEye_Demo(void);
 extern void Lcd_Write_data_dma(uint8_t *p_data, uint16_t len);
 extern void HW_SPI_Tx_DMA_16bit_ColorBlock(uint16 *pData, uint16 DataLen);
 
-
-//绘制空电池
-void ui_paint_bat(void);
-
-//绘制电池剩余
-void ui_paint_bat_remain(uint8_t percent);
-
+extern void ShowNum_48(uint8_t n);
 
 void GuiShowNum(uint8_t x, uint8_t y, uint16_t num, uint8_t len);
 
 void GuiShowChar_16(uint16_t x, uint16_t y, uint8_t s);
+
+
+
+
+//绘制空电池
+void ui_paint_bat(void);
+
 
 
 void Gui_Circle(uint16_t X, uint16_t Y, uint16_t R, uint16_t fc);

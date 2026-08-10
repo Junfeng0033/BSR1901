@@ -114,7 +114,7 @@ __RAM_CODE__ void Clear_DMA_Interrupt(void)
 
 
 
-void Gecko_DMA_Transport(volatile void *dest,volatile const void *src, uint16 size,uint8 type, uint8 direct)
+ void Gecko_DMA_Transport(volatile void *dest,volatile const void *src, uint16 size,uint8 type, uint8 direct)
 {
 	//volatile uint32 dma_statu,dma_ctrl;//cpu_flags;
 
@@ -140,7 +140,6 @@ void Gecko_DMA_Transport(volatile void *dest,volatile const void *src, uint16 si
 //优化函数写法
 __RAM_CODE__ void HW_SPI_Tx_DMA_16bit_ColorBlock_Opt(uint16 *pData, uint16 DataLen)
 {
-	//volatile uint32 dma_ctrl=0;
 	
 	LCD_DC_SET;	
 	hwp_spi0->CTROL=0x10f9b;//16bit

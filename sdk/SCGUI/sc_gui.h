@@ -19,15 +19,16 @@ typedef void (*lcd_refresh_cb)(uint16_t x, uint16_t y, uint16_t w, uint16_t h, c
 	
 ===================================================================================================	
 
-void lcd_dma_refresh_colorblock(uint16_t xs, uint16_t ys, uint16_t w, uint16_t h, color_t *color)
+void lcd_dma_refresh_colorblock(uint16_t xs, uint16_t ys, uint16_t xend,uint16_t yend, color_t *color)
 {
-	uint32_t len = w*h;
+	uint16_t num = (xend-xs+1)*(yend-ys+1);
 	
-	Lcd_SetRegion(xs, ys, xs+w-1, ys+h-1);	
+	Lcd_SetRegion(xs,ys,xend,yend);	
 	
-	HW_SPI_Tx_DMA_16bit_ColorBlock(color,len);
+	HW_SPI_Tx_DMA_16bit_ColorBlock(color,num);
 	
 }
+
 ===================================================================================================	
 */
 

@@ -584,6 +584,41 @@ void bsr1901_PAD_pullup_pulldown_Config(void)
 }
 
 
+/*
+
+BOR_BIT[1:0]			
+
+2.2  2.4  2.6  2.8
+
+assign reg_aon_bor_bit_cfg_vset =reg_0x020[14:13]
+
+11£º2.2V
+00£º2.8V
+
+*/
+
+typedef enum {
+    BOR_2P2 = 0x11,
+    BOR_2P4 = 0x10,
+    BOR_2P6 = 0x01,		
+    BOR_2P8 = 0x00,
+    BOR_QTY
+} BOR_VSET_T; 
+
+
+void BOR_BIT_CFG(void)
+{
+
+//	wr_data = 0x608e789D;//test bor function [BOR_BT=11,-------2.35V]
+//	wr_data = 0x608e189D;//test bor function [BOR_BT=00,-------2.75V]
+
+	
+	
+}
+
+
+
+
 
 
 
@@ -600,7 +635,8 @@ uint32 AON_CFG_ANA_CTRL_1_0x20_Default=0x808E7885;//
 
 #define EN_OSC32M                (1<<12)
 
-#define PWRMOS_G(n)              (((n)&0x3)<<13)  //2 bits Power PMOS Gate
+#define BOR_VSET(n)              (((n)&0x3)<<13)  //2 bits:2.2  2.4  2.6  2.8
+
 #define LDO1_VSET(n)             (((n)&0x3)<<15)  //2 bits
 #define LDO1_EN                  (1<<17)
 #define BG_EN                    (1<<18)
@@ -640,7 +676,7 @@ void Osc32M_Freq_Trimming(void)
 //	pExitCriticalSection(status);	
 	
 	wr_data=reg_read(ADDR_AON_CFG_ANA_CTRL_2);
-  wr_data = AON_CFG_ANA_CTRL_2_0x24_Default;
+  wr_data = AON_CFG_ANA_CTRL_2_0x24_Default;////There is a bug in AON register reading
 	
 	//Force bit[4] to use SW config OSC frequency
 //	wr_data |= SW_FORCE_CALI32M_TUNE | SW_FORCE_LDO1_EN;//change LDO33_OUT and LDO33_FLASH_OUT to 3.5V//2022-08-19 ZJF
@@ -653,7 +689,7 @@ void Osc32M_Freq_Trimming(void)
 /////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	wr_data=reg_read(ADDR_AON_CFG_ANA_CTRL_1);
-  wr_data = AON_CFG_ANA_CTRL_1_0x20_Default;
+  wr_data = AON_CFG_ANA_CTRL_1_0x20_Default;////There is a bug in AON register reading
 	
 	//wr_data |= RCO32M_FREQ(0xff);//max
 //1@1 board
@@ -686,7 +722,7 @@ wr_data= wr_data| ahb_rd_data;
 //0xA0,4.065MHz
 //0x90,3.7736MHz(uart ok)	
 //	wr_data = 0xcc86789D;	//2024-09-14 @shanghai change bit19=0 24.2MH2@3.3V
-//#define RCO32M_EN_16M            (1<<19)
+
 
   wr_data = 0x9D86789D;//20MHZ
   //wr_data = 0x6F86789D;//16MHZ
@@ -694,6 +730,40 @@ wr_data= wr_data| ahb_rd_data;
   //wr_data = 0x7B8E789D;//2024-09-14 @Shanghai  8.5MHZ
 	
 	//wr_data = 0x708E789D;//2024-09-14 @Shanghai  8MHZ
+	
+	
+	wr_data = 0x608e7885;//default
+	
+	wr_data = 0xD08e7885;//1.2MHZ PCLK	
+	
+	wr_data = 0xD08e789D;//1.233MHZ PCLK	
+	
+	
+	wr_data = 0x608e789D;//test bor function [BOR_BT=11,-------2.35V]
+	wr_data = 0x608e189D;//test bor function [BOR_BT=00,-------2.75V]
+
+
+
+
+//#define LDO_FLASH_VSET(n)        (((n)&0x3)<<3)  //2 bits
+
+//assign reg_aon_ldo_flash_vset =reg_0x020[4:3]
+
+
+	//wr_data = 0xD08e189D;
+
+	wr_data = 0xD08e188D;//ldo flash vset=01 [3.2V],actual 3.6V
+	
+	wr_data = 0xD08e1885;//ldo flash vset=00 [3.3V],actual 3.48V
+
+
+	
+//test pwm
+//	wr_data = 0xCC8e7885;//1.2MHZ PCLK	
+	
+	
+	reg_write(0x40020000+0x020, wr_data);		
+	
 	reg_write(ADDR_AON_CFG_ANA_CTRL_1, wr_data);
 
 	AON_CFG_ANA_CTRL_1_0x20_Default=wr_data;	

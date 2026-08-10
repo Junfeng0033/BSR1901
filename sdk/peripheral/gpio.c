@@ -716,26 +716,141 @@ __RAM_CODE__ void GPIO_Toggle(uint8 pin)
 **                            End Of File
 ******************************************************************************/
 
-//KEY Port(GPIOA7)
-//uint8 Read_Gpio_A7(void)
 
+
+//PAD16
+//GPIOB4
+uint8 K27_KEY_Detect(void)
+{
+	
+	
+	uint32 iomux_val;
+  //GPIOB4	
+	uint8 pin=4;//GPIOB4(PAD16)
+
+
+	gecko_pinmux_config(PAD16,GPIO_B_4);
+
+/*
+
+// pinmux in comments
+assign GPIOB_4_iin =
+                    (pad_fun0[24]==1'b0 && pad_fun1[24]==1'b0) ? pad_24_pin :
+                    pad_fun1[16] ? pad_16_pin :
+                                   1'b1;
+
+*/	
+
+	
+	iomux_val = SYS_HW32_REG_RD(0x300);
+	iomux_val|=FUNC1_SPI_CS2;
+	SYS_HW32_REG_WR(0x300,iomux_val);
+	
+	iomux_val = SYS_HW32_REG_RD(0x304);
+	iomux_val|=FUNC1_SPI_CS2;
+	SYS_HW32_REG_WR(0x304,iomux_val);
+
+
+  GPIODIR_1 &=~BIT(pin);
+	
+	return (*((volatile unsigned long *)(GPIO_GROUP1_BASE+(1 << (pin + 2)))));
+	
+}
+
+
+
+
+
+
+
+
+
+#if 0
+//PAD11
 //GPIOA7
 uint8 K27_KEY_Detect(void)
 {
-	//uint8 gpio_status;
-	uint8 pin=7;//GPIOA7(PAD06)
+		uint32 iomux_val;
+//GPIOA7	
+	uint8 pin=7;//GPIOA7(PAD11)
 
-	//gecko_pinmux_config(PAD6,GPIOA_7);//config PAD06 as gpio	
-	gecko_pinmux_config(PAD11,GPIO_A_7);//config PAD11 as gpio
 
-	//GPIODIR_0 &=0x7F;//set GPIOA7 direction to input (config it to "0")
+	gecko_pinmux_config(PAD11,GPIO_A_7);
+
+/*
+
+	assign GPIOA_7_iin =
+                    pad_fun0[6] ? pad_06_pin :
+                    pad_fun1[11] ? pad_11_pin :
+                                   1'b1;
+
+*/	
+
+	//clear func0
+	iomux_val = SYS_HW32_REG_RD(0x300);
+	iomux_val&=(~FUNC1_UART0_SOUT);
+	SYS_HW32_REG_WR(0x300,iomux_val);
+
+	//clear func1
+	iomux_val = SYS_HW32_REG_RD(0x304);
+	iomux_val&=(~FUNC0_GPIO_A_7);
+	SYS_HW32_REG_WR(0x304,iomux_val);
+	
+
+
   GPIODIR_0 &=~BIT(7);
 	
-	pin=7;
+	return (*((volatile unsigned long *)(GPIO_GROUP0_BASE+(1 << (pin + 2)))));
+	
+}
+
+
+
+
+
+
+//KEY Port(GPIOA6)
+
+
+//GPIOA6
+uint8 K27_KEY_Detect(void)
+{
+	
+//GPIOA6	
+	uint8 pin=6;//GPIOA6(PAD10)
+
+	gecko_pinmux_config(PAD10,GPIO_A_6);//config PAD10 as gpio
+
+  GPIODIR_0 &=~BIT(6);
 	
 	return (*((volatile unsigned long *)(GPIO_GROUP0_BASE+(1 << (pin + 2)))));
-
+	
 }
+
+
+
+
+//GPIOA5
+uint8 K27_KEY_Detect(void)
+{
+	
+//GPIOA5	
+	uint8 pin=5;//GPIOA5(PAD9)
+
+	gecko_pinmux_config(PAD9,GPIO_A_5);//config PAD9 as gpio
+
+  GPIODIR_0 &=~BIT(5);
+	
+	return (*((volatile unsigned long *)(GPIO_GROUP0_BASE+(1 << (pin + 2)))));
+	
+}
+
+
+#endif 
+
+
+
+
 
 
 
@@ -766,6 +881,9 @@ uint8 BSR1901_KEY1_Detect(void)
 {
 	//uint8 gpio_status;
 	uint8 pin=4;
+	
+	bsr1901_pullup_pulldown_config(PAD_16,PAD_PULLUP);
+	
 
 	gecko_pinmux_config(PAD16,GPIO_B_4);//config PAD16 as gpio
 
@@ -924,5 +1042,212 @@ void Key1_Detect(void)
 			GpiopinWrite(PB3,HIGH);
 		}	
 }
+
+
+
+
+
+
+	
+	#if 0
+	//PAD0(GPIOA1)---SWCLK
+	gecko_pinmux_config(PAD0,GPIO_A_0);
+	//GPIO_InitIO(OUTPUT,PA0);	
+	GpiopinMode(PA0,OUTPUT);		
+  while(1)
+	{
+		GPIO_WriteIO(HIGH, PA0); 
+
+		GPIO_WriteIO(LOW, PA0);
+
+	}
+	#endif	
+	
+	
+
+	#if 0
+	//PAD0(GPIOA1)---SWCLK
+	gecko_pinmux_config(PAD0,GPIO_A_0);
+	//GPIO_InitIO(OUTPUT,PA0);	
+	GpiopinMode(PA0,OUTPUT);		
+  while(1)
+	{
+		GPIO_WriteIO(HIGH, PA0); 
+
+		GPIO_WriteIO(LOW, PA0);
+
+	}
+	#endif	
+
+	
+	#if 0
+	//PAD1(GPIOA1)---SWDIO
+	gecko_pinmux_config(PAD1,GPIO_A_1);
+	//GPIO_InitIO(OUTPUT,PA1);	
+	GpiopinMode(PA1,OUTPUT);		
+  while(1)
+	{
+		GPIO_WriteIO(HIGH, PA1); 
+
+		GPIO_WriteIO(LOW, PA1);
+
+	}
+	#endif	
+
+	
+	
+	#if 0
+	//PAD6
+	gecko_pinmux_config(PAD6,GPIOA_7);//LCD reset
+	GPIO_InitIO(OUTPUT,PA7);	
+	GpiopinMode(PA7,OUTPUT);		
+  while(1)
+	{
+		//GPIO_WriteIO(HIGH, PA7);
+		LCD_RST_SET;
+		
+		//GPIO_WriteIO(LOW, PA7);
+		LCD_RST_CLR;
+	}
+	#endif
+	
+	
+	
+	#if 0
+	//PAD7(GPIOB7)
+	gecko_pinmux_config(PAD7,GPIOB_7);//
+
+	GPIO_InitIO(OUTPUT,PB7);	
+	GpiopinMode(PB7,OUTPUT);		
+  while(1)
+	{
+		GPIO_WriteIO(HIGH, PB7); 
+
+		GPIO_WriteIO(LOW, PB7);
+	}
+
+	
+  #else
+//	//PAD19(GPIOB7)
+//	gecko_pinmux_config(PAD19,GPIO_B_7);
+//	
+//	
+//	GPIO_InitIO(OUTPUT,PB7);	
+//	GpiopinMode(PB7,OUTPUT);		
+//  while(1)
+//	{
+//		GPIO_WriteIO(HIGH, PB7); 
+//		//bsr1901_pullup_pulldown_config(PAD_07,PAD_PULLUP);
+//		GPIO_WriteIO(LOW, PB7);
+//		//bsr1901_pullup_pulldown_config(PAD_07,PAD_PULLDOWN);
+//	}
+	#endif
+	
+
+
+
+
+	#if 0
+	//PAD8
+	gecko_pinmux_config(PAD8,GPIO_A_4);	
+	GPIO_InitIO(OUTPUT,PA4);	
+	GpiopinMode(PA4,OUTPUT);		
+  while(1)
+	{
+		GPIO_WriteIO(HIGH, PA4);
+		GPIO_WriteIO(LOW, PA4);
+	}
+	#endif
+	
+	
+	
+	#if 0
+	//PAD9
+	gecko_pinmux_config(PAD9,GPIO_A_5);	
+	GPIO_InitIO(OUTPUT,PA5);	
+	GpiopinMode(PA5,OUTPUT);		
+  while(1)
+	{
+		GPIO_WriteIO(HIGH, PA5);
+		GPIO_WriteIO(LOW, PA5);
+	}
+	#endif
+	
+
+
+	#if 0
+	//PAD11
+	gecko_pinmux_config(PAD11,GPIO_A_7);	
+	GPIO_InitIO(OUTPUT,PA7);	
+	GpiopinMode(PA7,OUTPUT);		
+  while(1)
+	{
+		GPIO_WriteIO(HIGH, PA7);
+		GPIO_WriteIO(LOW, PA7);
+	}
+	#endif
+
+
+
+
+	#if 0
+	//PAD16(GPIOB4)
+	gecko_pinmux_config(PAD16,GPIO_B_4);	
+	GPIO_InitIO(OUTPUT,PB4);	
+	//GpiopinMode(PB4,OUTPUT);		
+  while(1)
+	{
+		GPIO_WriteIO(HIGH, PB4);
+		GPIO_WriteIO(LOW, PB4);
+	}
+	#endif
+	
+
+
+	#if 0
+	//PAD21
+	gecko_pinmux_config(PAD21,GPIO_A_3);//LCD DC
+	GPIO_InitIO(OUTPUT,PA3);	
+	GpiopinMode(PA3,OUTPUT);		
+  while(1)
+	{
+		GPIO_WriteIO(HIGH, PA3);
+		GPIO_WriteIO(LOW, PA3);
+	}
+	#endif	
+	
+
+
+	#if 0
+  //PAD24 LCD BL Control
+	GPIO_InitIO(OUTPUT,PB4);	
+	GpiopinMode(PB4,OUTPUT);		
+  while(1)
+	{
+		//GPIO_WriteIO(HIGH, PB4);
+		LCD_BL_SET;
+		
+		//GPIO_WriteIO(LOW, PB4);
+		LCD_BL_CLR;
+		
+	}
+	#endif
+	
+	#if 0
+	//PAD24(GPIOB4)
+	//default function GPIO
+	//GPIO_InitIO(OUTPUT,PB4);	
+	GpiopinMode(PB4,OUTPUT);		
+  while(1)
+	{
+		GPIO_WriteIO(HIGH, PB4); 
+
+		GPIO_WriteIO(LOW, PB4);
+
+	}
+	#endif		
+	
+	
+
 
 

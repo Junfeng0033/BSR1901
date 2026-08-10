@@ -1511,7 +1511,7 @@ void gecko_task_cm0_sw_flash_quad()
 }
 //------------------------------------------------------------------
 
-__RAM_CODE__ void gecko_task_cm0_sw_flash()
+void gecko_task_cm0_sw_flash()
 {
     unsigned int ahb_wr_data;
     //  unsigned int ahb_rd_data;
@@ -2196,4 +2196,45 @@ void HJ_Read_UserData(void)
 	
 	
 	
+
+
+
+
+
+
+/*
+标准深度休眠必须同时满足四个硬性条件：
+1，切断 CPU 内核、SRAM、主外设的主电源域；
+2，只给 RTC、备份 IO、独立看门狗等极小的 AlwaysOn 备份域单独供电；
+3，SRAM、CPU 寄存器全部丢失，运行状态无法保存；
+4，唤醒后触发上电复位，程序从头运行，不能从休眠断点继续执行。
+*/
+
+void EnterDeepSleepMode(void)
+{
+	
+		#if 0
+		//LCD_BL_CLR;
+		//bsr1901_pullup_pulldown_config(PAD_14,PAD_PULLDOWN);	
+		#endif
+
+		//LDO33_AUX disable, power down LCD module			
+		LDO33_LCD_Disable();
+
+//	wr_data = 0x608e7885;
+//	reg_write(0x40020000+0x020, wr_data);
+//				
+//	wr_data=reg_read(0x40020000+0x000);
+//	wr_data |= 0x200;//(set bit10=1)
+//	reg_write(0x40020000+0x000, wr_data);
+
+		bsr1901_prepare_sleep_for_pin_wakeup();
+		//sleep-wakeup setting
+		tc_gecko_cm0_aon_sleep();//deep sleep test for low power design
+	
+}
+
+
+
+
 

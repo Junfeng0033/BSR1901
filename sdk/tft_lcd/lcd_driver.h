@@ -28,7 +28,7 @@
 //              SCL   接SPI_CLK--------(PAD22)
 //              SDA   接SPI_MOSI-------(PAD23)
 
-//              RES   接PB7------------(PAD07)
+//              RES   接PA7------------(PAD06)
 //              DC    接PA3------------(PAD21)
 
 //              CS    接SPI_CSN_1------(PAD20)//有些显示屏可以直接接地
