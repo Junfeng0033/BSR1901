@@ -4,7 +4,7 @@
 //
 //  文 件 名   : lcd_driver.h
 //  版 本 号   : v2.0
-//  生成日期   : 2018-1111
+//  生成日期   : 2018-11-11
 //  最近修改   : 
 //  功能描述   : 0.96寸ISP LCD 4接口演示例程
 /******************************************************************************
@@ -49,11 +49,6 @@
 //#define X_MAX_PIXEL		128
 //#define Y_MAX_PIXEL		128
 
-//#define USE_HORIZONTAL 1  //设置横屏或者竖屏显示 0或1为竖屏 2或3为横屏
-
-
-
-#define USE_HORIZONTAL   0  //设置横屏或者竖屏显示 0或1为竖屏 2或3为横屏
 
 #define X_MAX_PIXEL 240
 #define Y_MAX_PIXEL 240
@@ -131,25 +126,8 @@
 
 
 
-#define LCD_WR_DATA(data){\
-LCD_RS_SET;\
-LCD_DATAOUT(data);\
-LCD_WR_CLR;\
-LCD_WR_SET;\
-}
 
 
-
-
-#define 	LCD_WR_REG										Lcd_WriteIndex //写入命令
-#define 	LCD_WR_DATA8									Lcd_WriteData	 //写入数据
-
-
-#define 	LCD_NV3022_CMD								Lcd_WriteIndex
-#define 	LCD_NV3022_Parameter					Lcd_WriteData
-
-#define 	LCD_NV3023_CMD								Lcd_WriteIndex
-#define 	LCD_NV3023_Parameter					Lcd_WriteData
 
 
 enum

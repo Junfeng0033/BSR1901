@@ -107,6 +107,20 @@ extern void sram_gecko_task_cm0_sw_flash(void);
 extern void ui_paint_bat_percent(uint8_t percent);
 
 
+extern void BSR1901_MOS_Enable(void);
+extern void BSR1901_MOS_Disable(void);
+
+extern void Gui_Draw_Line(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1, uint16_t Color);
+
+extern void Gui_Circle(uint16_t X, uint16_t Y, uint16_t R, uint16_t fc);
+extern void Gui_FillCircle(uint16_t X, uint16_t Y, uint16_t R, uint16_t fc);
+
+extern void Gui_DrawRect(uint16_t x0, uint16_t y0, uint16_t w, uint16_t h, uint16_t Color);
+extern void Gui_DrawFillRect(uint16_t x0, uint16_t y0, uint16_t w, uint16_t h, uint16_t color);
+
+extern void Gui_ShowString_Transparent(uint16_t x, uint16_t y, uint16_t fc, uint8_t *s);
+
+
 extern unsigned int gImage_128x128_charging_32bit[8192];
 extern const unsigned int gImage_128x128_battery_32b[8192];
 
@@ -159,6 +173,7 @@ extern void pad23_as_spi_mosi(void);
 extern void pad24_as_spi_csn2(void);
 
 
+extern void EnterDeepSleepMode(void);
 
 #endif
 

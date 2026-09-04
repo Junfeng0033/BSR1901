@@ -1,4 +1,26 @@
 
+/*
+
+可以使用SPI+DMA模式。如果SPI时钟设置为6MHz，发送一个字节是8/6000000=1.333us。
+ws2812b设置一个灯珠的颜色需要3个字节(r, g, b)，3*8=24位。使SPI的字节正好等于ws2812b的一个位。
+因此控制一个ws2812b需要SPI发送24byte，在头部加入两个字节0，在尾部加入一个字节0进行消抖，
+总共需要24+3=27byte。
+
+
+
+一个RGB灯亮起需要24个数据，0x0F代表1码，0x01是0码。
+在colorful_lights_display_buffer数据中填入
+
+u8 colorful_lights_display_buffer[24] = 
+{
+0x01,0x01,0x01,0x01,0x01,0x01,0x01,0x01,
+0x01,0x01,0x01,0x01,0x01,0x01,0x01,0x01,
+0x0F,0x0F,0x0F,0x0F,0x0F,0x0F,0x0F,0x0F,
+};   //rgb数据BUF
+
+
+*/
+
 
 #define NUM_LED 8
 uint8_t LED_Data[NUM_LED][4];

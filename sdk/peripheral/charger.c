@@ -373,14 +373,6 @@ void pwm_dutyset(u8 index)
 
 void pwm_close(void)
 {
-#if 0
-	PWMCON=0;
-	IOMUXC3 &=~0X06;
-	P0 &= ~BIT(2);
-	P0 |= BIT(3);
-	pwm_init_flag =1;//next time use pwm must init	
-#endif
-
 	gecko_pwm_stop();
 	pwm_init_flag =1;//next time use pwm must init	
 	
@@ -624,27 +616,7 @@ void dc_detect(void)
 
 
 
-#if 0
 
-int main() {
-    charger_manager_t my_charger;
-    
-    charger_init(&my_charger);
-    
-    printf("Charger Initialized. Starting loop...\n");
-    
-    // 模拟运行
-    for (int i = 0; i < 10; i++) {
-        charger_process(&my_charger);
-        // 此处打印状态用于验证
-        // printf("State: %d, Vbat: %dmV, Icharge: %dmA, PWM: %d\n", 
-        //        my_charger.state, my_charger.v_bat_mv, my_charger.i_charge_ma, my_charger.pwm_duty);
-    }
-
-    return 0;
-}
-
-#endif
 
 
 
@@ -655,6 +627,9 @@ void Task_Charger_Control(void)
 {
 	
     charger_process(&my_charger);
+	
+		printf("State: %d, Vbat: %dmV, Icharge: %dmA, PWM: %d\n",my_charger.state, my_charger.v_bat_mv, my_charger.i_charge_ma, my_charger.pwm_duty);
+	
 		//bulk_func();
 
 }

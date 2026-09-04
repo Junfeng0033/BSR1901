@@ -31,8 +31,8 @@
     Program header entries: 1
     Section header entries: 17
 
-    Program header offset: 398844 (0x000615fc)
-    Section header offset: 398876 (0x0006161c)
+    Program header offset: 401044 (0x00061e94)
+    Section header offset: 401076 (0x00061eb4)
 
     Section header string table index: 16
 
@@ -57,9 +57,9 @@
     0x20000000:   85 78 8e 80 00 00 00 00 00 00 00 00 00 00 00 00    .x..............
     0x20000010:   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    ................
     0x20000020:   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    ................
-    0x20000030:   74 b6 01 00 1c c1 01 00 fc c4 01 00 00 00 00 00    t...............
-    0x20000040:   00 00 01 10 76 f1 00 00 62 00 00 00 85 16 00 00    ....v...b.......
-    0x20000050:   3f 16 00 00 10 00 00 00 00 00 00 00 30 00 00 20    ?...........0.. 
+    0x20000030:   7c b6 01 00 24 c1 01 00 04 c5 01 00 00 00 00 00    |...$...........
+    0x20000040:   00 00 01 10 76 f1 00 00 62 00 00 00 8d 16 00 00    ....v...b.......
+    0x20000050:   47 16 00 00 10 00 00 00 00 00 00 00 30 00 00 20    G...........0.. 
     0x20000060:   00 00 00 00 50 00 02 00 00 00 00 00 00 00 00 00    ....P...........
     0x20000070:   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    ................
     0x20000080:   02 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    ................
@@ -82,37 +82,37 @@
 
 
 ** Section #6 '.debug_frame' (SHT_PROGBITS)
-    Size   : 4224 bytes
+    Size   : 4248 bytes
 
 
 ** Section #7 '.debug_info' (SHT_PROGBITS)
-    Size   : 67808 bytes
+    Size   : 67968 bytes
 
 
 ** Section #8 '.debug_line' (SHT_PROGBITS)
-    Size   : 21320 bytes
+    Size   : 21428 bytes
 
 
 ** Section #9 '.debug_loc' (SHT_PROGBITS)
-    Size   : 13240 bytes
+    Size   : 13272 bytes
 
 
 ** Section #10 '.debug_macinfo' (SHT_PROGBITS)
-    Size   : 43128 bytes
+    Size   : 42912 bytes
 
 
 ** Section #11 '.debug_pubnames' (SHT_PROGBITS)
-    Size   : 5906 bytes
+    Size   : 5975 bytes
 
 
 ** Section #12 '.symtab' (SHT_SYMTAB)
-    Size   : 11856 bytes (alignment 4)
+    Size   : 11936 bytes (alignment 4)
     String table #13 '.strtab'
-    Last local symbol no. 490
+    Last local symbol no. 494
 
 
 ** Section #13 '.strtab' (SHT_STRTAB)
-    Size   : 9040 bytes
+    Size   : 9196 bytes
 
 
 ** Section #14 '.note' (SHT_NOTE)
@@ -120,7 +120,7 @@
 
 
 ** Section #15 '.comment' (SHT_PROGBITS)
-    Size   : 40500 bytes
+    Size   : 42288 bytes
 
 
 ** Section #16 '.shstrtab' (SHT_STRTAB)
@@ -137,10 +137,10 @@ address     size       variable name                            type
 0x00000000  0x1        flag_key2                                uint8
 
 address     size       variable name                            type
-0x0001c648  0xc        gSysDate                                 array[12] of const uint8
+0x0001c650  0xc        gSysDate                                 array[12] of const uint8
 
 address     size       variable name                            type
-0x0001c654  0x10       gSysTime                                 array[16] of const uint8
+0x0001c65c  0x10       gSysTime                                 array[16] of const uint8
 
 address     size       variable name                            type
 0x00000000  0x4        myVariable                               pointer to volatile int
@@ -149,18 +149,18 @@ address     size       variable name                            type
 0x00000000  0x2        ram_color                                volatile uint16
 
 address     size       variable name                            type
-0x0001c63c  0xc        km_prt                                   const sc_image_t
-0x0001c63c  0x4        km_prt.map                               pointer to const uint8_t
-0x0001c640  0x4        km_prt.mask                              pointer to const uint8_t
-0x0001c644  0x4(20:12) km_prt.w                                 uint32_t
-0x0001c644  0x4(8:12)  km_prt.h                                 uint32_t
-0x0001c644  0x4(0:8)   km_prt.bpp                               uint32_t
+0x0001c644  0xc        km_prt                                   const sc_image_t
+0x0001c644  0x4        km_prt.map                               pointer to const uint8_t
+0x0001c648  0x4        km_prt.mask                              pointer to const uint8_t
+0x0001c64c  0x4(20:12) km_prt.w                                 uint32_t
+0x0001c64c  0x4(8:12)  km_prt.h                                 uint32_t
+0x0001c64c  0x4(0:8)   km_prt.bpp                               uint32_t
 
 address     size       variable name                            type
-0x0001c510  0xb4       km_prt_tab                               array[90] of const uint16_t
+0x0001c518  0xb4       km_prt_tab                               array[90] of const uint16_t
 
 address     size       variable name                            type
-0x0001c4fc  0x14       cmaps                                    array[1] of const lv_font_fmt_txt_cmap_t
+0x0001c504  0x14       cmaps                                    array[1] of const lv_font_fmt_txt_cmap_t
 
 address     size       variable name                            type
 0x20000030  0x1c       font_dsc                                 lv_font_fmt_txt_dsc_t
@@ -176,10 +176,10 @@ address     size       variable name                            type
 0x20000048  0x4        font_dsc.last_glyph_id                   uint32_t
 
 address     size       variable name                            type
-0x0001b674  0xaa6      glyph_bitmap                             array[2726] of const uint8_t
+0x0001b67c  0xaa6      glyph_bitmap                             array[2726] of const uint8_t
 
 address     size       variable name                            type
-0x0001c11c  0x318      glyph_dsc                                array[99] of const lv_font_fmt_txt_glyph_dsc_t
+0x0001c124  0x318      glyph_dsc                                array[99] of const lv_font_fmt_txt_glyph_dsc_t
 
 address     size       variable name                            type
 0x2000004c  0x14       lv_font_16                               lv_font_t
@@ -191,7 +191,7 @@ address     size       variable name                            type
 0x2000005c  0x4        lv_font_16.dsc                           pointer to unknown Type 
 
 address     size       variable name                            type
-0x0001c434  0xc8       unicode_list_1                           array[100] of const uint16_t
+0x0001c43c  0xc8       unicode_list_1                           array[100] of const uint16_t
 
 address     size       variable name                            type
 0x2000002c  0x4        gui                                      pointer to sc_gui_t
@@ -231,16 +231,16 @@ address     size       variable name                            type
 0x0001f008  0x8000     gImage_128x128_star_32bit                array[8192] of const unsigned int
 
 address     size       variable name                            type
-0x00013674  0x8000     gImage_128x128_cake_32bit                array[8192] of const unsigned int
+0x0001367c  0x8000     gImage_128x128_cake_32bit                array[8192] of const unsigned int
 
 address     size       variable name                            type
-0x0000b674  0x8000     gImage_128x128_battery_32b               array[8192] of const unsigned int
+0x0000b67c  0x8000     gImage_128x128_battery_32b               array[8192] of const unsigned int
 
 address     size       variable name                            type
-0x00003674  0x8000     gImage_128x128_charging_32bit            array[8192] of const unsigned int
+0x0000367c  0x8000     gImage_128x128_charging_32bit            array[8192] of const unsigned int
 
 address     size       variable name                            type
-0x00003080  0x5f1      asc16                                    array[1521] of const unsigned char
+0x00003088  0x5f1      asc16                                    array[1521] of const unsigned char
 
 address     size       variable name                            type
 0x00000000  0xa        lcd                                      app_lcd_t

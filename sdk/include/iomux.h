@@ -159,7 +159,8 @@ typedef enum
 																		//PAD04
 																		//PAD05	
     GPIOA_7,    			UART0_SOUT,				  //PAD06
-    GPIOB_7,					UART0_SIN,				  //PAD07		
+    GPIOB_7,					UART0_SIN,				  //PAD07
+	
     PWM_CH3,	 			  GPIO_A_4,						//PAD08
     PWM_CH6,	 				GPIO_A_5,						//PAD09	
     PWM_CH7,	 				GPIO_A_6,						//PAD10

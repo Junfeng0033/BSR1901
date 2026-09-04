@@ -17,14 +17,14 @@
 #if 0
 
 // -------------------------- 配置区（根据你的芯片改）-------------------------
-#define PUF_SRAM_START  0x20000000UL  // 你的 1901 SRAM 起始地址
+#define PUF_SRAM_START  0x20000000UL  	// 你的 1901 SRAM 起始地址
 #define PUF_SRAM_SIZE   1024            // 用 1KB（4KB 足够，留 3KB 给程序）
 #define PUF_STABLE_TH   90              // 稳定阈值：90% 以上上电不变才算稳定
-#define PUF_OUTPUT_BITS 64               // 输出 64bit ID（改成 32 就是 32bit）
+#define PUF_OUTPUT_BITS 64              // 输出 64bit ID（改成 32 就是 32bit）
 // -----------------------------------------------------------------------------
 
-static uint8_t sram_buf[PUF_SRAM_SIZE];       // 上电原始值缓存
-static uint8_t stable_mask[PUF_SRAM_SIZE];     // 稳定位掩码（1=稳定，0=不稳定）
+static uint8_t sram_buf[PUF_SRAM_SIZE];       	// 上电原始值缓存
+static uint8_t stable_mask[PUF_SRAM_SIZE];     	// 稳定位掩码（1=稳定，0=不稳定）
 static uint64_t puf_uid = 0;                    // 最终 64bit UID
 
 // 1. 上电第一时间抓取 SRAM 初始值（必须在任何初始化代码前调用！）

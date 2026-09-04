@@ -81,7 +81,7 @@
             <nStopB2X>0</nStopB2X>
           </BeforeMake>
           <AfterMake>
-            <RunUserProg1>1</RunUserProg1>
+            <RunUserProg1>0</RunUserProg1>
             <RunUserProg2>0</RunUserProg2>
             <UserProg1Name>build.bat</UserProg1Name>
             <UserProg2Name>Keil5_disp_size_bar_v0.3.exe</UserProg2Name>
@@ -540,6 +540,26 @@
               <FileType>1</FileType>
               <FilePath>.\tft_lcd\lcd_driver.c</FilePath>
             </File>
+            <File>
+              <FileName>drv_lcd_gc9a01.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\tft_lcd\GC9A01\drv_lcd_gc9a01.c</FilePath>
+            </File>
+            <File>
+              <FileName>drv_lcd_nv3022b.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\tft_lcd\NV3022B\drv_lcd_nv3022b.c</FilePath>
+            </File>
+            <File>
+              <FileName>drv_lcd_nv3023.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\tft_lcd\NV3023\drv_lcd_nv3023.c</FilePath>
+            </File>
+            <File>
+              <FileName>drv_lcd_st7735s.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\tft_lcd\ST7735S\drv_lcd_st7735s.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -549,26 +569,6 @@
               <FileName>rle_decompression.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\RLE_decompression\rle_decompression.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>segger_rtt</GroupName>
-          <Files>
-            <File>
-              <FileName>SEGGER_RTT.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\RTT\SEGGER_RTT.c</FilePath>
-            </File>
-            <File>
-              <FileName>SEGGER_RTT_printf.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\RTT\SEGGER_RTT_printf.c</FilePath>
-            </File>
-            <File>
-              <FileName>SEGGER_RTT_Syscalls_KEIL.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\RTT\SEGGER_RTT_Syscalls_KEIL.c</FilePath>
             </File>
           </Files>
         </Group>

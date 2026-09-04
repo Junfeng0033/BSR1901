@@ -256,7 +256,10 @@ void HW_SPI_Tx_DMA_32bit(uint16 *pData, uint16 DataLen)
 }
 
 
- void HW_SPI_Tx_DMA_16bit(uint16 *pData, uint16 DataLen)
+
+
+
+__RAM_CODE__ void HW_SPI_Tx_DMA_16bit(uint16 *pData, uint16 DataLen)
 {
 	
 #if 1
@@ -288,6 +291,7 @@ void HW_SPI_Tx_DMA_32bit(uint16 *pData, uint16 DataLen)
 	
 	
 }
+
 
 
 
@@ -695,6 +699,68 @@ void Config_CSN1_and_CSN2_Both_Invalid(void)
 	SYS_HW32_REG_WR(0x304,TempC);	
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//向液晶屏写一个8位指令
+void Lcd_WriteIndex(uint8_t Index)
+{
+	//SPI 写命令时序开始
+	LCD_DC_CLR;
+	SPI_WriteData(Index);
+}
+
+//向液晶屏写一个8位数据
+void Lcd_WriteData(uint8_t Data)
+{
+   LCD_DC_SET;
+   SPI_WriteData(Data); 
+}
+
+//向液晶屏写一个16位数据
+void LCD_WriteData_16Bit(uint16_t Data)
+{
+	LCD_DC_SET;
+
+#if 0	
+	SPI_WriteData(Data>>8); 	//写入高8位数据
+	SPI_WriteData(Data); 			//写入低8位数据
+#else
+
+//#define LSBF								(1<<6)
+/*
+input lsbf;
+
+1'b0:MSB first (高位在前)
+
+1'b1:LSB first
+*/
+	
+	//hwp_spi0->CTROL=0x10f9b;							//16bit spi data
+  //#define 	SPI_Write16bitData(data) 			{hwp_spi0->CTROL = 0x10f9b;hwp_spi0->FIFODATA = data;}
+
+
+
+
+	SPI_Write16bitData(Data);
+	
+	
+	
+#endif	
+	
+}
 
 
 

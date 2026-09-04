@@ -221,6 +221,8 @@ void Task_KeyScan(void)
 //			  //sleep-wakeup setting
 //				tc_gecko_cm0_aon_sleep();//deep sleep test for low power design
 
+//					EnterDeepSleepMode();
+
 		}
 		#endif
 		

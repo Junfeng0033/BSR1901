@@ -7,6 +7,8 @@
 #include "uart.h"
 
 
+//D2A_AON_RSVD_7						pin_wakeup选择			
+
 
 
 uint32 AON_CFG_ANA_CTRL_1_0x20_Default=0x808E7885;
@@ -584,6 +586,10 @@ void bsr1901_PAD_pullup_pulldown_Config(void)
 }
 
 
+
+
+
+
 /*
 
 BOR_BIT[1:0]			
@@ -598,23 +604,150 @@ assign reg_aon_bor_bit_cfg_vset =reg_0x020[14:13]
 */
 
 typedef enum {
-    BOR_2P2 = 0x11,
-    BOR_2P4 = 0x10,
-    BOR_2P6 = 0x01,		
-    BOR_2P8 = 0x00,
+    BOR_2P2 = 3,    // 0b11
+    BOR_2P4 = 2,    // 0b10
+    BOR_2P6 = 1,		// 0b01
+    BOR_2P8 = 0,    // 0b00
     BOR_QTY
-} BOR_VSET_T; 
+} BOR_VSET_T;
 
 
-void BOR_BIT_CFG(void)
+
+#define BOR_VOL_SET(n)      				(((n)&0x3U)<<13U)  //2 bits
+
+#define BOR_VOL_SET_MASK            (0x3U << 13U)           //BOR域完整掩码，用于清除旧值
+#define BSR1901_BOR_CTRL_REG_ADDR   (0x40020000U + 0x20U)
+
+
+
+void BSR1901_SetBOR_Voltage(BOR_VSET_T bor_cfg)
 {
 
 //	wr_data = 0x608e789D;//test bor function [BOR_BT=11,-------2.35V]
 //	wr_data = 0x608e189D;//test bor function [BOR_BT=00,-------2.75V]
 
+
+		unsigned int wr_data;
 	
+	  uint8_t hw_code = (uint8_t)bor_cfg;
+	
+	  hw_code &= 0x3U;
+	
+		wr_data = reg_read(BSR1901_BOR_CTRL_REG_ADDR);
+    wr_data &= ~BOR_VOL_SET_MASK;          //清除旧的bit13---bit14
+    wr_data |= BOR_VOL_SET(hw_code);       //写入新2bit配置
+    reg_write(BSR1901_BOR_CTRL_REG_ADDR, wr_data);
 	
 }
+
+
+uint8_t BSR1901_GetBOR_VoltageCode(void)
+{
+    uint32_t rd_data = reg_read(BSR1901_BOR_CTRL_REG_ADDR);
+    return (uint8_t)((rd_data & BOR_VOL_SET_MASK) >> 13U);
+}
+
+
+
+
+
+
+
+
+typedef enum
+{
+    LPBG_VTRIM_CFG0 = 0,    // 0b000
+    LPBG_VTRIM_CFG1 = 1,    // 0b001
+    LPBG_VTRIM_CFG2 = 2,    // 0b010
+    LPBG_VTRIM_CFG3 = 3,    // 0b011
+    LPBG_VTRIM_CFG4 = 4,    // 0b100
+    LPBG_VTRIM_CFG5 = 5,    // 0b101
+    LPBG_VTRIM_CFG6 = 6,    // 0b110
+    LPBG_VTRIM_CFG7 = 7     // 0b111
+}LPBG_VTRIM_CFG_T;
+
+
+
+#define BSR1901_LPBG_VTRIM(n)            (((n)&0x7U)<<5U)  //3 bits
+#define BSR1901_LPBG_VTRIM_MASK      		 (0x7U << 5U)
+#define BSR1901_LPBG_CTRL_REG_ADDR   		 (0x40020000U + 0x20U)
+
+
+void BSR1901_CFG_LPBG_VTRIM(LPBG_VTRIM_CFG_T lpbg_vtrim_cfg)
+{
+		unsigned int wr_data;
+	
+	  uint8_t trim_val = (uint8_t)lpbg_vtrim_cfg;
+	
+		trim_val &= 0x07U;
+	
+		wr_data = reg_read(BSR1901_LPBG_CTRL_REG_ADDR);
+    wr_data &= ~BSR1901_LPBG_VTRIM_MASK; //清除旧的bit5---bit7
+    wr_data |= BSR1901_LPBG_VTRIM(trim_val);
+    reg_write(BSR1901_LPBG_CTRL_REG_ADDR, wr_data);
+
+}
+
+
+
+
+
+
+
+
+
+//#define LDO_FLASH_VSET(n)        (((n)&0x3)<<3)  //2 bits,
+//ERROR config //VSET<1:0> 00-->3.3V;01-->3.2V;10-->3.4V;11-->3.5V
+
+typedef enum {
+    LDO_FLASH_3P2V = 0,    // 0b00
+    LDO_FLASH_3P3V = 1,    // 0b01
+    LDO_FLASH_3P4V = 2,    // 0b10
+    LDO_FLASH_3P5V = 3,    // 0b11
+    LDO_FLASH_QTY
+} LDO_NORFLASH_VSET_T;
+
+
+
+#define LDO_NORFLASH_VSET(n)             (((n)&0x3U)<<3U)  //2 bits bit3---bit4, VSET<1:0>
+#define LDO_NORFLASH_VSET_MASK         	 (0x3U << 3U)      //NorFlash LDO VSET域完整掩码，清除旧值
+#define BSR1901_NORFLASH_LDO_REG_ADDR    (0x40020000U + 0x20U)
+
+
+void BSR1901_SetLdo_NorFlashVoltage(LDO_NORFLASH_VSET_T vset_cfg)
+{
+    uint32_t wr_data;
+    uint8_t hw_code;
+
+    /* 非法参数直接返回，不操作寄存器 */
+    if ((uint32_t)vset_cfg >= LDO_FLASH_QTY)
+    {
+        return;
+    }
+
+    hw_code = (uint8_t)vset_cfg;
+    hw_code &= 0x3U;
+
+    wr_data = reg_read(BSR1901_NORFLASH_LDO_REG_ADDR);
+    wr_data &= ~LDO_NORFLASH_VSET_MASK;        //清除旧的bit3---bit4
+    wr_data |= LDO_NORFLASH_VSET(hw_code);     //写入新2bit配置
+    reg_write(BSR1901_NORFLASH_LDO_REG_ADDR, wr_data);
+}
+
+
+
+uint8_t BSR1901_GetLdo_NORFlashVoltageCode(void)
+{
+    uint32_t rd_data = reg_read(BSR1901_NORFLASH_LDO_REG_ADDR);
+    return (uint8_t)((rd_data & LDO_NORFLASH_VSET_MASK) >> 3U);
+}
+
+
+
+
+
+
+
 
 
 
@@ -757,6 +890,24 @@ wr_data= wr_data| ahb_rd_data;
 	wr_data = 0xD08e1885;//ldo flash vset=00 [3.3V],actual 3.48V
 
 
+//test freq limit @20260830
+	wr_data = 0xDF8e1885;//1.26MHZ@3.3V PCLK
+	
+	wr_data = 0xEF8e1885;//1.32MHZ@3.3V PCLK
+
+
+	wr_data = 0xFF8e1885;//1.37MHZ@3.3V PCLK
+
+//enale bit19
+  wr_data = 0x5D861885;//1.44MHZ@3.3V PCLK
+	
+
+  wr_data = 0x60861885;//1.47MHZ@3.3V PCLK
+	
+
+
+
+	
 	
 //test pwm
 //	wr_data = 0xCC8e7885;//1.2MHZ PCLK	
@@ -769,7 +920,111 @@ wr_data= wr_data| ahb_rd_data;
 	AON_CFG_ANA_CTRL_1_0x20_Default=wr_data;	
 	wr_data=AON_CFG_ANA_CTRL_1_0x20_Default;
 	
+	
+#if 0
+//==========================================================================		
+	
+
+//"A larger value corresponds to a higher voltage."
+
+	BSR1901_CFG_LPBG_VTRIM(0);	
+//	BSR1901_CFG_LPBG_VTRIM(1);
+//	BSR1901_CFG_LPBG_VTRIM(2);	
+//	BSR1901_CFG_LPBG_VTRIM(3);
+//	BSR1901_CFG_LPBG_VTRIM(4);	
+//	BSR1901_CFG_LPBG_VTRIM(5);
+//	BSR1901_CFG_LPBG_VTRIM(6);
+//	BSR1901_CFG_LPBG_VTRIM(7);	
+	
+
+//@VDD5V = 4V
+//	BSR1901_SetLdo_NorFlashVoltage(LDO_FLASH_3P2V);	//3.44V
+	BSR1901_SetLdo_NorFlashVoltage(LDO_FLASH_3P3V);	//3.55V
+
+//	BSR1901_SetLdo_NorFlashVoltage(LDO_FLASH_3P4V);	//3.64V
+	
+	
+//	BSR1901_SetLdo_NorFlashVoltage(LDO_FLASH_3P5V);		//3.74V
+
+
+//==========================================================================		
+
+
+
+
+//==========================================================================		
+	
+//@VDD5V = 4V
+
+	BSR1901_CFG_LPBG_VTRIM(4);	
+
+	BSR1901_SetLdo_NorFlashVoltage(LDO_FLASH_3P3V);	//3.32V
+
+
+
+//==========================================================================	
+
+//==========================================================================		
+	
+//@VDD5V = 4V
+
+	BSR1901_CFG_LPBG_VTRIM(3);	
+
+	BSR1901_SetLdo_NorFlashVoltage(LDO_FLASH_3P3V);	//3.36V
+
+
+
+//==========================================================================	
+
+
+//==========================================================================		
+	
+//@VDD5V = 4V
+
+	BSR1901_CFG_LPBG_VTRIM(5);	
+
+	BSR1901_SetLdo_NorFlashVoltage(LDO_FLASH_3P3V);	//3.52V
+
+
+
+//==========================================================================	
+
+
+
+
+//==========================================================================		
+	
+//@VDD5V = 4V
+
+	BSR1901_CFG_LPBG_VTRIM(5);	
+
+	BSR1901_SetLdo_NorFlashVoltage(LDO_FLASH_3P2V);	//3.44V
+
+
+
+//==========================================================================	
+
+
+//==========================================================================		
+	
+//@VDD5V = 4V
+
+	BSR1901_CFG_LPBG_VTRIM(4);	
+
+	BSR1901_SetLdo_NorFlashVoltage(LDO_FLASH_3P2V);	//3.24V
+
+
+
+//==========================================================================	
+#endif
+
+
 }
+
+
+
+
+
 
 
 void GEK_Retention_Reg_Access(void)
@@ -891,6 +1146,7 @@ void gecko_rootnode_osc32mclk_cfg(void)
 
 
 
+
 //可以为用户提供1.8V /2.8V/3.0V/3.3V 四种电压。
 /*
 VSET<1:0>         Vout
@@ -962,6 +1218,11 @@ void LDO33_LCD_Disable(void)
 		reg_write(0x40020000+0x28,wr_data);			
 		#endif	
 }
+
+
+
+
+
 
 
 

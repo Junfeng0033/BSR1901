@@ -5,6 +5,12 @@
 
 
 //=================================================
+//D2A_AON_RSVD_0						MOS gate Enable			
+
+//D2A_AON_RSVD_1						OP1_OUT连接ADC CH8			
+//D2A_AON_RSVD_2						OP2_OUT连接ADC CH9			
+
+
 // VDD5V ---> VSS
 // OPA Module Configure
 // OP_Amp can be confiured as ...
@@ -36,10 +42,20 @@ assign reg_aon_op2_en        = reg_0x028[5];
 assign reg_aon_op1_en        = reg_0x028[4];
 assign reg_aon_opa_pga2      = reg_0x028[3:2];
 assign reg_aon_opa_pga1      = reg_0x028[1:0];
+
+
 ////////////////////////////////////////////////////////////
+
+
+PGA<1:0> = 00  ---> 1倍放大
+PGA<1:0> = 01  ---> 4倍放大
+PGA<1:0> = 10  ---> 8倍放大
+PGA<1:0> = 11  ---> 16倍放大
+
 
 1,enable opa1 and opa2
 2,tune PGA gain 
+
 
 ////////////////////////////////////////////////////////////
 */

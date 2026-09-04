@@ -1,6 +1,6 @@
 
 #include "main.h"
-#include "SEGGER_RTT.h"
+//#include "SEGGER_RTT.h"
 
 //#define __RAM_CODE__ 		__attribute__((section("ram_code")))
 int const Trim[] __attribute__ ((section(".ARM.__at_0x0001F000"))) = {0x12345678,0x22334455};
@@ -12,18 +12,6 @@ const uint8 gSysTime[16] = __TIME__;
 //#define VERSION "(\"BraveStarr 1901+ GPU\" - GPU MCU Firware  - "__DATE__" - "__TIME__")"
 
 
-extern void BSR1901_MOS_Enable(void);
-extern void BSR1901_MOS_Disable(void);
-
-extern void Gui_Draw_Line(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1, uint16_t Color);
-
-extern void Gui_Circle(uint16_t X, uint16_t Y, uint16_t R, uint16_t fc);
-extern void Gui_FillCircle(uint16_t X, uint16_t Y, uint16_t R, uint16_t fc);
-
-extern void Gui_DrawRect(uint16_t x0, uint16_t y0, uint16_t w, uint16_t h, uint16_t Color);
-extern void Gui_DrawFillRect(uint16_t x0, uint16_t y0, uint16_t w, uint16_t h, uint16_t color);
-
-extern void Gui_ShowString_Transparent(uint16_t x, uint16_t y, uint16_t fc, uint8_t *s);
 
 
 
@@ -94,7 +82,9 @@ int main (void)
 	gecko_pinmux_default_config();
 	
 	
-	//gecko_pinmux_config(PAD12,PCLK_OUT);
+	gecko_pinmux_config(PAD12,PCLK_OUT);
+	
+	//while(1);
 
 
 
@@ -186,8 +176,11 @@ pad23_as_spi_mosi();
 	Gui_ShowString_Transparent(100, 100, RED, (uint8_t *)"HELLO");
 	
   delay_1us(8000);
+	
 
-
+  //EnterDeepSleepMode();
+	
+	
 
   Lcd_Fill(0,0,X_MAX_PIXEL,Y_MAX_PIXEL,RED);//DMA fast
 	delay_1us(8000);
@@ -499,35 +492,10 @@ pad23_as_spi_mosi();
 
 
 
-#ifdef LOG_SEGGER_RTT
-	
-	SEGGER_RTT_Init();
-//  SEGGER_RTT_ConfigUpBuffer(0, NULL, NULL, 0, SEGGER_RTT_MODE_BLOCK_IF_FIFO_FULL);
-
-//  SEGGER_RTT_WriteString(0, "SEGGER Real-Time-Terminal Sample\r\n\r\n");
-//  SEGGER_RTT_WriteString(0, "###### Testing SEGGER_printf() ######\r\n");
-//  SEGGER_RTT_printf(0, "printf Test: %%c,         'S' : %c.\r\n", 'S');
-//  SEGGER_RTT_printf(0, "printf Test: %%5c,        'E' : %5c.\r\n", 'E');
-//  SEGGER_RTT_printf(0, "printf Test: %%-5c,       'G' : %-5c.\r\n", 'G');
-//  SEGGER_RTT_printf(0, "printf Test: %%5.3c,      'G' : %-5c.\r\n", 'G');
-//  SEGGER_RTT_printf(0, "printf Test: %%.3c,       'E' : %-5c.\r\n", 'E');
-//  SEGGER_RTT_printf(0, "printf Test: %%c,         'R' : %c.\r\n", 'R');
-
-	SEGGER_RTT_printf(0, "LOG_SEGGER_RTT Initial !\r\n");
-	SEGGER_RTT_printf(0, "Tick Value: %d\r\n", TimeTick);
-	
-//	SEGGER_RTT_SetTerminal(1);
-//	SEGGER_RTT_WriteString(0, RTT_CTRL_TEXT_RED);
-//	SEGGER_RTT_WriteString(0, "ERROR: Timeout!\r\n");
-
-//	SEGGER_RTT_SetTerminal(2);
-//	SEGGER_RTT_WriteString(0, RTT_CTRL_TEXT_GREEN);
-//	SEGGER_RTT_WriteString(0, "INFO: Current = 1.23A\r\n");
-	
-#endif
-
   //Lcd_Fill(0,0,X_MAX_PIXEL,Y_MAX_PIXEL,BLACK);//DMA fast
 	//Lcd_SetRegion(0, 30, 159, 159);
+	
+	
 	while(1)
 	{
 	
