@@ -551,11 +551,6 @@
               <FilePath>.\tft_lcd\NV3022B\drv_lcd_nv3022b.c</FilePath>
             </File>
             <File>
-              <FileName>drv_lcd_nv3023.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\tft_lcd\NV3023\drv_lcd_nv3023.c</FilePath>
-            </File>
-            <File>
               <FileName>drv_lcd_st7735s.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\tft_lcd\ST7735S\drv_lcd_st7735s.c</FilePath>

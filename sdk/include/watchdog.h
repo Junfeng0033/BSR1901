@@ -120,6 +120,22 @@ typedef struct
 
 
 /*----- WDT Time Period -----*/
+
+/*
+0x10 register [7:4]
+
+IntTime 7:4 R/WP The timer interval of the interrupt stage:
+0: Clock period ¡Á 2^6
+1: Clock period ¡Á 2^8
+2: Clock period ¡Á 2^10
+3: Clock period ¡Á 2^11
+4: Clock period ¡Á 2^12
+5: Clock period ¡Á 2^13
+6: Clock period ¡Á 2^14
+7: Clock period ¡Á 2^15
+
+*/
+
 #define NDS_WDT_TIME_POW_2_6              (0x0UL)                           ///< WDT timer interval    64 clock periods.
 #define NDS_WDT_TIME_POW_2_8              (0x1UL)                           ///< WDT timer interval   256 clock periods.
 #define NDS_WDT_TIME_POW_2_10             (0x2UL)                           ///< WDT timer interval  1024 clock periods.
@@ -132,6 +148,20 @@ typedef struct
 
 
 /* 0x10 Control Register */
+
+/*
+0x10 register [10:8]
+RstTime 10:8 R/WP The time interval of the reset stage:
+
+0: Clock period ¡Á 2^7
+1: Clock period ¡Á 2^8
+2: Clock period ¡Á 2^9
+3: Clock period ¡Á 2^10
+4: Clock period ¡Á 2^11
+5: Clock period ¡Á 2^12
+6: Clock period ¡Á 2^13
+7: Clock period ¡Á 2^14
+*/
 
 #define WDT_CTRL_RSTTIME_POW_2_7        0x000
 #define WDT_CTRL_RSTTIME_POW_2_8        0x100

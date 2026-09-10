@@ -49,7 +49,6 @@ void SystemInit(void)
     hal_nvic_clear_pending_irq(CMU2AHB_IRQ);
     hal_nvic_set_priority(CMU2AHB_IRQ, 0);
     hal_nvic_enable_irq(CMU2AHB_IRQ);   
-
 		gecko_task_cm0_sw_flash_quad();
     //----------------------------------
 #endif
@@ -108,8 +107,6 @@ int main (void)
 //              BLK   接PB4(PWM4/CSN2)-(PAD24)
 
 
-
-#if 1
 	gecko_pinmux_config(PAD22,SPICLK);
 	
 	gecko_pinmux_config(PAD23,SPIMOSI);	
@@ -119,26 +116,11 @@ int main (void)
 	gecko_pinmux_config(PAD24,SPI_CSN_2);
 	//gecko_pinmux_config(PAD24,GPIO_B_4);//BL control,default function,do not needed to configure
 	
-	
 	gecko_pinmux_config(PAD21,GPIO_A_3);//DC control	
-	
 	
 	//gecko_pinmux_config(PAD6,GPIOA_7);//RES(reset) control
 	gecko_pinmux_config(PAD7,GPIOB_7);//RES(reset) control
 	
-#else
-
-pad20_as_spi_csn1();
-//pad21_as_spi_miso();
-pad21_as_gpio_a3();//LCD DC control	
-gecko_pinmux_config(PAD6,GPIOA_7);//LCD reset
-	
-pad22_as_spi_clk();
-pad23_as_spi_mosi();
-//pad24_as_spi_csn2();//LCD BL Control	
-
-#endif
-
 
 
 
@@ -167,7 +149,9 @@ pad23_as_spi_mosi();
 	Gui_Draw_Line(10,20, 200,20, BLUE);  // 水平线
 	Gui_Draw_Line(50,10, 50,150, GREEN); // 垂直线
 	//Gui_Circle(100,100,30,RED);
-	
+
+
+
 	//Gui_FillCircle(100,100,30,RED);
 	
 	//Gui_DrawRect(50, 50, 100, 60, RED);
@@ -182,9 +166,6 @@ pad23_as_spi_mosi();
 	
 	
 
-  Lcd_Fill(0,0,X_MAX_PIXEL,Y_MAX_PIXEL,RED);//DMA fast
-	delay_1us(8000);
-	
 //  Gui_ProgressBar(50, 100, 150, 20, 60, BLACK, GREEN, GRAY1);
 //  while(1);
 
@@ -193,8 +174,6 @@ pad23_as_spi_mosi();
 //  while(1);
 	
 	
-	delay_1us(8000);
-
 
 
 	
@@ -217,10 +196,6 @@ pad23_as_spi_mosi();
   Lcd_Fill(0,0,X_MAX_PIXEL,Y_MAX_PIXEL,C_BLUE);//DMA fast
 	delay_1us(8000);
 
-
-  //Lcd_Fill(0,0,X_MAX_PIXEL,Y_MAX_PIXEL,C_TOMATO);//DMA fast
-	//delay_1us(8000);
-
 	
 	
 	Lcd_SetRegion(70, 70, 197, 197);						//坐标设置
@@ -238,9 +213,6 @@ pad23_as_spi_mosi();
 
 	delay_1us(8000);
 
-  gecko_pinmux_config(PAD12,PCLK_OUT);
-
-
 
 	HW_SPI_Tx_DMA_32bit((uint16*)gImage_128x128_battery_32b, 8192);	
 
@@ -252,9 +224,9 @@ pad23_as_spi_mosi();
 //  delay_1us(8000);
 	
 		
-	Lcd_SetRegion(30, 30, 129, 129);
-	HW_SPI_Tx_DMA_8bit((uint16*)gImage_circle_100x100, 20000);	
-	delay_1us(8000);
+//	Lcd_SetRegion(30, 30, 129, 129);
+//	HW_SPI_Tx_DMA_8bit((uint16*)gImage_circle_100x100, 20000);	
+//	delay_1us(8000);
 
 
 
@@ -406,7 +378,6 @@ pad23_as_spi_mosi();
 	
 	
 	//sc_create_task(0, sc_demo_arc, 2);
-
 	
 	//sc_create_task(0, sc_demo_text, 2);	
 
@@ -420,11 +391,8 @@ pad23_as_spi_mosi();
 	//sc_create_task(0, sc_demo_Image_zip, 2);	
 
 
-	//sc_create_task(0, sc_demo_arc, 2);
-
-	//sc_create_task(0, sc_demo_text, 2);
 	
-#if 1
+#if 0
 	// 在 (60, 65) 位置画一个 100x16 的进度条，60% 进度
 	sc_draw_Bar(NULL,
 							60, 65,           // x, y 左上角坐标
@@ -459,23 +427,6 @@ pad23_as_spi_mosi();
 
 
 
-
-
-
-
-
-
-
-
-//	watchdog_init(5000,1);
-
-
-//iWatchDog for FSM Control
-
-//	  iWDT_Timer_Disable();
-//	  iWDT_Timer_Restart();	
-//	  iWDT_Timer_Init();
-
 /************************Buck-Boost Control***************************************/
     
   //charger_init(&my_charger);
@@ -494,11 +445,20 @@ pad23_as_spi_mosi();
 
   //Lcd_Fill(0,0,X_MAX_PIXEL,Y_MAX_PIXEL,BLACK);//DMA fast
 	//Lcd_SetRegion(0, 30, 159, 159);
-	
-	
+
+
+//=============================================
+//iWatchDog for FSM Control
+	  iWDT_Timer_Disable();
+	  iWDT_Timer_Restart();	
+	  iWDT_Timer_Init();
+
+//	watchdog_init(5000,1);
+//==============================================	
 	while(1)
 	{
-	
+		iWDT_Timer_Restart();	
+		
 		sc_task_loop(NULL);		
 		system_tick++;
 		//system_tick=TimeTick;//1ms tick

@@ -907,11 +907,31 @@ wr_data= wr_data| ahb_rd_data;
 
 
 
+  wr_data = 0x6086789D;//test @2026-09-07(voltage from 3.2V to 3.5V) 
 	
 	
-//test pwm
-//	wr_data = 0xCC8e7885;//1.2MHZ PCLK	
+  wr_data = 0x6886789D;	//1.55MHZ @3.5V
 	
+	
+  wr_data = 0x6A86789D;	//1.58MHZ @3.5V	
+	
+//====================================================================	
+//not setting QSPI clock(mask QSPI setting code)
+
+  wr_data = 0x9A86789D;//2.0MHZ PCLK
+	
+
+  wr_data = 0xAA86789D;//2.1MHZ PCLK
+	
+	
+	wr_data = 0xCA86789D;//2.4MHZ PCLK
+	
+	
+	wr_data = 0xDA86789D;//2.52MHZ PCLK	
+	
+//=====================================================================	
+
+
 	
 	reg_write(0x40020000+0x020, wr_data);		
 	

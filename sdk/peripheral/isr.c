@@ -299,8 +299,8 @@ uint32 RC_Unique_ID=0;
 void iWDT_IRQHandler(void)
 {
 	
-	  RC_Unique_ID=Get_SysTick_VALUE();
-	  iWDT_Timer_Disable();
+//	  RC_Unique_ID=Get_SysTick_VALUE();
+//	  iWDT_Timer_Disable();
 	
 }
 

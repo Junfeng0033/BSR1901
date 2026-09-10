@@ -107,11 +107,11 @@ void iWDT_Timer_Init(void)
 	
 	iWATCHDOG->WREN=WDT200_WP_NUM;//Write the magic number,0x5aa5
 
-	Val|=IWDT_INT_TIME(2);//The timer interval of the interrupt stage
-	Val|=IWDT_RST_TIME(2);//The time interval of the reset stage
+	/////////Val|=IWDT_INT_TIME(2);//The timer interval of the interrupt stage
+	Val|=IWDT_RST_TIME(7);//The time interval of the reset stage
 	
 	Val|=IWDT_CLK_SEL;//Clock source of timer:[0:EXTCLK;1:PCLK]
-	Val|=IWDT_INT_EN;
+	/////////Val|=IWDT_INT_EN;
 	Val|=IWDT_RST_EN;
 	Val|=IWDT_EN;	
 
@@ -119,9 +119,9 @@ void iWDT_Timer_Init(void)
 	
 	
 	
-	hal_nvic_clear_pending_irq(IWDT_IRQ);
-	hal_nvic_set_priority(IWDT_IRQ, 0);
-	hal_nvic_enable_irq(IWDT_IRQ);		
+//	hal_nvic_clear_pending_irq(IWDT_IRQ);
+//	hal_nvic_set_priority(IWDT_IRQ, 0);
+//	hal_nvic_enable_irq(IWDT_IRQ);		
 	
 }
 

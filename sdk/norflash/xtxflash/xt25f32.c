@@ -1448,7 +1448,10 @@ void gecko_task_cm0_sw_flash_quad()
     //  CS2CLK_DEFAULT   3'h0
     //  CSHT_DEFAULT     3'h2
     //  SCLKDIV_DEFAULT  8'h1
-    ahb_wr_data = (0x2<<8) | 0x0;
+    //ahb_wr_data = (0x2<<8) | 0xff;//不分频
+	
+    ahb_wr_data = (0x2<<8) & 0xFF00;//2分频
+	
     reg_write(ADDR_REG_GECKO_CMU2AHB_WR_ADDR, ADDR_QSPI_CFG_SPIIF_TIMING);
     reg_write(ADDR_REG_GECKO_CMU2AHB_WR_DATA, ahb_wr_data);
     reg_write(ADDR_REG_GECKO_CMU_EX_CONFIG, 0x1); // ahb_wr_data = reg_read(ADDR_REG_GECKO_CMU_EX_CONFIG) | 0x1;
@@ -1527,7 +1530,11 @@ void gecko_task_cm0_sw_flash()
     //  CS2CLK_DEFAULT   3'h0
     //  CSHT_DEFAULT     3'h2
     //  SCLKDIV_DEFAULT  8'h1
-    ahb_wr_data = (0x2<<8) | 0xff;
+	
+    //ahb_wr_data = (0x2<<8) | 0xff;//不分频
+	
+    ahb_wr_data = (0x2<<8) & 0xFF00;//2分频
+	
     reg_write(ADDR_REG_GECKO_CMU2AHB_WR_ADDR, ADDR_QSPI_CFG_SPIIF_TIMING);
     reg_write(ADDR_REG_GECKO_CMU2AHB_WR_DATA, ahb_wr_data);
     reg_write(ADDR_REG_GECKO_CMU_EX_CONFIG, 0x1); // ahb_wr_data = reg_read(ADDR_REG_GECKO_CMU_EX_CONFIG) | 0x1;
