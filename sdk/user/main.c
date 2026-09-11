@@ -27,7 +27,7 @@ void SystemInit(void)
 	Osc32M_Freq_Trimming();//trimming 32MHz	
 	
 //	gecko_rootnode_osc32mclk_cfg();
-//	gecko_rootnode_clk32k_cfg();
+	gecko_rootnode_clk32k_cfg();
 
 	//2024-11-16
 	gecko_cmu_init();	

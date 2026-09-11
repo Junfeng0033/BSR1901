@@ -1123,10 +1123,13 @@ void gecko_rootnode_clk32k_cfg(void)
 	wr_data=reg_read(ADDR_AON_CFG_AON_FSM_CTRL);
 	wr_data |= SEL_AON_CLK16K;
 	reg_write(ADDR_AON_CFG_AON_FSM_CTRL, wr_data);	
-	wr_data=reg_read(ADDR_AON_CFG_AON_FSM_CTRL);
-	delay_1us(15);
-	wr_data &= (~SEL_AON_CLK16K);	
-	reg_write(ADDR_AON_CFG_AON_FSM_CTRL, wr_data);
+	
+	
+//	wr_data=reg_read(ADDR_AON_CFG_AON_FSM_CTRL);
+//	delay_1us(15);
+//	wr_data &= (~SEL_AON_CLK16K);	
+//	reg_write(ADDR_AON_CFG_AON_FSM_CTRL, wr_data);
+	
 }
 
 
