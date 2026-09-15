@@ -1250,10 +1250,13 @@ assign reg_aon_wait_pu_cntto    = reg_0x000[1:0];
 
 		ahb_wr_data=reg_read(GECKO_AON_BASE_ADDR+0x000);
 		
-		ahb_wr_data = GEK1109_PIN_WAKEUP_Enable  |
-								  GEK1109_DEEP_SLEEP_Enable ;
+
     
-		#if 0 //GPIO pin wakeup
+		#if 1 //GPIO pin wakeup
+		
+		ahb_wr_data = GEK1109_PIN_WAKEUP_Enable  |
+								  GEK1109_DEEP_SLEEP_Enable ;		
+		h2l_wr_busy();
     reg_write(GECKO_AON_BASE_ADDR+0x000, ahb_wr_data);
 		
 		

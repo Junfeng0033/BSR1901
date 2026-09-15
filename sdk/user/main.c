@@ -85,12 +85,6 @@ int main (void)
 	
 	//while(1);
 
-
-
-
-
-
-
 	
 //本程序适配 BSR1901 推荐硬件端口（单显示屏，非双屏异显）
 //              GND   电源地
@@ -216,9 +210,9 @@ int main (void)
 
 	HW_SPI_Tx_DMA_32bit((uint16*)gImage_128x128_battery_32b, 8192);	
 
-	delay_1us(8000);
-		
-
+//	delay_1us(8000);
+	
+	
 //	Lcd_SetRegion(20, 39, 109, 87);
 //	HW_SPI_Tx_DMA((uint16*)gImage_bat_90x49, 8820);
 //  delay_1us(8000);
@@ -459,13 +453,15 @@ int main (void)
 	{
 		iWDT_Timer_Restart();	
 		
+
+		
 		sc_task_loop(NULL);		
 		system_tick++;
 		//system_tick=TimeTick;//1ms tick
 	
 		//current_tick = TimeTick;
    
-		//Task_KeyScan();
+		Task_KeyScan();
 		
 		Get_Vbat_Voltage();
 		

@@ -805,6 +805,11 @@
               <FileType>1</FileType>
               <FilePath>.\user\ui_app.c</FilePath>
             </File>
+            <File>
+              <FileName>ws2812b.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\user\ws2812b.c</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>

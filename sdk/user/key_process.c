@@ -140,7 +140,7 @@ void Task_KeyScan(void)
 		
 	   
 		//KEY1(SW2)
-		#if 1
+		#if 0
 		//PAD11(GPIOA7)
 		gpio_status=K27_KEY_Detect();//default gpio_status=0x40 
 
@@ -181,7 +181,7 @@ void Task_KeyScan(void)
 
 
 		//KEY2(SW1)
-		#if 0
+		#if 1
 //		//PAD18(GPIOB6)		
 //		gpio_status=KP85_KEY2_Detect();//default gpio_status=0x40 
 //		key_status=gpio_status & 0x40;
@@ -208,7 +208,7 @@ void Task_KeyScan(void)
         #endif
 
 				//LDO33_AUX disable, power down LCD module			
-				LDO33_LCD_Disable();
+//				LDO33_LCD_Disable();
 			
 //				wr_data = 0x608e7885;
 //				reg_write(0x40020000+0x020, wr_data);
@@ -221,7 +221,7 @@ void Task_KeyScan(void)
 //			  //sleep-wakeup setting
 //				tc_gecko_cm0_aon_sleep();//deep sleep test for low power design
 
-//					EnterDeepSleepMode();
+					EnterDeepSleepMode();
 
 		}
 		#endif

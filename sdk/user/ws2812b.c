@@ -1,4 +1,34 @@
 
+#include "spi.h"
+#include "uart.h"
+#include "dma.h"
+#include "gpio.h"
+
+
+//#include <stdarg.h>
+//#include <stdio.h>
+
+
+
+/*
+
+连接示意图如下：
+
+MCU引脚					WS2812点阵屏							备注
+
+GND								GND								必须共地
+
+SPI MOSI						DIN								通过电阻连接
+
+-								VCC								接独立5V电源
+
+*/
+
+
+
+
+
+
 /*
 
 可以使用SPI+DMA模式。如果SPI时钟设置为6MHz，发送一个字节是8/6000000=1.333us。
@@ -46,7 +76,8 @@ void ws2812_spi (int GREEN, int RED, int BLUE)
 	BLUE = BLUE*brightness/100;
 #endif
 	uint32_t color = GREEN<<16 | RED<<8 | BLUE;
-	uint8_t sendData[24];
+	//uint8_t sendData[24];
+	uint16 sendData[24];
 	int indx = 0;
 
 	for (int i=23; i>=0; i--)
@@ -55,7 +86,8 @@ void ws2812_spi (int GREEN, int RED, int BLUE)
 		else sendData[indx++] = 0b100;  // store 0
 	}
 
-	HAL_SPI_Transmit(&hspi1, sendData, 24, 1000);
+	//HAL_SPI_Transmit(&hspi1, sendData, 24, 1000);
+	HW_SPI_Tx_DMA(sendData, 24);
 }
 
 
@@ -65,9 +97,9 @@ void WS2812_Send (void)
 {
 	for (int i=0; i<NUM_LED; i++)
 	{
-		WS2812_Send_Spi(LED_Data[i][1],LED_Data[i][2],LED_Data[i][3]);
+		//WS2812_Send_Spi(LED_Data[i][1],LED_Data[i][2],LED_Data[i][3]);
 	}
-	HAL_Delay (1);
+	//HAL_Delay (1);
 }
 
 
@@ -102,5 +134,60 @@ while (1)
 }
   
 #endif
+
+
+
+
+
+
+/*****************************WS2812 SPI *****************************************
+
+//https://blog.csdn.net/karaxiaoyu/article/details/120944765
+
+
+rgbbyte = rgb2byte(0xff,0x0,0x0)---[SPI_24bit_Transfer]
+rstbyte = bytes([0xff]*16)---------[SPI_8bit_Transfer]
+
+outbyte = rstbyte+rgbbyte+rstbyte
+
+
+
+
+while True:
+
+    rgbbyte = rgb2byte(0xff,0x0,0x0)		//输出RGB为（0xff，0x0,0x0），对应WS2812应该是输出红色
+    outbyte = rstbyte+rgbbyte+rstbyte
+    hspi.write(outbyte)
+    time.sleep_ms(500)
+ 
+    rgbbyte = rgb2byte(0x0,0xff,0x0)
+    outbyte = rstbyte+rgbbyte+rstbyte
+    hspi.write(outbyte)
+    time.sleep_ms(500)
+ 
+    rgbbyte = rgb2byte(0x0,0x0,0xff)
+    outbyte = rstbyte+rgbbyte+rstbyte
+    hspi.write(outbyte)
+    time.sleep_ms(500)
+		
+		
+*****************************WS2812 SPI *****************************************/
+
+
+
+
+//ws2812_show(frame_buf, LED_COUNT);
+
+void ws2812_show(uint16_t *buf, uint16_t led_count) {
+	HW_SPI_Tx_DMA(buf, led_count * 24);
+}
+
+
+
+
+
+
+
+
 
 

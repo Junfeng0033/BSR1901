@@ -42,6 +42,8 @@ extern uint8 mi_tou_detect(void);
 extern void bsr1901_prepare_sleep_for_pin_wakeup(void);
 
 
+extern void EnterDeepSleepMode(void);
+
 
 
 

@@ -212,6 +212,7 @@ __RAM_CODE__  void DMA_IRQHandler(void)
 }
 
 
+#if 0
 //wait DMA transfer complete
 __RAM_CODE__ void dma_sram_wait(unsigned long delay)
 {
@@ -226,13 +227,35 @@ __RAM_CODE__ void dma_sram_wait(unsigned long delay)
 					  return;					
 				}
         __nop();
-			  __nop();
-			  __nop();
+		__nop();
+		__nop();
+        __nop();
+		__nop();
+		__nop();
     }
 }
+#endif
 
 
 
+//wait DMA transfer complete
+__RAM_CODE__ void dma_sram_wait(unsigned long delay)
+{
+	
+//    unsigned int i;
+//    unsigned long count;
+//    count = (delay<<4);
+	
+    while(1)
+    {
+			  if(dma_int_flag==1)
+				{
+						dma_int_flag=0;
+					  return;					
+				}
+		
+    }
+}
 
 
 

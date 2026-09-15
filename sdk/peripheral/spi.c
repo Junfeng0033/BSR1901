@@ -247,12 +247,32 @@ void HW_SPI_Tx(HAL_SPI_ID_T id,uint8 *pData, uint16 DataLen)
 
 void HW_SPI_Tx_DMA_32bit(uint16 *pData, uint16 DataLen)
 {
+	
+#if 0
 	LCD_DC_SET;	
   SPI_32bit_Transfer();
 	
 	Gecko_DMA_Transport((volatile uint32 *)(XR7_SPI_BASE + XR7_SPI_FIFO), pData, DataLen, 
 						AHB_DMA_CONTROL_WORD_TR, AHB_DMA_CONTROL_SRC_INC_DES_NOINC);	
-	dma_sram_wait(1000);		
+	dma_sram_wait(1000);
+
+#else
+
+	LCD_DC_SET;	
+	hwp_spi0->CTROL=0x10fab;//32bit
+	
+	__disable_irq();
+	
+	DMA_WRITE_REG((volatile uint32 *)AHB_DMA_SRCADDR_REG, (uint32) pData);
+	DMA_WRITE_REG((volatile uint32 *)AHB_DMA_DESTADDR_REG, (uint32) (XR7_SPI_BASE + XR7_SPI_FIFO));
+	DMA_WRITE_REG((volatile uint32 *)AHB_DMA_DATALENGTH_REG, DataLen);
+	DMA_WRITE_REG((volatile uint32 *)AHB_DMA_CONTROL_REG,(AHB_DMA_CONTROL_WORD_TR|AHB_DMA_CONTROL_SRC_INC_DES_NOINC));
+	__enable_irq();	
+	
+	dma_sram_wait(9000);
+
+#endif
+	
 }
 
 
@@ -262,7 +282,7 @@ void HW_SPI_Tx_DMA_32bit(uint16 *pData, uint16 DataLen)
 __RAM_CODE__ void HW_SPI_Tx_DMA_16bit(uint16 *pData, uint16 DataLen)
 {
 	
-#if 1
+#if 0
 	
 	LCD_DC_SET;	
   //SPI_16bit_Transfer();
@@ -286,6 +306,8 @@ __RAM_CODE__ void HW_SPI_Tx_DMA_16bit(uint16 *pData, uint16 DataLen)
 	DMA_WRITE_REG((volatile uint32 *)AHB_DMA_DATALENGTH_REG, DataLen);
 	DMA_WRITE_REG((volatile uint32 *)AHB_DMA_CONTROL_REG,(AHB_DMA_CONTROL_HWORD_TR|AHB_DMA_CONTROL_SRC_INC_DES_NOINC));
 	__enable_irq();	
+	
+	dma_sram_wait(1000);
 
 #endif
 	
@@ -422,8 +444,8 @@ void lcd_dma_refresh_colorblock(uint16_t xs, uint16_t ys, uint16_t xend,uint16_t
 
 
 
-
- void lcd_dma_16bit_refresh(uint16_t xs, uint16_t ys, uint16_t w, uint16_t h, color_t *color)
+//__RAM_CODE__
+void lcd_dma_16bit_refresh(uint16_t xs, uint16_t ys, uint16_t w, uint16_t h, color_t *color)
 {
 	uint32_t len = w*h;
 	
