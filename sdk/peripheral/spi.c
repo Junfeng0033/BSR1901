@@ -113,6 +113,22 @@ void SPI_8bit_Transfer(void)
 
 
 
+
+
+//SPI_SetBaudRate(2);
+void SPI_SetBaudRate(uint16_t baud_div)
+{
+    uint32_t ctrl = hwp_spi0->CTROL;
+    ctrl &= ~(0xFFFF << 16);
+    ctrl |= SPI_BAUD(baud_div);
+    hwp_spi0->CTROL = ctrl;
+}
+
+
+
+
+
+
 void HW_SPI_Initialise(HAL_SPI_ID_T id)
 {
 	volatile unsigned int rd_data;
