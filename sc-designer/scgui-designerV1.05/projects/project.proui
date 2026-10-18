@@ -1,0 +1,198 @@
+{
+  "assets": [
+    {
+      "bg": "#000000",
+      "fileName": "唯美月亮.gif",
+      "format": "indxqoia4",
+      "h": 225,
+      "height": 225,
+      "id": "pending_img_1",
+      "imageType": "待转换",
+      "name": "唯美月亮.gif",
+      "pending": true,
+      "pixelFormat": "",
+      "sourcePath": "generated/images/唯美月亮.gif",
+      "storage": "rom",
+      "w": 282,
+      "width": 282
+    },
+    {
+      "bg": "#000000",
+      "fileName": "火焰爆炸.gif",
+      "format": "indxqoia4",
+      "h": 282,
+      "height": 282,
+      "id": "pending_img_2",
+      "imageType": "待转换",
+      "name": "火焰爆炸.gif",
+      "pending": true,
+      "pixelFormat": "",
+      "sourcePath": "generated/images/火焰爆炸.gif",
+      "storage": "rom",
+      "w": 282,
+      "width": 282
+    },
+    {
+      "bg": "#000000",
+      "fileName": "科技纹理.gif",
+      "format": "indxqoia4",
+      "h": 282,
+      "height": 282,
+      "id": "pending_img_3",
+      "imageType": "待转换",
+      "name": "科技纹理.gif",
+      "pending": true,
+      "pixelFormat": "",
+      "sourcePath": "generated/images/科技纹理.gif",
+      "storage": "rom",
+      "w": 282,
+      "width": 282
+    }
+  ],
+  "export": {},
+  "fonts": [
+    {
+      "autoAscii": true,
+      "bpp": 4,
+      "charset": "",
+      "enabled": false,
+      "fontName": "scg_font_slot0",
+      "fontRef": "",
+      "fontType": "internal",
+      "id": "font_slot0",
+      "size": 16,
+      "slot": 0
+    },
+    {
+      "autoAscii": true,
+      "bpp": 4,
+      "charset": "",
+      "enabled": false,
+      "fontName": "scg_font_slot1",
+      "fontRef": "",
+      "fontType": "internal",
+      "id": "font_slot1",
+      "size": 16,
+      "slot": 1
+    },
+    {
+      "autoAscii": true,
+      "bpp": 4,
+      "charset": "",
+      "enabled": false,
+      "fontName": "scg_font_slot2",
+      "fontRef": "",
+      "fontType": "internal",
+      "id": "font_slot2",
+      "size": 16,
+      "slot": 2
+    },
+    {
+      "autoAscii": true,
+      "bpp": 4,
+      "charset": "",
+      "enabled": false,
+      "fontName": "scg_font_slot3",
+      "fontRef": "",
+      "fontType": "internal",
+      "id": "font_slot3",
+      "size": 16,
+      "slot": 3
+    },
+    {
+      "autoAscii": true,
+      "bpp": 4,
+      "charset": "",
+      "enabled": false,
+      "fontName": "scg_font_slot4",
+      "fontRef": "",
+      "fontType": "internal",
+      "id": "font_slot4",
+      "size": 16,
+      "slot": 4
+    },
+    {
+      "autoAscii": true,
+      "bpp": 4,
+      "charset": "",
+      "enabled": false,
+      "fontName": "scg_font_slot5",
+      "fontRef": "",
+      "fontType": "internal",
+      "id": "font_slot5",
+      "size": 16,
+      "slot": 5
+    },
+    {
+      "autoAscii": true,
+      "bpp": 4,
+      "charset": "",
+      "enabled": false,
+      "fontName": "scg_font_slot6",
+      "fontRef": "",
+      "fontType": "internal",
+      "id": "font_slot6",
+      "size": 16,
+      "slot": 6
+    },
+    {
+      "autoAscii": true,
+      "bpp": 4,
+      "charset": "",
+      "enabled": false,
+      "fontName": "scg_font_slot7",
+      "fontRef": "",
+      "fontType": "internal",
+      "id": "font_slot7",
+      "size": 16,
+      "slot": 7
+    }
+  ],
+  "format": "scgui-project",
+  "project": {
+    "background": "#000000",
+    "config": null,
+    "grid": {
+      "size": 8,
+      "snap": true,
+      "visible": true
+    },
+    "name": "scgui",
+    "renderer": {
+      "pfbLines": 10
+    },
+    "screen": {
+      "colorFormat": "RGB565",
+      "height": 240,
+      "width": 320
+    },
+    "touch": true,
+    "version": "0.1.0"
+  },
+  "roots": [
+    {
+      "elements": [],
+      "id": "main",
+      "name": "主界面"
+    },
+    {
+      "background": "#000000",
+      "elements": [],
+      "id": "page_1",
+      "name": "页面 2"
+    },
+    {
+      "background": "#000000",
+      "elements": [],
+      "id": "page_2",
+      "name": "页面 3"
+    },
+    {
+      "background": "#000000",
+      "elements": [],
+      "id": "page_3",
+      "name": "页面 4"
+    }
+  ],
+  "schemaVersion": 9
+}

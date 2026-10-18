@@ -250,5 +250,5 @@ enum{
 
 
 void Gecko_Timer_Init(void);
-void Gecko_Timer_Setting(uint8 TIM_IDX);
+void Gecko_Timer_Setting(uint8 TIM_IDX,uint32 timeout_cycle);
 

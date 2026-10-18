@@ -1,0 +1,21 @@
+{
+    "configurations": [
+        {
+            "name": "Win32",
+            "includePath": [
+                "${workspaceFolder}",
+                "${workspaceFolder}/src",
+                "${workspaceFolder}/examples",
+                "${workspaceFolder}/images",
+                "${workspaceFolder}/fonts",
+                "${workspaceFolder}/sdl2/include"
+            ],
+            "defines": [
+                "SC_APP_DEMO=7"
+            ],
+            "cStandard": "c11",
+            "intelliSenseMode": "windows-msvc-x64"
+        }
+    ],
+    "version": 4
+}

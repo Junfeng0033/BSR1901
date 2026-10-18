@@ -108,6 +108,10 @@ input lsbf;
 #define SPE								  (1<<10)
 #define GUARD_TIME				  (1<<11)
 
+#define CONTINUOUS_MODE			(1<<14) //SPI Continuous transmission mode
+#define FIFO_PREFETCH       (1<<15) //SPI tx fifo prefetch: DMA is given a "fifo has room" level instead of the per-word read request
+
+
 #define SPI_BAUD(n)         (((n)&0xFFFF)<<16) //spi baud
 
 

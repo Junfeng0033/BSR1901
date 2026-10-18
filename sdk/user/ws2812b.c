@@ -18,9 +18,9 @@ MCU引脚					WS2812点阵屏							备注
 
 GND								GND								必须共地
 
-SPI MOSI						DIN								通过电阻连接
+SPI MOSI					DIN								通过电阻连接
 
--								VCC								接独立5V电源
+-									VCC								接独立5V电源
 
 */
 

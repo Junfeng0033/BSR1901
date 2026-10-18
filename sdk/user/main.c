@@ -73,7 +73,9 @@ int main (void)
 	
 
 
-
+	 BSR1901_MOS_Enable();
+	
+   //BSR1901_MOS_Disable();
 	
 	//aon_wakeup_irq_cfg();	
 	//gecko_efuse_read();
@@ -304,7 +306,7 @@ int main (void)
 
 /**********************************************************************************	
 		//Gecko_Timer_Init();
-		//Gecko_Timer_Setting(TIMER_INDEX0);	
+		//Gecko_Timer_Setting(uint8 TIM_IDX,uint32 timeout_cycle);	
 *************************************************************************************/
 
 //		gecko_pinmux_config(PAD0,UART0_OUT);
@@ -432,7 +434,7 @@ int main (void)
 
 /************************SysTick configure***************************************/
 	//----SysTick Init-----
-	//SysTick_Config(2000);//SysTick === 1ms tick for KEY detect
+	//SysTick_Config(20000);//SysTick === 1ms tick for KEY detect
 /************************SysTick configure***************************************/
 
 

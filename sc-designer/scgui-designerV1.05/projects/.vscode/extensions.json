@@ -1,0 +1,9 @@
+{
+    "recommendations": [
+        "anysphere.cpptools"
+    ],
+    "unwantedRecommendations": [
+        "llvm-vs-code-extensions.vscode-clangd",
+        "ms-vscode.cpptools"
+    ]
+}

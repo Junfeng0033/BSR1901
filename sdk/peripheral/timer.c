@@ -65,7 +65,7 @@ void Gecko_Timer_Unmask(uint8 num)
 
 
 
-void Gecko_Timer_Setting(uint8 TIM_IDX)
+void Gecko_Timer_Setting(uint8 TIM_IDX,uint32 timeout_cycle)
 {
 
 		switch (TIM_IDX)
@@ -74,7 +74,7 @@ void Gecko_Timer_Setting(uint8 TIM_IDX)
 			
 				//HWreg_Assign_Register(Gecko_Timer_LoadCount_REG(Gecko_Timer0_Int_Index), SYS_TIMER_DELAY_MS);//#define SYS_TIMER_DELAY_MS	20000	
 				//HWreg_Assign_Register(Gecko_Timer_LoadCount_REG(Gecko_Timer0_Int_Index), 800000);//2.5ms@8Mhz
-				HWreg_Assign_Register(Gecko_Timer_LoadCount_REG(Gecko_Timer0_Int_Index), 100);//
+				HWreg_Assign_Register(Gecko_Timer_LoadCount_REG(Gecko_Timer0_Int_Index), timeout_cycle);
 				HWreg_Assign_Register(Gecko_Timer_Control_REG(Gecko_Timer0_Int_Index), GECKO_BIT(Gecko_Timer_Control_MODE_BIT));
 				Gecko_Timer_Unmask(Gecko_Timer0_Int_Index);		
 				Gecko_Timer_Enable_One(Gecko_Timer0_Int_Index);	

@@ -1,0 +1,14 @@
+{
+    "files.associations": {
+        "container_demo.h": "c",
+        "keyboard_demo.h": "c",
+        "text_box_demo.h": "c",
+        "lvgl.h": "c",
+        "font_arial.h": "c",
+        "sc_transform.h": "c",
+        "sc_obj.h": "c",
+        "sc_event.h": "c",
+        "image.h": "c",
+        "app_ui.h": "c"
+    }
+}

@@ -1486,7 +1486,7 @@ void gecko_task_cm0_sw_flash_quad()
 
 		//  use timer-wakeup to hold the CPU
     Gecko_Timer_Init();
-	  Gecko_Timer_Setting(TIMER_INDEX0);
+	  		Gecko_Timer_Setting(TIMER_INDEX0,8000);
 		NVIC_DisableIRQ(CMU2AHB_IRQ);
 
     reg_write(ADDR_REG_GECKO_CMU_EX_CONFIG, 0x1); // ahb_wr_data = reg_read(ADDR_REG_GECKO_CMU_EX_CONFIG) | 0x1;
@@ -1636,7 +1636,7 @@ unsigned char spi_nor_read_SR1(void)
     qspi_task_config_trans(ATCSPI_SPI_TRANS_RD_ONLY, 0x1, 0x0, 0x0, 0x0, 0x1);
 	
     UATR0_PRINT_LOG((unsigned char *)("spi_nor_read_SR1 --- 1111111"));	
-	  //Gecko_Timer_Setting(TIMER_INDEX0);//80 0000, 100ms
+	  //Gecko_Timer_Setting(TIMER_INDEX0,800000);//80 0000, 100ms
     reg_write(ADDR_QSPI_CFG_SPI_CMD, XTX_QSPI_CMD_RD_STATUS);
 	  //__wfi();
     UATR0_PRINT_LOG((unsigned char *)("spi_nor_read_SR1 --- 222222"));		
@@ -1745,7 +1745,7 @@ __RAM_CODE__ int EraseSector (unsigned long sectornum)
 
 //===========================================================================	
 	
-		//Gecko_Timer_Setting(TIMER_INDEX0);//80 0000, 100ms
+		//Gecko_Timer_Setting(TIMER_INDEX0,800000);//80 0000, 100ms
     //send 20H+adr	
     //#define XTX_QSPI_CMD_SE   0x20
     reg_write(ADDR_QSPI_CFG_SPI_CMD, XTX_QSPI_CMD_SE);
@@ -1836,7 +1836,7 @@ __RAM_CODE__ int ProgramPage (unsigned long adr, unsigned long sz, unsigned char
 	  reg_write(ADDR_QSPI_CFG_TRANS_CTRL, ahb_wr_data);
     reg_write(ADDR_QSPI_CFG_SPI_ADDR, HW_ADDR);//add Kevin Zhou 20220303			
 
-		//Gecko_Timer_Setting(TIMER_INDEX0);//80 0000, 100ms		
+		//Gecko_Timer_Setting(TIMER_INDEX0,800000);//80 0000, 100ms		
     reg_write(ADDR_QSPI_CFG_SPI_CMD, XTX_QSPI_CMD_PAGE_PROG);	
 		//__wfi();
 		sram_run_delay(6000);
@@ -2070,7 +2070,7 @@ void Gek1108_NV_Save_UserData()
 
 //  use timer-wakeup to hold the CPU
 //	Gecko_Timer_Init();
-//	Gecko_Timer_Setting(TIMER_INDEX0);
+//	Gecko_Timer_Setting(TIMER_INDEX0,8000);
 //	__wfi();
 
 

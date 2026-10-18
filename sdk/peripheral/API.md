@@ -16,7 +16,7 @@ void GpiopinMode(uint8 pin,uint8 mode)和VOID GPIO_InitIO(UINT8 direction, UINT8
 设置gpio的输入输出模式，参数mode
 enum {
     LOW = 0x00,HIGH,TOGG,
-    INPUT = 0x00,OUTPUT,s
+    INPUT = 0x00,OUTPUT,
     PA0 = 0x00,PA1,PA2,PA3,PA4,PA5,PA6,PA7,
     PB0 = 0x08,PB1,PB2,PB3,PB4,PB5,PB6,PB7,
 };
@@ -188,7 +188,7 @@ HW_SPI_Initialise(HAL_SPI_0);
 void HW_SPI_Tx_DMA_16bit(HAL_SPI_ID_T id,uint16 *pData, uint16 DataLen)
 {
 	LCD_RS_SET;	
-    SPI_16bit_Transfer();
+  SPI_16bit_Transfer();
 	Gecko_DMA_Transport((volatile uint32 *)(XR7_SPI_BASE + XR7_SPI_FIFO), pData, DataLen, 
 	AHB_DMA_CONTROL_HWORD_TR, AHB_DMA_CONTROL_SRC_INC_DES_NOINC);	
 	dma_sram_delay(1000);	
@@ -197,7 +197,7 @@ void HW_SPI_Tx_DMA_16bit(HAL_SPI_ID_T id,uint16 *pData, uint16 DataLen)
 void HW_SPI_Tx_DMA_16bit_ColorBlock(HAL_SPI_ID_T id,uint16 *pData, uint16 DataLen)
 {
 	LCD_RS_SET;	
-    SPI_16bit_Transfer();
+  SPI_16bit_Transfer();
 	Gecko_DMA_Transport((volatile uint32 *)(XR7_SPI_BASE + XR7_SPI_FIFO), pData, DataLen, 
 	AHB_DMA_CONTROL_HWORD_TR, AHB_DMA_CONTROL_SRC_NOINC_DES_NOINC);	
 	dma_sram_delay(1000);		
@@ -216,7 +216,7 @@ void HW_SPI_Tx_DMA_32bit(HAL_SPI_ID_T id,uint16 *pData, uint16 DataLen)
 void HW_SPI_Tx_DMA_32bit(HAL_SPI_ID_T id,uint16 *pData, uint16 DataLen)
 {
 	LCD_RS_SET;	
-    SPI_32bit_Transfer();
+  SPI_32bit_Transfer();
 	Gecko_DMA_Transport((volatile uint32 *)(XR7_SPI_BASE + XR7_SPI_FIFO), pData, DataLen, 
 	AHB_DMA_CONTROL_WORD_TR, AHB_DMA_CONTROL_SRC_INC_DES_NOINC);	
 	dma_sram_delay(1000);	
@@ -254,6 +254,16 @@ void lcd_dma_refresh_colorblock(uint16_t xs, uint16_t ys, uint16_t w, uint16_t h
 	Lcd_SetRegion(xs, ys, xs+w-1, ys+h-1);		
 	HW_SPI_Tx_DMA_16bit_ColorBlock(HAL_SPI_0,color,len);	
 }
+
+
+
+改版的1901在SPI里面增加连个新功能：
+
+#define CONTINUOUS_MODE		(1<<14) //SPI Continuous transmission mode
+#define FIFO_PREFETCH       (1<<15) //SPI tx fifo prefetch: DMA is given a "fifo has room" level instead of the per-word read request
+
+
+增加了连续传输模式，效率翻倍
 
 
 ## 4. DMA
@@ -322,8 +332,8 @@ void Uart_16550_Initialise(HAL_UART_ID_T id,uint32 baud_rate, uint16 uart_settin
 UART初始化，参数1，id；参数2，baud_rate；参数3，uart_setting
 
 用法：
-Uart_16550_Initialise(HAL_UART_0,115200,0x3);	
-Uart_16550_Initialise(HAL_UART_1,115200,0x3);	
+Uart_16550_Initialise(HAL_UART_0,115200,0x3);	//0x3表示N81格式
+Uart_16550_Initialise(HAL_UART_1,115200,0x3);	//0x3表示N81格式
 
 
 ## 6. ADC
@@ -361,8 +371,142 @@ uint16 GeckoGpadcGetRawData(GPADC_CHAN_T channel)
 读取ADC通道的ADC值
 
 
+## 7. Timer
 
-## 7. SoftPUF
+1901有一个32bit的 Timer模块。
+Timer模块基地址：
+#define    GECKO_APB_TIMER0_BASE    0x40011000
+
+软件流程：
+A，	初始化Timer
+B，	设置Timer timeout 的时间
+C，	在对应的timer interrupt routine中执行用户期望的动作
+
+
+Gecko_Timer_Init();//初始化Timer
+Gecko_Timer_Setting(uint8 TIM_IDX,uint32 timeout_cycle);	//设置Timer timeout 的时间
+
+假如APB Timer的pclk时钟是8MHz，一个cycle是125ns，8000*125ns=1ms,如果设置timeout=800_000,那么800_000x125ns=100ms timer.
+
+
+
+void TIMER0_IRQHandler(void)
+{   //timer0 interrupt service routine
+		Timer0_Interrupt_Handler();//在对应的timer interrupt routine中执行用户期望的动作	
+}
+
+
+
+
+## 8. Watchdog
+
+1901的Watchdog有两个，一个是Window Watchdog， 一个是Independent Watchdog.
+
+Watchdog的软件代码行为是这样的：
+
+watchdog_init(30, 1);//interrupt 
+
+
+/* Watchdog initialization */
+/* type = 0 : No action */
+/* type = 1 : Interrupt */
+/* type = 2 : Reset */
+void watchdog_init(unsigned int cycle, int type)
+{
+  watchdog_unlock();
+  GECKO1108_WATCHDOG->WdogLoad = cycle;
+  if (type==0) 
+  {
+		//printf("  Set to no action");
+    GECKO1108_WATCHDOG->CTRL = 0;
+  } 
+  else if (type==1) 
+  {
+			//printf("  Set to NMI generation");
+     	GECKO1108_WATCHDOG->CTRL = Gecko_Watchdog_CTRL_INTEN_Msk;
+			hal_nvic_clear_pending_irq(WDT_IRQn);
+			hal_nvic_set_priority(WDT_IRQn, 0);
+			hal_nvic_enable_irq(WDT_IRQn);			
+  } 
+  else 
+  {
+			//printf("  Set to reset generation");
+    	GECKO1108_WATCHDOG->CTRL = Gecko_Watchdog_CTRL_RESEN_Msk|Gecko_Watchdog_CTRL_INTEN_Msk;
+  }
+  watchdog_lock();
+}
+
+
+Independent Watchdog，也叫独立看门狗。它由Always On的由低速时钟驱动，即使CPU时钟发生故障，它依然有效。
+
+
+//iWatchDog for FSM Control
+iWDT_Timer_Disable();
+iWDT_Timer_Restart();	
+iWDT_Timer_Init();
+
+喂狗函数 iWDT_Timer_Restart();	//Feed IWDG
+
+
+
+## 9. MOS
+
+1901集成了一个模拟开关，在mos.c中有两个函数。
+
+模拟开关导通：
+void BSR1901_MOS_Enable(void)
+{
+	unsigned int wr_data;
+	wr_data = reg_read(0x40020000+0x90);
+	wr_data |= MOS_EN;
+	reg_write(0x40020000+0x90,wr_data);
+
+}
+
+
+模拟开关断开
+void BSR1901_MOS_Disable(void)
+{
+	unsigned int wr_data;
+	wr_data = reg_read(0x40020000+0x90);
+	wr_data &= (~MOS_EN);
+	reg_write(0x40020000+0x90,wr_data);
+
+}
+
+
+
+## 10. SysTick
+
+如果我们设置CPU的时钟是20MHZ，一个cycle周期是1/20_000_000=50ns
+
+SysTick_Config(20000);这里的20000代表20000个50ns Tick一次，即20_000x50ns=1ms
+
+
+/************************SysTick configure***************************************/
+	SysTick_Config(20000);
+/************************SysTick configure***************************************/
+
+
+
+
+SysTick的中断服务程序：
+
+__RAM_CODE__ void SysTick_Handler(void)  //interrupt routine
+{
+
+	TimeTick++;//TimeTick will increase by "1"  every 1000us
+	
+	//system_tick=TimeTick;
+	
+}
+
+
+
+
+
+
+## 11. SoftPUF
 
 在 Reset_Handler 里面调用这个功能。
 

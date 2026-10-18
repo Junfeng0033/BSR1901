@@ -1,0 +1,70 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Build SDL Demo",
+      "type": "shell",
+      "command": "examples\\build_demo.bat",
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "shell": {
+          "executable": "cmd.exe",
+          "args": ["/d", "/c"]
+        }
+      },
+      "group": "build",
+      "problemMatcher": [
+        "$gcc"
+      ]
+    },
+    {
+      "label": "Build Project",
+      "type": "shell",
+      "command": "build.bat",
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "shell": {
+          "executable": "cmd.exe",
+          "args": ["/d", "/c"]
+        }
+      },
+      "group": "build",
+      "problemMatcher": [
+        "$gcc"
+      ]
+    },
+    {
+      "label": "Build & Run SDL Demo",
+      "type": "shell",
+      "dependsOn": "Build SDL Demo",
+      "command": "scgui.exe",
+      "options": {
+        "cwd": "${workspaceFolder}\\build",
+        "shell": {
+          "executable": "cmd.exe",
+          "args": ["/d", "/c"]
+        }
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Build & Run Project",
+      "type": "shell",
+      "dependsOn": "Build Project",
+      "command": "scgui.exe",
+      "options": {
+        "cwd": "${workspaceFolder}\\build",
+        "shell": {
+          "executable": "cmd.exe",
+          "args": ["/d", "/c"]
+        }
+      },
+      "group": "build",
+      "problemMatcher": []
+    }
+  ]
+}

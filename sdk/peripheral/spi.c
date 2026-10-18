@@ -6,6 +6,9 @@
  *     This file contains SPI code example
  *   Author:
  *   	 YJ
+ 
+ 建议板测时把 tx_fifo_full 对应的中断（int_en[1]）使能上：在 pf_en=1 下 full 永远不该抬，它一亮就是丢字的实锤 
+ 
 ****************************************************************************/
 //#include "platform_config.h"
 
@@ -119,7 +122,7 @@ void SPI_8bit_Transfer(void)
 void SPI_SetBaudRate(uint16_t baud_div)
 {
     uint32_t ctrl = hwp_spi0->CTROL;
-    ctrl &= ~(0xFFFF << 16);
+    ctrl &= ~((uint32_t)0xFFFF << 16);
     ctrl |= SPI_BAUD(baud_div);
     hwp_spi0->CTROL = ctrl;
 }
@@ -274,18 +277,24 @@ void HW_SPI_Tx_DMA_32bit(uint16 *pData, uint16 DataLen)
 
 #else
 
-	LCD_DC_SET;	
-	hwp_spi0->CTROL=0x10fab;//32bit
+	LCD_DC_SET;
+
+
+	hwp_spi0->CTROL=0x10fab|CONTINUOUS_MODE|FIFO_PREFETCH;   // 0x18fab
 	
+
 	__disable_irq();
-	
+
 	DMA_WRITE_REG((volatile uint32 *)AHB_DMA_SRCADDR_REG, (uint32) pData);
 	DMA_WRITE_REG((volatile uint32 *)AHB_DMA_DESTADDR_REG, (uint32) (XR7_SPI_BASE + XR7_SPI_FIFO));
 	DMA_WRITE_REG((volatile uint32 *)AHB_DMA_DATALENGTH_REG, DataLen);
 	DMA_WRITE_REG((volatile uint32 *)AHB_DMA_CONTROL_REG,(AHB_DMA_CONTROL_WORD_TR|AHB_DMA_CONTROL_SRC_INC_DES_NOINC));
-	__enable_irq();	
-	
+	__enable_irq();
+
 	dma_sram_wait(9000);
+
+	uint32 wait = 0;
+	while((hwp_spi0->STATS & busy_spi_sync) && (wait++ < 200000));
 
 #endif
 	
