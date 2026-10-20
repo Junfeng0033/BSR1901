@@ -1587,7 +1587,7 @@ Removing Unused input sections from the image.
     Removing timer.o(i.Gecko_Timer_Enable_One), (20 bytes).
     Removing timer.o(i.Gecko_Timer_Init), (52 bytes).
     Removing timer.o(i.Gecko_Timer_Mask), (20 bytes).
-    Removing timer.o(i.Gecko_Timer_Setting), (92 bytes).
+    Removing timer.o(i.Gecko_Timer_Setting), (88 bytes).
     Removing timer.o(i.Gecko_Timer_Unmask), (20 bytes).
     Removing systick.o(i.Get_SysTick_VALUE), (12 bytes).
     Removing systick.o(i.Read_SysTick_VALUE), (12 bytes).
@@ -2108,7 +2108,7 @@ Removing Unused input sections from the image.
     Removing fepilogue.o(.text), (130 bytes).
     Removing sc_transform.o(i.__ARM_common_ll_mulss), (48 bytes).
 
-699 unused section(s) (total 1270365 bytes) removed from the image.
+699 unused section(s) (total 1270361 bytes) removed from the image.
 
 ==============================================================================
 

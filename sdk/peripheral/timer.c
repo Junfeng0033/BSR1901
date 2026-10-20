@@ -63,7 +63,13 @@ void Gecko_Timer_Unmask(uint8 num)
 
 
 
+/*
 
+//Gecko_Timer_Setting(uint8 TIM_IDX,uint32 timeout_cycle);	//设置Timer timeout 的时间
+
+//假如APB Timer的pclk时钟是8MHz，一个cycle是125ns，8000*125ns=1ms,如果设置timeout=800_000,那么800_000x125ns=100ms timer.
+
+*/
 
 void Gecko_Timer_Setting(uint8 TIM_IDX,uint32 timeout_cycle)
 {
@@ -90,7 +96,7 @@ void Gecko_Timer_Setting(uint8 TIM_IDX,uint32 timeout_cycle)
 		case TIMER_INDEX1:
 			
 				//HWreg_Assign_Register(Gecko_Timer_LoadCount_REG(Gecko_Timer0_Int_Index), SYS_TIMER_DELAY_MS);//#define SYS_TIMER_DELAY_MS	20000	
-				HWreg_Assign_Register(Gecko_Timer_LoadCount_REG(Gecko_Timer1_Int_Index), 8000);//1ms@8Mhz
+				HWreg_Assign_Register(Gecko_Timer_LoadCount_REG(Gecko_Timer1_Int_Index), timeout_cycle);//1ms@8Mhz
 				HWreg_Assign_Register(Gecko_Timer_Control_REG(Gecko_Timer1_Int_Index), GECKO_BIT(Gecko_Timer_Control_MODE_BIT));
 				Gecko_Timer_Unmask(Gecko_Timer1_Int_Index);
 				Gecko_Timer_Enable_One(Gecko_Timer1_Int_Index);	
